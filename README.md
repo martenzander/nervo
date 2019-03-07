@@ -11,7 +11,7 @@
 ## Installation
 
 ```
-npm i git+ssh://git@gitlab.com/slimInteractive/svg.git#master
+npm i git+ssh://git@gitlab.com/slimInteractive/tween.git#master
 ```
 
 ## Usage
