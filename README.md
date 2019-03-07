@@ -19,9 +19,47 @@ npm i git+ssh://git@gitlab.com/slimInteractive/tween.git#master
 
 ```js
 import * as Tween from 'tween';
-
-...
-
-
-const tween = new Tween.Tween()
 ```
+
+## Tween
+
+```js
+const tween = new Tween.Tween(start, end, parameters = {});
+```
+
+### Start `type: {}`
+
+```js
+{
+    x: 0,
+    y: 0,
+    z: 0,
+}
+```
+
+### End `type: {}`
+
+```js
+{
+    x: 10,
+    y: 100,
+    z: 1000,
+}
+```
+
+### Parameters `type: {}`
+
+* autoStart `type: boolean`
+* duration `type: float`
+* easing `type: string`
+* loop `type: boolean`
+* onUpdate `type: callback function`
+* onComplete `type: callback function`
+
+
+### Methods
+
+* `.start()`
+* `.stop()`
+* `.play()`
+* `.pause()`
