@@ -13,15 +13,29 @@
 		</style>
 	</head>
 	<body>
+		<div class="mesh-container">
+			<div class="mesh-void">
+				<div class="mesh-column-12 mesh-column-sm-12 mesh-column-md-12 mesh-column-lg-12 mesh-column-xl-12">
+					<p>
+						<code>
+							<pre>{"x":0,"y":0,"z":0}</pre>
+							<pre class="current"></pre>
+							<pre>{"x":10,"y":100,"z":1000}</pre>
+						</code>
+					</p>
+				</div>
+			</div>
+		</div>
 		<script type="text/javascript">
 
-		const tween = new Tween.Tween({x:0},{x:1},{
+		const current = document.querySelector('.current');
+		const tween = new Tween.Tween({x:0,y:0,z:0},{x:10,y:100,z:1000},{
 			autoStart: true,
 			onUpdate: e => {
-				console.log(e.current);
+				current.innerHTML = JSON.stringify(e.current);
 			},
 			onComplete: e => {
-				console.log(e.current);
+				current.innerHTML = JSON.stringify(e.current);
 				console.log("tween finished")
 			}
 		});
