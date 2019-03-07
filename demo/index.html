@@ -32,6 +32,7 @@
 		const tween = new Tween.Tween({x:0,y:0,z:0},{x:10,y:100,z:1000},{
 			autoStart: true,
 			onUpdate: e => {
+				console.log(e.current);
 				current.innerHTML = JSON.stringify(e.current);
 			},
 			onComplete: e => {

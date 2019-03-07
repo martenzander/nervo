@@ -30,6 +30,7 @@ class Tween {
 		this.currentTime = this.duration;
 		this.progress = 1.0;
 		this.easedProgress = 1.0;
+		this.onUpdate();
 		if ("onComplete" in this.options) this.options.onComplete(this);
 		this.pause();
 	}
