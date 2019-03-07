@@ -4,7 +4,7 @@
         Tween
     </h3>
     <p align="center">
-        Tweening Framework
+        tweening multidimensional objects
     </p>
 </p>
 
