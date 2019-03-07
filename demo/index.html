@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>Tween</title>
+		<script type="text/javascript" src="../build/tween.js"></script>
+		<link rel="stylesheet" type="text/css" href="css/styles.css">
+		<style>
+			* {
+				margin: 0;
+				padding: 0;
+			}
+		</style>
+	</head>
+	<body>
+		<script type="text/javascript">
+
+		const tween = new Tween.Tween({x:0},{x:1},{
+			autoStart: true,
+			onUpdate: e => {
+				console.log(e.current);
+			},
+			onComplete: e => {
+				console.log(e.current);
+				console.log("tween finished")
+			}
+		});
+
+		console.log(tween);
+
+		// document.addEventListener("keydown", function (e){
+		// 	switch(e.keyCode){
+		// 		case 80:
+		// 			if(tween.isRendering){
+		// 				tween.pause();
+		// 			}else{
+		// 				tween.play();
+		// 			}
+		// 			break;
+		// 		case 83:
+		// 			tween.start();
+		// 			break;
+		// 		case 67:
+		// 			tween.stop();
+		// 			break;
+		// 	}
+		// });
+		</script>
+	</body>
+</html>
