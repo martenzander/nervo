@@ -2,7 +2,7 @@ import Clock from "./Clock";
 import * as Eases from "eases";
 
 export default class Tween {
-	static AutoStart = true;
+	static AutoStart = false;
 	static Duration = 5.0;
 	static Easing = "quadInOut";
 	static Loop = false;
@@ -16,7 +16,7 @@ export default class Tween {
 		this.easing = Eases[options.easing] || Eases[Tween.Easing];
 		this.easedProgress = this.easing(this.progress);
 		this.endValues = end;
-		this.isRendering = false;
+		this.isTweening = false;
 		this.loop = options.loop !== undefined ? options.loop : Tween.Loop;
 		this.options = options;
 		this.progress = 0;
@@ -25,7 +25,7 @@ export default class Tween {
 		// event binding
 		this.onComplete = this.onComplete.bind(this);
 		this.onUpdate = this.onUpdate.bind(this);
-		this.render = this.render.bind(this);
+		this.tween = this.tween.bind(this);
 
 		if (this.autoStart) this.start();
 	}
@@ -35,7 +35,6 @@ export default class Tween {
 		this.currentTime = this.duration;
 		this.progress = 1.0;
 		this.easedProgress = 1.0;
-		this.onUpdate();
 		if ("onComplete" in this.options) this.options.onComplete(this);
 		this.pause();
 	}
@@ -62,31 +61,30 @@ export default class Tween {
 	}
 
 	pause() {
-		this.isRendering = false;
+		this.isTweening = false;
 		this.clock.stop();
 	}
 
 	play() {
-		this.isRendering = true;
+		this.isTweening = true;
 		this.clock.start();
-		this.render();
+		this.tween();
 	}
 
-	updateValues() {
-		// update values
-		for (const key in this.startValues) {
-			this.current[key] =
-				this.startValues[key] +
-				(this.endValues[key] - this.startValues[key]) * this.easedProgress;
-		}
-	}
-
-	render() {
+	tween() {
 		// update timestamp
 		this.currentTime += this.clock.getDelta();
 
+		// update tween
+		this.update(this.currentTime);
+
+		if (!this.isTweening) return;
+		requestAnimationFrame(this.tween);
+	}
+
+	update(time) {
 		// update progress
-		this.progress = this.currentTime / this.duration;
+		this.progress = time / this.duration;
 		this.easedProgress = this.easing(this.progress);
 
 		// validate progress
@@ -97,15 +95,14 @@ export default class Tween {
 				this.onComplete();
 			}
 		} else {
-			this.updateValues();
-			// onUpdate
-			this.onUpdate();
+			// update values
+			for (const key in this.startValues) {
+				this.current[key] =
+					this.startValues[key] +
+					(this.endValues[key] - this.startValues[key]) * this.easedProgress;
+			}
 		}
-
-		// values debug
-		// console.log(this.currentTime, this.current);
-
-		if (!this.isRendering) return;
-		requestAnimationFrame(this.render);
+		// onUpdate
+		this.onUpdate();
 	}
 }

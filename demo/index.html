@@ -2,7 +2,7 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
-		<title>Tween</title>
+		<title>Anim</title>
 		<script type="text/javascript" src="../build/anim.js"></script>
 		<link rel="stylesheet" type="text/css" href="css/styles.css">
 		<style>
@@ -18,9 +18,9 @@
 				<div class="mesh-column-12 mesh-column-sm-12 mesh-column-md-12 mesh-column-lg-12 mesh-column-xl-12">
 					<p>
 						<code>
-							<pre>{"x":0,"y":0,"z":0}</pre>
-							<pre class="current"></pre>
-							<pre>{"x":10,"y":100,"z":1000}</pre>
+							<pre class="tween1"></pre>
+							<pre class="tween2"></pre>
+							<pre class="tween3"></pre>
 						</code>
 					</p>
 				</div>
@@ -28,38 +28,71 @@
 		</div>
 		<script type="text/javascript">
 
-		const current = document.querySelector('.current');
-		const tween = new Anim.Tween({x:0,y:0,z:0},{x:10,y:100,z:1000},{
-			autoStart: true,
+		const tween1Container = document.querySelector('.tween1');
+		const tween2Container = document.querySelector('.tween2');
+		const tween3Container = document.querySelector('.tween3');
+
+
+		const tween1 = new Anim.Tween({x:0,y:0,z:0},{x:10,y:100,z:1000},{
+			autoStart: false,
+			duration: 0.5,
 			onUpdate: e => {
-				console.log(e.current);
-				current.innerHTML = JSON.stringify(e.current);
+				tween1Container.innerHTML = JSON.stringify(e.current);
 			},
 			onComplete: e => {
-				current.innerHTML = JSON.stringify(e.current);
-				console.log("tween finished")
+				console.log("Tween 1 finished");
 			}
 		});
 
+		const tween2 = new Anim.Tween({tween2:0},{tween2:10},{
+			autoStart: false,
+			duration: 0.25,
+			onUpdate: e => {
+				tween2Container.innerHTML = JSON.stringify(e.current);
+			},
+			onComplete: e => {
+				console.log("Tween 2 finished");
+			}
+		});
 
+		const tween3 = new Anim.Tween({tween3:0},{tween3:1000},{
+			autoStart: false,
+			duration: 1,
+			onUpdate: e => {
+				tween3Container.innerHTML = JSON.stringify(e.current);
+			},
+			onComplete: e => {
+				console.log("Tween 3 finished");
+			}
+		});
 
-		// document.addEventListener("keydown", function (e){
-		// 	switch(e.keyCode){
-		// 		case 80:
-		// 			if(tween.isRendering){
-		// 				tween.pause();
-		// 			}else{
-		// 				tween.play();
-		// 			}
-		// 			break;
-		// 		case 83:
-		// 			tween.start();
-		// 			break;
-		// 		case 67:
-		// 			tween.stop();
-		// 			break;
-		// 	}
-		// });
+		const timeline = new Anim.Timeline([tween1, tween2, tween3], {
+			onUpdate: e => {
+				console.log(e.current)
+			},
+			onComplete: e => {
+				console.log('Timeline Finish');
+			}
+		});
+
+		document.addEventListener("keydown", function (e){
+			switch(e.keyCode){
+				case 80:
+					if(timeline.isTweening){
+						timeline.pause();
+					}else{
+						timeline.play();
+					}
+					break;
+				case 83:
+					timeline.start();
+					break;
+				case 67:
+					timeline.stop();
+					break;
+			}
+		});
+
 		</script>
 	</body>
 </html>
