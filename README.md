@@ -24,7 +24,7 @@ import * as Tween from 'tween';
 ## Tween
 
 ```js
-const tween = new Tween.Tween(start, end, parameters = {});
+const tween = new Tween.Tweener(start, end, parameters = {});
 ```
 
 ### Start `type: {}`

@@ -29,8 +29,8 @@
 		<script type="text/javascript">
 
 		const current = document.querySelector('.current');
-		const tween = new Tween.Tween({x:0,y:0,z:0},{x:10,y:100,z:1000},{
-			autoStart: true,
+		const tween = new Tween.Tweener({x:0,y:0,z:0},{x:10,y:100,z:1000},{
+			autoStart: false,
 			onUpdate: e => {
 				console.log(e.current);
 				current.innerHTML = JSON.stringify(e.current);
@@ -41,7 +41,7 @@
 			}
 		});
 
-		console.log(tween);
+
 
 		// document.addEventListener("keydown", function (e){
 		// 	switch(e.keyCode){
