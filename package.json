@@ -2,7 +2,7 @@
 	"name": "anim",
 	"version": "0.0.1",
 	"description": "tweening multidimensional values",
-	"main": "build/animation.min.js",
+	"main": "build/anim.min.js",
 	"scripts": {
 		"build:prod": "NODE_ENV=production webpack --config config/webpack.config.js --mode production",
 		"build:dev": "NODE_ENV=development webpack --config config/webpack.config.js --mode development",
