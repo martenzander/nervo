@@ -1,7 +1,7 @@
 <p align="center">
     <img align="center" src="http://exchange.weareslim.de/assets/images/svg/logo_blue.svg" width="100" height="auto" alt="slim Logo" class="js-lazy-loaded">
     <h3 align="center">
-        Tween
+        Anim
     </h3>
     <p align="center">
         tweening multidimensional objects
@@ -11,23 +11,23 @@
 ## Installation
 
 ```
-npm i git+ssh://git@gitlab.com/slimInteractive/tween.git#master
+npm i git+ssh://git@gitlab.com/slimInteractive/anim.git#master
 ```
 
 ## Usage
 
 
 ```js
-import * as Tween from 'tween';
+import * as Anim from 'anim';
 ```
 
 ## Tween
 
 ```js
-const tween = new Tween.Tweener(start, end, parameters = {});
+const tween = new Anim.Tween(start, end, parameters = {});
 ```
 
-### Start `type: {}`
+#### Start `type: {}`
 
 ```js
 {
@@ -37,7 +37,7 @@ const tween = new Tween.Tweener(start, end, parameters = {});
 }
 ```
 
-### End `type: {}`
+#### End `type: {}`
 
 ```js
 {
@@ -47,7 +47,7 @@ const tween = new Tween.Tweener(start, end, parameters = {});
 }
 ```
 
-### Parameters `type: {}`
+#### Parameters `type: {}`
 
 * autoStart `type: boolean`
 * duration `type: float`
@@ -57,9 +57,15 @@ const tween = new Tween.Tweener(start, end, parameters = {});
 * onComplete `type: callback function`
 
 
-### Methods
+#### Methods
 
 * `.start()`
 * `.stop()`
 * `.play()`
 * `.pause()`
+
+## Timeline
+
+```js
+const timeline = new Anim.Timeline();
+```

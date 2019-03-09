@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8" />
 		<title>Tween</title>
-		<script type="text/javascript" src="../build/tween.js"></script>
+		<script type="text/javascript" src="../build/anim.js"></script>
 		<link rel="stylesheet" type="text/css" href="css/styles.css">
 		<style>
 			* {
@@ -29,8 +29,8 @@
 		<script type="text/javascript">
 
 		const current = document.querySelector('.current');
-		const tween = new Tween.Tweener({x:0,y:0,z:0},{x:10,y:100,z:1000},{
-			autoStart: false,
+		const tween = new Anim.Tween({x:0,y:0,z:0},{x:10,y:100,z:1000},{
+			autoStart: true,
 			onUpdate: e => {
 				console.log(e.current);
 				current.innerHTML = JSON.stringify(e.current);

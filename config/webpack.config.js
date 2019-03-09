@@ -9,7 +9,7 @@ const fileName =
 const config = {
 	entry: ["./src/js/index.js"],
 	output: {
-		library: "Tween",
+		library: "Anim",
 		libraryTarget: "umd",
 		path: path.resolve(__dirname, "../", "build"),
 		filename: fileName,

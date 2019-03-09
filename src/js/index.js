@@ -1,3 +1,3 @@
-import Tweener from "./Core/Tweener";
+import Tween from "./Core/Tween";
 
-export { Tweener };
+export { Tween };

@@ -1,8 +1,8 @@
 {
-	"name": "tween",
+	"name": "anim",
 	"version": "0.0.1",
 	"description": "tweening multidimensional values",
-	"main": "build/tween.min.js",
+	"main": "build/animation.min.js",
 	"scripts": {
 		"build:prod": "NODE_ENV=production webpack --config config/webpack.config.js --mode production",
 		"build:dev": "NODE_ENV=development webpack --config config/webpack.config.js --mode development",
@@ -11,12 +11,7 @@
 		"style": "postcss demo/css/src/styles.css --dir demo/css/ --config config/postcss.config.js --watch",
 		"start": "npm-run-all --parallel style code"
 	},
-	"keywords": [
-		"javascript",
-		"tween",
-		"animation",
-		"js"
-	],
+	"keywords": ["javascript", "tween", "animation", "js", "timeline"],
 	"author": "Marten Zander",
 	"license": "ISC",
 	"devDependencies": {

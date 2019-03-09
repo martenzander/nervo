@@ -1,23 +1,23 @@
 import Clock from "./Clock";
 import * as Eases from "eases";
 
-export default class Tweener {
+export default class Tween {
 	static AutoStart = true;
 	static Duration = 5.0;
 	static Easing = "quadInOut";
 	static Loop = false;
 
 	constructor(start, end, options = {}) {
-		this.autoStart = options.autoStart !== undefined ? options.autoStart : Tweener.AutoStart;
+		this.autoStart = options.autoStart !== undefined ? options.autoStart : Tween.AutoStart;
 		this.clock = new Clock();
 		this.current = { ...{}, ...this.startValues };
 		this.currentTime = 0;
-		this.duration = options.duration || Tweener.Duration;
-		this.easing = Eases[options.easing] || Eases[Tweener.Easing];
+		this.duration = options.duration || Tween.Duration;
+		this.easing = Eases[options.easing] || Eases[Tween.Easing];
 		this.easedProgress = this.easing(this.progress);
 		this.endValues = end;
 		this.isRendering = false;
-		this.loop = options.loop !== undefined ? options.loop : Tweener.Loop;
+		this.loop = options.loop !== undefined ? options.loop : Tween.Loop;
 		this.options = options;
 		this.progress = 0;
 		this.startValues = start;
