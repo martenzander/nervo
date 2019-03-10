@@ -9,18 +9,28 @@
 			* {
 				margin: 0;
 				padding: 0;
+				box-sizing: border-box;
 			}
 		</style>
 	</head>
 	<body>
 		<div class="mesh-container">
 			<div class="mesh-void">
-				<div class="mesh-column-12 mesh-column-sm-12 mesh-column-md-12 mesh-column-lg-12 mesh-column-xl-12">
+				<div class="mesh-column-6 mesh-column-sm-6 mesh-column-md-6 mesh-column-lg-6 mesh-column-xl-6">
 					<p>
+						tween output
 						<code>
 							<pre class="tween1"></pre>
 							<pre class="tween2"></pre>
 							<pre class="tween3"></pre>
+						</code>
+					</p>
+				</div>
+				<div class="mesh-column-6 mesh-column-sm-6 mesh-column-md-6 mesh-column-lg-6 mesh-column-xl-6">
+					<p>
+						timeline output
+						<code>
+							<pre class="timeline"></pre>
 						</code>
 					</p>
 				</div>
@@ -31,44 +41,48 @@
 		const tween1Container = document.querySelector('.tween1');
 		const tween2Container = document.querySelector('.tween2');
 		const tween3Container = document.querySelector('.tween3');
+		const timelineContainer = document.querySelector('.timeline');
 
 
 		const tween1 = new Anim.Tween({x:0,y:0,z:0},{x:10,y:100,z:1000},{
 			autoStart: false,
-			duration: 0.5,
+			duration: 5,
 			onUpdate: e => {
 				tween1Container.innerHTML = JSON.stringify(e.current);
 			},
 			onComplete: e => {
-				console.log("Tween 1 finished");
+				console.log("Tween 1 finished", e);
 			}
 		});
 
 		const tween2 = new Anim.Tween({tween2:0},{tween2:10},{
 			autoStart: false,
-			duration: 0.25,
+			duration: 5,
 			onUpdate: e => {
 				tween2Container.innerHTML = JSON.stringify(e.current);
 			},
 			onComplete: e => {
-				console.log("Tween 2 finished");
+				console.log("Tween 2 finished", e);
 			}
 		});
 
 		const tween3 = new Anim.Tween({tween3:0},{tween3:1000},{
 			autoStart: false,
-			duration: 1,
+			duration: 5,
 			onUpdate: e => {
 				tween3Container.innerHTML = JSON.stringify(e.current);
 			},
 			onComplete: e => {
-				console.log("Tween 3 finished");
+				console.log("Tween 3 finished", e);
 			}
 		});
 
+
 		const timeline = new Anim.Timeline([tween1, tween2, tween3], {
+			// autoStart: true,
+			loop: true,
 			onUpdate: e => {
-				console.log(e.current)
+				// timelineContainer.innerHTML = JSON.stringify(e);
 			},
 			onComplete: e => {
 				console.log('Timeline Finish');

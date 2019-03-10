@@ -1,8 +1,9 @@
 import Clock from "./Clock";
-let tweenIndex = 0;
+import Track from "./Track";
 
 export default class Timeline {
 	static AutoStart = false;
+	static Loop = false;
 
 	constructor(tweens = [], options = {}) {
 		this.autoStart = options.autoStart !== undefined ? options.autoStart : Timeline.AutoStart;
@@ -10,10 +11,12 @@ export default class Timeline {
 		this.currentTime = 0;
 		this.isTweening = false;
 		this.options = options;
+		this.loop = options.loop !== undefined ? options.loop : Timeline.Loop;
+		this.tracks = [];
 
-		this.tweens = tweens || [];
-		this.tweens.forEach(tween => {
+		tweens.forEach(tween => {
 			tween.stop();
+			this.add(tween);
 		});
 
 		// event binding
@@ -24,36 +27,39 @@ export default class Timeline {
 		if (this.autoStart) this.start();
 	}
 
-	getPreTweenElapsedTime() {
-		let preTweenElapsedTime = 0;
+	getDuration() {
+		let duration = 0;
 
-		for (let i = 0; i < tweenIndex; i++) {
-			preTweenElapsedTime += this.tweens[i].duration;
-		}
+		this.tracks.forEach(track => {
+			if (track.end > duration) duration = track.end;
+		});
 
-		return preTweenElapsedTime;
+		return duration;
 	}
 
-	checkTweenIndex() {
-		if (tweenIndex === this.tweens.length - 1) {
-			this.pause();
-			this.onComplete();
-		} else {
-			tweenIndex++;
-		}
+	add(tween, options = {}) {
+		const track = new Track(tween, {
+			start: options.start || this.duration,
+			timeline: this,
+		});
+		this.tracks.push(track);
+		this.duration = this.getDuration();
 	}
 
 	onComplete() {
-		if ("onComplete" in this.options) this.options.onComplete(this.tweens[tweenIndex]);
+		this.pause();
+		if ("onComplete" in this.options) this.options.onComplete(this);
 	}
 
 	onUpdate() {
-		if ("onUpdate" in this.options) this.options.onUpdate(this.tweens[tweenIndex]);
+		if ("onUpdate" in this.options) this.options.onUpdate(this);
 	}
 
 	reset() {
 		this.currentTime = 0;
-		tweenIndex = 0;
+		this.tracks.forEach(track => {
+			track.reset();
+		});
 	}
 
 	start() {
@@ -87,18 +93,24 @@ export default class Timeline {
 		requestAnimationFrame(this.tween);
 	}
 
-	update(time) {
-		// current tween
-		const tween = this.tweens[tweenIndex];
-		const preTweenElapsedTime = this.getPreTweenElapsedTime();
+	updateTracks(time) {
+		this.tracks.forEach(track => {
+			track.update(time);
+		});
+	}
 
-		if (time >= tween.duration + preTweenElapsedTime) {
-			time = tween.duration + preTweenElapsedTime;
-			tween.update(tween.duration);
-			this.onUpdate();
-			this.checkTweenIndex();
+	update(time) {
+		if (time >= this.duration) {
+			if (this.loop) {
+				this.start();
+			} else {
+				time = this.duration;
+				this.updateTracks(time);
+				this.onUpdate();
+				this.onComplete();
+			}
 		} else {
-			tween.update(time - preTweenElapsedTime);
+			this.updateTracks(time);
 			this.onUpdate();
 		}
 	}

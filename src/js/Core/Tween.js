@@ -6,21 +6,26 @@ export default class Tween {
 	static Duration = 5.0;
 	static Easing = "quadInOut";
 	static Loop = false;
+	static ID = 0;
 
 	constructor(start, end, options = {}) {
 		this.autoStart = options.autoStart !== undefined ? options.autoStart : Tween.AutoStart;
 		this.clock = new Clock();
-		this.current = { ...{}, ...this.startValues };
-		this.currentTime = 0;
+		// this.current = { ...{}, ...this.startValues };
+		// this.currentTime = 0;
 		this.duration = options.duration || Tween.Duration;
 		this.easing = Eases[options.easing] || Eases[Tween.Easing];
-		this.easedProgress = this.easing(this.progress);
+		// this.easedProgress = this.easing(this.progress);
 		this.endValues = end;
 		this.isTweening = false;
 		this.loop = options.loop !== undefined ? options.loop : Tween.Loop;
 		this.options = options;
-		this.progress = 0;
+		// this.progress = 0;
 		this.startValues = start;
+		this.id = Tween.ID;
+		Tween.ID++;
+
+		this.reset();
 
 		// event binding
 		this.onComplete = this.onComplete.bind(this);
@@ -35,8 +40,8 @@ export default class Tween {
 		this.currentTime = this.duration;
 		this.progress = 1.0;
 		this.easedProgress = 1.0;
-		if ("onComplete" in this.options) this.options.onComplete(this);
 		this.pause();
+		if ("onComplete" in this.options) this.options.onComplete(this);
 	}
 
 	onUpdate() {
@@ -46,8 +51,8 @@ export default class Tween {
 	reset() {
 		this.current = { ...{}, ...this.startValues };
 		this.currentTime = 0;
-		this.progress = 0;
-		this.easedProgress = 0;
+		// update tween
+		this.update(this.currentTime);
 	}
 
 	start() {
