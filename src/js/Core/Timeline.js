@@ -3,7 +3,9 @@ import Track from "./Track";
 
 export default class Timeline {
 	static AutoStart = false;
+	static Instances = [];
 	static Loop = false;
+	static ID = 0;
 
 	constructor(tweens = [], options = {}) {
 		this.autoStart = options.autoStart !== undefined ? options.autoStart : Timeline.AutoStart;
@@ -13,6 +15,9 @@ export default class Timeline {
 		this.options = options;
 		this.loop = options.loop !== undefined ? options.loop : Timeline.Loop;
 		this.tracks = [];
+		this.id = Timeline.ID;
+		Timeline.ID++;
+		Timeline.Instances.push(this);
 
 		tweens.forEach(tween => {
 			tween.stop();
