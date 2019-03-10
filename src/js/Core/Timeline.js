@@ -106,12 +106,12 @@ export default class Timeline {
 
 	update(time) {
 		if (time >= this.duration) {
+			time = this.duration;
+			this.updateTracks(time);
+			this.onUpdate();
 			if (this.loop) {
 				this.start();
 			} else {
-				time = this.duration;
-				this.updateTracks(time);
-				this.onUpdate();
 				this.onComplete();
 			}
 		} else {
