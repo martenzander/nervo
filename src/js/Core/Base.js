@@ -2,13 +2,13 @@ export default class Base {
 	static Instances = [];
 	static ID = 0;
 
-	constructor() {
-		this.setId(this);
+	constructor(options) {
 		this.children = [];
+		this.options = options;
+		this.setId(this);
 
 		// event binding
-		this.onAdd = this.onAdd.bind(this);
-		this.onProgress = this.onProgress.bind(this);
+		this.updateRelationships = this.updateRelationships.bind(this);
 	}
 
 	clone() {
@@ -18,20 +18,27 @@ export default class Base {
 		return clone;
 	}
 
-	onAdd(object) {
-		object.parent = this;
-		this.children.push(object);
+	remove(...objects) {
+		objects.forEach(object => {
+			for (let i = 0; i < this.children.length; i++) {
+				const child = this.children[i];
+				if (child === object) {
+					object.parent = null;
+					this.children.splice(i, 1);
+				}
+			}
+		});
 	}
 
-	onProgress() {
-		if ("onProgress" in this.options) this.options.onProgress(this);
+	updateRelationships(object) {
+		object.parent = this;
+		this.children.push(object);
 	}
 
 	updateChildren(time) {
 		this.children.forEach(child => {
 			child.update(time);
 		});
-		this.onProgress();
 	}
 
 	setId(object) {

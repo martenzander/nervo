@@ -1,24 +1,31 @@
 import Base from "./../Core/Base";
 
 export default class Track extends Base {
-	constructor(tween, options = {}) {
-		super();
+	constructor(objects = [], options = {}) {
+		super(options);
 		this.isTrack = true;
-		this.start = options.start || 0;
-		this.end = tween.duration + this.start;
-		this.options = options;
+		this.type = "Track";
+		this.start = options.start !== undefined ? options.start : 0;
+		this.end = 0;
 
-		this.add(tween);
-
-		this.reset();
+		this.add(objects);
 	}
 
-	add(tween) {
-		if (!tween.isTween) {
-			console.error(`Object is no instance of Tween. : ${tween}`);
-			return;
-		}
-		this.onAdd(tween);
+	add(...objects) {
+		objects.forEach(object => {
+			if (object.isTween) {
+				this.updateRelationships(object);
+			}
+		});
+		this.updateTimeRange();
+	}
+
+	updateTimeRange() {
+		this.end = 0;
+
+		this.children.forEach(child => {
+			if (child.scaledDuration + this.start > this.end) this.end = child.scaledDuration + this.start;
+		});
 	}
 
 	reset() {

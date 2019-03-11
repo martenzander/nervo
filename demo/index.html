@@ -43,6 +43,7 @@
 			autoStart: false,
 			duration: 5,
 			onProgress: e => {
+				// console.log(e.type + ": " + `${e.id + 1}`, e.current);
 				tween1Container.innerHTML = JSON.stringify(e.current);
 			},
 			onComplete: e => {
@@ -53,7 +54,9 @@
 		const tween2 = new Motion.Tween({tween2:0},{tween2:10},{
 			autoStart: false,
 			duration: 5,
+			// timeScale: 10,
 			onProgress: e => {
+				// console.log(e.type + ": " + `${e.id + 1}`, e.current);
 				tween2Container.innerHTML = JSON.stringify(e.current);
 			},
 			onComplete: e => {
@@ -65,6 +68,7 @@
 			autoStart: false,
 			duration: 5,
 			onProgress: e => {
+				// console.log(e.type + ": " + `${e.id + 1}`, e.current);
 				tween3Container.innerHTML = JSON.stringify(e.current);
 			},
 			onComplete: e => {
@@ -76,6 +80,7 @@
 			autoStart: false,
 			duration: 5,
 			onProgress: e => {
+				// console.log(e.type + ": " + `${e.id + 1}`, e.current);
 				tween4Container.innerHTML = JSON.stringify(e.current);
 			},
 			onComplete: e => {
@@ -85,9 +90,10 @@
 
 
 		const timeline = new Motion.Timeline([tween1, tween2, tween3], {
-			// autoStart: true,
+			autoStart: false,
 			loop: true,
 			onProgress: e => {
+				// console.log(e);
 				// timelineContainer.innerHTML = JSON.stringify(e);
 			},
 			onComplete: e => {
@@ -96,7 +102,7 @@
 		});
 
 		timeline.add(tween4, {
-			// start: 0.33
+			start: 0
 		});
 
 		console.log(timeline);
