@@ -1,7 +1,7 @@
 <p align="center">
     <img align="center" src="http://exchange.weareslim.de/assets/images/svg/logo_blue.svg" width="100" height="auto" alt="slim Logo" class="js-lazy-loaded">
     <h3 align="center">
-        Anim
+        Motion
     </h3>
     <p align="center">
         tweening multidimensional objects
@@ -11,20 +11,20 @@
 ## Installation
 
 ```
-npm i git+ssh://git@gitlab.com/slimInteractive/anim.git#master
+npm i git+ssh://git@gitlab.com/slimInteractive/motion.git#master
 ```
 
 ## Usage
 
 
 ```js
-import * as Anim from 'anim';
+import * as Motion from 'motion';
 ```
 
 ## Tween
 
 ```js
-const tween = new Anim.Tween(start, end, parameters = {});
+const tween = new Motion.Tween(start, end, parameters = {});
 ```
 
 #### Start `type: {}`
@@ -67,5 +67,5 @@ const tween = new Anim.Tween(start, end, parameters = {});
 ## Timeline
 
 ```js
-const timeline = new Anim.Timeline();
+const timeline = new Motion.Timeline();
 ```

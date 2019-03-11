@@ -2,8 +2,8 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
-		<title>Anim</title>
-		<script type="text/javascript" src="../build/anim.js"></script>
+		<title>Motion</title>
+		<script type="text/javascript" src="../build/motion.js"></script>
 		<link rel="stylesheet" type="text/css" href="css/styles.css">
 		<style>
 			* {
@@ -37,7 +37,7 @@
 		const timelineContainer = document.querySelector('.timeline');
 
 
-		const tween1 = new Anim.Tween({x:0,y:0,z:0},{x:10,y:100,z:1000},{
+		const tween1 = new Motion.Tween({x:0,y:0,z:0},{x:10,y:100,z:1000},{
 			autoStart: false,
 			duration: 5,
 			onUpdate: e => {
@@ -48,7 +48,7 @@
 			}
 		});
 
-		const tween2 = new Anim.Tween({tween2:0},{tween2:10},{
+		const tween2 = new Motion.Tween({tween2:0},{tween2:10},{
 			autoStart: false,
 			duration: 5,
 			onUpdate: e => {
@@ -59,7 +59,7 @@
 			}
 		});
 
-		const tween3 = new Anim.Tween({tween3:0},{tween3:1000},{
+		const tween3 = new Motion.Tween({tween3:0},{tween3:1000},{
 			autoStart: false,
 			duration: 5,
 			onUpdate: e => {
@@ -70,7 +70,7 @@
 			}
 		});
 
-		const tween4 = new Anim.Tween({tween4:0},{tween4:1000},{
+		const tween4 = new Motion.Tween({tween4:0},{tween4:1000},{
 			autoStart: false,
 			duration: 5,
 			onUpdate: e => {
@@ -82,7 +82,7 @@
 		});
 
 
-		const timeline = new Anim.Timeline([tween1, tween2, tween3], {
+		const timeline = new Motion.Timeline([tween1, tween2, tween3], {
 			// autoStart: true,
 			loop: true,
 			onUpdate: e => {

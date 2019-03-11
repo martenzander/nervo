@@ -1,15 +1,12 @@
 const path = require("path");
 const packageConfig = require("./../package.json");
 
-const fileName =
-	process.env.NODE_ENV === "development"
-		? `${packageConfig.name}.js`
-		: `${packageConfig.name}.min.js`;
+const fileName = process.env.NODE_ENV === "development" ? `${packageConfig.name}.js` : `${packageConfig.name}.min.js`;
 
 const config = {
 	entry: ["./src/js/index.js"],
 	output: {
-		library: "Anim",
+		library: "Motion",
 		libraryTarget: "umd",
 		path: path.resolve(__dirname, "../", "build"),
 		filename: fileName,
