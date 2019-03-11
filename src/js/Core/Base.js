@@ -4,6 +4,11 @@ export default class Base {
 
 	constructor() {
 		this.setId(this);
+		this.children = [];
+
+		// event binding
+		this.onAdd = this.onAdd.bind(this);
+		this.onProgress = this.onProgress.bind(this);
 	}
 
 	clone() {
@@ -11,6 +16,22 @@ export default class Base {
 		this.setId(clone);
 
 		return clone;
+	}
+
+	onAdd(object) {
+		object.parent = this;
+		this.children.push(object);
+	}
+
+	onProgress() {
+		if ("onProgress" in this.options) this.options.onProgress(this);
+	}
+
+	updateChildren(time) {
+		this.children.forEach(child => {
+			child.update(time);
+		});
+		this.onProgress();
 	}
 
 	setId(object) {

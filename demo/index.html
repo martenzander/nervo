@@ -16,7 +16,7 @@
 	<body>
 		<div class="mesh-container">
 			<div class="mesh-void">
-				<div class="mesh-column-6 mesh-column-sm-6 mesh-column-md-6 mesh-column-lg-6 mesh-column-xl-6">
+				<div class="mesh-column-9 mesh-column-sm-9 mesh-column-md-9 mesh-column-lg-9 mesh-column-xl-9">
 					<p>
 						<code>
 							<pre class="tween1"></pre>
@@ -25,6 +25,8 @@
 							<pre class="tween4"></pre>
 						</code>
 					</p>
+				</div>
+				<div class="mesh-column-3 mesh-column-sm-3 mesh-column-md-3 mesh-column-lg-3 mesh-column-xl-3">
 				</div>
 			</div>
 		</div>
@@ -40,7 +42,7 @@
 		const tween1 = new Motion.Tween({x:0,y:0,z:0},{x:10,y:100,z:1000},{
 			autoStart: false,
 			duration: 5,
-			onUpdate: e => {
+			onProgress: e => {
 				tween1Container.innerHTML = JSON.stringify(e.current);
 			},
 			onComplete: e => {
@@ -51,7 +53,7 @@
 		const tween2 = new Motion.Tween({tween2:0},{tween2:10},{
 			autoStart: false,
 			duration: 5,
-			onUpdate: e => {
+			onProgress: e => {
 				tween2Container.innerHTML = JSON.stringify(e.current);
 			},
 			onComplete: e => {
@@ -62,7 +64,7 @@
 		const tween3 = new Motion.Tween({tween3:0},{tween3:1000},{
 			autoStart: false,
 			duration: 5,
-			onUpdate: e => {
+			onProgress: e => {
 				tween3Container.innerHTML = JSON.stringify(e.current);
 			},
 			onComplete: e => {
@@ -73,11 +75,11 @@
 		const tween4 = new Motion.Tween({tween4:0},{tween4:1000},{
 			autoStart: false,
 			duration: 5,
-			onUpdate: e => {
+			onProgress: e => {
 				tween4Container.innerHTML = JSON.stringify(e.current);
 			},
 			onComplete: e => {
-				console.log("Tween 3 finished", e);
+				console.log("Tween 4 finished", e);
 			}
 		});
 
@@ -85,7 +87,7 @@
 		const timeline = new Motion.Timeline([tween1, tween2, tween3], {
 			// autoStart: true,
 			loop: true,
-			onUpdate: e => {
+			onProgress: e => {
 				// timelineContainer.innerHTML = JSON.stringify(e);
 			},
 			onComplete: e => {
@@ -94,18 +96,15 @@
 		});
 
 		timeline.add(tween4, {
-			start: 0.33
+			// start: 0.33
 		});
 
-		console.log(timeline.clone());
-
-		// console.log(timeline, tween1, tween2);
+		console.log(timeline);
 
 		document.addEventListener("keydown", function (e){
-			console.log(e.keyCode);
 			switch(e.keyCode){
 				case 80:
-					if(timeline.isTweening){
+					if(timeline.isActive){
 						timeline.pause();
 					}else{
 						timeline.play();

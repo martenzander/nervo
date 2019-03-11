@@ -25,7 +25,6 @@ export default class Tween extends Base {
 
 		// event binding
 		this.onComplete = this.onComplete.bind(this);
-		this.onUpdate = this.onUpdate.bind(this);
 		this.tween = this.tween.bind(this);
 
 		if (this.autoStart) this.start();
@@ -38,10 +37,6 @@ export default class Tween extends Base {
 		this.easedProgress = 1.0;
 		this.pause();
 		if ("onComplete" in this.options) this.options.onComplete(this);
-	}
-
-	onUpdate() {
-		if ("onUpdate" in this.options) this.options.onUpdate(this);
 	}
 
 	reset() {
@@ -101,7 +96,7 @@ export default class Tween extends Base {
 				this.current[key] = this.startValues[key] + (this.endValues[key] - this.startValues[key]) * this.easedProgress;
 			}
 		}
-		// onUpdate
-		this.onUpdate();
+		// onProgress
+		this.onProgress();
 	}
 }

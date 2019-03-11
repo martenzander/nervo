@@ -6,25 +6,23 @@ export default class Timeline extends Base {
 	static AutoStart = false;
 	static Loop = false;
 
-	constructor(tweens = [], options = {}) {
+	constructor(objects = [], options = {}) {
 		super();
-		this.isTimeline = true;
 		this.autoStart = options.autoStart !== undefined ? options.autoStart : Timeline.AutoStart;
+		this.duration = 0;
+		this.isTimeline = true;
 		this.clock = new Clock();
 		this.currentTime = 0;
 		this.isActive = false;
 		this.options = options;
 		this.loop = options.loop !== undefined ? options.loop : Timeline.Loop;
-		this.tracks = [];
 
-		tweens.forEach(tween => {
-			tween.stop();
-			this.add(tween);
+		objects.forEach(object => {
+			this.add(object, {});
 		});
 
 		// event binding
 		this.onComplete = this.onComplete.bind(this);
-		this.onUpdate = this.onUpdate.bind(this);
 		this.tween = this.tween.bind(this);
 
 		if (this.autoStart) this.start();
@@ -33,35 +31,35 @@ export default class Timeline extends Base {
 	getDuration() {
 		let duration = 0;
 
-		this.tracks.forEach(track => {
-			if (track.end > duration) duration = track.end;
+		this.children.forEach(child => {
+			if (child.end > duration) duration = child.end;
 		});
 
 		return duration;
 	}
 
-	add(tween, options = {}) {
+	add(tween) {
+		if (!tween.isTween) {
+			console.error(`Object is no instance of Tween. : ${tween}`);
+			return;
+		}
+
 		const track = new Track(tween, {
-			start: options.start || this.duration,
-			timeline: this,
+			start: this.options.start || this.duration,
 		});
-		this.tracks.push(track);
+		this.onAdd(track);
 		this.duration = this.getDuration();
 	}
 
 	onComplete() {
-		this.pause();
 		if ("onComplete" in this.options) this.options.onComplete(this);
-	}
-
-	onUpdate() {
-		if ("onUpdate" in this.options) this.options.onUpdate(this);
+		this.pause();
 	}
 
 	reset() {
 		this.currentTime = 0;
-		this.tracks.forEach(track => {
-			track.reset();
+		this.children.forEach(child => {
+			child.reset();
 		});
 	}
 
@@ -96,25 +94,17 @@ export default class Timeline extends Base {
 		requestAnimationFrame(this.tween);
 	}
 
-	updateTracks(time) {
-		this.tracks.forEach(track => {
-			track.update(time);
-		});
-	}
-
 	update(time) {
 		if (time >= this.duration) {
 			time = this.duration;
-			this.updateTracks(time);
-			this.onUpdate();
+			this.updateChildren(time);
 			if (this.loop) {
 				this.start();
 			} else {
 				this.onComplete();
 			}
 		} else {
-			this.updateTracks(time);
-			this.onUpdate();
+			this.updateChildren(time);
 		}
 	}
 }
