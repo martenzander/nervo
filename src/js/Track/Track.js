@@ -1,16 +1,14 @@
-export default class Track {
-	static Instances = [];
-	static ID = 0;
+import Base from "./../Core/Base";
 
+export default class Track extends Base {
 	constructor(tween, options = {}) {
+		super();
+		this.isTrack = true;
 		this.tween = tween;
 		this.tween.track = this;
 		this.start = options.start || 0;
 		this.end = tween.duration + this.start;
 		this.timeline = options.timeline;
-		this.id = Track.ID;
-		Track.ID++;
-		Track.Instances.push(this);
 
 		this.reset();
 	}

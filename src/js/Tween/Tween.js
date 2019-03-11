@@ -1,27 +1,25 @@
-import Clock from "./Clock";
+import Clock from "./../Core/Clock";
+import Base from "./../Core/Base";
 import * as Eases from "eases";
 
-export default class Tween {
+export default class Tween extends Base {
 	static AutoStart = false;
 	static Duration = 5.0;
 	static Easing = "quadInOut";
-	static Instances = [];
 	static Loop = false;
-	static ID = 0;
 
 	constructor(start, end, options = {}) {
+		super();
+		this.isTween = true;
 		this.autoStart = options.autoStart !== undefined ? options.autoStart : Tween.AutoStart;
 		this.clock = new Clock();
 		this.duration = options.duration || Tween.Duration;
 		this.easing = Eases[options.easing] || Eases[Tween.Easing];
 		this.endValues = end;
-		this.isTweening = false;
+		this.isActive = false;
 		this.loop = options.loop !== undefined ? options.loop : Tween.Loop;
 		this.options = options;
 		this.startValues = start;
-		this.id = Tween.ID;
-		Tween.ID++;
-		Tween.Instances.push(this);
 
 		this.reset();
 
@@ -64,12 +62,12 @@ export default class Tween {
 	}
 
 	pause() {
-		this.isTweening = false;
+		this.isActive = false;
 		this.clock.stop();
 	}
 
 	play() {
-		this.isTweening = true;
+		this.isActive = true;
 		this.clock.start();
 		this.tween();
 	}
@@ -81,7 +79,7 @@ export default class Tween {
 		// update tween
 		this.update(this.currentTime);
 
-		if (!this.isTweening) return;
+		if (!this.isActive) return;
 		requestAnimationFrame(this.tween);
 	}
 
@@ -100,9 +98,7 @@ export default class Tween {
 		} else {
 			// update values
 			for (const key in this.startValues) {
-				this.current[key] =
-					this.startValues[key] +
-					(this.endValues[key] - this.startValues[key]) * this.easedProgress;
+				this.current[key] = this.startValues[key] + (this.endValues[key] - this.startValues[key]) * this.easedProgress;
 			}
 		}
 		// onUpdate

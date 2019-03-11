@@ -1,23 +1,21 @@
-import Clock from "./Clock";
-import Track from "./Track";
+import Clock from "./../Core/Clock";
+import Base from "./../Core/Base";
+import Track from "./../Track/Track";
 
-export default class Timeline {
+export default class Timeline extends Base {
 	static AutoStart = false;
-	static Instances = [];
 	static Loop = false;
-	static ID = 0;
 
 	constructor(tweens = [], options = {}) {
+		super();
+		this.isTimeline = true;
 		this.autoStart = options.autoStart !== undefined ? options.autoStart : Timeline.AutoStart;
 		this.clock = new Clock();
 		this.currentTime = 0;
-		this.isTweening = false;
+		this.isActive = false;
 		this.options = options;
 		this.loop = options.loop !== undefined ? options.loop : Timeline.Loop;
 		this.tracks = [];
-		this.id = Timeline.ID;
-		Timeline.ID++;
-		Timeline.Instances.push(this);
 
 		tweens.forEach(tween => {
 			tween.stop();
@@ -78,12 +76,12 @@ export default class Timeline {
 	}
 
 	pause() {
-		this.isTweening = false;
+		this.isActive = false;
 		this.clock.stop();
 	}
 
 	play() {
-		this.isTweening = true;
+		this.isActive = true;
 		this.clock.start();
 		this.tween();
 	}
@@ -94,7 +92,7 @@ export default class Timeline {
 
 		this.update(this.currentTime);
 
-		if (!this.isTweening) return;
+		if (!this.isActive) return;
 		requestAnimationFrame(this.tween);
 	}
 

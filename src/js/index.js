@@ -1,40 +1,19 @@
-import Track from "./Core/Track";
-import Tween from "./Core/Tween";
-import Timeline from "./Core/Timeline";
+import Base from "./Core/Base";
+import Track from "./Track/Track";
+import Tween from "./Tween/Tween";
+import Timeline from "./Timeline/Timeline";
 
-const getTimelineById = id => {
+const getElementById = id => {
 	let instance;
 
-	Timeline.Instances.forEach(timeline => {
-		if (timeline.id === id) instance = timeline;
+	Base.Instances.forEach(baseObject => {
+		if (baseObject.id === id) instance = baseObject;
 	});
 
 	return instance;
 };
 
-const getTrackById = id => {
-	let instance;
-
-	Track.Instances.forEach(track => {
-		if (track.id === id) instance = track;
-	});
-
-	return instance;
-};
-
-const getTweenById = id => {
-	let instance;
-
-	Tween.Instances.forEach(tween => {
-		if (tween.id === id) instance = tween;
-	});
-
-	return instance;
-};
-
-export { getTimelineById };
-export { getTrackById };
-export { getTweenById };
+export { getElementById };
 
 // Classes
 export { Track };
