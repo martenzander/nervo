@@ -24,8 +24,8 @@ export default class Ticker extends Base {
 	}
 
 	onComplete() {
-		this.pause();
 		if ("onComplete" in this.options) this.options.onComplete(this);
+		this.pause();
 	}
 
 	onProgress() {
@@ -102,13 +102,14 @@ export default class Ticker extends Base {
 	}
 
 	tick() {
+		if (!this.isActive) return;
+
 		// update time
 		this.currentTime += this.clock.getDelta();
 
 		// update call
 		this.update(this.currentTime);
 
-		if (!this.isActive) return;
 		requestAnimationFrame(this.tick);
 	}
 }
