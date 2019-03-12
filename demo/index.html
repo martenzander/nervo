@@ -45,6 +45,9 @@
 			// timeScale: 2,
 			// easing: "expoOut",
 			onProgress: e => {
+				e.current.x = Math.round(e.current.x * 100) / 100;
+				e.current.y = Math.round(e.current.y * 100) / 100;
+				e.current.z = Math.round(e.current.z * 100) / 100;
 				// console.log(e.type + ": " + `${e.id + 1}`, e.current);
 				tween1Container.innerHTML = JSON.stringify(e.current);
 			},
@@ -59,6 +62,7 @@
 			// timeScale: 10,
 			onProgress: e => {
 				// console.log(e.type + ": " + `${e.id + 1}`, e.current);
+				e.current.tween2 = Math.round(e.current.tween2 * 100) / 100;
 				tween2Container.innerHTML = JSON.stringify(e.current);
 			},
 			onComplete: e => {
@@ -71,6 +75,7 @@
 			duration: 5,
 			onProgress: e => {
 				// console.log(e.type + ": " + `${e.id + 1}`, e.current);
+				e.current.tween3 = Math.round(e.current.tween3 * 100) / 100;
 				tween3Container.innerHTML = JSON.stringify(e.current);
 			},
 			onComplete: e => {
@@ -81,8 +86,10 @@
 		const tween4 = new Motion.Tween({tween4:0},{tween4:1000},{
 			autoStart: false,
 			duration: 5,
+			timeScale: 10,
 			onProgress: e => {
 				// console.log(e.type + ": " + `${e.id + 1}`, e.current);
+				e.current.tween4 = Math.round(e.current.tween4 * 100) / 100;
 				tween4Container.innerHTML = JSON.stringify(e.current);
 			},
 			onComplete: e => {
@@ -96,7 +103,7 @@
 		const timeline = new Motion.Timeline([tween1,tween2], {
 			autoStart: false,
 			loop: true,
-			// timeScale: 2,
+			timeScale: 0.5,
 			// easing: "expoIn",
 			onProgress: e => {
 				// console.log(e);
