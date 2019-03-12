@@ -26,7 +26,7 @@ export default class Track extends Base {
 		this.end = 0;
 
 		this.children.forEach(child => {
-			if (child.duration + this.start > this.end) this.end = child.duration + this.start;
+			if (child.duration * child.timeScale + this.start > this.end) this.end = child.duration * child.timeScale + this.start;
 		});
 	}
 
@@ -38,17 +38,19 @@ export default class Track extends Base {
 		});
 	}
 
-	update(time) {
-		if (time >= this.end) {
+	update(t) {
+		t /= this.parent.timeScale;
+
+		if (t >= this.end) {
 			if (this.finished) return;
 			this.updateChildren(this.end - this.start);
 			this.finished = true;
-		} else if (time >= this.start) {
+		} else if (t >= this.start) {
 			if (!this.initialized) {
 				this.updateChildren(0);
 				this.initialized = true;
 			} else {
-				this.updateChildren(time - this.start);
+				this.updateChildren(t - this.start);
 			}
 		}
 	}
