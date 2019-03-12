@@ -1,30 +1,30 @@
 <p align="center">
     <img align="center" src="http://exchange.weareslim.de/assets/images/svg/logo_blue.svg" width="100" height="auto" alt="slim Logo" class="js-lazy-loaded">
     <h3 align="center">
-        Motion
+        Layla
     </h3>
     <p align="center">
-        tweening multidimensional objects
+        Javascript Animation Library
     </p>
 </p>
 
-## Installation
+<!-- ## Installation
 
 ```
-npm i git+ssh://git@gitlab.com/slimInteractive/motion.git#master
+npm i git+ssh://git@gitlab.com/slimInteractive/layla.git#master
 ```
 
 ## Usage
 
 
 ```js
-import * as Motion from 'motion';
+import * as Layla from 'layla';
 ```
 
 ## Tween
 
 ```js
-const tween = new Motion.Tween(start, end, parameters = {});
+const tween = new Layla.Tween(start, end, parameters = {});
 ```
 
 #### Start `type: {}`
@@ -67,5 +67,5 @@ const tween = new Motion.Tween(start, end, parameters = {});
 ## Timeline
 
 ```js
-const timeline = new Motion.Timeline();
-```
+const timeline = new Layla.Timeline();
+``` -->
