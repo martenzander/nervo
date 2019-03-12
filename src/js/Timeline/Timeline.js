@@ -15,16 +15,18 @@ export default class Timeline extends Ticker {
 
 	addTween(tween, options = {}) {
 		const track = new Track([tween], {
-			start: options.start !== undefined ? options.start : this.scaledDuration,
+			start: options.start !== undefined ? options.start : this.duration,
 		});
 		this.updateRelationships(track);
-		this.updateDuration();
 	}
 
 	add(object, options = {}) {
 		if (object.isTween) {
 			this.addTween(object, options);
+		} else if (object.isTrack) {
+			this.updateRelationships(object);
 		}
+		this.updateDuration();
 	}
 
 	updateDuration() {
