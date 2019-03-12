@@ -8,7 +8,9 @@ export default class Track extends Base {
 		this.start = options.start !== undefined ? options.start : 0;
 		this.end = 0;
 
-		this.add(objects);
+		objects.forEach(object => {
+			this.add(object);
+		});
 	}
 
 	add(...objects) {
