@@ -88,10 +88,13 @@
 			}
 		});
 
+		const track = new Motion.Track([tween3,tween4],{start: 20});
 
-		const timeline = new Motion.Timeline([tween1, tween2, tween3], {
+
+		const timeline = new Motion.Timeline([tween1,tween2], {
 			autoStart: false,
 			loop: true,
+			timeScale: 0.5,
 			onProgress: e => {
 				// console.log(e);
 				// timelineContainer.innerHTML = JSON.stringify(e);
@@ -101,9 +104,7 @@
 			}
 		});
 
-		timeline.add(tween4, {
-			start: 0
-		});
+		timeline.add(track);
 
 		console.log(timeline);
 
