@@ -28,6 +28,8 @@ export default class Timeline extends Ticker {
 			});
 			this.addTrack(track);
 		} else if (object.isTrack) {
+			object.start = object.start !== undefined ? object.start : this.duration;
+			object.updateTimeRange();
 			this.addTrack(object, options);
 		}
 		this.updateDuration();
