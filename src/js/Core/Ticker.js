@@ -72,28 +72,33 @@ export default class Ticker extends Base {
 	}
 
 	update(time) {
+		let updateTime = 0;
 		// update progress
-		this.progress = time / this.scaledDuration;
+		this.progress = time / this.duration;
 		this.easedProgress = this.easing(this.progress);
 
 		// validate progress
 		if (this.progress >= 1.0) {
 			this.progress = 1.0;
 			this.easedProgress = 1.0;
-			time = this.scaledDuration;
-			this.execute(time);
-			// onProgress
-			this.onProgress();
+			time = this.duration;
+			updateTime = time;
+		} else {
+			updateTime = this.duration * this.easedProgress;
+		}
 
+		this.execute(updateTime);
+		// onProgress
+		this.onProgress();
+
+		if (this.isTimeline) console.log(updateTime);
+
+		if (this.progress >= 1.0) {
 			if (this.loop) {
 				this.start();
 			} else {
 				this.onComplete();
 			}
-		} else {
-			this.execute(this.scaledDuration * this.easedProgress);
-			// onProgress
-			this.onProgress();
 		}
 	}
 
