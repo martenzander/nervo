@@ -9,6 +9,16 @@ export default class Base {
 
 		// event binding
 		this.updateRelationships = this.updateRelationships.bind(this);
+		this.onProgress = this.onProgress.bind(this);
+		this.onComplete = this.onComplete.bind(this);
+	}
+
+	onComplete() {
+		if ("onComplete" in this.options) this.options.onComplete(this);
+	}
+
+	onProgress() {
+		if ("onProgress" in this.options) this.options.onProgress(this);
 	}
 
 	clone() {

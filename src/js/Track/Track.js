@@ -44,6 +44,7 @@ export default class Track extends Base {
 		if (t >= this.end) {
 			if (this.finished) return;
 			this.updateChildren(this.end - this.start);
+			this.onComplete();
 			this.finished = true;
 		} else if (t >= this.start) {
 			if (!this.initialized) {
@@ -51,6 +52,7 @@ export default class Track extends Base {
 				this.initialized = true;
 			} else {
 				this.updateChildren(t - this.start);
+				this.onProgress();
 			}
 		}
 	}

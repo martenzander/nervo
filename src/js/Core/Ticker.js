@@ -17,19 +17,8 @@ export default class Ticker extends Base {
 
 		// event binding
 		this.tick = this.tick.bind(this);
-		this.onProgress = this.onProgress.bind(this);
-		this.onComplete = this.onComplete.bind(this);
 
 		if (this.autoStart) this.start();
-	}
-
-	onComplete() {
-		if ("onComplete" in this.options) this.options.onComplete(this);
-		this.pause();
-	}
-
-	onProgress() {
-		if ("onProgress" in this.options) this.options.onProgress(this);
 	}
 
 	reset() {
@@ -92,6 +81,7 @@ export default class Ticker extends Base {
 				this.start();
 			} else {
 				this.onComplete();
+				this.pause();
 			}
 		}
 	}
