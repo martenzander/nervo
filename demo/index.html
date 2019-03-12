@@ -42,6 +42,7 @@
 		const tween1 = new Motion.Tween({x:0,y:0,z:0},{x:10,y:100,z:1000},{
 			autoStart: false,
 			duration: 5,
+			// timeScale: 2,
 			onProgress: e => {
 				// console.log(e.type + ": " + `${e.id + 1}`, e.current);
 				tween1Container.innerHTML = JSON.stringify(e.current);
@@ -94,7 +95,7 @@
 		const timeline = new Motion.Timeline([tween1,tween2], {
 			autoStart: false,
 			loop: true,
-			timeScale: 0.5,
+			timeScale: 2,
 			onProgress: e => {
 				// console.log(e);
 				// timelineContainer.innerHTML = JSON.stringify(e);

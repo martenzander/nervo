@@ -14,7 +14,6 @@ export default class Ticker extends Base {
 		this.isActive = false;
 		this.loop = options.loop !== undefined ? options.loop : Motion.Loop;
 		this.timeScale = options.timeScale !== undefined ? options.timeScale : Motion.TimeScale;
-		this.scaledDuration = this.duration * this.timeScale;
 
 		// event binding
 		this.tick = this.tick.bind(this);
@@ -72,17 +71,19 @@ export default class Ticker extends Base {
 	}
 
 	update(time) {
+		let scaledTime = time * this.timeScale;
+		if (this.isTimeline) console.log(scaledTime, time);
 		let updateTime = 0;
 		// update progress
-		this.progress = time / this.duration;
+		this.progress = scaledTime / this.duration;
 		this.easedProgress = this.easing(this.progress);
 
 		// validate progress
 		if (this.progress >= 1.0) {
 			this.progress = 1.0;
 			this.easedProgress = 1.0;
-			time = this.duration;
-			updateTime = time;
+			scaledTime = this.duration;
+			updateTime = scaledTime;
 		} else {
 			updateTime = this.duration * this.easedProgress;
 		}
@@ -90,8 +91,6 @@ export default class Ticker extends Base {
 		this.execute(updateTime);
 		// onProgress
 		this.onProgress();
-
-		if (this.isTimeline) console.log(updateTime);
 
 		if (this.progress >= 1.0) {
 			if (this.loop) {
@@ -107,7 +106,7 @@ export default class Ticker extends Base {
 		this.currentTime += this.clock.getDelta();
 
 		// update call
-		this.update(this.currentTime * this.timeScale);
+		this.update(this.currentTime);
 
 		if (!this.isActive) return;
 		requestAnimationFrame(this.tick);

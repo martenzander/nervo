@@ -26,7 +26,7 @@ export default class Track extends Base {
 		this.end = 0;
 
 		this.children.forEach(child => {
-			if (child.scaledDuration + this.start > this.end) this.end = child.scaledDuration + this.start;
+			if (child.duration + this.start > this.end) this.end = child.duration + this.start;
 		});
 	}
 

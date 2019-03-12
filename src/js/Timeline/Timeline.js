@@ -37,6 +37,5 @@ export default class Timeline extends Ticker {
 		});
 
 		this.duration = duration;
-		this.scaledDuration = this.duration * this.timeScale;
 	}
 }
