@@ -66,9 +66,7 @@ export default class Ticker extends Base {
 		this.tick();
 	}
 
-	execute(time) {
-		this.updateChildren(time);
-	}
+	execute() {}
 
 	update(time) {
 		let scaledTime = time * this.timeScale;

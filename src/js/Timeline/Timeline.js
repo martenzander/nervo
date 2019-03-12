@@ -13,6 +13,10 @@ export default class Timeline extends Ticker {
 		});
 	}
 
+	execute(time) {
+		this.updateChildren(time);
+	}
+
 	addTween(tween, options = {}) {
 		const track = new Track([tween], {
 			start: options.start !== undefined ? options.start : this.duration,
