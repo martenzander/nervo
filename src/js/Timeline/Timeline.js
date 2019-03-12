@@ -8,31 +8,17 @@ export default class Timeline extends Ticker {
 		this.isTimeline = true;
 		this.type = "Timeline";
 
-		objects.forEach(object => {
-			this.add(object, {});
-		});
+		this.add(this.getTrackFromTweens(objects, options), options);
 	}
 
 	execute(time) {
 		this.updateChildren(time);
 	}
 
-	addTrack(track) {
-		this.updateRelationships(track);
-	}
-
-	add(object, options = {}) {
-		if (object.isTween) {
-			const track = new Track([object], {
-				start: options.start !== undefined ? options.start : this.duration,
-			});
-			this.addTrack(track);
-		} else if (object.isTrack) {
-			object.start = object.start !== undefined ? object.start : this.duration;
-			object.updateTimeRange();
-			this.addTrack(object, options);
-		}
-		this.updateDuration();
+	getTrackFromTweens(tweens, options) {
+		return new Track(tweens, {
+			start: options.start !== undefined ? options.start : this.duration,
+		});
 	}
 
 	updateDuration() {

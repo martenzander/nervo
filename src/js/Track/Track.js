@@ -5,28 +5,25 @@ export default class Track extends Base {
 		super(options);
 		this.isTrack = true;
 		this.type = "Track";
-		this.start = options.start;
+		this.start = 0;
 
-		objects.forEach(object => {
-			this.add(object);
-		});
+		this.add(objects, options);
 	}
 
-	add(...objects) {
-		objects.forEach(object => {
-			if (object.isTween) {
-				this.updateRelationships(object);
-			}
-		});
-		this.updateTimeRange();
-	}
-
-	updateTimeRange() {
+	updateTimeRange(start) {
+		this.start = start !== undefined ? start : this.start;
 		this.end = 0;
+
+		if (this.children.length <= 0) {
+			console.warn("Layla.Track.updateTimeRange: No instances of Layla.Tween in this Track.");
+			return this;
+		}
 
 		this.children.forEach(child => {
 			if (child.duration * child.timeScale + this.start > this.end) this.end = child.duration * child.timeScale + this.start;
 		});
+
+		return this;
 	}
 
 	reset() {

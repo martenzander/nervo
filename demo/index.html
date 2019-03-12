@@ -39,66 +39,66 @@
 		const timelineContainer = document.querySelector('.timeline');
 
 
-		const tween1 = new Motion.Tween({x:0,y:0,z:0},{x:10,y:100,z:1000},{
+		const tween1 = new Layla.Tween({x:0,y:0,z:0},{x:10,y:100,z:1000},{
 			autoStart: false,
 			duration: 5,
 			// timeScale: 2,
 			// easing: "expoOut",
 			onProgress: e => {
-				e.current.x = Math.round(e.current.x * 100) / 100;
-				e.current.y = Math.round(e.current.y * 100) / 100;
-				e.current.z = Math.round(e.current.z * 100) / 100;
-				// console.log(e.type + ": " + `${e.id + 1}`, e.current);
-				tween1Container.innerHTML = JSON.stringify(e.current);
+				e.target.value.x = Math.round(e.target.value.x * 100) / 100;
+				e.target.value.y = Math.round(e.target.value.y * 100) / 100;
+				e.target.value.z = Math.round(e.target.value.z * 100) / 100;
+				// console.log(e.type + ": " + `${e.id + 1}`, e.target.value);
+				tween1Container.innerHTML = JSON.stringify(e.target.value);
 			},
 			onComplete: e => {
 				console.log("Tween 1 finished", e);
 			}
 		});
 
-		const tween2 = new Motion.Tween({tween2:0},{tween2:10},{
+		const tween2 = new Layla.Tween({tween2:0},{tween2:10},{
 			autoStart: false,
 			duration: 5,
 			// timeScale: 10,
 			onProgress: e => {
-				// console.log(e.type + ": " + `${e.id + 1}`, e.current);
-				e.current.tween2 = Math.round(e.current.tween2 * 100) / 100;
-				tween2Container.innerHTML = JSON.stringify(e.current);
+				// console.log(e.type + ": " + `${e.id + 1}`, e.target.value);
+				e.target.value.tween2 = Math.round(e.target.value.tween2 * 100) / 100;
+				tween2Container.innerHTML = JSON.stringify(e.target.value);
 			},
 			onComplete: e => {
 				console.log("Tween 2 finished", e);
 			}
 		});
 
-		const tween3 = new Motion.Tween({tween3:0},{tween3:1000},{
+		const tween3 = new Layla.Tween({tween3:0},{tween3:1000},{
 			autoStart: false,
-			duration: 5,
+			duration: 10,
 			onProgress: e => {
-				// console.log(e.type + ": " + `${e.id + 1}`, e.current);
-				e.current.tween3 = Math.round(e.current.tween3 * 100) / 100;
-				tween3Container.innerHTML = JSON.stringify(e.current);
+				// console.log(e.type + ": " + `${e.id + 1}`, e.target.value);
+				e.target.value.tween3 = Math.round(e.target.value.tween3 * 100) / 100;
+				tween3Container.innerHTML = JSON.stringify(e.target.value);
 			},
 			onComplete: e => {
 				console.log("Tween 3 finished", e);
 			}
 		});
 
-		const tween4 = new Motion.Tween({tween4:0},{tween4:1000},{
+		const tween4 = new Layla.Tween({tween4:0},{tween4:1000},{
 			autoStart: false,
 			duration: 5,
 			timeScale: 10,
 			onProgress: e => {
-				// console.log(e.type + ": " + `${e.id + 1}`, e.current);
-				e.current.tween4 = Math.round(e.current.tween4 * 100) / 100;
-				tween4Container.innerHTML = JSON.stringify(e.current);
+				// console.log(e.type + ": " + `${e.id + 1}`, e.target.value);
+				e.target.value.tween4 = Math.round(e.target.value.tween4 * 100) / 100;
+				tween4Container.innerHTML = JSON.stringify(e.target.value);
 			},
 			onComplete: e => {
 				console.log("Tween 4 finished", e);
 			}
 		});
 
-		const track = new Motion.Track([tween3,tween4],{
-			start: 50,
+		const track = new Layla.Track([tween3,tween2],{
+			// start: 2,
 			onProgress: e => {
 				// console.log('Track update',e);
 			},
@@ -108,10 +108,11 @@
 		});
 
 
-		const timeline = new Motion.Timeline([tween1,tween2], {
+		const timeline = new Layla.Timeline([tween1], {
 			autoStart: false,
 			loop: true,
-			// timeScale: 0.5,
+			// start: 5,
+			timeScale: 0.5,
 			// easing: "expoIn",
 			onProgress: e => {
 				// console.log(e);
@@ -122,7 +123,11 @@
 			}
 		});
 
-		timeline.add(track);
+
+
+		timeline.add([tween4, track],{
+			start: 10
+		});
 
 		console.log(timeline);
 

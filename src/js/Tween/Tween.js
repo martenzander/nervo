@@ -7,13 +7,13 @@ export default class Tween extends Ticker {
 		this.type = "Tween";
 		this.target = target;
 		this.origin = origin;
-		this.current = { ...{}, ...this.origin };
+		this.value = { ...{}, ...this.origin };
 	}
 
 	execute() {
 		// update values
 		for (const key in this.origin) {
-			this.current[key] = this.origin[key] + (this.target[key] - this.origin[key]) * this.easedProgress;
+			this.value[key] = this.origin[key] + (this.target[key] - this.origin[key]) * this.easedProgress;
 		}
 	}
 }
