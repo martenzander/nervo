@@ -29,8 +29,8 @@ export default class Track extends Base {
 	}
 
 	reset() {
-		this.isFinished = false;
-		this.isInitialized = false;
+		this.finished = false;
+		this.initialized = false;
 		this.children.forEach(child => {
 			child.reset();
 		});
@@ -38,13 +38,13 @@ export default class Track extends Base {
 
 	update(time) {
 		if (time >= this.end) {
-			if (this.isFinished) return;
+			if (this.finished) return;
 			this.updateChildren(this.end - this.start);
-			this.isFinished = true;
+			this.finished = true;
 		} else if (time >= this.start) {
-			if (!this.isInitialized) {
+			if (!this.initialized) {
 				this.updateChildren(0);
-				this.isInitialized = true;
+				this.initialized = true;
 			} else {
 				this.updateChildren(time - this.start);
 			}
