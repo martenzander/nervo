@@ -9,8 +9,8 @@ export default class Ticker extends Base {
 		this.autoStart = options.autoStart !== undefined ? options.autoStart : Motion.AutoStart;
 		this.clock = new Clock();
 		this.currentTime = 0;
-		this.duration = options.duration || Motion.Duration;
-		this.easing = Eases[options.easing] || Eases[Motion.Easing];
+		this.duration = options.duration !== undefined ? options.duration : Motion.Duration;
+		this.easing = options.easing !== undefined ? Eases[options.easing] : Eases[Motion.Easing];
 		this.isActive = false;
 		this.loop = options.loop !== undefined ? options.loop : Motion.Loop;
 		this.timeScale = options.timeScale !== undefined ? options.timeScale : Motion.TimeScale;
