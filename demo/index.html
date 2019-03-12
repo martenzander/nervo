@@ -97,13 +97,21 @@
 			}
 		});
 
-		const track = new Motion.Track([tween3,tween4],{start: 20});
+		const track = new Motion.Track([tween3,tween4],{
+			start: 50,
+			onProgress: e => {
+				// console.log('Track update',e);
+			},
+			onComplete: e => {
+				console.log(`Track completed: Track with ID ${e.id}`)
+			}
+		});
 
 
 		const timeline = new Motion.Timeline([tween1,tween2], {
 			autoStart: false,
 			loop: true,
-			timeScale: 0.5,
+			// timeScale: 0.5,
 			// easing: "expoIn",
 			onProgress: e => {
 				// console.log(e);
