@@ -43,6 +43,7 @@
 			autoStart: false,
 			duration: 5,
 			// timeScale: 2,
+			// easing: "expoOut",
 			onProgress: e => {
 				// console.log(e.type + ": " + `${e.id + 1}`, e.current);
 				tween1Container.innerHTML = JSON.stringify(e.current);
@@ -95,7 +96,8 @@
 		const timeline = new Motion.Timeline([tween1,tween2], {
 			autoStart: false,
 			loop: true,
-			timeScale: 2,
+			// timeScale: 2,
+			// easing: "expoIn",
 			onProgress: e => {
 				// console.log(e);
 				// timelineContainer.innerHTML = JSON.stringify(e);

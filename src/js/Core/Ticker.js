@@ -72,7 +72,6 @@ export default class Ticker extends Base {
 
 	update(time) {
 		let scaledTime = time * this.timeScale;
-		if (this.isTimeline) console.log(scaledTime, time);
 		let updateTime = 0;
 		// update progress
 		this.progress = scaledTime / this.duration;
