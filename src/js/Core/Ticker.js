@@ -102,7 +102,7 @@ export default class Ticker extends Base {
 		this.currentTime += this.clock.getDelta();
 
 		// update call
-		this.update(this.currentTime);
+		this.update(this.currentTime * this.timeScale);
 
 		if (!this.isActive) return;
 		requestAnimationFrame(this.tick);
