@@ -57,10 +57,12 @@ export default class Ticker extends Base {
 
 	execute() {}
 
-	update(time) {
+	update(t) {
+		if (!this.isActive) return;
+
 		let updateTime = 0;
 		// update progress
-		this.progress = time / (this.duration * this.timeScale);
+		this.progress = t / (this.duration * this.timeScale);
 		this.easedProgress = this.easing(this.progress);
 
 		// validate progress
