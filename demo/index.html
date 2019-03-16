@@ -103,10 +103,9 @@
 				// console.log('Track update',e);
 			},
 			onComplete: e => {
-				console.log(`Track completed: Track with ID ${e.id}`)
+				// console.log(`Track completed: Track with ID ${e.target.id}`)
 			}
 		});
-
 
 		const timeline = new Layla.Timeline([tween1], {
 			autoStart: false,
@@ -115,21 +114,15 @@
 			timeScale: 0.5,
 			// easing: "expoIn",
 			onProgress: e => {
-				// console.log(e);
-				// timelineContainer.innerHTML = JSON.stringify(e);
 			},
 			onComplete: e => {
 				console.log('Timeline Finish');
 			}
 		});
 
-
-
 		timeline.add([tween4, track],{
 			start: 10
 		});
-
-		console.log(timeline);
 
 		document.addEventListener("keydown", function (e){
 			switch(e.keyCode){
