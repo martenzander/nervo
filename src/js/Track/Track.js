@@ -44,6 +44,9 @@ export default class Track extends Base {
 			this.finished = true;
 		} else if (t >= this.start) {
 			if (!this.initialized) {
+				this.children.forEach(child => {
+					child.isActive = true;
+				});
 				this.updateChildren(0);
 				this.initialized = true;
 			} else {
