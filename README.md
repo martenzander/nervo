@@ -8,7 +8,7 @@
     </p>
 </p>
 
-<!-- ## Installation
+## Installation
 
 ```
 npm i git+ssh://git@gitlab.com/slimInteractive/layla.git#master
@@ -68,4 +68,4 @@ const tween = new Layla.Tween(start, end, parameters = {});
 
 ```js
 const timeline = new Layla.Timeline();
-``` -->
+```

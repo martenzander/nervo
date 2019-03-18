@@ -15,19 +15,93 @@
 	</head>
 	<body>
 		<div class="mesh-container">
+				<div class="mesh-void">
+						<div class="mesh-column-9 mesh-column-sm-9 mesh-column-md-9 mesh-column-lg-9 mesh-column-xl-9">
+							<p>
+								<pre class="tween1"></pre>
+								<pre class="tween2"></pre>
+								<pre class="tween3"></pre>
+								<pre class="tween4"></pre>
+							</p>
+						</div>
+						<div class="mesh-column-3 mesh-column-sm-3 mesh-column-md-3 mesh-column-lg-3 mesh-column-xl-3">
+						</div>
+					</div>
 			<div class="mesh-void">
-				<div class="mesh-column-9 mesh-column-sm-9 mesh-column-md-9 mesh-column-lg-9 mesh-column-xl-9">
-					<p>
-						<code>
-							<pre class="tween1"></pre>
-							<pre class="tween2"></pre>
-							<pre class="tween3"></pre>
-							<pre class="tween4"></pre>
-						</code>
-					</p>
-				</div>
-				<div class="mesh-column-3 mesh-column-sm-3 mesh-column-md-3 mesh-column-lg-3 mesh-column-xl-3">
-				</div>
+				<div class="mesh-column-12 mesh-column-sm-12 mesh-column-md-12 mesh-column-lg-12 mesh-column-xl-12"></div>
+					<h1>Layla</h1>
+					<p>Javascript Animation Library</p>
+					<section>
+						<div style="padding-bottom: calc(9/16* 100%); position: relative;">
+							<canvas style="position: absolute; width: 100%;height: 100%; left: 0;"></canvas>
+						</div>
+					</section>
+					<section>
+						<h2>Installation</h2>
+						<code>npm i git+ssh://git@gitlab.com/slimInteractive/layla.git#master</code>
+					</section>
+					<section>
+						<h2>Usage</h2>
+						<code>import * as Layla from 'layla';</code>
+					</section>
+					<section>
+						<h2>Tween</h2>
+						<code>const tween = new Layla.Tween(start : {}, end : {}, parameters : {});</code>
+						<h3>Start <code>type : {}</code></h3>
+						<h3>End <code>type : {}</code></h3>
+						<h3>Parameters <code>type : {}</code></h3>
+						<ul>
+							<li>autoStart <code>boolean</code></li>
+							<li>duration <code>float</code></li>
+							<li>easing <code>string</code></li>
+							<li>loop <code>boolean</code></li>
+							<li>onComplete <code>callback function</code></li>
+							<li>onProgress <code>callback function</code></li>
+							<li>onStart <code>callback function</code></li>
+							<li>timeScale <code>float</code></li>
+						</ul>
+						<h3>Methods</h3>
+						<ul>
+							<li><code>.pause()</code></li>
+							<li><code>.play()</code></li>
+							<li><code>.start()</code></li>
+							<li><code>.stop()</code></li>
+						</ul>
+					</section>
+					<section>
+						<h2>Track</h2>
+						<code>const track = new Layla.Track(tweens : [], parameters : {});</code>
+						<h3>Tweens <code>type : []</code></h3>
+						<h3>Parameters <code>type : {}</code></h3>
+						<ul>
+							<li>start <code>float</code></li>
+							<li>onStart <code>callback function</code></li>
+							<li>onProgress <code>callback function</code></li>
+							<li>onComplete <code>callback function</code></li>
+						</ul>
+					</section>
+					<section>
+						<h2>Timeline</h2>
+						<code>const timeline = new Layla.Timeline(tweens : [], parameters : {});</code>
+						<h3>Tweens <code>type : []</code></h3>
+						<h3>Parameters <code>type : {}</code></h3>
+						<ul>
+							<li>autoStart <code>boolean</code></li>
+							<li>easing <code>string</code></li>
+							<li>loop <code>boolean</code></li>
+							<li>onComplete <code>callback function</code></li>
+							<li>onProgress <code>callback function</code></li>
+							<li>onStart <code>callback function</code></li>
+							<li>timeScale <code>boolean</code></li>
+						</ul>
+						<h3>Methods</h3>
+						<ul>
+							<li><code>.pause()</code></li>
+							<li><code>.play()</code></li>
+							<li><code>.start()</code></li>
+							<li><code>.stop()</code></li>
+						</ul>
+					</section>
 			</div>
 		</div>
 		<script type="text/javascript">
@@ -42,6 +116,7 @@
 		const tween1 = new Layla.Tween({x:0,y:0,z:0},{x:10,y:100,z:1000},{
 			autoStart: false,
 			duration: 5,
+			// loop: true,
 			// timeScale: 2,
 			// easing: "expoOut",
 			onProgress: e => {

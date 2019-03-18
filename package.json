@@ -8,7 +8,7 @@
 		"build:dev": "NODE_ENV=development webpack --config config/webpack.config.js --mode development",
 		"build": "npm-run-all build:prod build:dev",
 		"code": "NODE_ENV=development webpack-dev-server --config config/webpack.config.js --hot --inline --mode development --open",
-		"style": "postcss demo/css/src/styles.css --dir demo/css/ --config config/postcss.config.js --watch",
+		"style": "postcss demo/css/src/styles.css --watch --dir demo/css/ --config config/postcss.config.js ",
 		"start": "npm-run-all --parallel style code"
 	},
 	"keywords": ["javascript", "tween", "animation", "motion", "js", "timeline"],
