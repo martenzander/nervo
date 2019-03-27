@@ -2,8 +2,8 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
-		<title>Zeitgeist</title>
-		<script type="text/javascript" src="../build/zeitgeist-js.js"></script>
+		<title>Nervo</title>
+		<script type="text/javascript" src="../build/nervo.js"></script>
 		<link rel="stylesheet" type="text/css" href="css/styles.css">
 		<style>
 			* {
@@ -29,7 +29,7 @@
 					</div>
 			<div class="mesh-void">
 				<div class="mesh-column-12 mesh-column-sm-12 mesh-column-md-12 mesh-column-lg-12 mesh-column-xl-12"></div>
-					<h1>Zeitgeist</h1>
+					<h1>Nervo</h1>
 					<p>Javascript Animation Library</p>
 					<section>
 						<div style="padding-bottom: calc(9/16* 100%); position: relative;">
@@ -38,15 +38,15 @@
 					</section>
 					<section>
 						<h2>Installation</h2>
-						<code>npm i zeitgeist-js</code>
+						<code>npm i nervo</code>
 					</section>
 					<section>
 						<h2>Usage</h2>
-						<code>import * as Zeitgeist from 'zeitgeist-js';</code>
+						<code>import * as Nervo from 'nervo';</code>
 					</section>
 					<section>
 						<h2>Tween</h2>
-						<code>const tween = new Zeitgeist.Tween(start : {}, end : {}, parameters : {});</code>
+						<code>const tween = new Nervo.Tween(start : {}, end : {}, parameters : {});</code>
 						<h3>Start <code>type : {}</code></h3>
 						<h3>End <code>type : {}</code></h3>
 						<h3>Parameters <code>type : {}</code></h3>
@@ -70,7 +70,7 @@
 					</section>
 					<section>
 						<h2>Track</h2>
-						<code>const track = new Zeitgeist.Track(tweens : [], parameters : {});</code>
+						<code>const track = new Nervo.Track(tweens : [], parameters : {});</code>
 						<h3>Tweens <code>type : []</code></h3>
 						<h3>Parameters <code>type : {}</code></h3>
 						<ul>
@@ -82,7 +82,7 @@
 					</section>
 					<section>
 						<h2>Timeline</h2>
-						<code>const timeline = new Zeitgeist.Timeline(tweens : [], parameters : {});</code>
+						<code>const timeline = new Nervo.Timeline(tweens : [], parameters : {});</code>
 						<h3>Tweens <code>type : []</code></h3>
 						<h3>Parameters <code>type : {}</code></h3>
 						<ul>
@@ -113,7 +113,7 @@
 		const timelineContainer = document.querySelector('.timeline');
 
 
-		const tween1 = new Zeitgeist.Tween({x:0,y:0,z:0},{x:10,y:100,z:1000},{
+		const tween1 = new Nervo.Tween({x:0,y:0,z:0},{x:10,y:100,z:1000},{
 			autoStart: false,
 			duration: 5,
 			// loop: true,
@@ -131,7 +131,7 @@
 			}
 		});
 
-		const tween2 = new Zeitgeist.Tween({tween2:0},{tween2:10},{
+		const tween2 = new Nervo.Tween({tween2:0},{tween2:10},{
 			autoStart: false,
 			duration: 5,
 			// timeScale: 10,
@@ -145,7 +145,7 @@
 			}
 		});
 
-		const tween3 = new Zeitgeist.Tween({tween3:0},{tween3:1000},{
+		const tween3 = new Nervo.Tween({tween3:0},{tween3:1000},{
 			autoStart: false,
 			duration: 10,
 			onProgress: e => {
@@ -158,7 +158,7 @@
 			}
 		});
 
-		const tween4 = new Zeitgeist.Tween({tween4:0},{tween4:1000},{
+		const tween4 = new Nervo.Tween({tween4:0},{tween4:1000},{
 			autoStart: false,
 			duration: 5,
 			timeScale: 10,
@@ -172,7 +172,7 @@
 			}
 		});
 
-		const track = new Zeitgeist.Track([tween3,tween2],{
+		const track = new Nervo.Track([tween3,tween2],{
 			// start: 2,
 			onProgress: e => {
 				// console.log('Track update',e);
@@ -182,7 +182,7 @@
 			}
 		});
 
-		const timeline = new Zeitgeist.Timeline([tween1], {
+		const timeline = new Nervo.Timeline([tween1], {
 			autoStart: false,
 			loop: true,
 			// start: 5,

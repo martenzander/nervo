@@ -1,30 +1,30 @@
 <p align="center">
     <!-- <img align="center" src="http://exchange.weareslim.de/assets/images/svg/logo_blue.svg" width="100" height="auto" alt="slim Logo" class="js-lazy-loaded"> -->
     <h3 align="center">
-        Zeitgeist
+        Nervo
     </h3>
     <p align="center">
-        Javascript Animation Library
+        [WIP] Javascript Animation Library
     </p>
 </p>
 
 ## Installation
 
 ```
-npm i zeitgeist-js
+npm i nervo
 ```
 
 ## Usage
 
 
 ```js
-import * as Zeitgeist from 'zeitgeist-js';
+import * as Nervo from 'nervo';
 ```
 
 ## Tween
 
 ```js
-const tween = new Zeitgeist.Tween(start, end, parameters = {});
+const tween = new Nervo.Tween(start, end, parameters = {});
 ```
 
 #### Start `type: {}`
@@ -67,5 +67,5 @@ const tween = new Zeitgeist.Tween(start, end, parameters = {});
 ## Timeline
 
 ```js
-const timeline = new Zeitgeist.Timeline();
+const timeline = new Nervo.Timeline();
 ```

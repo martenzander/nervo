@@ -6,7 +6,7 @@ const fileName = process.env.NODE_ENV === "development" ? `${packageConfig.name}
 const config = {
 	entry: ["./src/js/index.js"],
 	output: {
-		library: "Zeitgeist",
+		library: "Nervo",
 		libraryTarget: "umd",
 		path: path.resolve(__dirname, "../", "build"),
 		filename: fileName,
