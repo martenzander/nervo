@@ -3,6 +3,10 @@
 	"version": "0.0.2",
 	"description": "[WIP] Javascript Animation Library",
 	"main": "build/nervo.min.js",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/SlimMarten/nervo.git"
+	},
 	"scripts": {
 		"build:prod": "NODE_ENV=production webpack --config config/webpack.config.js --mode production",
 		"build:dev": "NODE_ENV=development webpack --config config/webpack.config.js --mode development",
