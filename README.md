@@ -24,7 +24,7 @@ import * as Nervo from 'nervo';
 ## Tween
 
 ```js
-const tween = new Nervo.Tween(start, end, parameters = {});
+const tween = new Nervo.Tween(start : {}, end : {}, parameters : {});
 ```
 
 #### Start `type: {}`
@@ -32,8 +32,7 @@ const tween = new Nervo.Tween(start, end, parameters = {});
 ```js
 {
     x: 0,
-    y: 0,
-    z: 0,
+    ...
 }
 ```
 
@@ -42,30 +41,63 @@ const tween = new Nervo.Tween(start, end, parameters = {});
 ```js
 {
     x: 10,
-    y: 100,
-    z: 1000,
+    ...
 }
 ```
 
 #### Parameters `type: {}`
 
-* autoStart `type: boolean`
-* duration `type: float`
-* easing `type: string`
-* loop `type: boolean`
-* onUpdate `type: callback function`
-* onComplete `type: callback function`
+* autoStart `boolean`
+* duration `float`
+* easing `string`
+* loop `boolean`
+* onComplete `callback function`
+* onProgress `callback function`
+* onStart `callback function`
+* timeScale `float`
 
 
 #### Methods
 
+* `.pause()`
+* `.play()`
 * `.start()`
 * `.stop()`
-* `.play()`
-* `.pause()`
+
+## Track
+
+```js
+const track = new Nervo.Track(tween : [], parameters : {});
+```
+
+#### Tweens `type : []`
+#### Parameters `type : {}`
+
+* start `float`
+* onComplete `callback function`
+* onProgress `callback function`
+* onStart `callback function`
 
 ## Timeline
 
 ```js
-const timeline = new Nervo.Timeline();
+const timeline = new Nervo.Timeline(tweens : [], parameters : {});
 ```
+
+#### Tweens `type : []`
+#### Parameters `type : {}`
+
+* autoStart `boolean`
+* easing `string`
+* loop `boolean`
+* onComplete `callback function`
+* onProgress `callback function`
+* onStart `callback function`
+* timeScale `boolean`
+
+#### Methods
+
+* `.pause()`
+* `.play()`
+* `.start()`
+* `.stop()`
