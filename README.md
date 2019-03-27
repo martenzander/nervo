@@ -1,7 +1,7 @@
 <p align="center">
-    <img align="center" src="http://exchange.weareslim.de/assets/images/svg/logo_blue.svg" width="100" height="auto" alt="slim Logo" class="js-lazy-loaded">
+    <!-- <img align="center" src="http://exchange.weareslim.de/assets/images/svg/logo_blue.svg" width="100" height="auto" alt="slim Logo" class="js-lazy-loaded"> -->
     <h3 align="center">
-        Layla
+        Zeitgeist
     </h3>
     <p align="center">
         Javascript Animation Library
@@ -11,20 +11,20 @@
 ## Installation
 
 ```
-npm i git+ssh://git@gitlab.com/slimInteractive/layla.git#master
+npm i zeitgeist-js
 ```
 
 ## Usage
 
 
 ```js
-import * as Layla from 'layla';
+import * as Zeitgeist from 'zeitgeist-js';
 ```
 
 ## Tween
 
 ```js
-const tween = new Layla.Tween(start, end, parameters = {});
+const tween = new Zeitgeist.Tween(start, end, parameters = {});
 ```
 
 #### Start `type: {}`
@@ -67,5 +67,5 @@ const tween = new Layla.Tween(start, end, parameters = {});
 ## Timeline
 
 ```js
-const timeline = new Layla.Timeline();
+const timeline = new Zeitgeist.Timeline();
 ```
