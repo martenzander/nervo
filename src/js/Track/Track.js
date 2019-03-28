@@ -1,3 +1,5 @@
+const packageConfig = require("./../../../package.json");
+const libName = packageConfig.name.charAt(0).toUpperCase() + packageConfig.name.slice(1);
 import Base from "./../Core/Base";
 
 export default class Track extends Base {
@@ -15,7 +17,7 @@ export default class Track extends Base {
 		this.end = 0;
 
 		if (this.children.length <= 0) {
-			console.warn("Layla.Track.updateTimeRange: No instances of Layla.Tween in this Track.");
+			console.warn(`${libName}.Track.updateTimeRange: No instances of ${libName}.Tween in this Track.`);
 			return this;
 		}
 

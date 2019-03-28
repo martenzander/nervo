@@ -1,3 +1,5 @@
+const packageConfig = require("./../../../package.json");
+const libName = packageConfig.name.charAt(0).toUpperCase() + packageConfig.name.slice(1);
 import EventDispatcher from "./EventDispatcher";
 
 export default class Base extends EventDispatcher {
@@ -7,7 +9,7 @@ export default class Base extends EventDispatcher {
 	constructor(options) {
 		super();
 		this.children = [];
-		this.isLayla = true;
+		this.isNervo = true;
 		this.options = options;
 		this.parent = null;
 		this.setId(this);
@@ -58,25 +60,25 @@ export default class Base extends EventDispatcher {
 		}
 
 		if (object === this) {
-			console.error("Layla.Base.add: Object can't be a child of itself.", object);
+			console.error(`${libName}.Base.add: Object can't be a child of itself.`, object);
 			return this;
 		}
 
-		if (object && object.isLayla) {
+		if (object && object.isNervo) {
 			if (object.parent !== null) {
 				object.parent.remove(object);
 			}
 
 			if (this.isTimeline) {
 				if (!object.isTween && !object.isTrack) {
-					console.error("Layla.Base.add: Object is not an instance of Layla.Tween or Layla.Track.", object);
+					console.error(`${libName}.Base.add: Object is not an instance of ${libName}.Tween or ${libName}.Track.`, object);
 					return this;
 				}
 			}
 
 			if (this.isTrack) {
 				if (!object.isTween) {
-					console.error("Layla.Base.add: Object is not an instance of Layla.Tween.", object);
+					console.error(`${libName}.Base.add: Object is not an instance of ${libName}.Tween.`, object);
 					return this;
 				}
 			}
@@ -88,7 +90,7 @@ export default class Base extends EventDispatcher {
 
 			this.onChildChange();
 		} else {
-			console.error("Layla.Base.add: Object is not an instance of Layla.Base.", object);
+			console.error(`${libName}.Base.add: Object is not an instance of ${libName}.Base.`, object);
 		}
 		return this;
 	}
