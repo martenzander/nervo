@@ -1,6 +1,6 @@
 {
 	"name": "nervo",
-	"version": "0.0.3",
+	"version": "0.0.5",
 	"description": "[WIP] Javascript Animation Library",
 	"main": "build/nervo.min.js",
 	"repository": {
@@ -15,14 +15,7 @@
 		"style": "postcss demo/css/src/styles.css --watch --dir demo/css/ --config config/postcss.config.js ",
 		"start": "npm-run-all --parallel style code"
 	},
-	"keywords": [
-		"javascript",
-		"tween",
-		"animation",
-		"motion",
-		"js",
-		"timeline"
-	],
+	"keywords": ["javascript", "tween", "animation", "motion", "js", "timeline"],
 	"author": "Marten Zander",
 	"license": "MIT",
 	"devDependencies": {
