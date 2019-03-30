@@ -1,11 +1,5 @@
 <p align="center">
     <a href="https://www.nervo-js.org" rel="nofollow"><img src="https://raw.githubusercontent.com/SlimMarten/nervo/development/logo.svg?sanitize=true" align="center" width="300"></a>
-    <h3 align="center">
-        Nervo
-    </h3>
-    <p align="center">
-        [WIP] Javascript Animation Library
-    </p>
 </p>
 
 ## Installation
