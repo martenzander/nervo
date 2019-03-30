@@ -1,5 +1,5 @@
 <p align="center">
-    <!-- <img align="center" src="http://exchange.weareslim.de/assets/images/svg/logo_blue.svg" width="100" height="auto" alt="slim Logo" class="js-lazy-loaded"> -->
+    <a href="https://www.nervo-js.org" rel="nofollow"><img src="https://raw.githubusercontent.com/SlimMarten/nervo/development/logo.svg" align="center" width="200"></a>
     <h3 align="center">
         Nervo
     </h3>
