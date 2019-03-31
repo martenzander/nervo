@@ -10,9 +10,9 @@
 	"scripts": {
 		"build:prod": "NODE_ENV=production webpack --config config/webpack.config.js --mode production",
 		"build:dev": "NODE_ENV=development webpack --config config/webpack.config.js --mode development",
-		"build:web": "NODE_ENV=production webpack --config config/webpack.config.web.js --mode production",
-		"build": "npm-run-all build:prod build:dev build:web",
-		"react": "NODE_ENV=production webpack-dev-server --config config/webpack.config.web.js --mode production --open",
+		"build:app": "NODE_ENV=production webpack --config config/webpack.config.app.js --mode production",
+		"build": "npm-run-all build:prod build:dev build:app",
+		"app": "NODE_ENV=development webpack-dev-server --config config/webpack.config.app.js --mode development --open",
 		"start": "NODE_ENV=development webpack-dev-server --config config/webpack.config.js --hot --mode development --open"
 	},
 	"keywords": ["javascript", "tween", "animation", "motion", "js", "timeline"],
@@ -50,6 +50,6 @@
 		"@babel/polyfill": "^7.2.5",
 		"babel-preset-react": "^6.24.1",
 		"eases": "^1.0.8",
-		"mesh-helper": "^1.0.1"
+		"mini-css-extract-plugin": "^0.5.0"
 	}
 }

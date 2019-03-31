@@ -42,18 +42,18 @@ module.exports = {
 			},
 		],
 	},
-	devServer: {
-		disableHostCheck: true,
-		port: 3000,
-		contentBase: [path.join(__dirname, "..", "build"), path.join(__dirname, "..", "nervo-js.org", "dist")],
-		watchContentBase: true,
-		publicPath: "http://localhost:8080/",
-	},
 	plugins: [
 		new HtmlWebpackPlugin({
-			template: "nervo-js.org/src/html/development.html",
+			template: "app/src/html/development.html",
 			// favicon: "nervo-js.org/favicon.ico",
 		}),
 		new webpack.HotModuleReplacementPlugin(),
 	],
+	devServer: {
+		disableHostCheck: true,
+		port: 3000,
+		contentBase: [path.join(__dirname, "..", "build"), path.join(__dirname, "..", "app", "dist")],
+		watchContentBase: true,
+		publicPath: "http://localhost:8080/",
+	},
 };

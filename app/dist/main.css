@@ -1,0 +1,56 @@
+.output__output___Q0CL_{
+  background: red;
+}
+/* ! Grid generated using postcss-mesh v1.1.0 | MIT License | Marten Zander | github.com/SlimMarten/postcss-mesh  */
+
+*{
+    box-sizing: border-box;
+}
+
+/* @mesh-grid {
+  column-count: 12;
+  compile: true;
+  container-width: 100%;
+  display-type: float;
+  gutter-on-outside: true;
+  gutter: 30px;
+  name: mesh;
+  query-condition: min-width;
+  responsive-gutter: false;
+
+  @mesh-viewport-sm {
+      container-width: 540px;
+      viewport: 576px;
+  }
+
+  @mesh-viewport-md {
+      container-width: 720px;
+      viewport: 768px;
+  }
+
+  @mesh-viewport-lg {
+      container-width: 960px;
+      viewport: 992px;
+  }
+
+  @mesh-viewport-xl {
+      container-width: 1140px;
+      viewport: 1200px;
+  }
+} */
+
+
+code{
+    display: inline-block;
+    background: #eee;
+    padding: 12px;
+    border-radius: 4px;
+}
+
+section + section{
+    margin-top: 80px;
+}
+
+/* ! Grid generated using postcss-mesh v1.1.0 | MIT License | Marten Zander | github.com/SlimMarten/postcss-mesh  */
+
+

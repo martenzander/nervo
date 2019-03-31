@@ -1,15 +1,18 @@
 const path = require("path");
-const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+
+const devMode = process.env.NODE_ENV !== "production";
 
 const { resolve } = require("./webpack.settings");
 
 module.exports = {
-	entry: ["./nervo-js.org/src/jsx/Index.jsx"],
+	entry: ["./app/src/jsx/Index.jsx"],
 	output: {
-		path: path.resolve(__dirname, "../", "nervo-js.org", "dist"),
+		path: path.resolve(__dirname, "../", "app", "dist"),
 		filename: "js/bundle.js",
 	},
+	devtool: false,
 	resolve,
 	module: {
 		rules: [
@@ -21,8 +24,15 @@ module.exports = {
 			{
 				test: /\.(css|scss)$/,
 				use: [
-					"style-loader",
-					{ loader: "css-loader", options: { importLoaders: 1 } },
+					devMode ? "style-loader" : MiniCssExtractPlugin.loader,
+					{
+						loader: "css-loader",
+						// options: { importLoaders: 1 },
+						query: {
+							modules: true,
+							localIdentName: "[path][name]__[local]--[hash:base64:5]",
+						},
+					},
 					{
 						loader: "postcss-loader",
 						options: {
@@ -38,8 +48,11 @@ module.exports = {
 	},
 	plugins: [
 		new HtmlWebpackPlugin({
-			template: "nervo-js.org/src/html/index.html",
-			// favicon: "nervo-js.org/favicon.ico",
+			template: "app/src/html/index.html",
+		}),
+		new MiniCssExtractPlugin({
+			filename: "[name].css",
+			chunkFilename: "[id].css",
 		}),
 	],
 	devServer: {
@@ -48,7 +61,7 @@ module.exports = {
 		host: "localhost",
 		historyApiFallback: true,
 		open: true,
-		contentBase: [path.join(__dirname, "..", "nervo-js.org", "dist")],
+		contentBase: [path.join(__dirname, "..", "app", "dist")],
 		watchContentBase: true,
 		publicPath: "http://localhost:8080/",
 	},
