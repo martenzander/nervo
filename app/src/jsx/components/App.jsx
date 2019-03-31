@@ -1,7 +1,11 @@
 import React, { Component } from "react";
 import Output from "./Output";
+import Divider from "./Divider";
 import * as Nervo from "../../../../src/js/index";
+const data = require('./../../js/data.js');
 import styles from "./../../scss/app.scss";
+
+console.log(data.default)
 
 class App extends Component {
 	state = {
@@ -31,6 +35,9 @@ class App extends Component {
 	render() {
 		return (
 			<div className="app">
+				<a href={"https://github.com/SlimMarten/nervo"} target={"_blank"}>
+					<img style={{position: "fixed", top: "0", right: "0", border: "0"}} src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub" />
+				</a>
 				<div className={styles["mesh-container"]}>
 					<div className={styles["mesh-void"]}>
 						<div
@@ -48,6 +55,7 @@ class App extends Component {
 							<Output value={this.state.value} />
 						</div>
 					</div>
+					<Divider/>
 				</div>
 			</div>
 		);

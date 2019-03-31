@@ -1,0 +1,9 @@
+.divider{
+  margin: 0;
+  border: none;
+  height: 1px;
+  background-image: linear-gradient(to right, rgba(0,0,0,1) 20%, rgba(0,0,0,0) 0%);
+  background-position: top;
+  background-size: 5px 1px;
+  background-repeat: repeat-x;
+}
