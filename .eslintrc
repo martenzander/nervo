@@ -11,6 +11,7 @@
 	},
 	"parser": "babel-eslint",
 	"globals": {
+		"Nervo": false,
 		"require": false,
 		"__dirname": false,
 		"module": false,
