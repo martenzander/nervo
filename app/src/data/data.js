@@ -1,6 +1,4 @@
 const packageConfig = require("./../../../package.json");
-import js from "raw-loader!./sources/test.source";
-console.log(js);
 
 const data = {
 	sections: [

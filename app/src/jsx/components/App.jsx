@@ -8,8 +8,6 @@ import Prism from "prismjs";
 const data = require("./../../data/data.js").default;
 import styles from "./../../scss/components/app.scss";
 
-import js from "raw-loader!!./../../data/sources/test.source";
-
 class App extends Component {
 	state = {
 		value: 0,
@@ -23,7 +21,7 @@ class App extends Component {
 			{
 				autoStart: false,
 				duration: 2,
-				loop: true,
+				// loop: true,
 				onProgress: e => {
 					this.setState({ ...{}, ...e.target.value });
 				},
@@ -54,9 +52,8 @@ class App extends Component {
 							}`}
 						>
 							<Output value={this.state.value} />
-							<pre className="language-javascript line-numbers">
-								<code className="language-css">{js}</code>
-							</pre>
+							{/* <pre className="language-javascript line-numbers" data-src="./sources/test.js"> */}
+							<pre data-src="./sources/test.js">{/* <code className="language-css" /> */}</pre>
 						</div>
 						<div
 							className={`${styles["mesh-column-3"]} ${styles["mesh-column-sm-3"]} ${styles["mesh-column-md-3"]} ${

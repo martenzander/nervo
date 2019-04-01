@@ -1,3 +1,5 @@
+/* author: https://github.com/SlimMarten */
+
 const tween = new Nervo.Tween(
 	{ value: 0 },
 	{ value: 100 },

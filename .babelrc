@@ -20,8 +20,8 @@
 		"@babel/plugin-proposal-class-properties",
 		["prismjs", {
 			"languages": ["javascript", "css", "markup"],
-			"plugins": ["line-numbers"],
-			"theme": "tomorrow",
+			"plugins": ["line-numbers", "autolinker", "file-highlight", "previewers", "command-line"],
+			"theme": "default",
 			"css": true
 	}]
 	]
