@@ -1,5 +1,5 @@
+import styles from "./styles.scss";
 import React, { Component } from "react";
-import styles from "./../../scss/components/output.scss";
 
 class Output extends Component {
 	render() {

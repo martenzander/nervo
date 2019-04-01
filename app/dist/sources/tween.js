@@ -1,4 +1,4 @@
-/* author: https://github.com/SlimMarten */
+import * as Nervo from "nervo";
 
 const tween = new Nervo.Tween(
 	{ value: 0 },

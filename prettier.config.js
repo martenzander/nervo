@@ -5,7 +5,7 @@ module.exports = {
 	useTabs: true,
 	semi: true,
 	singleQuote: false,
-	printWidth: 150,
+	printWidth: 100,
 	parser: "babel",
 	overrides: [
 		{

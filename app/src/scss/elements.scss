@@ -1,0 +1,110 @@
+/*================================
+=            elements            =
+================================*/
+
+*,
+*:after,
+*:before {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+*:focus {
+  outline: none;
+}
+
+body,
+html {
+  margin: 0;
+  padding: 0;
+  cursor: default;
+  // background: $primary-dark;
+  font-size: 16px;
+  // @include font("regular", 16px, none, 0);
+  color: $corporate-color-3;
+  width: 100%;
+  min-height: 100vh;
+}
+
+body {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  position: relative;
+  overflow-x: hidden;
+}
+
+// ::selection {
+//   background: $primary-brand;
+//   color: rgba($primary-dark, 0.5);
+// }
+
+a {
+  // color: $primary-brand;
+  text-decoration: none;
+  transition: color 0.15s linear;
+
+  &.js-inpage-anchor{
+    &:hover{
+      text-decoration: underline;
+    }
+  }
+}
+
+p {
+  // @include font("regular", 16px, 28px, 20);
+
+  // @include md {
+  //   @include font("regular", 18px, 30px, 20);
+  // }
+
+  // .is-dark & {
+  //   color: rgba($secondary-light, 0.6);
+  // }
+}
+
+address {
+  font-style: normal;
+}
+
+ul,
+ol {
+  list-style-type: none;
+}
+
+button {
+  &[disabled] {
+    pointer-events: none;
+  }
+
+  &:not([disabled]) {
+    cursor: pointer;
+  }
+
+  -webkit-appearance: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+img {
+  display: block;
+}
+
+/*----------  GLOBAL CLASSES  ----------*/
+
+[hidden], .hidden {
+  display: none !important;
+}
+
+.clearfix {
+  &::before,
+  &::after {
+    content: "";
+    display: block;
+    clear: both;
+  }
+}

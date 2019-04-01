@@ -1,12 +1,12 @@
+import styles from "./styles.scss";
 import React, { Component } from "react";
-import Output from "./Output";
-import Divider from "./Divider";
-import GithubRibbon from "./GithubRibbon";
-import Sidebar from "./Sidebar";
-import * as Nervo from "../../../../src/js/index";
-import Prism from "prismjs";
-const data = require("./../../data/data.js").default;
-import styles from "./../../scss/components/app.scss";
+import Output from "./../Output/Output";
+import GithubRibbon from "./../GithubRibbon/GithubRibbon";
+import Section from "./../Section/Section";
+import Sidebar from "./../Sidebar/Sidebar";
+import Logo from "./../Logo/Logo";
+import * as Nervo from "../../../../../src/js/index";
+const data = require("./../../../data/index.js").default;
 
 class App extends Component {
 	state = {
@@ -31,29 +31,28 @@ class App extends Component {
 
 	componentDidMount() {
 		this.tween.start();
-		Prism.highlightAll();
 	}
 
 	render() {
 		const sections = data.sections.map((s, i) => {
 			s.id = i;
-			return <div key={s.name}>{s.name}</div>;
+			return <Section value={s} key={s.name} contents={s.contents} />;
 		});
 
 		return (
 			<div className="app">
 				<GithubRibbon />
 				<div className={styles["mesh-container"]}>
-					{sections}
+					<Logo />
+
 					<div className={styles["mesh-void"]}>
 						<div
 							className={`${styles["mesh-column-9"]} ${styles["mesh-column-sm-9"]} ${styles["mesh-column-md-9"]} ${
 								styles["mesh-column-lg-9"]
 							}`}
 						>
+							{sections}
 							<Output value={this.state.value} />
-							{/* <pre className="language-javascript line-numbers" data-src="./sources/test.js"> */}
-							<pre data-src="./sources/test.js">{/* <code className="language-css" /> */}</pre>
 						</div>
 						<div
 							className={`${styles["mesh-column-3"]} ${styles["mesh-column-sm-3"]} ${styles["mesh-column-md-3"]} ${
@@ -63,7 +62,6 @@ class App extends Component {
 							<Sidebar sections={sections} />
 						</div>
 					</div>
-					<Divider />
 				</div>
 			</div>
 		);

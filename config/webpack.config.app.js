@@ -11,7 +11,7 @@ module.exports = {
 	entry: ["./app/src/jsx/Index.jsx"],
 	output: {
 		path: path.resolve(__dirname, "../", "app", "dist"),
-		filename: "js/bundle.js",
+		filename: "js/[name].bundle.js",
 	},
 	devtool: false,
 	resolve,

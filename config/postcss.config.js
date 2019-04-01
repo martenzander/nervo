@@ -14,7 +14,7 @@ module.exports = ctx => ({
 		"postcss-each": {},
 		"postcss-sassy-mixins": {},
 		"postcss-conditionals": {},
-		"postcss-advanced-variables": {},
+		"postcss-modules-values": {},
 		// "postcss-quantity-queries": {},
 		"postcss-hexrgba": {},
 		// "postcss-object-fit-images": {},
