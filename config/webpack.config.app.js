@@ -23,6 +23,7 @@ module.exports = {
 			},
 			{
 				test: /\.(css|scss)$/,
+				exclude: /node_modules/,
 				use: [
 					devMode ? "style-loader" : MiniCssExtractPlugin.loader,
 					{
@@ -41,6 +42,16 @@ module.exports = {
 								path: path.resolve(__dirname),
 							},
 						},
+					},
+				],
+			},
+			{
+				test: /\.(css|scss)$/,
+				exclude: /src/,
+				use: [
+					devMode ? "style-loader" : MiniCssExtractPlugin.loader,
+					{
+						loader: "css-loader",
 					},
 				],
 			},

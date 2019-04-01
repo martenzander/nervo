@@ -1,0 +1,26 @@
+/*=====================================
+=            media-queries            =
+=====================================*/
+
+/* small screens */
+@mixin sm {
+	@media (min-width: $breakpoint-sm) {
+		@content;
+	}
+}
+
+/* medium screens */
+@mixin md {
+	@media (min-width: $breakpoint-md) {
+		@content;
+	}
+}
+
+/* large screens */
+@mixin lg {
+	@media (min-width: $breakpoint-lg) {
+		@content;
+	}
+}
+
+/*=====  End of media-queries  ======*/

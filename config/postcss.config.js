@@ -4,7 +4,7 @@ module.exports = ctx => ({
 	parser: "postcss-scss",
 	map: ctx.options.map,
 	plugins: {
-		// "postcss-import": {},
+		"postcss-import": {},
 		// "postcss-at-rules-variables": {},
 		// "postcss-nested-ancestors": {},
 		// "postcss-custom-properties": {},
@@ -12,7 +12,7 @@ module.exports = ctx => ({
 		// "postcss-selector-not": {},
 		// "postcss-for": {},
 		// "postcss-each": {},
-		// "postcss-sassy-mixins": {},
+		"postcss-sassy-mixins": {},
 		// "postcss-conditionals": {},
 		// "postcss-advanced-variables": {},
 		// "postcss-quantity-queries": {},

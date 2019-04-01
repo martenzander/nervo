@@ -1,0 +1,13 @@
+/*=============================================
+=            better-text-underline            =
+=============================================*/
+
+@mixin better-text-underline($textColor, $backgroundColor) {
+	background: linear-gradient($backgroundColor,$backgroundColor),linear-gradient($backgroundColor,$backgroundColor), linear-gradient($textColor,$textColor);
+	background-size: .05em 1px, .05em 1px, 1px 1px;
+	background-repeat: no-repeat, no-repeat, repeat-x;
+	text-shadow: .03em 0 $backgroundColor, -.03em 0 $backgroundColor, 0 .03em $backgroundColor, 0 -.03em $backgroundColor, .06em 0 $backgroundColor, -.06em 0 $backgroundColor, .09em 0 $backgroundColor, -.09em 0 $backgroundColor, .12em 0 $backgroundColor, -.12em 0 $backgroundColor, .15em 0 $backgroundColor, -.15em 0 $backgroundColor;
+    background-position: 0% 90%, 100% 90%, 0% 90%;
+}
+
+/*=====  End of better-text-underline  ======*/

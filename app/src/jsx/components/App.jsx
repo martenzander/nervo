@@ -1,11 +1,14 @@
 import React, { Component } from "react";
 import Output from "./Output";
 import Divider from "./Divider";
+import GithubRibbon from "./GithubRibbon";
+import Sidebar from "./Sidebar";
 import * as Nervo from "../../../../src/js/index";
-const data = require('./../../js/data.js');
-import styles from "./../../scss/app.scss";
+import Prism from "prismjs";
+const data = require("./../../data/data.js").default;
+import styles from "./../../scss/components/app.scss";
 
-console.log(data.default)
+import js from "raw-loader!!./../../data/sources/test.source";
 
 class App extends Component {
 	state = {
@@ -30,15 +33,20 @@ class App extends Component {
 
 	componentDidMount() {
 		this.tween.start();
+		Prism.highlightAll();
 	}
 
 	render() {
+		const sections = data.sections.map((s, i) => {
+			s.id = i;
+			return <div key={s.name}>{s.name}</div>;
+		});
+
 		return (
 			<div className="app">
-				<a href={"https://github.com/SlimMarten/nervo"} target={"_blank"}>
-					<img style={{position: "fixed", top: "0", right: "0", border: "0"}} src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub" />
-				</a>
+				<GithubRibbon />
 				<div className={styles["mesh-container"]}>
+					{sections}
 					<div className={styles["mesh-void"]}>
 						<div
 							className={`${styles["mesh-column-9"]} ${styles["mesh-column-sm-9"]} ${styles["mesh-column-md-9"]} ${
@@ -46,16 +54,19 @@ class App extends Component {
 							}`}
 						>
 							<Output value={this.state.value} />
+							<pre className="language-javascript line-numbers">
+								<code className="language-css">{js}</code>
+							</pre>
 						</div>
 						<div
 							className={`${styles["mesh-column-3"]} ${styles["mesh-column-sm-3"]} ${styles["mesh-column-md-3"]} ${
 								styles["mesh-column-lg-3"]
 							}`}
 						>
-							<Output value={this.state.value} />
+							<Sidebar sections={sections} />
 						</div>
 					</div>
-					<Divider/>
+					<Divider />
 				</div>
 			</div>
 		);

@@ -18,5 +18,11 @@
 	],
 	"plugins": [
 		"@babel/plugin-proposal-class-properties",
+		["prismjs", {
+			"languages": ["javascript", "css", "markup"],
+			"plugins": ["line-numbers"],
+			"theme": "tomorrow",
+			"css": true
+	}]
 	]
 }
