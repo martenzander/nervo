@@ -4,4 +4,12 @@
   border-radius: 8px;
   box-shadow: 0 2px 4px 0 rgba(17,31,51,.3);
   margin-left: 20px;
+
+  $color: red;
+
+  &__element{
+    ^&__child &{
+      background: $color;
+    }
+  }
 }
