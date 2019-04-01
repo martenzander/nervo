@@ -1,7 +1,7 @@
 import styles from "./styles.scss";
 import React, { Component } from "react";
+import Prism from "prismjs"
 
-import Prism from "prismjs";
 
 class Code extends Component {
 	constructor(props) {

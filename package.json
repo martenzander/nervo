@@ -26,7 +26,8 @@
 		"css",
 		"motion",
 		"js",
-		"library"
+		"library",
+		"toolkit"
 	],
 	"author": "Marten Zander",
 	"license": "MIT",

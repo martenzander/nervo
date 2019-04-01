@@ -4,6 +4,8 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const webpack = require("webpack");
 
 const { resolve } = require("./webpack.settings");
+const { plugins } = require("./webpack.settings");
+plugins.htmlWebpackPlugin.template = "app/src/html/development.html"
 
 const fileName = process.env.NODE_ENV === "development" ? `${packageConfig.name}.js` : `${packageConfig.name}.min.js`;
 
@@ -43,10 +45,7 @@ module.exports = {
 		],
 	},
 	plugins: [
-		new HtmlWebpackPlugin({
-			template: "app/src/html/development.html",
-			// favicon: "nervo-js.org/favicon.ico",
-		}),
+		new HtmlWebpackPlugin(plugins.htmlWebpackPlugin),
 		new webpack.HotModuleReplacementPlugin(),
 	],
 	devServer: {

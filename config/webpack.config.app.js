@@ -1,11 +1,12 @@
 const path = require("path");
-const packageConfig = require("./../package.json");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 const devMode = process.env.NODE_ENV !== "production";
 
 const { resolve } = require("./webpack.settings");
+const { plugins } = require("./webpack.settings");
+plugins.htmlWebpackPlugin.template = "app/src/html/index.html"
 
 module.exports = {
 	entry: ["./app/src/jsx/Index.jsx"],
@@ -59,11 +60,7 @@ module.exports = {
 		],
 	},
 	plugins: [
-		new HtmlWebpackPlugin({
-			title: `${packageConfig.name.charAt(0).toUpperCase() + packageConfig.name.slice(1)} – JavaScript Animation Framework`,
-			keys: packageConfig.keywords,
-			template: "app/src/html/index.html",
-		}),
+		new HtmlWebpackPlugin(plugins.htmlWebpackPlugin),
 		new MiniCssExtractPlugin({
 			filename: "css/[name].css",
 			chunkFilename: "css/[id].css",
