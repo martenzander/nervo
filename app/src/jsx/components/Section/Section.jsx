@@ -28,9 +28,10 @@ class Section extends Component {
 			});
 		}
 	}
+
 	render() {
 		return (
-			<section className={styles.section}>
+			<section className={`${styles.section} js-section`} id={this.props.value.name}>
 				<Suspense fallback={<div>Loading...</div>}>
 					<Headline value={this.props.value.name} type={"h2"} />
 					{this.components}
