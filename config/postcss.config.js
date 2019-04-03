@@ -4,7 +4,12 @@ module.exports = ctx => ({
 	parser: "postcss-scss",
 	map: ctx.options.map,
 	plugins: {
-		"postcss-import": {},
+		stylelint: {
+			configFile: ".stylelintrc",
+			files: "app/src/**/*.(css|scss|pcss)",
+			syntax: "scss",
+		},
+		"postcss-import": { plugins: [require("stylelint")()] },
 		"postcss-at-rules-variables": {},
 		"postcss-nested-ancestors": {},
 		// "postcss-custom-properties": {},

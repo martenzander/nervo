@@ -1,6 +1,6 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const StyleLintPlugin = require("stylelint-webpack-plugin");
+// const StyleLintPlugin = require("stylelint-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 const devMode = process.env.NODE_ENV !== "production";
@@ -79,11 +79,11 @@ module.exports = {
 		],
 	},
 	plugins: [
-		new StyleLintPlugin({
-			configFile: path.join(__dirname, "..", ".stylelintrc"),
-			files: "app/src/**/*.(css|scss|pcss)",
-			syntax: "scss",
-		}),
+		// new StyleLintPlugin({
+		// 	configFile: path.join(__dirname, "..", ".stylelintrc"),
+		// 	files: "app/src/**/*.(css|scss|pcss)",
+		// 	syntax: "scss",
+		// }),
 		new HtmlWebpackPlugin(plugins.htmlWebpackPlugin),
 		new MiniCssExtractPlugin({
 			filename: "css/[name].css",
