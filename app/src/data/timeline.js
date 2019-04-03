@@ -1,5 +1,5 @@
 const tween = {
-	name: "Tween",
+	name: "Timeline",
 	contents: [
 		{
 			component: "copy",
