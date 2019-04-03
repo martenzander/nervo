@@ -1,12 +1,13 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const StyleLintPlugin = require("stylelint-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 const devMode = process.env.NODE_ENV !== "production";
 
 const { resolve } = require("./webpack.settings");
 const { plugins } = require("./webpack.settings");
-plugins.htmlWebpackPlugin.template = "app/src/html/index.html"
+plugins.htmlWebpackPlugin.template = "app/src/html/index.html";
 
 module.exports = {
 	entry: ["./app/src/jsx/Index.jsx"],
@@ -24,14 +25,13 @@ module.exports = {
 				use: ["babel-loader"],
 			},
 			{
-				test: /\.(css|scss)$/,
+				test: /\.(css|scss|pcss)$/,
 				exclude: /node_modules/,
 				use: [
 					devMode ? "style-loader" : MiniCssExtractPlugin.loader,
 					{
 						loader: "css-loader",
-						// options: { importLoaders: 1 },
-						query: {
+						options: {
 							modules: true,
 							localIdentName: "[path][name]__[local]--[hash:base64:5]",
 						},
@@ -48,7 +48,7 @@ module.exports = {
 				],
 			},
 			{
-				test: /\.(css|scss)$/,
+				test: /\.(css|scss|pcss)$/,
 				exclude: /src/,
 				use: [
 					devMode ? "style-loader" : MiniCssExtractPlugin.loader,
@@ -60,6 +60,11 @@ module.exports = {
 		],
 	},
 	plugins: [
+		new StyleLintPlugin({
+			configFile: path.join(__dirname, "..", ".stylelintrc"),
+			files: "app/src/**/*.(css|scss|pcss)",
+			syntax: "scss",
+		}),
 		new HtmlWebpackPlugin(plugins.htmlWebpackPlugin),
 		new MiniCssExtractPlugin({
 			filename: "css/[name].css",
