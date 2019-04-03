@@ -10,7 +10,7 @@ class Code extends Component {
 			return (
 				<pre
 					key={i}
-					className={`${styles["border-radius"]} ${block.isCommand ? "command-line" : "line-numbers"}`}
+					className={`${block.isCommand ? "command-line" : "line-numbers"}`}
 					data-prompt={"$"}
 					data-src={`./sources/${block.source}`}
 				/>
@@ -22,7 +22,7 @@ class Code extends Component {
 	}
 
 	render() {
-		return <div>{this.codeBlocks}</div>;
+		return <div className={`${styles.borderRadius} ${styles.margin} `}>{this.codeBlocks}</div>;
 	}
 }
 
