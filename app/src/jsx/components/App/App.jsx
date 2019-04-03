@@ -45,7 +45,7 @@ class App extends Component {
 				<div className={"nervo-container"}>
 					<Logo />
 				</div>
-				<main className={`js-main-content`}>
+				<main className={"js-main-content"}>
 					<div className={"nervo-container"}>
 						<div className={"nervo-void"}>
 							<div className={"nervo-col-12 nervo-col-sm-12 nervo-col-md-12 nervo-col-lg-9"}>
