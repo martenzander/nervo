@@ -41,23 +41,15 @@ class App extends Component {
 		return (
 			<div className="app">
 				<GithubRibbon />
-				<div className={styles["mesh-container"]}>
+				<div className={"nervo-container"}>
 					<Logo />
 
-					<div className={styles["mesh-void"]}>
-						<div
-							className={`${styles["mesh-column-9"]} ${styles["mesh-column-sm-9"]} ${styles["mesh-column-md-9"]} ${
-								styles["mesh-column-lg-9"]
-							}`}
-						>
+					<div className={"nervo-void"}>
+						<div className={"nervo-col-12 nervo-col-sm-12 nervo-col-md-12 nervo-col-lg-9"}>
 							{sections}
 							<Output value={this.state.value} />
 						</div>
-						<div
-							className={`${styles["mesh-column-3"]} ${styles["mesh-column-sm-3"]} ${styles["mesh-column-md-3"]} ${
-								styles["mesh-column-lg-3"]
-							}`}
-						>
+						<div className={"nervo-col-12 nervo-col-sm-12 nervo-col-md-12 nervo-col-lg-3"}>
 							<Sidebar sections={sections} />
 						</div>
 					</div>
