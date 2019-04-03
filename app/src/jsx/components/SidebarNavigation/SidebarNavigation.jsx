@@ -1,13 +1,14 @@
 import styles from "./styles.pcss";
 import React, { Component } from "react";
+const Link = React.lazy(() => import("./../Link/Link"));
 
 class SidebarNavigation extends Component {
 	render() {
-		const items = this.props.sections.map((s, i) => {
+		const items = this.sections.map((s, i) => {
 			const href = `#${s.key}`;
 			return (
-				<li key={s.key} className={styles.item}>
-					<a href={href}>{s.key}</a>
+				<li key={s.key}>
+					<Link value={s.key} target={`#${s.key}`} />
 				</li>
 			);
 		});
