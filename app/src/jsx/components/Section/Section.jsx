@@ -1,5 +1,7 @@
+import styles from "./styles.pcss";
 import React, { Component, Suspense } from "react";
 import Code from "./../Code/Code";
+const Headline = React.lazy(() => import("./../Headline/Headline"));
 const Copy = React.lazy(() => import("./../Copy/Copy"));
 const Divider = React.lazy(() => import("./../Divider/Divider"));
 
@@ -28,11 +30,11 @@ class Section extends Component {
 	}
 	render() {
 		return (
-			<section>
-				<h3>{this.props.value.name}</h3>
-				{this.components}
+			<section className={styles.section}>
 				<Suspense fallback={<div>Loading...</div>}>
-					<Divider />
+					<Headline value={this.props.value.name} type={"h2"} />
+					{this.components}
+					{this.props.id + 1 === this.props.sectionLength ? null : <Divider />}
 				</Suspense>
 			</section>
 		);

@@ -1,4 +1,4 @@
-import styles from "./styles.scss";
+import styles from "./styles.pcss";
 import React, { Component } from "react";
 
 class Logo extends Component {

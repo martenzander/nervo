@@ -1,9 +1,10 @@
-import styles from "./styles.scss";
+import styles from "./styles.pcss";
 import React, { Component } from "react";
 
 class Divider extends Component {
 	render() {
-		return <hr className={styles.divider} />;
+		const className = `${styles.base}`;
+		return <hr className={className} />;
 	}
 }
 

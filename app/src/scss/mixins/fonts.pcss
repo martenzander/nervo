@@ -1,0 +1,55 @@
+/*=============================
+=            fonts            =
+=============================*/
+
+/*----------  require fonts  ----------*/
+
+// Amsi Pro Bold
+// @font-face {
+// 	font-family: 'AmsiPro-Bold';
+// 	src: resolve('33C879_0_0.eot');
+// 	src: resolve('33C879_0_0.eot?#iefix') format('embedded-opentype'),
+// 		resolve('33C879_0_0.woff?__blob=publicationFile') format('woff'),
+// 		resolve('33C879_0_0.ttf?__blob=publicationFile') format('truetype');
+// 	font-weight: normal;
+// 	font-style: normal;
+// }
+
+/*----------  font mixins  ----------*/
+
+/**
+
+	USAGE:
+	- @include font('FONT ALIAS', $fontSize, $lineHeight, $letter-spacing);
+
+ **/
+
+@mixin font($id, $fontSize, $lineHeight, $letter-spacing) {
+
+	/* set font alias */
+	// @if $id == 'bold' {
+	// 	font-family: 'AmsiPro-Bold';
+	// }
+	// @else if $id == 'narrow-bold'{
+	// 	font-family: 'AmsiProNarw-Bold';
+	// }
+
+	/* set font values */
+	font-size: $fontSize;
+	font-style: normal;
+	font-weight: normal;
+	letter-spacing: $letter-spacing;
+
+	/* set line-height */
+	@if $lineHeight == none {
+		/* don't return line-height */
+	}
+	@else if $lineHeight == normal{
+		line-height: normal;
+	}
+	@else{
+		line-height: $lineHeight;
+	}
+}
+
+/*=====  End of fonts  ======*/

@@ -1,4 +1,4 @@
-import styles from "./styles.scss";
+import styles from "./styles.pcss";
 import React, { Component } from "react";
 import Output from "./../Output/Output";
 import GithubRibbon from "./../GithubRibbon/GithubRibbon";
@@ -35,8 +35,7 @@ class App extends Component {
 
 	render() {
 		const sections = data.sections.map((s, i) => {
-			s.id = i;
-			return <Section value={s} key={s.name} contents={s.contents} />;
+			return <Section sectionLength={data.sections.length} id={i} value={s} key={s.name} contents={s.contents} />;
 		});
 
 		return (

@@ -1,5 +1,6 @@
-import styles from "./styles.scss";
-import React, { Component } from "react";
+import styles from "./styles.pcss";
+import React, { Component, Suspense } from "react";
+const SidebarNavigation = React.lazy(() => import("./../SidebarNavigation/SidebarNavigation"));
 
 class Sidebar extends Component {
 	constructor(props) {
@@ -7,10 +8,13 @@ class Sidebar extends Component {
 	}
 
 	render() {
-		const items = this.props.sections.map((s, i) => {
-			return <li key={s.key}>{s.key}</li>;
-		});
-		return <div className={styles.sidebar}>{items}</div>;
+		return (
+			<div className={styles.sidebar}>
+				<Suspense fallback={<div>Loading SidebarNavigation Component</div>}>
+					<SidebarNavigation sections={this.props.sections} />
+				</Suspense>
+			</div>
+		);
 	}
 }
 
