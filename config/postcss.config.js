@@ -15,7 +15,17 @@ module.exports = ctx => ({
 		"postcss-sassy-mixins": {},
 		"postcss-conditionals": {},
 		"postcss-modules-values": {},
-		"postcss-advanced-variables": {},
+		"postcss-advanced-variables": {
+			variables: {
+				"breakpoint-sm": "576px",
+				"breakpoint-md": "768px",
+				"breakpoint-lg": "992px",
+				"breakpoint-xl": "1200px",
+				"corporate-color-1": "#FBFBFA",
+				"corporate-color-2": "#EBE32A",
+				"corporate-color-3": "#202449",
+			},
+		},
 		// "postcss-quantity-queries": {},
 		"postcss-hexrgba": {},
 		// "postcss-object-fit-images": {},
