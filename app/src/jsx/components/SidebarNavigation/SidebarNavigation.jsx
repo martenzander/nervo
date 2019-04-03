@@ -5,7 +5,6 @@ const Link = React.lazy(() => import("./../Link/Link"));
 class SidebarNavigation extends Component {
 	render() {
 		const items = this.sections.map((s, i) => {
-			const href = `#${s.key}`;
 			return (
 				<li key={s.key}>
 					<Link value={s.key} target={`#${s.key}`} />
