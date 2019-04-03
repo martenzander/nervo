@@ -5,7 +5,7 @@ const Link = React.lazy(() => import("./../Link/Link"));
 class SidebarNavigation extends Component {
 	constructor(props) {
 		super(props);
-		this.sections = props.parent.props.sections;
+		this.sections = props.sections;
 		this.state = {
 			scrollPos: window.scrollY,
 		};

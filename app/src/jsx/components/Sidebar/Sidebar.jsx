@@ -1,6 +1,5 @@
 import styles from "./styles.pcss";
 import React, { Component, Suspense } from "react";
-const SidebarNavigation = React.lazy(() => import("./../SidebarNavigation/SidebarNavigation"));
 
 class Sidebar extends Component {
 	constructor(props) {
@@ -85,9 +84,7 @@ class Sidebar extends Component {
 
 		return (
 			<div className={this.className} ref={this.refCallback} style={this.sidebarInlineStyles}>
-				<Suspense fallback={<div>Loading SidebarNavigation Component</div>}>
-					<SidebarNavigation parent={this} />
-				</Suspense>
+				{this.props.children}
 			</div>
 		);
 	}
