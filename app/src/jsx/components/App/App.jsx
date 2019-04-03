@@ -1,10 +1,11 @@
-import styles from "./styles.pcss";
+// import styles from "./styles.pcss";
 import React, { Component } from "react";
 import Output from "./../Output/Output";
 import GithubRibbon from "./../GithubRibbon/GithubRibbon";
 import Section from "./../Section/Section";
 import Sidebar from "./../Sidebar/Sidebar";
 import Logo from "./../Logo/Logo";
+import Footer from "./../Footer/Footer";
 import * as Nervo from "../../../../../src/js/index";
 const data = require("./../../../data/index.js").default;
 
@@ -43,17 +44,21 @@ class App extends Component {
 				<GithubRibbon />
 				<div className={"nervo-container"}>
 					<Logo />
-
-					<div className={"nervo-void"}>
-						<div className={"nervo-col-12 nervo-col-sm-12 nervo-col-md-12 nervo-col-lg-9"}>
-							{sections}
-							<Output value={this.state.value} />
-						</div>
-						<div className={"nervo-col-12 nervo-col-sm-12 nervo-col-md-12 nervo-col-lg-3"}>
-							<Sidebar sections={sections} />
+				</div>
+				<main className={`js-main-content`}>
+					<div className={"nervo-container"}>
+						<div className={"nervo-void"}>
+							<div className={"nervo-col-12 nervo-col-sm-12 nervo-col-md-12 nervo-col-lg-9"}>
+								{sections}
+								<Output value={this.state.value} />
+							</div>
+							<div className={"nervo-col-12 nervo-col-sm-12 nervo-col-md-12 nervo-col-lg-3"}>
+								<Sidebar sections={sections} />
+							</div>
 						</div>
 					</div>
-				</div>
+				</main>
+				<Footer />
 			</div>
 		);
 	}
