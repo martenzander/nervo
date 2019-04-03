@@ -26,7 +26,7 @@ module.exports = {
 			},
 			{
 				test: /\.(css|scss|pcss)$/,
-				exclude: /node_modules/,
+				exclude: /(node_modules|scss)/,
 				use: [
 					devMode ? "style-loader" : MiniCssExtractPlugin.loader,
 					{
@@ -35,6 +35,25 @@ module.exports = {
 							modules: true,
 							localIdentName: "[path][name]__[local]--[hash:base64:5]",
 						},
+					},
+					{
+						loader: "postcss-loader",
+						options: {
+							// exec: true,
+							config: {
+								path: path.resolve(__dirname),
+							},
+						},
+					},
+				],
+			},
+			{
+				test: /\.(css|scss|pcss)$/,
+				include: /scss/,
+				use: [
+					devMode ? "style-loader" : MiniCssExtractPlugin.loader,
+					{
+						loader: "css-loader",
 					},
 					{
 						loader: "postcss-loader",
