@@ -2,7 +2,7 @@ import React from "react";
 import { render } from "react-dom";
 
 import App from "./components/App/App";
-import styles from "./../scss/_index.pcss";
+import styles from "./../scss/globals/_index.pcss";
 import MeshHelper from "mesh-helper";
 
 const meshHelper = new MeshHelper({});
