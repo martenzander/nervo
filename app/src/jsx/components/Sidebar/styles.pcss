@@ -1,8 +1,17 @@
 @import './../../../scss/mixins/media-queries.pcss';
 
 .sidebar{
+  display: none;
 
   @include md{
     padding-left: 20px;
   }
+
+  @include lg{
+    display: block;
+  }
+}
+
+.fixed{
+  position: fixed;
 }
