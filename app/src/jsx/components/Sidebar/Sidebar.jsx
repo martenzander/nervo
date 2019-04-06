@@ -41,7 +41,8 @@ class Sidebar extends Component {
 		const parentPadding = window.getComputedStyle(this.node.parentElement)["padding-left"];
 
 		return (
-			parseFloat(this.node.parentElement.getBoundingClientRect().width) - parseFloat(parentPadding.substring(0, parentPadding.length - 2)) * 2
+			parseFloat(this.node.parentElement.getBoundingClientRect().width) -
+			parseFloat(parentPadding.substring(0, parentPadding.length - 2)) * 2
 		);
 	};
 
@@ -83,9 +84,13 @@ class Sidebar extends Component {
 		this.updateSideBar();
 
 		return (
-			<div className={this.className} ref={this.refCallback} style={this.sidebarInlineStyles}>
+			<aside
+				className={this.className}
+				ref={this.refCallback}
+				style={this.sidebarInlineStyles}
+			>
 				{this.props.children}
-			</div>
+			</aside>
 		);
 	}
 }

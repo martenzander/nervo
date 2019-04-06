@@ -36,7 +36,7 @@ class Link extends Component {
 		switch (this.props.component) {
 			case "sidebar":
 				if (this.props.isActive) {
-					className = `${styles.link} ${styles.sidebar} ${styles.sidebarActive}`;
+					className = `${styles.link} ${styles.sidebar} ${styles.linkActive}`;
 				} else {
 					className = `${styles.link} ${styles.sidebar}`;
 				}

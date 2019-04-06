@@ -8,11 +8,13 @@ const tween = {
 		},
 		{
 			component: "code",
-			value: [
-				{
-					source: "tween.js",
-				},
-			],
+			value: {
+				source: "tween.js",
+			},
+		},
+		{
+			component: "codePen",
+			value: "//codepen.io/SlimMarten/embed/ryzjPe/?height=497&theme-id=0&default-tab=result",
 		},
 	],
 };

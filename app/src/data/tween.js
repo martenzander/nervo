@@ -8,11 +8,14 @@ const tween = {
 		},
 		{
 			component: "code",
-			value: [
-				{
-					source: "tween.js",
-				},
-			],
+			value: {
+				source: "tween.js",
+			},
+		},
+		{
+			component: "codePen",
+			value:
+				"//codepen.io/digitalwingman/embed/jRrLXv/?height=265&theme-id=0&default-tab=js,result",
 		},
 	],
 };

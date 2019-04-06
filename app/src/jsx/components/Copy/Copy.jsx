@@ -1,11 +1,15 @@
 import styles from "./styles.pcss";
 import React, { Component } from "react";
-import ReactHtmlParser, { processNodes, convertNodeToElement, htmlparser2 } from "react-html-parser";
+import ReactHtmlParser, {
+	processNodes,
+	convertNodeToElement,
+	htmlparser2,
+} from "react-html-parser";
 
 class Copy extends Component {
 	render() {
 		const classNames = `${styles.font} ${styles.margin}`;
-		return <p className={classNames}>{ReactHtmlParser(this.props.value)}</p>;
+		return <p className={classNames}>{new ReactHtmlParser(this.props.value)}</p>;
 	}
 }
 

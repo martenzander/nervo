@@ -4,6 +4,7 @@ import Code from "./../Code/Code";
 const Headline = React.lazy(() => import("./../Headline/Headline"));
 const Copy = React.lazy(() => import("./../Copy/Copy"));
 const Divider = React.lazy(() => import("./../Divider/Divider"));
+const CodePen = React.lazy(() => import("./../CodePen/CodePen"));
 
 class Section extends Component {
 	constructor(props) {
@@ -18,6 +19,13 @@ class Section extends Component {
 						return (
 							<Suspense key={i} fallback={<div>Loading Copy Component</div>}>
 								<Copy key={i} value={c.value} />
+							</Suspense>
+						);
+						break;
+					case "codePen":
+						return (
+							<Suspense key={i} fallback={<div>Loading Copy Component</div>}>
+								<CodePen key={i} value={c.value} />
 							</Suspense>
 						);
 						break;

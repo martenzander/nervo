@@ -8,11 +8,9 @@ const tween = {
 		},
 		{
 			component: "code",
-			value: [
-				{
-					source: "tween.js",
-				},
-			],
+			value: {
+				source: "tween.js",
+			},
 		},
 	],
 };

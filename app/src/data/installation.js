@@ -7,12 +7,10 @@ const installation = {
 		},
 		{
 			component: "code",
-			value: [
-				{
-					source: "install.sh",
-					isCommand: true,
-				},
-			],
+			value: {
+				source: "install.sh",
+				isCommand: true,
+			},
 		},
 	],
 };

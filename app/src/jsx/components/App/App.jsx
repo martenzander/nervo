@@ -3,9 +3,9 @@ import React, { Component, Suspense } from "react";
 import Output from "./../Output/Output";
 import GithubRibbon from "./../GithubRibbon/GithubRibbon";
 import Section from "./../Section/Section";
-import Sidebar from "./../Sidebar/Sidebar";
-const SidebarNavigation = React.lazy(() => import("./../SidebarNavigation/SidebarNavigation"));
+import Layout from "./../Layout/Layout";
 import Logo from "./../Logo/Logo";
+import Header from "./../Header/Header";
 import Hero from "./../Hero/Hero";
 import Footer from "./../Footer/Footer";
 import * as Nervo from "../../../../../src/js/index";
@@ -18,6 +18,7 @@ class App extends Component {
 
 	constructor(props) {
 		super(props);
+		this.data = data;
 		this.tween = new Nervo.Tween(
 			{ value: 0 },
 			{ value: 100 },
@@ -37,41 +38,35 @@ class App extends Component {
 	}
 
 	render() {
-		const sections = data.sections.map((s, i) => {
-			return <Section sectionLength={data.sections.length} id={i} value={s} key={s.name} contents={s.contents} />;
+		const sections = this.data.sections.map((s, i) => {
+			return (
+				<Section
+					sectionLength={this.data.sections.length}
+					id={i}
+					value={s}
+					key={s.name}
+					contents={s.contents}
+				/>
+			);
 		});
 
 		return (
 			<div className="app">
 				<GithubRibbon />
+				<Header value={this} />
 				<Hero>
 					<div className={"nervo-container"}>
 						<Logo />
 						<br />
-						{data.name}
+						{this.data.name}
 						<br />
-						{`v${data.version}`}
+						{`v${this.data.version}`}
 						<br />
-						<p>{data.description}</p>
+						<p>{this.data.description}</p>
 					</div>
 				</Hero>
-				<main className={"js-main-content"}>
-					<div className={"nervo-container"}>
-						<div className={"nervo-void"}>
-							<div className={"nervo-col-12 nervo-col-sm-12 nervo-col-md-12 nervo-col-lg-9"}>
-								{sections}
-								<Output value={this.state.value} />
-							</div>
-							<div className={"nervo-col-12 nervo-col-sm-12 nervo-col-md-12 nervo-col-lg-3"}>
-								<Sidebar>
-									<Suspense fallback={<div>Loading SidebarNavigation Component</div>}>
-										<SidebarNavigation sections={sections} />
-									</Suspense>
-								</Sidebar>
-							</div>
-						</div>
-					</div>
-				</main>
+				<Layout className={"js-main-content"} content={sections} />
+				<Output value={this.state.value} />
 				<Footer />
 			</div>
 		);

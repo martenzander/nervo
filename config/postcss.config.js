@@ -1,4 +1,12 @@
-const browsers = ["Explorer >= 9", "Edge >= 13", "Firefox ESR", "safari >= 10", "Chrome >= 55", "ChromeAndroid >= 47", "last 2 iOS versions"];
+const browsers = [
+	"Explorer >= 9",
+	"Edge >= 13",
+	"Firefox ESR",
+	"safari >= 10",
+	"Chrome >= 55",
+	"ChromeAndroid >= 47",
+	"last 2 iOS versions",
+];
 
 module.exports = ctx => ({
 	parser: "postcss-scss",
@@ -26,6 +34,7 @@ module.exports = ctx => ({
 				"breakpoint-md": "768px",
 				"breakpoint-lg": "992px",
 				"breakpoint-xl": "1200px",
+				"accent-color": "#F55380",
 				"corporate-color-1": "#FBFBFA",
 				"corporate-color-2": "#EBE32A",
 				"corporate-color-3": "#202449",
