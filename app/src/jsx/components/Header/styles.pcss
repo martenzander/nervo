@@ -1,12 +1,35 @@
 .this{
   left: 0;
   color: #fff;
-  background: #111f33;
+  background: $corporate-color-3;
   position: fixed;
   top: 0;
   z-index: 200;
   width: 100%;
-  transition: color .3s linear,background .3s linear;
+  transition: color .3s linear, background .3s linear;
+}
+.fader{
+  opacity: 0;
+  transition: opacity .3s;
+
+  &Active{
+    opacity: 1;
+  }
+}
+
+.highZIndex{
+  z-index: 200;
+}
+
+.content{
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.contentHolder{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .progressBar{

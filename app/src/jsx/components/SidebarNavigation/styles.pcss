@@ -1,4 +1,4 @@
-.navigation{
+.ul{
   background: #fff;
   padding: 17px;
   border-radius: 0.5em;
@@ -7,5 +7,18 @@
 
   &:nth-last-child(1){
     margin-bottom: 0;
+  }
+}
+
+.a{
+  display: block;
+  font-size: 20px;
+  padding: 0.5em 0.5em;
+  transition: all .1s, transform .2s cubic-bezier(.455,.03,.515,.955);
+  transform: translateX(5px);
+
+  &:hover, &Active{
+    color: $corporate-color-2;
+    transform: none;
   }
 }

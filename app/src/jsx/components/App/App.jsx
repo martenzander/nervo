@@ -1,4 +1,4 @@
-// import styles from "./styles.pcss";
+import styles from "./styles.pcss";
 import React, { Component, Suspense } from "react";
 import Output from "./../Output/Output";
 import GithubRibbon from "./../GithubRibbon/GithubRibbon";
@@ -19,26 +19,7 @@ class App extends Component {
 	constructor(props) {
 		super(props);
 		this.data = data;
-		this.tween = new Nervo.Tween(
-			{ value: 0 },
-			{ value: 100 },
-			{
-				autoStart: false,
-				duration: 2,
-				// loop: true,
-				onProgress: e => {
-					this.setState({ ...{}, ...e.target.value });
-				},
-			}
-		);
-	}
-
-	componentDidMount() {
-		this.tween.start();
-	}
-
-	render() {
-		const sections = this.data.sections.map((s, i) => {
+		this.sections = this.data.sections.map((s, i) => {
 			return (
 				<Section
 					sectionLength={this.data.sections.length}
@@ -49,10 +30,12 @@ class App extends Component {
 				/>
 			);
 		});
+	}
 
+	render() {
 		return (
-			<div className="app">
-				<GithubRibbon />
+			<div className={`${styles.app} app`}>
+				{/* <GithubRibbon /> */}
 				<Header value={this} />
 				<Hero>
 					<div className={"nervo-container"}>
@@ -65,9 +48,10 @@ class App extends Component {
 						<p>{this.data.description}</p>
 					</div>
 				</Hero>
-				<Layout className={"js-main-content"} content={sections} />
-				<Output value={this.state.value} />
-				<Footer />
+				<div className={`${styles.margin}`}>
+					<Layout className={`js-main-content`} content={this.sections} />
+					<Footer />
+				</div>
 			</div>
 		);
 	}

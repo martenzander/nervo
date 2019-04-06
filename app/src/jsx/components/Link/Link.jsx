@@ -1,9 +1,8 @@
-import styles from "./styles.pcss";
 import React, { Component } from "react";
 import MoveTo from "moveto";
 
 class Link extends Component {
-	onClick = e => {
+	static onClick = e => {
 		const key = e.currentTarget.getAttribute("href");
 		if (key.charAt(0) !== "#") return;
 		e.preventDefault();
@@ -32,21 +31,12 @@ class Link extends Component {
 	};
 
 	render() {
-		let className;
-		switch (this.props.component) {
-			case "sidebar":
-				if (this.props.isActive) {
-					className = `${styles.link} ${styles.sidebar} ${styles.linkActive}`;
-				} else {
-					className = `${styles.link} ${styles.sidebar}`;
-				}
-				break;
-			default:
-				className = `${styles.link}`;
-				break;
-		}
 		return (
-			<a className={className} onClick={this.onClick} href={this.props.target}>
+			<a
+				className={this.props.className}
+				onClick={this.props.onClick ? this.props.onClick : Link.onClick}
+				href={this.props.target}
+			>
 				{this.props.value}
 			</a>
 		);
