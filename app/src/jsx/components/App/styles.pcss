@@ -1,9 +1,36 @@
+@import './../../../scss/mixins/media-queries.pcss';
+
 .margin{
   margin-top: 100vh;
-  background: $corporate-color-1;
+  background: white;
   position: relative;
 }
 
 .app{
   overflow: hidden;
+}
+
+.padding{
+  padding-top: 120px;
+
+  @include lg{
+    padding-top: 130px;
+  }
+}
+
+.color{
+  color: $corporate-color-1;
+}
+
+.textTransform{
+  text-transform: uppercase;
+}
+
+.description{
+  color: $corporate-color-1;
+  margin-bottom: 2em;
+
+  &:-last-child{
+    marign-bottom: 0;
+  }
 }

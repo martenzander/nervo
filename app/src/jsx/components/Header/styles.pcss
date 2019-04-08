@@ -1,18 +1,23 @@
 .this{
+  background: $corporate-color-4;
   left: 0;
-  color: #fff;
-  background: $corporate-color-3;
+  color: $corporate-color-3;
   position: fixed;
   top: 0;
   z-index: 200;
   width: 100%;
   transition: color .3s linear, background .3s linear;
 }
+
 .fader{
+  background: $corporate-color-4;
   opacity: 0;
-  transition: opacity .3s;
+  transition: opacity .3s, background 0.3s;
+  box-shadow: 0px 2px 4px 0px rgba($corporate-color-3, 0.1);
 
   &Active{
+    background: white;
+    background: $corporate-color-1;
     opacity: 1;
   }
 }

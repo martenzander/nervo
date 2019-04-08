@@ -5,6 +5,7 @@ import GithubRibbon from "./../GithubRibbon/GithubRibbon";
 import Section from "./../Section/Section";
 import Layout from "./../Layout/Layout";
 import Logo from "./../Logo/Logo";
+import Button from "./../Button/Button";
 import Header from "./../Header/Header";
 import Hero from "./../Hero/Hero";
 import Footer from "./../Footer/Footer";
@@ -39,17 +40,25 @@ class App extends Component {
 				<Header value={this} />
 				<Hero>
 					<div className={"nervo-container"}>
-						<Logo />
+						<Logo big={true} />
+						<p className={`${styles.color}`}>
+							<span className={`${styles.textTransform}`}>{this.data.name}</span>
+							<br />
+							{`v${this.data.version}`}
+						</p>
 						<br />
-						{this.data.name}
-						<br />
-						{`v${this.data.version}`}
-						<br />
-						<p>{this.data.description}</p>
+						<p className={`${styles.description}`}>{this.data.description}</p>
+						<div>
+							<Button>Documentation</Button>
+							<Button>Github</Button>
+						</div>
 					</div>
 				</Hero>
 				<div className={`${styles.margin}`}>
-					<Layout className={`js-main-content`} content={this.sections} />
+					<Layout
+						className={`js-main-content ${styles.padding}`}
+						content={this.sections}
+					/>
 					<Footer />
 				</div>
 			</div>

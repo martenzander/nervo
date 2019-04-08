@@ -2,6 +2,7 @@ import styles from "./styles.pcss";
 import React, { Component } from "react";
 import ProgressBar from "./../ProgressBar/ProgressBar";
 import Navigation from "./../Navigation/Navigation";
+import Logo from "./../Logo/Logo";
 
 class Header extends Component {
 	constructor(props) {
@@ -58,7 +59,11 @@ class Header extends Component {
 					<div className={"nervo-container"}>
 						<div className={styles.contentHolder}>
 							<div className={`${styles.content} ${styles.highZIndex}`}>
-								<h1 className={styles.content}>Nervo</h1>
+								<h1 className={styles.content}>
+									<a>
+										<Logo />
+									</a>
+								</h1>
 								<p className={styles.content}>
 									<span className={styles.content}>
 										{this.props.value.data.version}

@@ -30,6 +30,7 @@ class Sidebar extends Component {
 		window.addEventListener("scroll", this.onScroll);
 		window.addEventListener("resize", this.onResize);
 		this.main = document.querySelector(".js-main-content");
+		this.header = document.querySelector("header");
 	};
 
 	componentWillUnmount = e => {
@@ -48,21 +49,24 @@ class Sidebar extends Component {
 
 	updateSideBar = e => {
 		if (!this.main) return;
+		this.mainPaddingTop = parseInt(
+			window.getComputedStyle(this.main).paddingTop.replace("px", "")
+		);
 		this.mainTop = this.main.getBoundingClientRect().top;
 		this.mainHeight = this.main.getBoundingClientRect().height;
 		this.mainBottom = this.mainHeight - Math.abs(this.mainTop);
-		this.top = this.node.getBoundingClientRect().top;
+		this.headerHeight = this.header.getBoundingClientRect().height;
 		this.height = this.node.getBoundingClientRect().height;
 		this.width = this.getWidth();
 
 		if (this.isFixed) {
-			this.stickyLimit = this.top + this.height;
+			this.stickyLimit = this.headerHeight + this.mainPaddingTop + this.height;
 		}
 
 		if (this.mainTop <= 60 && this.mainBottom >= this.stickyLimit) {
 			this.sidebarInlineStyles = {
 				width: `${this.width}px`,
-				top: `${this.stickyPadding}px`,
+				top: `${this.headerHeight + this.mainPaddingTop}px`,
 			};
 			if (this.isFixed) return;
 			this.className = `${styles.sidebar} ${styles.fixed}`;

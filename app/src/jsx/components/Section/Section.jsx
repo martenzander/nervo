@@ -43,7 +43,7 @@ class Section extends Component {
 				<Suspense fallback={<div>Loading...</div>}>
 					<Headline value={this.props.value.name} type={"h2"} />
 					{this.components}
-					{this.props.id + 1 === this.props.sectionLength ? null : <Divider />}
+					{/* {this.props.id + 1 === this.props.sectionLength ? null : <Divider />} */}
 				</Suspense>
 			</section>
 		);

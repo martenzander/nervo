@@ -14,7 +14,7 @@ const tween = {
 		},
 		{
 			component: "codePen",
-			value: "//codepen.io/SlimMarten/embed/ryzjPe/?height=497&theme-id=0&default-tab=result",
+			value: "//codepen.io/SlimMarten/embed/ryzjPe/?height=497&theme-id=1&dark-tab=result",
 		},
 	],
 };

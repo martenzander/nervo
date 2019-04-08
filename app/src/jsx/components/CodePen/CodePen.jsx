@@ -7,7 +7,7 @@ class CodePen extends Component {
 		return (
 			<div className={classNames}>
 				<iframe
-					height={265}
+					height={500}
 					style={{ width: "100%" }}
 					scrolling={"no"}
 					title={"Nervo"}

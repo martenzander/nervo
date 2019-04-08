@@ -74,6 +74,15 @@ module.exports = {
 					{
 						loader: "css-loader",
 					},
+					{
+						loader: "postcss-loader",
+						options: {
+							// exec: true,
+							config: {
+								path: path.resolve(__dirname),
+							},
+						},
+					},
 				],
 			},
 		],
