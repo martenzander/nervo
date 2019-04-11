@@ -10,7 +10,7 @@ export default class Clock {
 	}
 
 	start() {
-		this.startTime = (typeof performance === "undefined" ? Date : performance).now(); // see #10732
+		this.startTime = (typeof performance === "undefined" ? Date : performance).now();
 
 		this.oldTime = this.startTime;
 		this.elapsedTime = 0;

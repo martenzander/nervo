@@ -10,8 +10,5 @@ const getInstanceById = id => {
 	return instance;
 };
 
-const test = 3;
-
 // Utils
-export { test };
 export { getInstanceById };
