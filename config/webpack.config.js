@@ -1,13 +1,13 @@
 const path = require("path");
 const packageConfig = require("./../package.json");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
 const webpack = require("webpack");
 
 const { resolve } = require("./webpack.settings");
-const { plugins } = require("./webpack.settings");
-plugins.htmlWebpackPlugin.template = "app/src/html/development.html"
 
-const fileName = process.env.NODE_ENV === "development" ? `${packageConfig.name}.js` : `${packageConfig.name}.min.js`;
+const fileName =
+	process.env.NODE_ENV === "development"
+		? `${packageConfig.name}.js`
+		: `${packageConfig.name}.min.js`;
 
 module.exports = {
 	entry: ["./src/js/index.js"],
@@ -44,15 +44,5 @@ module.exports = {
 			},
 		],
 	},
-	plugins: [
-		new HtmlWebpackPlugin(plugins.htmlWebpackPlugin),
-		new webpack.HotModuleReplacementPlugin(),
-	],
-	devServer: {
-		disableHostCheck: true,
-		port: 3000,
-		contentBase: [path.join(__dirname, "..", "build"), path.join(__dirname, "..", "app", "dist")],
-		watchContentBase: true,
-		publicPath: "http://localhost:8080/",
-	},
+	plugins: [new webpack.HotModuleReplacementPlugin()],
 };
