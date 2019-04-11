@@ -12,11 +12,11 @@ const tween = {
 				source: "tween.js",
 			},
 		},
-		{
-			component: "codePen",
-			value:
-				"//codepen.io/digitalwingman/embed/jRrLXv/?height=265&theme-id=1&dark-tab=js,result",
-		},
+		// {
+		// 	component: "codePen",
+		// 	value:
+		// 		"//codepen.io/digitalwingman/embed/jRrLXv/?height=265&theme-id=1&dark-tab=js,result",
+		// },
 	],
 };
 export default tween;
