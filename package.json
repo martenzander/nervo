@@ -13,7 +13,8 @@
 		"build:app": "NODE_ENV=production webpack --config config/webpack.config.app.js --mode production",
 		"build:lib": "npm-run-all build:prod build:dev",
 		"build": "npm-run-all build:lib build:app",
-		"app": "NODE_ENV=development webpack-dev-server --config config/webpack.config.app.js --mode development --open"
+		"app": "NODE_ENV=development webpack-dev-server --config config/webpack.config.app.js --mode development --open",
+		"start": "npm-run-all app"
 	},
 	"keywords": [
 		"javascript",
