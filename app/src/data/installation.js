@@ -1,3 +1,5 @@
+const test = require("./../js/test");
+
 const installation = {
 	name: "Installation",
 	contents: [
@@ -11,6 +13,10 @@ const installation = {
 				source: "install.sh",
 				isCommand: true,
 			},
+		},
+		{
+			component: "canvas",
+			value: test,
 		},
 	],
 };

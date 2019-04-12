@@ -5,6 +5,7 @@ const Headline = React.lazy(() => import("./../Headline/Headline"));
 const Copy = React.lazy(() => import("./../Copy/Copy"));
 const Divider = React.lazy(() => import("./../Divider/Divider"));
 const CodePen = React.lazy(() => import("./../CodePen/CodePen"));
+const Canvas = React.lazy(() => import("./../Canvas/Canvas"));
 
 class Section extends Component {
 	constructor(props) {
@@ -26,6 +27,13 @@ class Section extends Component {
 						return (
 							<Suspense key={i} fallback={<div>Loading Copy Component</div>}>
 								<CodePen key={i} value={c.value} />
+							</Suspense>
+						);
+						break;
+					case "canvas":
+						return (
+							<Suspense key={i} fallback={<div>Loading Canvas Component</div>}>
+								<Canvas key={i} value={c.value} />
 							</Suspense>
 						);
 						break;
