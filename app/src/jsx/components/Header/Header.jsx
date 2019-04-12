@@ -3,14 +3,33 @@ import React, { Component } from "react";
 import ProgressBar from "./../ProgressBar/ProgressBar";
 import Navigation from "./../Navigation/Navigation";
 import Logo from "./../Logo/Logo";
+const downloadCounts = require("npm-download-counts");
 
 class Header extends Component {
+	static PACKAGE = "nervo";
+	static START = new Date("September 23, 2017 11:13:00");
+	static END = new Date();
+
 	constructor(props) {
 		super(props);
 		this.state = {
 			isActive: false,
 			classNames: `${styles.fader}`,
+			downloads: 0,
 		};
+
+		downloadCounts(Header.PACKAGE, Header.START, Header.END, (err, data) => {
+			let downloads = 0;
+
+			data.forEach(day => {
+				downloads += day.count;
+			});
+
+			this.setState({
+				...this.state,
+				downloads: downloads,
+			});
+		});
 	}
 
 	onScroll = e => {
@@ -59,17 +78,26 @@ class Header extends Component {
 					<div className={"nervo-container"}>
 						<div className={styles.contentHolder}>
 							<div className={`${styles.content} ${styles.highZIndex}`}>
-								<h1 className={styles.content}>
+								<h1 className={`${styles.content} ${styles.marginRight}`}>
 									<a>
 										<Logo />
 									</a>
 								</h1>
-								<p className={styles.content}>
-									<span className={styles.content}>
-										{this.props.value.data.version}
+								<p className={`${styles.content} ${styles.marginRight}`}>
+									<span
+										className={`${styles.content} ${styles.marginRight} ${
+											styles.font
+										}`}
+									>
+										v{this.props.value.data.version}
 									</span>
-									<span className={styles.content}>
-										{this.props.value.data.version}
+									<span
+										className={`${styles.content} ${styles.marginRight} ${
+											styles.font
+										}`}
+									>
+										{this.state.downloads}
+										{/* {this.props.value.data.version} */}
 									</span>
 								</p>
 							</div>
