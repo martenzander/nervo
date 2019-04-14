@@ -1,4 +1,4 @@
-const test = require("./../js/test");
+const Tween = require("./../js/Tween");
 
 const installation = {
 	name: "Installation",
@@ -16,7 +16,7 @@ const installation = {
 		},
 		{
 			component: "canvas",
-			value: test,
+			value: Tween,
 		},
 	],
 };
