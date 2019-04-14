@@ -17,8 +17,6 @@ export default class Ticker extends Base {
 
 		// event binding
 		this.tick = this.tick.bind(this);
-
-		if (this.autoStart) this.start();
 	}
 
 	reset() {

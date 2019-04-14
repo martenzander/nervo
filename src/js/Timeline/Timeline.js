@@ -9,6 +9,7 @@ export default class Timeline extends Ticker {
 		this.type = "Timeline";
 
 		this.add(this.getTrackFromTweens(objects, options), options);
+		if (this.autoStart) this.start();
 	}
 
 	execute(time) {
