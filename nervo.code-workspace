@@ -1,10 +1,10 @@
 {
 	"folders": [
 		{
-			"path": "."
+			"path": "/Users/marten/Work/intern/postcss-mesh.org"
 		},
 		{
-			"path": "/Users/marten/Work/intern/postcss-mesh.org"
+			"path": "../nervo"
 		}
 	],
 	"settings": {}
