@@ -1,13 +1,11 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-// const StyleLintPlugin = require("stylelint-webpack-plugin");
+const packageConfig = require("./../package.json");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 const devMode = process.env.NODE_ENV !== "production";
 
 const { resolve } = require("./webpack.settings");
-const { plugins } = require("./webpack.settings");
-plugins.htmlWebpackPlugin.template = "app/src/html/index.html";
 
 module.exports = {
 	entry: ["./app/src/jsx/Index.jsx"],
@@ -88,12 +86,13 @@ module.exports = {
 		],
 	},
 	plugins: [
-		// new StyleLintPlugin({
-		// 	configFile: path.join(__dirname, "..", ".stylelintrc"),
-		// 	files: "app/src/**/*.(css|scss|pcss)",
-		// 	syntax: "scss",
-		// }),
-		new HtmlWebpackPlugin(plugins.htmlWebpackPlugin),
+		new HtmlWebpackPlugin({
+			title: `${packageConfig.name.charAt(0).toUpperCase() +
+				packageConfig.name.slice(1)} – JavaScript Animation Framework`,
+			keys: packageConfig.keywords,
+			description: packageConfig.description,
+			template: "app/src/html/index.html",
+		}),
 		new MiniCssExtractPlugin({
 			filename: "css/[name].css",
 			chunkFilename: "css/[id].css",
