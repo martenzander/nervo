@@ -73,7 +73,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "156798f5b3a6c1a4b174";
+/******/ 	var hotCurrentHash = "403720044a0a9c095f5c";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -4452,7 +4452,9 @@ function (_EventDispatcher) {
     }
   }, {
     key: "add",
-    value: function add(object, options) {
+    value: function add(object) {
+      var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
       if (object.length >= 1) {
         if (this.isTimeline) {
           var tweens = [];
@@ -4463,7 +4465,7 @@ function (_EventDispatcher) {
           }
 
           var track = this.getTrackFromTweens(tweens, options);
-          this.add(track, {});
+          this.add(track, options);
           return this;
         }
 
@@ -4480,6 +4482,11 @@ function (_EventDispatcher) {
       }
 
       if (object && object.isNervo) {
+        if (this.isTween || this.isSpring) {
+          console.warn("".concat(libName, ".Base.add: Object is an instance of ").concat(libName, ".Tween or ").concat(libName, ".Spring and can't have children."), object);
+          return this;
+        }
+
         if (object.parent !== null) {
           object.parent.remove(object);
         }
@@ -4496,11 +4503,6 @@ function (_EventDispatcher) {
             console.error("".concat(libName, ".Base.add: Object is not an instance of ").concat(libName, ".Tween."), object);
             return this;
           }
-        }
-
-        if (this.isTween || this.isSpring) {
-          console.warn("".concat(libName, ".Base.add: Object is an instance of ").concat(libName, ".Tween or ").concat(libName, ".Spring and can't have children."), object);
-          return this;
         }
 
         object.parent = this;
@@ -5237,9 +5239,10 @@ function (_Ticker) {
   }, {
     key: "getTrackFromTweens",
     value: function getTrackFromTweens(tweens, options) {
-      return new _Track_Track__WEBPACK_IMPORTED_MODULE_12__["default"](tweens, {
+      var track = new _Track_Track__WEBPACK_IMPORTED_MODULE_12__["default"](tweens, {
         start: options.start !== undefined ? options.start : this.duration
       });
+      return track;
     }
   }, {
     key: "updateDuration",
@@ -5355,7 +5358,7 @@ function (_Base) {
     _this = _possibleConstructorReturn(this, _getPrototypeOf(Track).call(this, options));
     _this.isTrack = true;
     _this.type = "Track";
-    _this.start = 0;
+    _this.start = options.start !== undefined ? options.start : 0;
 
     _this.add(objects, options);
 
