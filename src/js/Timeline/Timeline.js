@@ -17,9 +17,10 @@ export default class Timeline extends Ticker {
 	}
 
 	getTrackFromTweens(tweens, options) {
-		return new Track(tweens, {
+		const track = new Track(tweens, {
 			start: options.start !== undefined ? options.start : this.duration,
 		});
+		return track;
 	}
 
 	updateDuration() {

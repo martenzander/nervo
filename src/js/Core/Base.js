@@ -42,7 +42,7 @@ export default class Base extends EventDispatcher {
 		return clone;
 	}
 
-	add(object, options) {
+	add(object, options = {}) {
 		if (object.length >= 1) {
 			if (this.isTimeline) {
 				const tweens = [];
@@ -51,7 +51,7 @@ export default class Base extends EventDispatcher {
 					if (object[i].isTrack) this.add(object[i], {});
 				}
 				const track = this.getTrackFromTweens(tweens, options);
-				this.add(track, {});
+				this.add(track, options);
 				return this;
 			}
 
@@ -67,6 +67,14 @@ export default class Base extends EventDispatcher {
 		}
 
 		if (object && object.isNervo) {
+			if (this.isTween || this.isSpring) {
+				console.warn(
+					`${libName}.Base.add: Object is an instance of ${libName}.Tween or ${libName}.Spring and can't have children.`,
+					object
+				);
+				return this;
+			}
+
 			if (object.parent !== null) {
 				object.parent.remove(object);
 			}
@@ -89,14 +97,6 @@ export default class Base extends EventDispatcher {
 					);
 					return this;
 				}
-			}
-
-			if (this.isTween || this.isSpring) {
-				console.warn(
-					`${libName}.Base.add: Object is an instance of ${libName}.Tween or ${libName}.Spring and can't have children.`,
-					object
-				);
-				return this;
 			}
 
 			object.parent = this;
