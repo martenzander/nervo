@@ -1,4 +1,5 @@
 const path = require("path");
+const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const packageConfig = require("./../package.json");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
@@ -64,6 +65,7 @@ module.exports = {
 					},
 				],
 			},
+			{ test: /\.hbs$/, loader: "handlebars-loader" },
 			{
 				test: /\.(css|scss|pcss)$/,
 				exclude: /src/,
@@ -86,12 +88,17 @@ module.exports = {
 		],
 	},
 	plugins: [
+		new webpack.LoaderOptionsPlugin({
+			options: {
+				handlebarsLoader: {},
+			},
+		}),
 		new HtmlWebpackPlugin({
 			title: `${packageConfig.name.charAt(0).toUpperCase() +
 				packageConfig.name.slice(1)} – JavaScript Animation Framework`,
 			keys: packageConfig.keywords,
 			description: packageConfig.description,
-			template: "app/src/html/index.html",
+			template: "app/src/hbs/index.hbs",
 		}),
 		new MiniCssExtractPlugin({
 			filename: "css/[name].css",
