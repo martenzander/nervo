@@ -91,6 +91,14 @@ export default class Base extends EventDispatcher {
 				}
 			}
 
+			if (this.isTween || this.isSpring) {
+				console.warn(
+					`${libName}.Base.add: Object is an instance of ${libName}.Tween or ${libName}.Spring and can't have children.`,
+					object
+				);
+				return this;
+			}
+
 			object.parent = this;
 			this.children.push(object);
 
