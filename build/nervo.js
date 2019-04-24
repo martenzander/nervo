@@ -73,7 +73,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "14b5799781cb27d5c024";
+/******/ 	var hotCurrentHash = "156798f5b3a6c1a4b174";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -4301,7 +4301,7 @@ module.exports = sineOut
 /*! exports provided: name, version, description, main, repository, scripts, keywords, author, license, devDependencies, dependencies, default */
 /***/ (function(module) {
 
-module.exports = {"name":"nervo","version":"0.0.7","description":"[WIP] Javascript Animation Library","main":"build/nervo.min.js","repository":{"type":"git","url":"git+https://github.com/SlimMarten/nervo.git"},"scripts":{"build:prod":"NODE_ENV=production webpack --config config/webpack.config.lib.js --mode production","build:dev":"NODE_ENV=development webpack --config config/webpack.config.lib.js --mode development","build:app":"NODE_ENV=production webpack --config config/webpack.config.app.js --mode production","build:lib":"npm-run-all build:prod build:dev","build":"npm-run-all build:lib build:app","app":"NODE_ENV=development webpack-dev-server --config config/webpack.config.app.js --mode development --open","start":"npm-run-all app"},"keywords":["javascript","animation","framework","tween","timeline","svg","css","motion","js","library","toolkit"],"author":"Marten Zander","license":"MIT","devDependencies":{"@babel/core":"^7.3.4","@babel/plugin-proposal-class-properties":"^7.3.4","@babel/preset-env":"^7.3.4","@babel/preset-react":"^7.0.0","autoprefixer":"^9.5.0","babel-eslint":"^10.0.1","babel-loader":"^8.0.5","babel-plugin-prismjs":"^1.0.2","babel-plugin-syntax-dynamic-import":"^6.18.0","babel-preset-react":"^6.24.1","core-js":"^3.0.0","css-loader":"^2.1.1","cssnano":"^4.1.10","eslint":"^5.15.3","eslint-loader":"^2.1.2","eslint-plugin-babel":"^5.3.0","html-webpack-plugin":"^3.2.0","mini-css-extract-plugin":"^0.5.0","moveto":"^1.8.0","npm-download-counts":"^0.1.2","npm-run-all":"^4.1.5","postcss-advanced-variables":"^3.0.0","postcss-assets":"^5.0.0","postcss-at-rules-variables":"^0.1.7","postcss-calc":"^7.0.1","postcss-conditionals":"^2.1.0","postcss-each":"^0.10.0","postcss-easings":"^2.0.0","postcss-flexbugs-fixes":"^4.1.0","postcss-for":"^2.1.1","postcss-hexrgba":"^1.0.1","postcss-import":"^12.0.1","postcss-initial":"^3.0.0","postcss-inline-svg":"^3.1.1","postcss-loader":"^3.0.0","postcss-mesh":"^1.1.7","postcss-modules-values":"^2.0.0","postcss-nested":"^4.1.2","postcss-nested-ancestors":"^2.0.0","postcss-pxtorem":"^4.0.1","postcss-sassy-mixins":"^2.1.0","postcss-scss":"^2.0.0","postcss-selector-not":"^4.0.0","postcss-size":"^3.0.0","postcss-will-change":"^3.0.0","prettier":"^1.16.4","prismjs":"^1.16.0","raw-loader":"^2.0.0","react":"^16.8.6","react-dom":"^16.8.6","react-html-parser":"^2.0.2","style-loader":"^0.23.1","stylelint":"^9.10.1","stylelint-config-recommended":"^2.1.0","stylelint-webpack-plugin":"^0.10.5","webpack":"^4.29.6","webpack-cli":"^3.3.0","webpack-dev-server":"^3.2.1"},"dependencies":{"@babel/polyfill":"^7.2.5","eases":"^1.0.8"}};
+module.exports = {"name":"nervo","version":"0.0.7","description":"[WIP] Javascript Animation Library","main":"build/nervo.min.js","repository":{"type":"git","url":"git+https://github.com/SlimMarten/nervo.git"},"scripts":{"favicon":"node config/favicon/favicon.js","build:prod":"NODE_ENV=production webpack --config config/webpack.config.lib.js --mode production","build:dev":"NODE_ENV=development webpack --config config/webpack.config.lib.js --mode development","build:app":"NODE_ENV=production webpack --config config/webpack.config.app.js --mode production","build:lib":"npm-run-all build:prod build:dev","build":"npm-run-all build:lib favicon build:app","app":"NODE_ENV=development webpack-dev-server --config config/webpack.config.app.js --mode development --open","start":"npm-run-all favicon app"},"keywords":["javascript","animation","framework","tween","timeline","svg","css","motion","js","library","toolkit"],"author":"Marten Zander","license":"MIT","devDependencies":{"@babel/core":"^7.3.4","@babel/plugin-proposal-class-properties":"^7.3.4","@babel/preset-env":"^7.3.4","@babel/preset-react":"^7.0.0","autoprefixer":"^9.5.0","babel-eslint":"^10.0.1","babel-loader":"^8.0.5","babel-plugin-prismjs":"^1.0.2","babel-plugin-syntax-dynamic-import":"^6.18.0","babel-preset-react":"^6.24.1","core-js":"^3.0.0","css-loader":"^2.1.1","cssnano":"^4.1.10","eslint":"^5.15.3","eslint-loader":"^2.1.2","eslint-plugin-babel":"^5.3.0","favicons":"^5.3.0","handlebars":"^4.1.2","handlebars-loader":"^1.7.1","html-webpack-plugin":"^3.2.0","jsdom":"^15.0.0","mini-css-extract-plugin":"^0.5.0","moveto":"^1.8.0","npm-download-counts":"^0.1.2","npm-run-all":"^4.1.5","postcss-advanced-variables":"^3.0.0","postcss-assets":"^5.0.0","postcss-at-rules-variables":"^0.1.7","postcss-calc":"^7.0.1","postcss-conditionals":"^2.1.0","postcss-each":"^0.10.0","postcss-easings":"^2.0.0","postcss-flexbugs-fixes":"^4.1.0","postcss-for":"^2.1.1","postcss-hexrgba":"^1.0.1","postcss-import":"^12.0.1","postcss-initial":"^3.0.0","postcss-inline-svg":"^3.1.1","postcss-loader":"^3.0.0","postcss-mesh":"^1.1.7","postcss-modules-values":"^2.0.0","postcss-nested":"^4.1.2","postcss-nested-ancestors":"^2.0.0","postcss-pxtorem":"^4.0.1","postcss-sassy-mixins":"^2.1.0","postcss-scss":"^2.0.0","postcss-selector-not":"^4.0.0","postcss-size":"^3.0.0","postcss-will-change":"^3.0.0","prettier":"^1.16.4","prismjs":"^1.16.0","raw-loader":"^2.0.0","react":"^16.8.6","react-dom":"^16.8.6","react-html-parser":"^2.0.2","style-loader":"^0.23.1","stylelint":"^9.10.1","stylelint-config-recommended":"^2.1.0","stylelint-webpack-plugin":"^0.10.5","webpack":"^4.29.6","webpack-cli":"^3.3.0","webpack-dev-server":"^3.2.1"},"dependencies":{"@babel/polyfill":"^7.2.5","eases":"^1.0.8"}};
 
 /***/ }),
 
@@ -4496,6 +4496,11 @@ function (_EventDispatcher) {
             console.error("".concat(libName, ".Base.add: Object is not an instance of ").concat(libName, ".Tween."), object);
             return this;
           }
+        }
+
+        if (this.isTween || this.isSpring) {
+          console.warn("".concat(libName, ".Base.add: Object is an instance of ").concat(libName, ".Tween or ").concat(libName, ".Spring and can't have children."), object);
+          return this;
         }
 
         object.parent = this;
@@ -5057,8 +5062,6 @@ function (_Ticker) {
     _classCallCheck(this, Spring);
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(Spring).call(this, options));
-    _this.autoStart = options.autoStart !== undefined ? options.autoStart : _index__WEBPACK_IMPORTED_MODULE_10__["AutoStart"];
-    _this.isActive = false;
     _this.isSpring = true;
     _this.type = "Spring";
     _this.target = target;
