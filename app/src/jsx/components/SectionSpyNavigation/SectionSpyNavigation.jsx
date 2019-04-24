@@ -29,22 +29,28 @@ class SectionSpyNavigation extends Component {
 	};
 
 	updateSidebar = e => {
+		const mainPaddingTop = parseInt(
+			window
+				.getComputedStyle(document.querySelector(".js-main-content"))
+				.paddingTop.replace("px", "")
+		);
 		this.setState({
 			items: this.sections.map((s, i) => {
 				const sectionNode = document.querySelector(`#${s.key}`);
 				const sectionTop = sectionNode.getBoundingClientRect().top;
 				const sectionHeight = sectionNode.getBoundingClientRect().height;
 
-				if (sectionTop <= 60 && sectionTop + sectionHeight > 60) {
+				if (sectionTop <= mainPaddingTop && sectionTop + sectionHeight > mainPaddingTop) {
 					return (
 						<li key={s.key} className={this.props.li}>
 							<Suspense fallback={<div>Link Component</div>}>
 								<Link
 									onClick={this.props.onItemClick ? this.props.onItemClick : null}
-									value={s.key}
-									target={`#${s.key}`}
+									href={`#${s.key}`}
 									className={`${this.props.a} ${this.props.active}`}
-								/>
+								>
+									{s.key}
+								</Link>
 							</Suspense>
 						</li>
 					);
@@ -54,10 +60,11 @@ class SectionSpyNavigation extends Component {
 						<Suspense fallback={<div>Link Component</div>}>
 							<Link
 								onClick={this.props.onItemClick ? this.props.onItemClick : null}
-								value={s.key}
-								target={`#${s.key}`}
+								href={`#${s.key}`}
 								className={`${this.props.a} `}
-							/>
+							>
+								{s.key}
+							</Link>
 						</Suspense>
 					</li>
 				);

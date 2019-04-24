@@ -8,7 +8,12 @@ class Link extends Component {
 		e.preventDefault();
 		const partner = document.querySelector(key);
 		let scrollTarget = partner.getBoundingClientRect().top;
-		scrollTarget -= 60;
+		const mainPaddingTop = window
+			.getComputedStyle(document.querySelector(".js-main-content"))
+			.paddingTop.replace("px", "");
+		const headerHeight = document.querySelector(".js-header").getBoundingClientRect().height;
+		// scrollTarget -= headerHeight + parseInt(mainPaddingTop);
+		scrollTarget -= parseInt(mainPaddingTop);
 
 		if (scrollTarget !== 0) {
 			const move = new MoveTo(
@@ -35,9 +40,9 @@ class Link extends Component {
 			<a
 				className={this.props.className}
 				onClick={this.props.onClick ? this.props.onClick : Link.onClick}
-				href={this.props.target}
+				href={this.props.href}
 			>
-				{this.props.value}
+				{this.props.children}
 			</a>
 		);
 	}

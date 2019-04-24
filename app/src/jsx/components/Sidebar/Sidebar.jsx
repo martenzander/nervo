@@ -61,12 +61,14 @@ class Sidebar extends Component {
 
 		if (this.isFixed) {
 			this.stickyLimit = this.headerHeight + this.mainPaddingTop + this.height;
+			this.stickyLimit = this.mainPaddingTop + this.height;
 		}
 
 		if (this.mainTop <= 60 && this.mainBottom >= this.stickyLimit) {
 			this.sidebarInlineStyles = {
 				width: `${this.width}px`,
-				top: `${this.headerHeight + this.mainPaddingTop}px`,
+				// top: `${this.headerHeight + this.mainPaddingTop}px`,
+				top: `${this.mainPaddingTop}px`,
 			};
 			if (this.isFixed) return;
 			this.className = `${styles.sidebar} ${styles.fixed}`;

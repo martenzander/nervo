@@ -5,7 +5,7 @@ import GithubRibbon from "./../GithubRibbon/GithubRibbon";
 import Section from "./../Section/Section";
 import Layout from "./../Layout/Layout";
 import Logo from "./../Logo/Logo";
-import Button from "./../Button/Button";
+import Link from "./../Link/Link";
 import Header from "./../Header/Header";
 import Hero from "./../Hero/Hero";
 import Footer from "./../Footer/Footer";
@@ -20,6 +20,7 @@ class App extends Component {
 	constructor(props) {
 		super(props);
 		this.data = data;
+		console.log(this.data);
 		this.sections = this.data.sections.map((s, i) => {
 			return (
 				<Section
@@ -49,8 +50,8 @@ class App extends Component {
 						<br />
 						<p className={`${styles.description}`}>{this.data.description}</p>
 						<div>
-							<Button>Documentation</Button>
-							<Button>Github</Button>
+							<Link href={`#About`}>Documentation</Link>
+							<Link href={this.data.repository.url.replace("git+", "")}>Github</Link>
 						</div>
 					</div>
 				</Hero>
