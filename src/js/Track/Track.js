@@ -7,7 +7,7 @@ export default class Track extends Base {
 		super(options);
 		this.isTrack = true;
 		this.type = "Track";
-		this.start = 0;
+		this.start = options.start !== undefined ? options.start : 0;
 
 		this.add(objects, options);
 	}
@@ -17,12 +17,15 @@ export default class Track extends Base {
 		this.end = 0;
 
 		if (this.children.length <= 0) {
-			console.warn(`${libName}.Track.updateTimeRange: No instances of ${libName}.Tween in this Track.`);
+			console.warn(
+				`${libName}.Track.updateTimeRange: No instances of ${libName}.Tween in this Track.`
+			);
 			return this;
 		}
 
 		this.children.forEach(child => {
-			if (child.duration * child.timeScale + this.start > this.end) this.end = child.duration * child.timeScale + this.start;
+			if (child.duration * child.timeScale + this.start > this.end)
+				this.end = child.duration * child.timeScale + this.start;
 		});
 
 		return this;
