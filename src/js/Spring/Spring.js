@@ -7,8 +7,6 @@ export default class Spring extends Ticker {
 
 	constructor(current, target, options = {}) {
 		super(options);
-		this.autoStart = options.autoStart !== undefined ? options.autoStart : Nervo.AutoStart;
-		this.isActive = false;
 		this.isSpring = true;
 		this.type = "Spring";
 		this.target = target;
