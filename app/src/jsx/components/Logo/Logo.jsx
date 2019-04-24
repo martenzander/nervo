@@ -325,31 +325,31 @@ class Logo extends Component {
 					</g>
 					<g>
 						<path
-							className={styles["gradient"]}
+							className={styles["gradientOne"]}
 							d="M214.68,80l-1.92,4.52c-1.1,2.59-4.09,4.69-6.68,4.69h-4.48c-1.42,0-2.08-1.15-1.48-2.57l2.82-6.64H192.5
 		l-3.8,8.96c-1.99,4.68,0.2,8.48,4.88,8.48h14.39c5.39,0,11.62-4.37,13.9-9.76l3.26-7.68H214.68z"
 						/>
 						<path
-							className={styles["gradient"]}
+							className={styles["gradientOne"]}
 							d="M167.46,97.44c4.68,0,10.09-3.8,12.08-8.48l3.8-8.96H172.9l-1.92,4.52c-1.1,2.59-4.09,4.69-6.68,4.69h-7.05
 		l3.91-9.21h-10.45l-7.4,17.44H167.46z"
 						/>
 						<path
-							className={styles["gradient"]}
+							className={styles["gradientOne"]}
 							d="M116.8,83.58h10.38l-2.33,13.86h10.45l2.22-13.22c0.35-2.1-0.92-3.57-3.08-3.57h0.64
 		c0.82,0,1.67-0.28,2.5-0.66h-29.71l-7.4,17.44h10.45L116.8,83.58z"
 						/>
 						<polygon
-							className={styles["gradient"]}
+							className={styles["gradientOne"]}
 							points="72.56,89.21 75.17,83.07 90.26,83.07 91.57,80 66.02,80 58.62,97.44 58.62,97.44 89.98,97.44
 		93.47,89.21 	"
 						/>
 						<polygon
-							className={styles["gradient"]}
+							className={styles["gradientOne"]}
 							points="15.56,97.44 25.95,97.44 33.35,80 22.9,80 15.56,97.29 	"
 						/>
 						<polygon
-							className={styles["gradient"]}
+							className={styles["gradientOne"]}
 							points="45.08,80 37.68,97.44 48.13,97.44 55.53,80 	"
 						/>
 					</g>
@@ -458,7 +458,7 @@ class Logo extends Component {
 		65.11,15.68 53.49,43.07 53.49,43.07 84.81,43.07 88.3,34.85 67.41,34.85 	"
 				/>
 				<linearGradient
-					id="SVGID_1_"
+					id="SVGID_2_"
 					gradientUnits="userSpaceOnUse"
 					x1="19.4207"
 					y1="42.1431"
@@ -469,30 +469,30 @@ class Logo extends Component {
 					<stop offset="1" style={{ stopColor: "#000000" }} />
 				</linearGradient>
 				<polygon
-					className={styles["gradient"]}
+					className={styles["gradientTwo"]}
 					points="17.98,25.27 10.42,43.07 20.86,43.07 28.42,25.27 	"
 				/>
 				<polygon
-					className={styles["gradient"]}
+					className={styles["gradientTwo"]}
 					points="40.13,25.27 32.58,43.07 43.01,43.07 50.57,25.27 	"
 				/>
 				<polygon
-					className={styles["gradient"]}
+					className={styles["gradientTwo"]}
 					points="85.09,28.72 86.56,25.27 61.05,25.27 53.49,43.07 84.81,43.07 88.3,34.85 67.41,34.85 70.02,28.72
 		"
 				/>
 				<path
-					className={styles["gradient"]}
+					className={styles["gradientTwo"]}
 					d="M129.21,26.31h0.64c1.07,0,2.2-0.43,3.24-1.04h-30.25l-7.56,17.81h10.44l5.88-13.85h10.37l-2.33,13.85h10.44
 		l2.22-13.2C132.65,27.78,131.38,26.31,129.21,26.31z"
 				/>
 				<path
-					className={styles["gradient"]}
+					className={styles["gradientTwo"]}
 					d="M216.54,33.32l3.42-8.06h-10.44l-2.08,4.9c-1.1,2.58-4.08,4.68-6.67,4.68h-4.47c-1.42,0-2.08-1.15-1.48-2.57
 		l2.98-7.02h-10.44l-3.96,9.34c-1.99,4.68,0.2,8.47,4.88,8.47h14.37C208.03,43.07,214.25,38.71,216.54,33.32z"
 				/>
 				<path
-					className={styles["gradient"]}
+					className={styles["gradientTwo"]}
 					d="M174.26,34.6l3.96-9.34h-10.44l-2.08,4.9c-1.1,2.58-4.08,4.68-6.67,4.68H152l4.07-9.58h-10.44l-7.56,17.81
 		h24.12C166.87,43.07,172.28,39.28,174.26,34.6z"
 				/>

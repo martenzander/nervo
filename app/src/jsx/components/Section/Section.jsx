@@ -1,11 +1,11 @@
 import styles from "./styles.pcss";
 import React, { Component, Suspense } from "react";
 import Code from "./../Code/Code";
-const Headline = React.lazy(() => import("./../Headline/Headline"));
+import Headline from "./../Headline/Headline";
 const Copy = React.lazy(() => import("./../Copy/Copy"));
 const Divider = React.lazy(() => import("./../Divider/Divider"));
 const CodePen = React.lazy(() => import("./../CodePen/CodePen"));
-const Canvas = React.lazy(() => import("./../Canvas/Canvas"));
+import Canvas from "./../Canvas/Canvas";
 
 class Section extends Component {
 	constructor(props) {
@@ -31,11 +31,7 @@ class Section extends Component {
 						);
 						break;
 					case "canvas":
-						return (
-							<Suspense key={i} fallback={<div>Loading Canvas Component</div>}>
-								<Canvas key={i} value={c.value} />
-							</Suspense>
-						);
+						return <Canvas key={i} value={c.value} />;
 						break;
 					default:
 						return <div key={i}>{"no valid component"}</div>;
@@ -48,11 +44,9 @@ class Section extends Component {
 	render() {
 		return (
 			<section className={`${styles.section} js-section`} id={this.props.value.name}>
-				<Suspense fallback={<div>Loading...</div>}>
-					<Headline value={this.props.value.name} type={"h2"} />
-					{this.components}
-					{/* {this.props.id + 1 === this.props.sectionLength ? null : <Divider />} */}
-				</Suspense>
+				<Headline value={this.props.value.name} type={"h2"} />
+				{this.components}
+				{/* {this.props.id + 1 === this.props.sectionLength ? null : <Divider />} */}
 			</section>
 		);
 	}
