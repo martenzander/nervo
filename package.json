@@ -1,6 +1,6 @@
 {
 	"name": "nervo",
-	"version": "0.0.6",
+	"version": "0.0.7",
 	"description": "[WIP] Javascript Animation Library",
 	"main": "build/nervo.min.js",
 	"repository": {

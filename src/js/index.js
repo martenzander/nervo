@@ -1,7 +1,8 @@
 import * as Utils from "./Core/Utils";
+import Spring from "./Spring/Spring";
+import Timeline from "./Timeline/Timeline";
 import Track from "./Track/Track";
 import Tween from "./Tween/Tween";
-import Timeline from "./Timeline/Timeline";
 
 // Defaults
 const AutoStart = false;
@@ -20,6 +21,7 @@ export { TimeScale };
 export { Utils };
 
 // Classes
-export { Track };
+export { Spring };
 export { Timeline };
+export { Track };
 export { Tween };

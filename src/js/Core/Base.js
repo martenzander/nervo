@@ -18,8 +18,10 @@ export default class Base extends EventDispatcher {
 		this.onAfterAdd = this.onAfterAdd.bind(this);
 		this.onProgress = this.onProgress.bind(this);
 		this.onComplete = this.onComplete.bind(this);
-		if ("onComplete" in this.options) this.addEventListener("onComplete", this.options.onComplete);
-		if ("onProgress" in this.options) this.addEventListener("onProgress", this.options.onProgress);
+		if ("onComplete" in this.options)
+			this.addEventListener("onComplete", this.options.onComplete);
+		if ("onProgress" in this.options)
+			this.addEventListener("onProgress", this.options.onProgress);
 		this.addEventListener("onAfterAdd", this.onAfterAdd);
 	}
 
@@ -71,14 +73,20 @@ export default class Base extends EventDispatcher {
 
 			if (this.isTimeline) {
 				if (!object.isTween && !object.isTrack) {
-					console.error(`${libName}.Base.add: Object is not an instance of ${libName}.Tween or ${libName}.Track.`, object);
+					console.error(
+						`${libName}.Base.add: Object is not an instance of ${libName}.Tween or ${libName}.Track.`,
+						object
+					);
 					return this;
 				}
 			}
 
 			if (this.isTrack) {
 				if (!object.isTween) {
-					console.error(`${libName}.Base.add: Object is not an instance of ${libName}.Tween.`, object);
+					console.error(
+						`${libName}.Base.add: Object is not an instance of ${libName}.Tween.`,
+						object
+					);
 					return this;
 				}
 			}
@@ -90,7 +98,10 @@ export default class Base extends EventDispatcher {
 
 			this.onChildChange();
 		} else {
-			console.error(`${libName}.Base.add: Object is not an instance of ${libName}.Base.`, object);
+			console.error(
+				`${libName}.Base.add: Object is not an instance of ${libName}.Base.`,
+				object
+			);
 		}
 		return this;
 	}

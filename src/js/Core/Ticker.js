@@ -1,4 +1,4 @@
-import * as Motion from "./../index";
+import * as Nervo from "./../index";
 import Clock from "./Clock";
 import Base from "./Base";
 import * as Eases from "eases";
@@ -6,14 +6,14 @@ import * as Eases from "eases";
 export default class Ticker extends Base {
 	constructor(options) {
 		super(options);
-		this.autoStart = options.autoStart !== undefined ? options.autoStart : Motion.AutoStart;
+		this.autoStart = options.autoStart !== undefined ? options.autoStart : Nervo.AutoStart;
 		this.clock = new Clock();
 		this.currentTime = 0;
-		this.duration = options.duration !== undefined ? options.duration : Motion.Duration;
-		this.easing = options.easing !== undefined ? Eases[options.easing] : Eases[Motion.Easing];
+		this.duration = options.duration !== undefined ? options.duration : Nervo.Duration;
+		this.easing = options.easing !== undefined ? Eases[options.easing] : Eases[Nervo.Easing];
 		this.isActive = false;
-		this.loop = options.loop !== undefined ? options.loop : Motion.Loop;
-		this.timeScale = options.timeScale !== undefined ? options.timeScale : Motion.TimeScale;
+		this.loop = options.loop !== undefined ? options.loop : Nervo.Loop;
+		this.timeScale = options.timeScale !== undefined ? options.timeScale : Nervo.TimeScale;
 
 		// event binding
 		this.tick = this.tick.bind(this);
@@ -90,7 +90,9 @@ export default class Ticker extends Base {
 		if (!this.isActive) return;
 
 		// update time
-		this.currentTime += this.clock.getDelta();
+		this.deltaTime = this.clock.getDelta();
+		this.lastTime = this.currentTime;
+		this.currentTime += this.deltaTime;
 
 		// update call
 		this.update(this.currentTime);
