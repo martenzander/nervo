@@ -20,7 +20,6 @@ class App extends Component {
 	constructor(props) {
 		super(props);
 		this.data = data;
-		console.log(this.data);
 		this.sections = this.data.sections.map((s, i) => {
 			return (
 				<Section

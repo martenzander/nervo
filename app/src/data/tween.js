@@ -1,3 +1,5 @@
+const Tween = require("./../js/Tween");
+
 const tween = {
 	name: "Tween",
 	contents: [
@@ -11,6 +13,10 @@ const tween = {
 			value: {
 				source: "tween.js",
 			},
+		},
+		{
+			component: "canvas",
+			value: Tween,
 		},
 		// {
 		// 	component: "codePen",

@@ -1,13 +1,11 @@
 import * as Nervo from "../../../src/js/index";
+import Canvas from "./Core/Canvas";
 
-class Spring {
+class Spring extends Canvas {
 	constructor(canvas) {
-		this.canvas = canvas;
-		this.context = canvas.getContext("2d");
-		this.radius = 0.0625;
-		this.isDragging = false;
+		super(canvas);
 
-		this.setCanvasSize();
+		this.isDragging = false;
 
 		this.spring = new Nervo.Spring(
 			{ x: this.canvas.width / 2, y: this.canvas.height / 2 },
@@ -15,6 +13,12 @@ class Spring {
 			{
 				stiffness: 0.1,
 				damping: 0.2,
+				onProgress: e => {
+					this.draw();
+				},
+				onComplete: e => {
+					console.log("onComplete");
+				},
 			}
 		);
 
@@ -23,39 +27,11 @@ class Spring {
 	}
 
 	initEvents = e => {
-		window.addEventListener("resize", this.onResize);
-		this.spring.addEventListener("onProgress", this.onSpringProgress);
-		this.spring.addEventListener("onComplete", e => {
-			console.log("onComplete");
-		});
+		window.addEventListener("resize", this.setSpringTargetToCenter);
 		this.canvas.addEventListener("mouseleave", this.onMouseLeaveOrUp);
 		this.canvas.addEventListener("mouseup", this.onMouseLeaveOrUp);
 		this.canvas.addEventListener("mousedown", this.onMouseDown);
 		this.canvas.addEventListener("mousemove", this.onMouseMove);
-	};
-
-	setCanvasSize = e => {
-		const style = window.getComputedStyle(this.canvas);
-		const width = style.width;
-		const height = style.height;
-		this.canvas.setAttribute("width", width.replace("px", ""));
-		this.canvas.setAttribute("height", height.replace("px", ""));
-	};
-
-	onScroll = e => {
-		this.setCanvasSize();
-		this.setSpringTargetToCenter();
-		this.draw();
-	};
-
-	onResize = e => {
-		this.setCanvasSize();
-		this.setSpringTargetToCenter();
-		this.draw();
-	};
-
-	onSpringProgress = e => {
-		this.draw();
 	};
 
 	onMouseDown = e => {
@@ -94,7 +70,7 @@ class Spring {
 		this.context.arc(
 			this.spring.current.x,
 			this.spring.current.y,
-			this.radius * this.canvas.width,
+			this.radius,
 			0,
 			2 * Math.PI,
 			false

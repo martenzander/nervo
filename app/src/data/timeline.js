@@ -1,3 +1,5 @@
+const Timeline = require("./../js/Timeline");
+
 const tween = {
 	name: "Timeline",
 	contents: [
@@ -11,6 +13,10 @@ const tween = {
 			value: {
 				source: "tween.js",
 			},
+		},
+		{
+			component: "canvas",
+			value: Timeline,
 		},
 		// {
 		// 	component: "codePen",
