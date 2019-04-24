@@ -26,7 +26,7 @@ module.exports = {
 		},
 	},
 	resolve,
-	devtool: "inline-source-map",
+	devtool: false,
 	module: {
 		rules: [
 			{

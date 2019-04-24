@@ -13,7 +13,7 @@ module.exports = {
 		path: path.resolve(__dirname, "../", "app", "dist"),
 		filename: "js/[name].bundle.js",
 	},
-	devtool: false,
+	devtool: devMode ? "inline-source-map" : false,
 	resolve,
 	module: {
 		rules: [
