@@ -8,13 +8,14 @@
 		"url": "git+https://github.com/SlimMarten/nervo.git"
 	},
 	"scripts": {
+		"favicon": "node config/favicon/favicon.js",
 		"build:prod": "NODE_ENV=production webpack --config config/webpack.config.lib.js --mode production",
 		"build:dev": "NODE_ENV=development webpack --config config/webpack.config.lib.js --mode development",
 		"build:app": "NODE_ENV=production webpack --config config/webpack.config.app.js --mode production",
 		"build:lib": "npm-run-all build:prod build:dev",
-		"build": "npm-run-all build:lib build:app",
+		"build": "npm-run-all build:lib favicon build:app",
 		"app": "NODE_ENV=development webpack-dev-server --config config/webpack.config.app.js --mode development --open",
-		"start": "npm-run-all app"
+		"start": "npm-run-all favicon app"
 	},
 	"keywords": [
 		"javascript",
@@ -48,7 +49,9 @@
 		"eslint": "^5.15.3",
 		"eslint-loader": "^2.1.2",
 		"eslint-plugin-babel": "^5.3.0",
+		"favicons": "^5.3.0",
 		"html-webpack-plugin": "^3.2.0",
+		"jsdom": "^15.0.0",
 		"mini-css-extract-plugin": "^0.5.0",
 		"moveto": "^1.8.0",
 		"npm-download-counts": "^0.1.2",
