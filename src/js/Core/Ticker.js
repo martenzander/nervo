@@ -28,7 +28,9 @@ export default class Ticker extends Base {
 			child.reset();
 		});
 
-		// update with currentTime = 0
+		/* set this.isActive so this.update(t) will have effect */
+		this.isActive = true;
+
 		this.update(this.currentTime);
 	}
 
