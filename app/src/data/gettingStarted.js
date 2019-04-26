@@ -23,7 +23,7 @@ const gettingStarted = {
 		},
 		{
 			component: "headline",
-			value: `Import`,
+			value: `Import in a ES6 module manner`,
 			type: "h3",
 		},
 		{

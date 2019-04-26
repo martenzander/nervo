@@ -3,7 +3,7 @@ import uuid from "uuid/v4";
 export const key = `id-${uuid()}`;
 
 const tween = {
-	name: "Nervo.Timeline()",
+	name: "Timeline",
 	key,
 	contents: [
 		{

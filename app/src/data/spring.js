@@ -3,7 +3,7 @@ import uuid from "uuid/v4";
 export const key = `id-${uuid()}`;
 
 const installation = {
-	name: "Nervo.Spring()",
+	name: "Spring",
 	key,
 	contents: [
 		{
