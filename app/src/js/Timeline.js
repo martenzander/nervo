@@ -10,11 +10,14 @@ class Timeline extends Canvas {
 		this.tweens = [];
 
 		for (let i = 0; i < 6; i++) {
+			let timeScale = i === 1 ? 4 : 1;
+
 			const tween = new Nervo.Tween(
 				{ progress: 0 },
 				{ progress: 1 },
 				{
-					easing: "circInOut",
+					// timeScale: timeScale,
+					easing: "cubicInOut",
 					duration: 3,
 				}
 			);
@@ -24,7 +27,8 @@ class Timeline extends Canvas {
 
 		this.timeline = new Nervo.Timeline([this.tweens[0], this.tweens[1]], {
 			loop: true,
-			timeScale: 2,
+			// timeScale: 1,
+			// easing: "circInOut",
 			onComplete: e => {
 				console.log("onComplete");
 			},
