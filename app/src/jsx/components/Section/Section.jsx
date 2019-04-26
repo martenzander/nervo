@@ -5,7 +5,6 @@ import AttentionBox from "./../AttentionBox/AttentionBox";
 import Headline from "./../Headline/Headline";
 import Divider from "./../Divider/Divider";
 const Copy = React.lazy(() => import("./../Copy/Copy"));
-const Divider = React.lazy(() => import("./../Divider/Divider"));
 const CodePen = React.lazy(() => import("./../CodePen/CodePen"));
 import Canvas from "./../Canvas/Canvas";
 
@@ -37,6 +36,9 @@ class Section extends Component {
 						break;
 					case "attentionBox":
 						return <AttentionBox key={i}>{c.value}</AttentionBox>;
+						break;
+					case "headline":
+						return <Headline key={i} value={c.value} type={c.type} />;
 						break;
 					default:
 						return <div key={i}>{"no valid component"}</div>;

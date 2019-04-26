@@ -18,7 +18,10 @@ class Copy extends Component {
 				return <h2 className={`${styles.h2}`}>{ReactHtmlParser(this.props.value)}</h2>;
 				break;
 			case "h3":
-				return <h3 className={`${styles.h1}`}>{ReactHtmlParser(this.props.value)}</h3>;
+				return <h3 className={`${styles.h3}`}>{ReactHtmlParser(this.props.value)}</h3>;
+				break;
+			case "h4":
+				return <h3 className={`${styles.h4}`}>{ReactHtmlParser(this.props.value)}</h3>;
 				break;
 			default:
 				return <p className={`${styles.h1}`}>no headline type defined</p>;
