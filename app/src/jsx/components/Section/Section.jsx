@@ -3,6 +3,7 @@ import React, { Component, Suspense } from "react";
 import Code from "./../Code/Code";
 import AttentionBox from "./../AttentionBox/AttentionBox";
 import Headline from "./../Headline/Headline";
+import Divider from "./../Divider/Divider";
 const Copy = React.lazy(() => import("./../Copy/Copy"));
 const Divider = React.lazy(() => import("./../Divider/Divider"));
 const CodePen = React.lazy(() => import("./../CodePen/CodePen"));
@@ -53,7 +54,7 @@ class Section extends Component {
 			>
 				<Headline value={this.props.value.name} type={"h2"} />
 				{this.components}
-				{/* {this.props.id + 1 === this.props.sectionLength ? null : <Divider />} */}
+				{this.props.id + 1 === this.props.sectionLength ? null : <Divider />}
 			</section>
 		);
 	}
