@@ -14,7 +14,7 @@ const tween = {
 		{
 			component: "code",
 			value: {
-				source: "tween.js",
+				source: "tweenConstructor.js",
 			},
 		},
 		{
