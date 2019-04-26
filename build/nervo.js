@@ -73,7 +73,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "403720044a0a9c095f5c";
+/******/ 	var hotCurrentHash = "f562215b39d5b8a94d07";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -4301,7 +4301,7 @@ module.exports = sineOut
 /*! exports provided: name, version, description, main, repository, scripts, keywords, author, license, devDependencies, dependencies, default */
 /***/ (function(module) {
 
-module.exports = {"name":"nervo","version":"0.0.7","description":"[WIP] Javascript Animation Library","main":"build/nervo.min.js","repository":{"type":"git","url":"git+https://github.com/SlimMarten/nervo.git"},"scripts":{"favicon":"node config/favicon/favicon.js","build:prod":"NODE_ENV=production webpack --config config/webpack.config.lib.js --mode production","build:dev":"NODE_ENV=development webpack --config config/webpack.config.lib.js --mode development","build:app":"NODE_ENV=production webpack --config config/webpack.config.app.js --mode production","build:lib":"npm-run-all build:prod build:dev","build":"npm-run-all build:lib favicon build:app","app":"NODE_ENV=development webpack-dev-server --config config/webpack.config.app.js --mode development --open","start":"npm-run-all favicon app"},"keywords":["javascript","animation","framework","tween","timeline","svg","css","motion","js","library","toolkit"],"author":"Marten Zander","license":"MIT","devDependencies":{"@babel/core":"^7.3.4","@babel/plugin-proposal-class-properties":"^7.3.4","@babel/preset-env":"^7.3.4","@babel/preset-react":"^7.0.0","autoprefixer":"^9.5.0","babel-eslint":"^10.0.1","babel-loader":"^8.0.5","babel-plugin-prismjs":"^1.0.2","babel-plugin-syntax-dynamic-import":"^6.18.0","babel-preset-react":"^6.24.1","core-js":"^3.0.0","css-loader":"^2.1.1","cssnano":"^4.1.10","eslint":"^5.15.3","eslint-loader":"^2.1.2","eslint-plugin-babel":"^5.3.0","favicons":"^5.3.0","handlebars":"^4.1.2","handlebars-loader":"^1.7.1","html-webpack-plugin":"^3.2.0","jsdom":"^15.0.0","mini-css-extract-plugin":"^0.5.0","moveto":"^1.8.0","npm-download-counts":"^0.1.2","npm-run-all":"^4.1.5","postcss-advanced-variables":"^3.0.0","postcss-assets":"^5.0.0","postcss-at-rules-variables":"^0.1.7","postcss-calc":"^7.0.1","postcss-conditionals":"^2.1.0","postcss-each":"^0.10.0","postcss-easings":"^2.0.0","postcss-flexbugs-fixes":"^4.1.0","postcss-for":"^2.1.1","postcss-hexrgba":"^1.0.1","postcss-import":"^12.0.1","postcss-initial":"^3.0.0","postcss-inline-svg":"^3.1.1","postcss-loader":"^3.0.0","postcss-mesh":"^1.1.7","postcss-modules-values":"^2.0.0","postcss-nested":"^4.1.2","postcss-nested-ancestors":"^2.0.0","postcss-pxtorem":"^4.0.1","postcss-sassy-mixins":"^2.1.0","postcss-scss":"^2.0.0","postcss-selector-not":"^4.0.0","postcss-size":"^3.0.0","postcss-will-change":"^3.0.0","prettier":"^1.16.4","prismjs":"^1.16.0","raw-loader":"^2.0.0","react":"^16.8.6","react-dom":"^16.8.6","react-html-parser":"^2.0.2","style-loader":"^0.23.1","stylelint":"^9.10.1","stylelint-config-recommended":"^2.1.0","stylelint-webpack-plugin":"^0.10.5","webpack":"^4.29.6","webpack-cli":"^3.3.0","webpack-dev-server":"^3.2.1"},"dependencies":{"@babel/polyfill":"^7.2.5","eases":"^1.0.8"}};
+module.exports = {"name":"nervo","version":"0.0.7","description":"[WIP] Javascript Animation Library","main":"build/nervo.min.js","repository":{"type":"git","url":"git+https://github.com/SlimMarten/nervo.git"},"scripts":{"favicon":"node config/favicon/favicon.js","build:prod":"NODE_ENV=production webpack --config config/webpack.config.lib.js --mode production","build:dev":"NODE_ENV=development webpack --config config/webpack.config.lib.js --mode development","build:app":"NODE_ENV=production webpack --config config/webpack.config.app.js --mode production","build:lib":"npm-run-all build:prod build:dev","build":"npm-run-all build:lib favicon build:app","app":"NODE_ENV=development webpack-dev-server --config config/webpack.config.app.js --mode development --open","start":"npm-run-all favicon app"},"keywords":["javascript","animation","framework","tween","timeline","svg","css","motion","js","library","toolkit"],"author":"Marten Zander","license":"MIT","devDependencies":{"@babel/core":"^7.3.4","@babel/plugin-proposal-class-properties":"^7.3.4","@babel/preset-env":"^7.3.4","@babel/preset-react":"^7.0.0","autoprefixer":"^9.5.0","babel-eslint":"^10.0.1","babel-loader":"^8.0.5","babel-plugin-prismjs":"^1.0.2","babel-plugin-syntax-dynamic-import":"^6.18.0","babel-preset-react":"^6.24.1","core-js":"^3.0.0","css-loader":"^2.1.1","cssnano":"^4.1.10","eslint":"^5.15.3","eslint-loader":"^2.1.2","eslint-plugin-babel":"^5.3.0","favicons":"^5.3.0","handlebars":"^4.1.2","handlebars-loader":"^1.7.1","html-webpack-plugin":"^3.2.0","jsdom":"^15.0.0","mini-css-extract-plugin":"^0.5.0","moveto":"^1.8.0","npm-download-counts":"^0.1.2","npm-run-all":"^4.1.5","postcss-advanced-variables":"^3.0.0","postcss-assets":"^5.0.0","postcss-at-rules-variables":"^0.1.7","postcss-calc":"^7.0.1","postcss-conditionals":"^2.1.0","postcss-each":"^0.10.0","postcss-easings":"^2.0.0","postcss-flexbugs-fixes":"^4.1.0","postcss-for":"^2.1.1","postcss-hexrgba":"^1.0.1","postcss-import":"^12.0.1","postcss-initial":"^3.0.0","postcss-inline-svg":"^3.1.1","postcss-loader":"^3.0.0","postcss-mesh":"^1.1.7","postcss-modules-values":"^2.0.0","postcss-nested":"^4.1.2","postcss-nested-ancestors":"^2.0.0","postcss-pxtorem":"^4.0.1","postcss-sassy-mixins":"^2.1.0","postcss-scss":"^2.0.0","postcss-selector-not":"^4.0.0","postcss-size":"^3.0.0","postcss-will-change":"^3.0.0","prettier":"^1.16.4","prismjs":"^1.16.0","raw-loader":"^2.0.0","react":"^16.8.6","react-dom":"^16.8.6","react-html-parser":"^2.0.2","style-loader":"^0.23.1","stylelint":"^9.10.1","stylelint-config-recommended":"^2.1.0","stylelint-webpack-plugin":"^0.10.5","webpack":"^4.29.6","webpack-cli":"^3.3.0","uuid":"^3.3.2","webpack-dev-server":"^3.2.1"},"dependencies":{"@babel/polyfill":"^7.2.5","eases":"^1.0.8"}};
 
 /***/ }),
 
@@ -4833,6 +4833,8 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -4843,12 +4845,31 @@ var Ticker =
 function (_Base) {
   _inherits(Ticker, _Base);
 
+  /*
+  	Nervo.Ticker: This is not intended to be called directly.
+  	It is called internally as a base class to manage timing and easing by other Nervo classes.
+  */
   function Ticker(options) {
     var _this;
 
     _classCallCheck(this, Ticker);
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(Ticker).call(this, options));
+
+    _defineProperty(_assertThisInitialized(_this), "tick", function (e) {
+      if (!_this.isActive) return;
+      /* Update time. */
+
+      _this.deltaTime = _this.clock.getDelta();
+      _this.lastTime = _this.currentTime;
+      _this.currentTime += _this.deltaTime;
+      /* Trigger update to calculate actual progress. */
+
+      _this.update(_this.currentTime);
+
+      requestAnimationFrame(_this.tick);
+    });
+
     _this.autoStart = options.autoStart !== undefined ? options.autoStart : _index__WEBPACK_IMPORTED_MODULE_12__["AutoStart"];
     _this.clock = new _Clock__WEBPACK_IMPORTED_MODULE_13__["default"]();
     _this.currentTime = 0;
@@ -4856,42 +4877,66 @@ function (_Base) {
     _this.easing = options.easing !== undefined ? eases__WEBPACK_IMPORTED_MODULE_15__[options.easing] : eases__WEBPACK_IMPORTED_MODULE_15__[_index__WEBPACK_IMPORTED_MODULE_12__["Easing"]];
     _this.isActive = false;
     _this.loop = options.loop !== undefined ? options.loop : _index__WEBPACK_IMPORTED_MODULE_12__["Loop"];
-    _this.timeScale = options.timeScale !== undefined ? options.timeScale : _index__WEBPACK_IMPORTED_MODULE_12__["TimeScale"]; // event binding
-
-    _this.tick = _this.tick.bind(_assertThisInitialized(_this));
+    _this.timeScale = options.timeScale !== undefined ? options.timeScale : _index__WEBPACK_IMPORTED_MODULE_12__["TimeScale"];
     return _this;
   }
+  /*
+  	this.reset(): Resets this instance and all of its children to t = 0.
+  	It's best practice to not call this method directly.
+  	Use this.start() or this.stop() instead.
+  */
+
 
   _createClass(Ticker, [{
     key: "reset",
     value: function reset() {
-      // reset currentTime
-      this.currentTime = 0; // trigger reset of children
+      this.currentTime = 0;
+      /* Reset all children. */
 
       this.children.forEach(function (child) {
         child.reset();
-      }); // update with currentTime = 0
+      });
+      /* Set this.isActive so this.update(t) will have effect. */
 
+      this.isActive = true;
       this.update(this.currentTime);
     }
+    /*
+    	this.start(): Resets this instance, all of its children and than starts ticking.
+    */
+
   }, {
     key: "start",
     value: function start() {
       this.reset();
       this.play();
     }
+    /*
+    	this.stop(): Resets this instance, all of its children and than stops at t = 0.
+    */
+
   }, {
     key: "stop",
     value: function stop() {
       this.reset();
       this.pause();
     }
+    /*
+    	this.pause(): Sets this.isActive to false and interrupts the tick loop.
+    	Also stops the clock at this.currentTime.
+    */
+
   }, {
     key: "pause",
     value: function pause() {
       this.isActive = false;
       this.clock.stop();
     }
+    /*
+    	this.play(): Sets this.isActive to true and triggers the tick loop after
+    	restarting the clock.
+    */
+
   }, {
     key: "play",
     value: function play() {
@@ -4899,17 +4944,29 @@ function (_Base) {
       this.clock.start();
       this.tick();
     }
+    /*
+    	this.execute(): Actual performance code of extending classes belongs here.
+    */
+
   }, {
     key: "execute",
     value: function execute() {}
+    /*
+    	this.update(): Updates the progress based on the currentTime.
+    	Than applies timeScale and triggers this.execute() with final updateTime.
+    	Lastly trigger events based on progress and loop options.
+    */
+
   }, {
     key: "update",
     value: function update(t) {
       if (!this.isActive) return;
-      var updateTime = 0; // update progress
+      var updateTime = 0;
+      /* Update progress. */
 
       this.progress = t / (this.duration * this.timeScale);
-      this.easedProgress = this.easing(this.progress); // validate progress
+      this.easedProgress = this.easing(this.progress);
+      /* Set actual updateTime. */
 
       if (this.progress >= 1.0) {
         this.progress = 1.0;
@@ -4919,7 +4976,8 @@ function (_Base) {
         updateTime = this.duration * this.timeScale * this.easedProgress;
       }
 
-      this.execute(updateTime); // onProgress
+      this.execute(updateTime);
+      /* Trigger events based on progress and loop options. */
 
       this.onProgress();
 
@@ -4932,18 +4990,11 @@ function (_Base) {
         }
       }
     }
-  }, {
-    key: "tick",
-    value: function tick() {
-      if (!this.isActive) return; // update time
+    /*
+    	this.tick(): The requestAnimationFrame loop to trigger this.update() with currentTime.
+    	Only gets triggered by this.play() and should not be called directly.
+    */
 
-      this.deltaTime = this.clock.getDelta();
-      this.lastTime = this.currentTime;
-      this.currentTime += this.deltaTime; // update call
-
-      this.update(this.currentTime);
-      requestAnimationFrame(this.tick);
-    }
   }]);
 
   return Ticker;
