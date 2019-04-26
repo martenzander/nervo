@@ -1,10 +1,16 @@
-import * as Nervo from "nervo";
-
 const tween = new Nervo.Tween(
-	{ value: 0 },
-	{ value: 100 },
+	{ progress: 0 },
+	{ progress: 1 },
 	{
 		autoStart: true,
-		duration: 2,
+		duration: 3,
+		loop: true,
+		easing: "quintInOut",
+		onProgress: e => {
+			/****************************
+			update circle position with
+			e.target.value.progress
+			****************************/
+		},
 	}
 );
