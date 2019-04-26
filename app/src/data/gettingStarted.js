@@ -1,5 +1,9 @@
+import uuid from "uuid/v4";
+export const key = `id-${uuid()}`;
+
 const gettingStarted = {
 	name: "Getting Started",
+	key,
 	contents: [
 		{
 			component: "headline",

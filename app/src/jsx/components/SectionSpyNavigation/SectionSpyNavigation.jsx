@@ -1,5 +1,4 @@
-import React, { Component, Suspense } from "react";
-const Link = React.lazy(() => import("../Link/Link"));
+import React, { Component } from "react";
 
 class SectionSpyNavigation extends Component {
 	constructor(props) {
@@ -43,29 +42,25 @@ class SectionSpyNavigation extends Component {
 				if (sectionTop <= mainPaddingTop && sectionTop + sectionHeight > mainPaddingTop) {
 					return (
 						<li key={s.props.uuid.replace(/\s/g, "")} className={this.props.li}>
-							<Suspense fallback={<div>Link Component</div>}>
-								<Link
-									onClick={this.props.onItemClick ? this.props.onItemClick : null}
-									href={`#${s.props.uuid.replace(/\s/g, "")}`}
-									className={`${this.props.a} ${this.props.active}`}
-								>
-									{s.props.value.name}
-								</Link>
-							</Suspense>
+							<a
+								onClick={this.props.onItemClick ? this.props.onItemClick : null}
+								href={`#${s.props.uuid.replace(/\s/g, "")}`}
+								className={`${this.props.a} ${this.props.active}`}
+							>
+								{s.props.value.name}
+							</a>
 						</li>
 					);
 				}
 				return (
 					<li key={s.props.uuid.replace(/\s/g, "")} className={this.props.li}>
-						<Suspense fallback={<div>Link Component</div>}>
-							<Link
-								onClick={this.props.onItemClick ? this.props.onItemClick : null}
-								href={`#${s.props.uuid.replace(/\s/g, "")}`}
-								className={`${this.props.a} `}
-							>
-								{s.props.value.name}
-							</Link>
-						</Suspense>
+						<a
+							onClick={this.props.onItemClick ? this.props.onItemClick : null}
+							href={`#${s.props.uuid.replace(/\s/g, "")}`}
+							className={`${this.props.a} `}
+						>
+							{s.props.value.name}
+						</a>
 					</li>
 				);
 			}),

@@ -4,14 +4,13 @@ import Output from "./../Output/Output";
 import GithubRibbon from "./../GithubRibbon/GithubRibbon";
 import Section from "./../Section/Section";
 import Layout from "./../Layout/Layout";
+import InpageAnchors from "./../InpageAnchors/InpageAnchors";
 import Logo from "./../Logo/Logo";
-import Link from "./../Link/Link";
 import Header from "./../Header/Header";
 import Hero from "./../Hero/Hero";
 import Footer from "./../Footer/Footer";
 import * as Nervo from "../../../../../src/js/index";
 const data = require("./../../../data/index.js").default;
-const uuid = require("uuid/v4");
 
 class App extends Component {
 	state = {
@@ -28,7 +27,7 @@ class App extends Component {
 					sectionLength={this.data.sections.length}
 					id={i}
 					value={s}
-					uuid={`id-${uuid()}`}
+					uuid={s.key}
 					contents={s.contents}
 				/>
 			);
@@ -38,31 +37,33 @@ class App extends Component {
 	render() {
 		return (
 			<div className={`${styles.app} app`}>
-				{/* <GithubRibbon /> */}
-				<Header value={this} />
-				<Hero>
-					<div className={"nervo-container"}>
-						<Logo big={true} />
-						<p className={`${styles.color}`}>
-							<span className={`${styles.textTransform}`}>{this.data.name}</span>
+				<InpageAnchors>
+					<GithubRibbon />
+					<Header value={this} />
+					<Hero>
+						<div className={"nervo-container"}>
+							<Logo big={true} />
+							<p className={`${styles.color}`}>
+								<span className={`${styles.textTransform}`}>{this.data.name}</span>
+								<br />
+								{`v${this.data.version}`}
+							</p>
 							<br />
-							{`v${this.data.version}`}
-						</p>
-						<br />
-						<p className={`${styles.description}`}>{this.data.description}</p>
-						<div>
-							<Link href={`#About`}>Documentation</Link>
-							<Link href={this.data.repository.url.replace("git+", "")}>Github</Link>
+							<p className={`${styles.description}`}>{this.data.description}</p>
+							<div>
+								<a href={`#${data.sections[0].key}`}>Documentation</a>
+								<a href={this.data.repository.url.replace("git+", "")}>Github</a>
+							</div>
 						</div>
+					</Hero>
+					<div className={`${styles.margin}`}>
+						<Layout
+							className={`js-main-content ${styles.padding}`}
+							content={this.sections}
+						/>
+						<Footer />
 					</div>
-				</Hero>
-				<div className={`${styles.margin}`}>
-					<Layout
-						className={`js-main-content ${styles.padding}`}
-						content={this.sections}
-					/>
-					<Footer />
-				</div>
+				</InpageAnchors>
 			</div>
 		);
 	}

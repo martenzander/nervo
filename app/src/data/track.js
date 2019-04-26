@@ -1,5 +1,9 @@
+import uuid from "uuid/v4";
+export const key = `id-${uuid()}`;
+
 const tween = {
-	name: "Nervo.Track()",
+	name: "Track",
+	key,
 	contents: [
 		{
 			component: "copy",

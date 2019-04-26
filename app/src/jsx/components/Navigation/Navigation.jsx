@@ -1,6 +1,6 @@
 import styles from "./styles.pcss";
 import React, { Component } from "react";
-import Link from "./../Link/Link";
+import InpageAnchors from "./../InpageAnchors/InpageAnchors";
 import SectionSpyNavigation from "./../SectionSpyNavigation/SectionSpyNavigation";
 
 class Navigation extends Component {
@@ -70,7 +70,7 @@ class Navigation extends Component {
 	};
 
 	onItemClick = e => {
-		Link.onClick(e);
+		InpageAnchors.onClick(e);
 		setTimeout(() => {
 			this.onClick();
 		}, 750);

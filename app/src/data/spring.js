@@ -1,7 +1,10 @@
 const Spring = require("./../js/Spring");
+import uuid from "uuid/v4";
+export const key = `id-${uuid()}`;
 
 const installation = {
 	name: "Nervo.Spring()",
+	key,
 	contents: [
 		{
 			component: "copy",

@@ -1,7 +1,10 @@
 const Timeline = require("./../js/Timeline");
+import uuid from "uuid/v4";
+export const key = `id-${uuid()}`;
 
 const tween = {
 	name: "Nervo.Timeline()",
+	key,
 	contents: [
 		{
 			component: "copy",

@@ -1,7 +1,24 @@
 import React, { Component } from "react";
 import MoveTo from "moveto";
 
-class Link extends Component {
+class InpageAnchors extends Component {
+	refCallback = e => {
+		this.node = e;
+	};
+
+	componentDidMount = e => {
+		setTimeout(e => {
+			this.anchors = Array.from(this.node.querySelectorAll("a"));
+			this.anchors.map(a => {
+				const href = a.getAttribute("href");
+				if (href !== null && href.charAt(0) === "#") {
+					a.addEventListener("click", InpageAnchors.onClick);
+				}
+				return a;
+			});
+		}, 100);
+	};
+
 	static onClick = e => {
 		const key = e.currentTarget.getAttribute("href");
 		if (key.charAt(0) !== "#") return;
@@ -36,16 +53,8 @@ class Link extends Component {
 	};
 
 	render() {
-		return (
-			<a
-				className={this.props.className}
-				onClick={this.props.onClick ? this.props.onClick : Link.onClick}
-				href={this.props.href}
-			>
-				{this.props.children}
-			</a>
-		);
+		return <div ref={this.refCallback}>{this.props.children}</div>;
 	}
 }
 
-export default Link;
+export default InpageAnchors;
