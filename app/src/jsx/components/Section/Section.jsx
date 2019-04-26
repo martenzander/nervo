@@ -1,11 +1,11 @@
 import styles from "./styles.pcss";
-import React, { Component, Suspense } from "react";
+import React, { Component } from "react";
 import Code from "./../Code/Code";
 import AttentionBox from "./../AttentionBox/AttentionBox";
 import Headline from "./../Headline/Headline";
 import Divider from "./../Divider/Divider";
-const Copy = React.lazy(() => import("./../Copy/Copy"));
-const CodePen = React.lazy(() => import("./../CodePen/CodePen"));
+import Copy from "./../Copy/Copy";
+import CodePen from "./../CodePen/CodePen";
 import Canvas from "./../Canvas/Canvas";
 
 class Section extends Component {
@@ -18,18 +18,10 @@ class Section extends Component {
 						return <Code key={i} value={c.value} />;
 						break;
 					case "copy":
-						return (
-							<Suspense key={i} fallback={<div>Loading Copy Component</div>}>
-								<Copy key={i} value={c.value} />
-							</Suspense>
-						);
+						return <Copy key={i} value={c.value} />;
 						break;
 					case "codePen":
-						return (
-							<Suspense key={i} fallback={<div>Loading Copy Component</div>}>
-								<CodePen key={i} value={c.value} />
-							</Suspense>
-						);
+						return <CodePen key={i} value={c.value} />;
 						break;
 					case "canvas":
 						return <Canvas key={i} value={c.value} />;

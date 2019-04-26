@@ -1,5 +1,4 @@
-import React, { Component, Suspense } from "react";
-
+import React, { Component } from "react";
 import Sidebar from "./../Sidebar/Sidebar";
 import SidebarNavigation from "../SidebarNavigation/SidebarNavigation";
 

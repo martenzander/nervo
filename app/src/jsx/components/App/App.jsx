@@ -1,5 +1,5 @@
 import styles from "./styles.pcss";
-import React, { Component, Suspense } from "react";
+import React, { Component } from "react";
 import Output from "./../Output/Output";
 import GithubRibbon from "./../GithubRibbon/GithubRibbon";
 import Section from "./../Section/Section";

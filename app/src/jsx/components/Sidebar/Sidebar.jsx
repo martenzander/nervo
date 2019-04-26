@@ -1,5 +1,5 @@
 import styles from "./styles.pcss";
-import React, { Component, Suspense } from "react";
+import React, { Component } from "react";
 
 class Sidebar extends Component {
 	constructor(props) {
