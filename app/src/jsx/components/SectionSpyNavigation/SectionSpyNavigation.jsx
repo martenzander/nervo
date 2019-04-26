@@ -36,34 +36,34 @@ class SectionSpyNavigation extends Component {
 		);
 		this.setState({
 			items: this.sections.map((s, i) => {
-				const sectionNode = document.querySelector(`#${s.key}`);
+				const sectionNode = document.querySelector(`#${s.props.uuid.replace(/\s/g, "")}`);
 				const sectionTop = sectionNode.getBoundingClientRect().top;
 				const sectionHeight = sectionNode.getBoundingClientRect().height;
 
 				if (sectionTop <= mainPaddingTop && sectionTop + sectionHeight > mainPaddingTop) {
 					return (
-						<li key={s.key} className={this.props.li}>
+						<li key={s.props.uuid.replace(/\s/g, "")} className={this.props.li}>
 							<Suspense fallback={<div>Link Component</div>}>
 								<Link
 									onClick={this.props.onItemClick ? this.props.onItemClick : null}
-									href={`#${s.key}`}
+									href={`#${s.props.uuid.replace(/\s/g, "")}`}
 									className={`${this.props.a} ${this.props.active}`}
 								>
-									{s.key}
+									{s.props.value.name}
 								</Link>
 							</Suspense>
 						</li>
 					);
 				}
 				return (
-					<li key={s.key} className={this.props.li}>
+					<li key={s.props.uuid.replace(/\s/g, "")} className={this.props.li}>
 						<Suspense fallback={<div>Link Component</div>}>
 							<Link
 								onClick={this.props.onItemClick ? this.props.onItemClick : null}
-								href={`#${s.key}`}
+								href={`#${s.props.uuid.replace(/\s/g, "")}`}
 								className={`${this.props.a} `}
 							>
-								{s.key}
+								{s.props.value.name}
 							</Link>
 						</Suspense>
 					</li>

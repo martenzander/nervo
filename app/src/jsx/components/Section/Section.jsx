@@ -47,7 +47,10 @@ class Section extends Component {
 
 	render() {
 		return (
-			<section className={`${styles.section} js-section`} id={this.props.value.name}>
+			<section
+				className={`${styles.section} js-section`}
+				id={this.props.uuid.replace(/\s/g, "")}
+			>
 				<Headline value={this.props.value.name} type={"h2"} />
 				{this.components}
 				{/* {this.props.id + 1 === this.props.sectionLength ? null : <Divider />} */}

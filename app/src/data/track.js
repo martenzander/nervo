@@ -1,5 +1,5 @@
 const tween = {
-	name: "Track",
+	name: "Nervo.Track()",
 	contents: [
 		{
 			component: "copy",

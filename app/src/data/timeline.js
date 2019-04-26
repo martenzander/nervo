@@ -1,7 +1,7 @@
 const Timeline = require("./../js/Timeline");
 
 const tween = {
-	name: "Timeline",
+	name: "Nervo.Timeline()",
 	contents: [
 		{
 			component: "copy",

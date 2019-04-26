@@ -1,7 +1,7 @@
 const Spring = require("./../js/Spring");
 
 const installation = {
-	name: "Spring",
+	name: "Nervo.Spring()",
 	contents: [
 		{
 			component: "copy",

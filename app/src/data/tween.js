@@ -1,7 +1,7 @@
 const Tween = require("./../js/Tween");
 
 const tween = {
-	name: "Tween",
+	name: "Nervo.Tween()",
 	contents: [
 		{
 			component: "copy",

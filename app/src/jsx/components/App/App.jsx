@@ -11,6 +11,7 @@ import Hero from "./../Hero/Hero";
 import Footer from "./../Footer/Footer";
 import * as Nervo from "../../../../../src/js/index";
 const data = require("./../../../data/index.js").default;
+const uuid = require("uuid/v4");
 
 class App extends Component {
 	state = {
@@ -23,10 +24,11 @@ class App extends Component {
 		this.sections = this.data.sections.map((s, i) => {
 			return (
 				<Section
+					key={i}
 					sectionLength={this.data.sections.length}
 					id={i}
 					value={s}
-					key={s.name}
+					uuid={`id-${uuid()}`}
 					contents={s.contents}
 				/>
 			);
