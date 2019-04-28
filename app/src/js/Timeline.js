@@ -40,6 +40,16 @@ class Timeline extends Canvas {
 		this.timeline.add([this.tweens[2], this.tweens[3]], { start: 1 });
 		this.timeline.add([this.tweens[4], this.tweens[5]], { start: 2 });
 		this.timeline.start();
+
+		// GUI Properties
+		const controls = this.gui.addFolder("controls");
+		controls.add(this.timeline, "start");
+		controls.add(this.timeline, "stop");
+		controls.add(this.timeline, "play");
+		controls.add(this.timeline, "pause");
+		const options = this.gui.addFolder("options");
+		options.add(this.timeline, "loop");
+		options.add(this.timeline, "timeScale");
 	}
 
 	draw = e => {
@@ -48,7 +58,7 @@ class Timeline extends Canvas {
 			this.context.beginPath();
 			this.context.arc(
 				this.padding +
-					(this.canvas.width - 2 * this.padding) * this.tweens[i].value.progress,
+					(this.canvas.width - 2 * this.padding) * this.tweens[i].current.progress,
 				this.padding + this.radius * 2.75 * i,
 				this.radius,
 				0,

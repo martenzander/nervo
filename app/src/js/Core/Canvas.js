@@ -1,6 +1,12 @@
+import * as dat from "dat.gui";
+
 class Canvas {
 	constructor(canvas) {
 		this.canvas = canvas;
+		this.gui = new dat.GUI({ autoPlace: false });
+		// this.gui.close();
+		this.gui.domElement.classList.add("gui");
+		this.canvas.parentElement.parentElement.appendChild(this.gui.domElement);
 		this.context = canvas.getContext("2d");
 		this.radiusFactor = 0.0625;
 		this.setSizes();

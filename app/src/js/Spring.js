@@ -9,18 +9,22 @@ class Spring extends Canvas {
 
 		this.spring = new Nervo.Spring(
 			{ x: this.canvas.width / 2, y: this.canvas.height / 2 },
-			{ x: this.canvas.width / 2, y: this.canvas.height / 2 },
+			{},
 			{
+				autoStart: false,
 				stiffness: 0.1,
 				damping: 0.2,
 				onProgress: e => {
 					this.draw();
 				},
 				onComplete: e => {
-					console.log("onComplete");
+					// console.log("onComplete");
 				},
 			}
 		);
+
+		this.gui.add(this.spring, "stiffness");
+		this.gui.add(this.spring, "damping");
 
 		this.initEvents();
 		this.draw();
@@ -75,7 +79,7 @@ class Spring extends Canvas {
 			2 * Math.PI,
 			false
 		);
-		this.context.fillStyle = "#DD436B";
+		this.context.fillStyle = "#FFEB4F";
 		this.context.fill();
 	};
 }
