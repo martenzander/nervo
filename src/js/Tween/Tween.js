@@ -6,8 +6,7 @@ export default class Tween extends Ticker {
 		super(options);
 		this.target = target;
 		this.origin = origin;
-		this.value = { ...{}, ...this.origin };
-
+		this.current = { ...{}, ...this.origin };
 		if (this.autoStart) this.start();
 	}
 
@@ -21,7 +20,7 @@ export default class Tween extends Ticker {
 	_execute = e => {
 		// update values
 		for (const key in this.origin) {
-			this.value[key] =
+			this.current[key] =
 				this.origin[key] + (this.target[key] - this.origin[key]) * this.easedProgress;
 		}
 	};
