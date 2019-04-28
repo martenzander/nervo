@@ -94,8 +94,9 @@ module.exports = {
 			},
 		}),
 		new HtmlWebpackPlugin({
-			title: `${packageConfig.name.charAt(0).toUpperCase() +
-				packageConfig.name.slice(1)} – JavaScript Animation Framework`,
+			title: `${packageConfig.name.charAt(0).toUpperCase() + packageConfig.name.slice(1)} – ${
+				packageConfig.description
+			}`,
 			keys: packageConfig.keywords,
 			description: packageConfig.description,
 			template: "app/src/hbs/index.hbs",
