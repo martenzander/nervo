@@ -39,6 +39,7 @@ module.exports = ctx => ({
 				"corporate-color-3": "#202449",
 				"corporate-color-4": "#196A99",
 				"corporate-color-5": "#DD436B",
+				"copy-color": "#4E516F",
 				fontSize: "18px",
 				textShadow: "none",
 				fontFamily: "Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace",
