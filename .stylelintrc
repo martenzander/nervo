@@ -8,5 +8,6 @@
     "selector-pseudo-class-no-unknown": null,
     "selector-pseudo-element-no-unknown":null,
     "selector-type-no-unknown": null,
+    "font-family-no-missing-generic-family-keyword": null,
   },
 }
