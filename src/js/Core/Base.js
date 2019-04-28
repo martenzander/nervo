@@ -2,52 +2,58 @@ const packageConfig = require("./../../../package.json");
 const libName = packageConfig.name.charAt(0).toUpperCase() + packageConfig.name.slice(1);
 import EventDispatcher from "./EventDispatcher";
 import { readonly } from "./Decorators";
+const uuid = require("uuid/v4");
 
 export default class Base extends EventDispatcher {
 	static Instances = [];
-	static ID = 0;
 
 	@readonly
 	isNervo = true;
 
 	@readonly
 	uuid = uuid();
+
 	constructor(options) {
 		super();
 		this.children = [];
 		this.options = options;
 		this.parent = null;
-		this.setId(this);
 
-		// event binding
-		this.onAfterAdd = this.onAfterAdd.bind(this);
-		this.onProgress = this.onProgress.bind(this);
-		this.onComplete = this.onComplete.bind(this);
-		if ("onComplete" in this.options)
-			this.addEventListener("onComplete", this.options.onComplete);
-		if ("onProgress" in this.options)
-			this.addEventListener("onProgress", this.options.onProgress);
-		this.addEventListener("onAfterAdd", this.onAfterAdd);
+		Base.Instances.push(this);
+
+		if ("onComplete" in this.options) {
+			this.onComplete = this.options.onComplete;
+			this.addEventListener("onComplete", this.onComplete);
+		}
+		if ("onProgress" in this.options) {
+			this.onProgress = this.options.onProgress;
+			this.addEventListener("onProgress", this.onProgress);
+		}
 	}
 
 	@readonly
+	_onComplete = e => {
 		this.dispatchEvent({ type: "onComplete" });
-	}
+	};
 
 	@readonly
+	_onProgress = e => {
 		this.dispatchEvent({ type: "onProgress" });
-	}
+	};
 
 	@readonly
-
-	clone() {
+	clone = e => {
 		const clone = Object.assign(Object.create(Object.getPrototypeOf(this)), this);
-		this.setId(clone);
-
+		Object.defineProperty(clone, "uuid", {
+			value: uuid(),
+			writable: false,
+		});
+		Base.Instances.push(clone);
 		return clone;
-	}
+	};
 
 	@readonly
+	add = (object, options = {}) => {
 		if (object.length >= 1) {
 			if (this.isTimeline) {
 				const tweens = [];
@@ -55,7 +61,7 @@ export default class Base extends EventDispatcher {
 					if (object[i].isTween) tweens.push(object[i]);
 					if (object[i].isTrack) this.add(object[i], {});
 				}
-				const track = this.getTrackFromTweens(tweens, options);
+				const track = this._getTrackFromTweens(tweens, options);
 				this.add(track, options);
 				return this;
 			}
@@ -109,7 +115,7 @@ export default class Base extends EventDispatcher {
 
 			object.dispatchEvent({ type: "added" });
 
-			this.onChildChange();
+			this._onChildChange();
 		} else {
 			console.error(
 				`${libName}.Base.add: Object is not an instance of ${libName}.Base.`,
@@ -117,12 +123,13 @@ export default class Base extends EventDispatcher {
 			);
 		}
 		return this;
-	}
+	};
 
 	@readonly
-		if (arguments.length > 1) {
-			for (let i = 0; i < arguments.length; i++) {
-				this.remove(arguments[i]);
+	remove = object => {
+		if (object.length > 1) {
+			for (let i = 0; i < object.length; i++) {
+				this.remove(object[i]);
 			}
 
 			return this;
@@ -135,31 +142,27 @@ export default class Base extends EventDispatcher {
 			object.dispatchEvent({ type: "removed" });
 
 			this.children.splice(index, 1);
-			this.onChildChange();
+			this._onChildChange();
 		}
 
 		return this;
-	}
+	};
 
 	@readonly
+	_onChildChange = e => {
 		if (this.isTimeline) {
-			this.updateDuration();
+			this._updateDuration();
 		}
 
 		if (this.isTrack) {
-			this.updateTimeRange();
+			this._updateTimeRange();
 		}
-	}
+	};
 
 	@readonly
+	_updateChildren = time => {
 		this.children.forEach(child => {
-			child.update(time);
+			child._update(time);
 		});
-	}
-
-	setId(object) {
-		object.id = Base.ID;
-		Base.ID++;
-		Base.Instances.push(object);
-	}
+	};
 }

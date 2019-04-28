@@ -9,8 +9,7 @@ export default class Track extends Base {
 		this.isFinished = false;
 		this.hasStarted = false;
 		this.start = options.start !== undefined ? options.start : 0;
-
-		this.add(objects, options);
+		if (objects.length >= 1) this.add(objects, options);
 	}
 
 	@readonly
@@ -18,6 +17,8 @@ export default class Track extends Base {
 
 	@readonly
 	type = "Track";
+
+	_updateTimeRange = start => {
 		this.start = start !== undefined ? start : this.start;
 		this.end = 0;
 
@@ -34,35 +35,35 @@ export default class Track extends Base {
 		});
 
 		return this;
-	}
+	};
 
-	reset() {
-		this.finished = false;
-		this.initialized = false;
+	_reset = e => {
+		this.isFinished = false;
+		this.hasStarted = false;
 		this.children.forEach(child => {
-			child.reset();
+			child._reset();
 		});
-	}
+	};
 
-	update(t) {
+	_update = t => {
 		t /= this.parent.timeScale;
 
 		if (t >= this.end) {
-			if (this.finished) return;
-			this.updateChildren(this.end - this.start);
-			this.onComplete();
-			this.finished = true;
+			if (this.isFinished) return;
+			this._updateChildren(this.end - this.start);
+			this._onComplete();
+			this.isFinished = true;
 		} else if (t >= this.start) {
-			if (!this.initialized) {
+			if (!this.hasStarted) {
 				this.children.forEach(child => {
 					child.isActive = true;
 				});
-				this.updateChildren(0);
-				this.initialized = true;
+				this._updateChildren(0);
+				this.hasStarted = true;
 			} else {
-				this.updateChildren(t - this.start);
-				this.onProgress();
+				this._updateChildren(t - this.start);
+				this._onProgress();
 			}
 		}
-	}
+	};
 }

@@ -1,14 +1,14 @@
 import Base from "./Base";
 
-const getInstanceById = id => {
+const getInstanceByUuid = uuid => {
 	let instance;
 
 	Base.Instances.forEach(baseObject => {
-		if (baseObject.id === id) instance = baseObject;
+		if (baseObject.uuid === uuid) instance = baseObject;
 	});
 
 	return instance;
 };
 
 // Utils
-export { getInstanceById };
+export { getInstanceByUuid };

@@ -5,9 +5,11 @@ import Ticker from "./../Core/Ticker";
 export default class Timeline extends Ticker {
 	constructor(objects = [], options = {}) {
 		super(options);
-		this.updateDuration();
+		delete this.parent;
 
-		this.add(this.getTrackFromTweens(objects, options), options);
+		this._updateDuration();
+
+		this.add(this._getTrackFromTweens(objects, options), options);
 		if (this.autoStart) this.start();
 	}
 
@@ -18,15 +20,20 @@ export default class Timeline extends Ticker {
 	type = "Timeline";
 
 	@readonly
+	_execute = time => {
+		this._updateChildren(time);
+	};
 
 	@readonly
+	_getTrackFromTweens = (tweens, options) => {
 		const track = new Track(tweens, {
 			start: options.start !== undefined ? options.start : this.duration,
 		});
 		return track;
-	}
+	};
 
 	@readonly
+	_updateDuration = e => {
 		let duration = 0;
 
 		this.children.forEach(child => {
@@ -34,5 +41,5 @@ export default class Timeline extends Ticker {
 		});
 
 		this.duration = duration;
-	}
+	};
 }
