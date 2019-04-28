@@ -16,7 +16,7 @@ class Footer extends Component {
 						<Logo />
 					</div>
 					<p className={styles.font}>
-						Developed by Marten Zander © {this.date.getFullYear()}
+						Developed by Marten Zander ©{this.date.getFullYear()}
 					</p>
 				</div>
 			</footer>
