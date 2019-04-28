@@ -1,18 +1,23 @@
 const packageConfig = require("./../../../package.json");
 const libName = packageConfig.name.charAt(0).toUpperCase() + packageConfig.name.slice(1);
+import { readonly } from "./../Core/Decorators";
 import Base from "./../Core/Base";
 
 export default class Track extends Base {
 	constructor(objects = [], options = {}) {
 		super(options);
-		this.isTrack = true;
-		this.type = "Track";
+		this.isFinished = false;
+		this.hasStarted = false;
 		this.start = options.start !== undefined ? options.start : 0;
 
 		this.add(objects, options);
 	}
 
-	updateTimeRange(start) {
+	@readonly
+	isTrack = true;
+
+	@readonly
+	type = "Track";
 		this.start = start !== undefined ? start : this.start;
 		this.end = 0;
 

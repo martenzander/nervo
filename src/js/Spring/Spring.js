@@ -1,3 +1,4 @@
+import { readonly } from "./../Core/Decorators";
 import * as Nervo from "./../index";
 import Ticker from "../Core/Ticker";
 
@@ -7,8 +8,8 @@ export default class Spring extends Ticker {
 
 	constructor(current, target, options = {}) {
 		super(options);
-		this.isSpring = true;
-		this.type = "Spring";
+		delete this.parent;
+		delete this.children;
 		this.target = target;
 		this.current = current;
 		this.stiffness = options.stiffness !== undefined ? options.stiffness : Spring.Stiffness;
@@ -27,17 +28,22 @@ export default class Spring extends Ticker {
 		if (this.autoStart) this.play();
 	}
 
-	lerp(v0, v1, t) {
-		return (1 - t) * v0 + t * v1;
+	@readonly
+	isSpring = true;
 	}
 
-	setTarget(target) {
+	@readonly
+	type = "Spring";
+
+	@readonly
 		this.target = target;
 		if (this.isActive) return;
 		this.play();
 	}
+	@readonly
 
 	update() {
+	@readonly
 		let isComplete = false;
 
 		for (const key in this.current) {
@@ -61,4 +67,5 @@ export default class Spring extends Ticker {
 			this.onComplete();
 		}
 	}
+	@readonly
 }

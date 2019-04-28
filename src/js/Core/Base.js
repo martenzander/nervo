@@ -1,15 +1,20 @@
 const packageConfig = require("./../../../package.json");
 const libName = packageConfig.name.charAt(0).toUpperCase() + packageConfig.name.slice(1);
 import EventDispatcher from "./EventDispatcher";
+import { readonly } from "./Decorators";
 
 export default class Base extends EventDispatcher {
 	static Instances = [];
 	static ID = 0;
 
+	@readonly
+	isNervo = true;
+
+	@readonly
+	uuid = uuid();
 	constructor(options) {
 		super();
 		this.children = [];
-		this.isNervo = true;
 		this.options = options;
 		this.parent = null;
 		this.setId(this);
@@ -25,15 +30,15 @@ export default class Base extends EventDispatcher {
 		this.addEventListener("onAfterAdd", this.onAfterAdd);
 	}
 
-	onComplete() {
+	@readonly
 		this.dispatchEvent({ type: "onComplete" });
 	}
 
-	onProgress() {
+	@readonly
 		this.dispatchEvent({ type: "onProgress" });
 	}
 
-	onAfterAdd(e) {}
+	@readonly
 
 	clone() {
 		const clone = Object.assign(Object.create(Object.getPrototypeOf(this)), this);
@@ -42,7 +47,7 @@ export default class Base extends EventDispatcher {
 		return clone;
 	}
 
-	add(object, options = {}) {
+	@readonly
 		if (object.length >= 1) {
 			if (this.isTimeline) {
 				const tweens = [];
@@ -114,7 +119,7 @@ export default class Base extends EventDispatcher {
 		return this;
 	}
 
-	remove(object) {
+	@readonly
 		if (arguments.length > 1) {
 			for (let i = 0; i < arguments.length; i++) {
 				this.remove(arguments[i]);
@@ -136,7 +141,7 @@ export default class Base extends EventDispatcher {
 		return this;
 	}
 
-	onChildChange() {
+	@readonly
 		if (this.isTimeline) {
 			this.updateDuration();
 		}
@@ -146,7 +151,7 @@ export default class Base extends EventDispatcher {
 		}
 	}
 
-	updateChildren(time) {
+	@readonly
 		this.children.forEach(child => {
 			child.update(time);
 		});

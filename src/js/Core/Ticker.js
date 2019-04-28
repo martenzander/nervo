@@ -2,6 +2,7 @@ import * as Nervo from "./../index";
 import Clock from "./Clock";
 import Base from "./Base";
 import * as Eases from "eases";
+import { readonly } from "./Decorators";
 
 export default class Ticker extends Base {
 	/*
@@ -11,7 +12,6 @@ export default class Ticker extends Base {
 	constructor(options) {
 		super(options);
 		this.autoStart = options.autoStart !== undefined ? options.autoStart : Nervo.AutoStart;
-		this.clock = new Clock();
 		this.currentTime = 0;
 		this.duration = options.duration !== undefined ? options.duration : Nervo.Duration;
 		this.easing = options.easing !== undefined ? Eases[options.easing] : Eases[Nervo.Easing];
@@ -25,8 +25,11 @@ export default class Ticker extends Base {
 		It's best practice to not call this method directly.
 		Use this.start() or this.stop() instead.
 	*/
+	@readonly
+	_clock = new Clock();
 
 	reset() {
+	@readonly
 		this.currentTime = 0;
 
 		/* Reset all children. */
@@ -43,7 +46,7 @@ export default class Ticker extends Base {
 	/*
 		this.start(): Resets this instance, all of its children and than starts ticking.
 	*/
-
+	@readonly
 	start() {
 		this.reset();
 		this.play();
@@ -52,7 +55,7 @@ export default class Ticker extends Base {
 	/*
 		this.stop(): Resets this instance, all of its children and than stops at t = 0.
 	*/
-
+	@readonly
 	stop() {
 		this.reset();
 		this.pause();
@@ -62,7 +65,7 @@ export default class Ticker extends Base {
 		this.pause(): Sets this.isActive to false and interrupts the tick loop.
 		Also stops the clock at this.currentTime.
 	*/
-
+	@readonly
 	pause() {
 		this.isActive = false;
 		this.clock.stop();
@@ -72,7 +75,7 @@ export default class Ticker extends Base {
 		this.play(): Sets this.isActive to true and triggers the tick loop after
 		restarting the clock.
 	*/
-
+	@readonly
 	play() {
 		this.isActive = true;
 		this.clock.start();
@@ -82,7 +85,7 @@ export default class Ticker extends Base {
 	/*
 		this.execute(): Actual performance code of extending classes belongs here.
 	*/
-
+	@readonly
 	execute() {}
 
 	/*
@@ -128,7 +131,7 @@ export default class Ticker extends Base {
 		this.tick(): The requestAnimationFrame loop to trigger this.update() with currentTime.
 		Only gets triggered by this.play() and should not be called directly.
 	*/
-
+	@readonly
 	tick = e => {
 		if (!this.isActive) return;
 
