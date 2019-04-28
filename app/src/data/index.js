@@ -9,7 +9,7 @@ const timeline = require("./timeline").default;
 const data = {
 	sections: [
 		{ ...about },
-		{ ...gettingStarted },
+		// { ...gettingStarted },
 		{ ...tween },
 		{ ...track },
 		{ ...timeline },

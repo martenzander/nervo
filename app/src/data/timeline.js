@@ -155,6 +155,18 @@ const timeline = {
 		],
 		[
 			{
+				component: "copy",
+				value: "The example above could be achieved using the following Code.",
+			},
+			{
+				component: "code",
+				value: {
+					source: "tweenExample.js",
+				},
+			},
+		],
+		[
+			{
 				component: "headline",
 				value: "Constructor",
 				type: "h3",

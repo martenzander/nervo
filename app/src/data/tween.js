@@ -146,12 +146,23 @@ const tween = {
 		[
 			{
 				component: "copy",
-				value:
-					"A Tween interpolates any Object with numeric values over time. With the use of callback functions it is possible to retrieve the current value of a Tween.",
+				value: "A Tween interpolates numeric values of an Object over time.",
 			},
 			{
 				component: "canvas",
 				value: TweenExample,
+			},
+		],
+		[
+			{
+				component: "copy",
+				value: "The example above could be achieved using the following Code.",
+			},
+			{
+				component: "code",
+				value: {
+					source: "tweenExample.js",
+				},
 			},
 		],
 		[

@@ -10,10 +10,14 @@ const gettingStarted = {
 	contents: [
 		[
 			{
-				component: "headline",
-				value: `Installation`,
-				type: "h3",
+				component: "copy",
+				value: `Getting started with Nervo is pretty simple. First, installation.`,
 			},
+			// {
+			// 	component: "headline",
+			// 	value: `Installation`,
+			// 	type: "h3",
+			// },
 			{
 				component: "code",
 				value: {
@@ -24,10 +28,14 @@ const gettingStarted = {
 		],
 		[
 			{
-				component: "headline",
-				value: `Import`,
-				type: "h3",
+				component: "copy",
+				value: `Import the library as Nervo.`,
 			},
+			// {
+			// 	component: "headline",
+			// 	value: `Import`,
+			// 	type: "h3",
+			// },
 			{
 				component: "code",
 				value: {
@@ -36,11 +44,11 @@ const gettingStarted = {
 			},
 		],
 		[
-			{
-				component: "headline",
-				value: `Create a <a href="#${TweenData.keys.section}">Tween</a>`,
-				type: "h3",
-			},
+			// {
+			// 	component: "headline",
+			// 	value: `Create a Tween`,
+			// 	type: "h3",
+			// },
 			{
 				component: "code",
 				value: {
