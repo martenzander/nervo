@@ -31,6 +31,7 @@ class InpageAnchors extends Component {
 		const headerHeight = document.querySelector(".js-header").getBoundingClientRect().height;
 		// scrollTarget -= headerHeight + parseInt(mainPaddingTop);
 		scrollTarget -= parseInt(mainPaddingTop);
+		scrollTarget = Math.ceil(scrollTarget);
 
 		if (scrollTarget !== 0) {
 			const move = new MoveTo(

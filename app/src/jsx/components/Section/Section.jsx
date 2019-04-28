@@ -2,6 +2,7 @@ import styles from "./styles.pcss";
 import React, { Component } from "react";
 import Code from "./../Code/Code";
 import AttentionBox from "./../AttentionBox/AttentionBox";
+import PropsList from "./../PropsList/PropsList";
 import Headline from "./../Headline/Headline";
 import Divider from "./../Divider/Divider";
 import Copy from "./../Copy/Copy";
@@ -12,30 +13,44 @@ class Section extends Component {
 	constructor(props) {
 		super(props);
 		if (props.contents !== undefined) {
-			this.components = this.props.contents.map((c, i) => {
-				switch (c.component) {
-					case "code":
-						return <Code key={i} value={c.value} />;
-						break;
-					case "copy":
-						return <Copy key={i} value={c.value} />;
-						break;
-					case "codePen":
-						return <CodePen key={i} value={c.value} />;
-						break;
-					case "canvas":
-						return <Canvas key={i} value={c.value} />;
-						break;
-					case "attentionBox":
-						return <AttentionBox key={i}>{c.value}</AttentionBox>;
-						break;
-					case "headline":
-						return <Headline key={i} value={c.value} type={c.type} />;
-						break;
-					default:
-						return <div key={i}>{"no valid component"}</div>;
-						break;
-				}
+			this.componentGroups = this.props.contents.map((cg, i) => {
+				const currentGroup = cg;
+				const components = [];
+
+				cg.forEach((c, n) => {
+					switch (c.component) {
+						case "code":
+							components.push(<Code key={n} value={c.value} />);
+							break;
+						case "copy":
+							components.push(<Copy key={n} value={c.value} />);
+							break;
+						case "codePen":
+							components.push(<CodePen key={n} value={c.value} />);
+							break;
+						case "canvas":
+							components.push(<Canvas key={n} value={c.value} />);
+							break;
+						case "attentionBox":
+							components.push(<AttentionBox key={n}>{c.value}</AttentionBox>);
+							break;
+						case "propsList":
+							components.push(<PropsList key={n} value={c.value} />);
+							break;
+						case "headline":
+							components.push(<Headline key={n} value={c.value} type={c.type} />);
+							break;
+						default:
+							components.push(<div key={n}>{"no valid component"}</div>);
+							break;
+					}
+				});
+
+				return (
+					<div key={i} className={styles.componentGroup}>
+						{components}
+					</div>
+				);
 			});
 		}
 	}
@@ -46,8 +61,10 @@ class Section extends Component {
 				className={`${styles.section} js-section`}
 				id={this.props.uuid.replace(/\s/g, "")}
 			>
-				<Headline value={this.props.value.name} type={"h2"} />
-				{this.components}
+				{/* <div className={styles.componentGroup}> */}
+				<Headline value={`${this.props.value.name}`} type={"h2"} />
+				{/* </div> */}
+				{this.componentGroups}
 				{this.props.id + 1 === this.props.sectionLength ? null : <Divider />}
 			</section>
 		);

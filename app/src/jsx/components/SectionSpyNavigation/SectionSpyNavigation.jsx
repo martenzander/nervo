@@ -47,7 +47,7 @@ class SectionSpyNavigation extends Component {
 								href={`#${s.props.uuid.replace(/\s/g, "")}`}
 								className={`${this.props.a} ${this.props.active}`}
 							>
-								{s.props.value.name}
+								{s.props.value.name.replace("Nervo.", "").replace("()", "")}
 							</a>
 						</li>
 					);
@@ -59,7 +59,7 @@ class SectionSpyNavigation extends Component {
 							href={`#${s.props.uuid.replace(/\s/g, "")}`}
 							className={`${this.props.a} `}
 						>
-							{s.props.value.name}
+							{s.props.value.name.replace("Nervo.", "").replace("()", "")}
 						</a>
 					</li>
 				);

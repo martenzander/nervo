@@ -6,9 +6,9 @@ import ReactHtmlParser, {
 	htmlparser2,
 } from "react-html-parser";
 
-class Copy extends Component {
+class Headline extends Component {
 	render() {
-		const classNames = `${styles.font} ${styles.margin}`;
+		const classNames = `${styles.font}`;
 
 		switch (this.props.type) {
 			case "h1":
@@ -21,7 +21,10 @@ class Copy extends Component {
 				return <h3 className={`${styles.h3}`}>{ReactHtmlParser(this.props.value)}</h3>;
 				break;
 			case "h4":
-				return <h3 className={`${styles.h4}`}>{ReactHtmlParser(this.props.value)}</h3>;
+				return <h4 className={`${styles.h4}`}>{ReactHtmlParser(this.props.value)}</h4>;
+				break;
+			case "h5":
+				return <h5 className={`${styles.h5}`}>{ReactHtmlParser(this.props.value)}</h5>;
 				break;
 			default:
 				return <p className={`${styles.h1}`}>no headline type defined</p>;
@@ -30,4 +33,4 @@ class Copy extends Component {
 	}
 }
 
-export default Copy;
+export default Headline;

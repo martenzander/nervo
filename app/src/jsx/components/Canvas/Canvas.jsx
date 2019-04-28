@@ -12,8 +12,10 @@ class Canvas extends Component {
 
 	render() {
 		return (
-			<div className={`${styles.aspectRatio} ${styles.margin}`}>
-				<canvas className={`${styles.canvas}`} ref={this.refCallback} />
+			<div className={`${styles.margin}`}>
+				<div className={`${styles.aspectRatio}`}>
+					<canvas className={`${styles.canvas}`} ref={this.refCallback} />
+				</div>
 			</div>
 		);
 	}
