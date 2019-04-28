@@ -5,11 +5,13 @@ const about = {
 	name: "About Nervo",
 	key,
 	contents: [
-		{
-			component: "copy",
-			value:
-				"There are a lot of different grid systems already out there and most of them are pretty good. But ☝️ none of them is offering the whole bandwidth of possible options. E.g. I wanted to switch between a flex, inline-block or float based grid as well as I wanted to be able to overwrite certain parameters like gutter or column-count breakpoint wise. That is how I came up with the idea to create my very own grid compiler and Mesh was born 🎉🎉🎉.",
-		},
+		[
+			{
+				component: "copy",
+				value:
+					"Nervo is a simple JavaScript animation library providing basic tweening functionality. It is designed to be flexible, intuitive and easy to learn. Nervo allows you to create single Tweens or control multiple instances within a Timeline.",
+			},
+		],
 	],
 };
 

@@ -1,37 +1,53 @@
 import uuid from "uuid/v4";
+const TweenData = require("./tween");
 export const key = `id-${uuid()}`;
+
+console.log(TweenData.keys.section);
 
 const gettingStarted = {
 	name: "Getting Started",
 	key,
 	contents: [
-		{
-			component: "headline",
-			value: `Installation`,
-			type: "h3",
-		},
-		{
-			component: "copy",
-			value: `Navigate to your project folder and enter the following command into your CLI.`,
-		},
-		{
-			component: "code",
-			value: {
-				source: "install.sh",
-				isCommand: true,
+		[
+			{
+				component: "headline",
+				value: `Installation`,
+				type: "h3",
 			},
-		},
-		{
-			component: "headline",
-			value: `Import in a ES6 module manner`,
-			type: "h3",
-		},
-		{
-			component: "code",
-			value: {
-				source: "import.js",
+			{
+				component: "code",
+				value: {
+					source: "install.sh",
+					isCommand: true,
+				},
 			},
-		},
+		],
+		[
+			{
+				component: "headline",
+				value: `Import`,
+				type: "h3",
+			},
+			{
+				component: "code",
+				value: {
+					source: "import.js",
+				},
+			},
+		],
+		[
+			{
+				component: "headline",
+				value: `Create a <a href="#${TweenData.keys.section}">Tween</a>`,
+				type: "h3",
+			},
+			{
+				component: "code",
+				value: {
+					source: "import.js",
+				},
+			},
+		],
 	],
 };
 
