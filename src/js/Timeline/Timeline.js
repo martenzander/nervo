@@ -37,7 +37,7 @@ export default class Timeline extends Ticker {
 		let duration = 0;
 
 		this.children.forEach(child => {
-			if (child.end > duration) duration = child.end;
+			if (child.start + child.duration > duration) duration = child.start + child.duration;
 		});
 
 		this.duration = duration;

@@ -8,6 +8,7 @@ export default class Track extends Base {
 		super(options);
 		this.isFinished = false;
 		this.hasStarted = false;
+		this.duration = 0;
 		this.start = options.start !== undefined ? options.start : 0;
 		if (objects.length >= 1) this.add(objects, options);
 	}
@@ -19,20 +20,22 @@ export default class Track extends Base {
 	type = "Track";
 
 	_updateTimeRange = start => {
+		let duration = 0;
 		this.start = start !== undefined ? start : this.start;
-		this.end = 0;
 
 		if (this.children.length <= 0) {
 			console.warn(
-				`${libName}.Track.updateTimeRange: No instances of ${libName}.Tween in this Track.`
+				`${libName}.Track._updateTimeRange: No instances of ${libName}.Tween in this Track.`
 			);
 			return this;
 		}
 
 		this.children.forEach(child => {
-			if (child.duration * child.timeScale + this.start > this.end)
-				this.end = child.duration * child.timeScale + this.start;
+			if (child.duration * child.timeScale > duration)
+				duration = child.duration * child.timeScale;
 		});
+
+		this.duration = duration;
 
 		return this;
 	};
@@ -48,9 +51,9 @@ export default class Track extends Base {
 	_update = t => {
 		t /= this.parent.timeScale;
 
-		if (t >= this.end) {
+		if (t >= this.duration + this.start) {
 			if (this.isFinished) return;
-			this._updateChildren(this.end - this.start);
+			this._updateChildren(this.duration);
 			this._onComplete();
 			this.isFinished = true;
 		} else if (t >= this.start) {
