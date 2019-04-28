@@ -1,4 +1,5 @@
 .button{
+  color: $corporate-color-3;
   font-family: "Roboto-BlackItalic", sans-serif;
   font-size: 13px;
   letter-spacing: 0.9px;
@@ -10,6 +11,10 @@
   padding: 1.25em 2em;
   box-shadow: 0 8px 15px 0 rgba($corporate-color-3,0.30);
 
+  &:hover{
+    text-decoration: none;
+  }
+
   &:last-child{
     margin-right: 0;
   }
@@ -17,6 +22,7 @@
   &Primary{
     background: $corporate-color-2;
   }
+
   &Secondary{
     background: $corporate-color-1;
   }

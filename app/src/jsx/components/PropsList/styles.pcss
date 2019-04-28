@@ -1,0 +1,62 @@
+@import './../../../scss/mixins/media-queries.pcss';
+
+.list{
+  margin: 0 -1rem;
+
+  @include md{
+    margin: 0 -1.3rem;
+  }
+}
+
+.item{
+  vertical-align: top;
+  width: 100%;
+  padding: 1rem 1rem;
+
+  @include md{
+    display: inline-block;
+    padding: 1.3rem 1.3rem;
+    width: calc(50%);
+  }
+
+  @include xl{
+    width: calc(100 / 3 * 1%);
+  }
+}
+
+.property{
+  font-size: 18px;
+  letter-spacing: -0.11px;
+  line-height: 1;
+  margin-bottom: 0.55rem;
+}
+
+.value, .value *{
+  font-size: inherit;
+  color: $copy-color;
+  opacity: 0.6;
+}
+
+.copy{
+  font-size: 15px;
+  letter-spacing: -0.11px;
+  line-height: 20px;
+  color: $copy-color;
+  clear: both;
+}
+
+.readonly{
+  &::after{
+    font-family: 'Roboto Slab Bold';
+    display: inline-block;
+    float:right;
+    background: $corporate-color-1;
+    padding: 0.25rem;
+    border-radius: 3px;
+    text-align: right;
+    color: $copy-color;
+    content:'readonly';
+    font-size: 0.6em;
+    line-height: 1em;
+  }
+}

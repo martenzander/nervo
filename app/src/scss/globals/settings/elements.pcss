@@ -45,16 +45,34 @@ body {
 a {
   font-family: inherit;
   color: $corporate-color-5;
-  text-decoration: underline;
-  transition: color 0.15s linear;
+  text-decoration: none;
+  transition: all 0.15s linear;
+
+  h1 &,h2 &,h3 &,h4 &,h5 &,h6 &{
+    text-decoration: underline;
+  }
+
+  &:hover{
+    text-decoration: underline;
+  }
 
   &:active{
-    color: inherit;
+    color:inherit;
+    opacity: 0.5;
   }
 }
 
-h1,h2,h3,h4,h5,h6{
+b,
+strong {
+  font-family: 'Roboto Slab Bold', sans-serif;
+}
+
+h1,h2,h3,h4{
   font-family: "Roboto Black italic", sans-serif;
+}
+
+h5,h6 {
+  font-family: "Roboto Slab Bold", sans-serif;
 }
 
 address {
