@@ -2,8 +2,6 @@ import uuid from "uuid/v4";
 const TweenData = require("./tween");
 export const key = `id-${uuid()}`;
 
-console.log(TweenData.keys.section);
-
 const gettingStarted = {
 	name: "Getting Started",
 	key,

@@ -5,7 +5,7 @@ class SectionSpyNavigation extends Component {
 		super(props);
 		this.sections = props.sections;
 		this.state = {
-			items: null,
+			mainPaddingTop: 0,
 		};
 	}
 
@@ -28,47 +28,43 @@ class SectionSpyNavigation extends Component {
 	};
 
 	updateSidebar = e => {
-		const mainPaddingTop = parseInt(
-			window
-				.getComputedStyle(document.querySelector(".js-main-content"))
-				.paddingTop.replace("px", "")
-		);
 		this.setState({
-			items: this.sections.map((s, i) => {
-				const sectionNode = document.querySelector(`#${s.props.uuid.replace(/\s/g, "")}`);
-				const sectionTop = sectionNode.getBoundingClientRect().top;
-				const sectionHeight = sectionNode.getBoundingClientRect().height;
-
-				if (sectionTop <= mainPaddingTop && sectionTop + sectionHeight > mainPaddingTop) {
-					return (
-						<li key={s.props.uuid.replace(/\s/g, "")} className={this.props.li}>
-							<a
-								onClick={this.props.onItemClick ? this.props.onItemClick : null}
-								href={`#${s.props.uuid.replace(/\s/g, "")}`}
-								className={`${this.props.a} ${this.props.active}`}
-							>
-								{s.props.value.name.replace("Nervo.", "").replace("()", "")}
-							</a>
-						</li>
-					);
-				}
-				return (
-					<li key={s.props.uuid.replace(/\s/g, "")} className={this.props.li}>
-						<a
-							onClick={this.props.onItemClick ? this.props.onItemClick : null}
-							href={`#${s.props.uuid.replace(/\s/g, "")}`}
-							className={`${this.props.a} `}
-						>
-							{s.props.value.name.replace("Nervo.", "").replace("()", "")}
-						</a>
-					</li>
-				);
-			}),
+			mainPaddingTop: parseInt(
+				window
+					.getComputedStyle(document.querySelector(".js-main-content"))
+					.paddingTop.replace("px", "")
+			),
 		});
 	};
 
 	render() {
-		return <ul className={this.props.ul}>{this.state.items}</ul>;
+		const items = this.sections.map((s, i) => {
+			const sectionNode = document.querySelector(`#${s.props.uuid.replace(/\s/g, "")}`);
+			const sectionTop = sectionNode.getBoundingClientRect().top;
+			const sectionHeight = sectionNode.getBoundingClientRect().height;
+			let linkClass;
+
+			if (
+				sectionTop <= this.state.mainPaddingTop &&
+				sectionTop + sectionHeight > this.state.mainPaddingTop
+			) {
+				linkClass = `${this.props.a} ${this.props.active}`;
+			} else {
+				linkClass = `${this.props.a}`;
+			}
+			return (
+				<li key={s.props.uuid.replace(/\s/g, "")} className={this.props.li}>
+					<a
+						onClick={this.props.onItemClick ? this.props.onItemClick : null}
+						href={`#${s.props.uuid.replace(/\s/g, "")}`}
+						className={linkClass}
+					>
+						{s.props.value.name.replace("Nervo.", "").replace("()", "")}
+					</a>
+				</li>
+			);
+		});
+		return <ul className={this.props.ul}>{items}</ul>;
 	}
 }
 

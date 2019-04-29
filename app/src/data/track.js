@@ -13,7 +13,7 @@ for (const key in reference) {
 
 // propsList
 const propsBlackList = ["isNervo"];
-const propertyMethods = ["easing", "onProgress", "onCpmplete"];
+const propertyMethods = ["easing", "onProgress", "onComplete"];
 const propsList = [];
 const propertyNames = [];
 
@@ -34,44 +34,40 @@ propertyNames.forEach(key => {
 
 	switch (key) {
 		case "children":
-			item.copy =
-				"Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.";
+			item.copy = "Contains a list of Tweens. Default <b>null</b>";
 			break;
-		case "end":
-			item.copy =
-				"Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.";
+		case "duration":
+			item.copy = "Total duration of the Track.";
 			break;
 		case "hasStarted":
-			item.copy =
-				"Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.";
+			item.copy = "Returns <b>true</b> when Track started updating. Default: <b>false</b>.";
 			break;
 		case "isFinished":
-			item.copy =
-				"Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.";
+			item.copy = "Returns <b>true</b> when Track is finished. Default: <b>false</b>.";
 			break;
 		case "isTrack":
-			item.copy =
-				"Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.";
+			item.copy = "Returns <b>true</b>.";
+			break;
+		case "onComplete":
+			item.copy = "Callback function – gets called when Track is finished.";
+			break;
+		case "onProgress":
+			item.copy = "Callback function – gets called while Track is playing.";
 			break;
 		case "options":
-			item.copy =
-				"Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.";
+			item.copy = "Object handed over to constructor.";
 			break;
 		case "parent":
-			item.copy =
-				"Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.";
+			item.copy = "Parent Timeline. Default: <b>null</b>.";
 			break;
 		case "start":
-			item.copy =
-				"Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.";
+			item.copy = "Start of the Track in seconds.";
 			break;
 		case "type":
-			item.copy =
-				"Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.";
+			item.copy = "A string with the purpose to identify the object. Default: <b>Track</b>.";
 			break;
 		case "uuid":
-			item.copy =
-				"Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.";
+			item.copy = "<a href=''>UUID</a> of the Track.";
 			break;
 		default:
 			item.copy = "";
@@ -107,16 +103,13 @@ methodNames.forEach(key => {
 
 	switch (key) {
 		case "add":
-			item.copy =
-				"Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.";
+			item.copy = "Adds Tweens to the Track.";
 			break;
 		case "clone":
-			item.copy =
-				"Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.";
+			item.copy = "Returns a clone of the Track.";
 			break;
 		case "remove":
-			item.copy =
-				"Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.";
+			item.copy = "Removes Tweens from the Track.";
 			break;
 		default:
 			item.copy = "";
@@ -136,6 +129,24 @@ const track = {
 	contents: [
 		[
 			{
+				component: "copy",
+				value:
+					"<b>Notice:</b> Tracks don't modify objects directly. They update their child Tweens based on given time provided by their parent timeline. Tracks without a parent Timeline have no effect on their Tweens.",
+			},
+			{
+				component: "attentionBox",
+				value:
+					"<b>Notice:</b> Tracks update their childs based on a given time provided by their parent Timeline. Tracks without a parent Timeline have no effect on their Tweens.",
+			},
+			{
+				component: "code",
+				value: {
+					source: "trackExample.js",
+				},
+			},
+		],
+		[
+			{
 				component: "headline",
 				value: "Constructor",
 				type: "h3",
@@ -143,29 +154,17 @@ const track = {
 			{
 				component: "code",
 				value: {
-					source: "tweenConstructor.js",
+					source: "trackConstructor.js",
 				},
 			},
 			{
 				component: "headline",
-				value: "Origin",
+				value: "Tweens",
 				type: "h4",
 			},
 			{
 				component: "copy",
-				value:
-					"None of them is offering the whole bandwidth of possible options. E.g. I wanted to switch between a flex, inline-block or float based grid as well as I wanted to be able to overwrite certain parameters like gutter or column-count breakpoint wise. That is how I came up with the idea to create my very own grid compiler and Mesh wa.",
-			},
-			{
-				component: "headline",
-				value: "Target",
-				type: "h4",
-			},
-			{
-				component: "copy",
-				value: `Lorem <a href='#${
-					keys.section
-				}'>ipsum</a> dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.`,
+				value: "An array of Tweens that will be added to the Track.",
 			},
 			{
 				component: "headline",
@@ -174,13 +173,7 @@ const track = {
 			},
 			{
 				component: "copy",
-				value:
-					"Lorem <a href='#Test'>ipsum</a> dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.",
-			},
-			{
-				component: "attentionBox",
-				value:
-					"Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.",
+				value: "<a href=''>start</a>",
 			},
 		],
 		[

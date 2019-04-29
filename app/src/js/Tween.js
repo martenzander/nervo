@@ -1,5 +1,12 @@
 import * as Nervo from "../../../src/js/index";
 import Canvas from "./Core/Canvas";
+import eases from "eases";
+
+const easeNames = [];
+
+for (const key in eases) {
+	easeNames.push(key);
+}
 
 class Tween extends Canvas {
 	constructor(canvas) {
@@ -20,7 +27,7 @@ class Tween extends Canvas {
 				onProgress: e => {
 					this.pos.x =
 						this.padding +
-						(this.canvas.width - 2 * this.padding) * e.target.current.progress;
+						(this.canvas.width - 2 * this.padding) * e.target.target.progress;
 					this.pos.y = this.canvas.height / 2;
 					this.draw();
 				},
@@ -37,7 +44,9 @@ class Tween extends Canvas {
 		options.add(this.tween, "duration");
 		options.add(this.tween, "loop");
 		options.add(this.tween, "timeScale");
-		this.gui.add(this.tween.current, "progress").listen();
+		options.add(this.tween, "easing", easeNames).onChange(e => {
+			this.tween.easing = eases[e];
+		});
 
 		this.draw();
 	}

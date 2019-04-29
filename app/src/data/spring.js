@@ -50,6 +50,12 @@ propertyNames.forEach(key => {
 		case "isSpring":
 			item.copy = "Returns <b>true</b>.";
 			break;
+		case "onComplete":
+			item.copy = "Callback function – gets called when Spring is finished.";
+			break;
+		case "onProgress":
+			item.copy = "Callback function – gets called while Spring is playing.";
+			break;
 		case "options":
 			item.copy = "Object handed over to constructor.";
 			break;
@@ -150,34 +156,17 @@ const spring = {
 			},
 			{
 				component: "headline",
-				value: "current",
+				value: "Options",
 				type: "h4",
 			},
 			{
 				component: "copy",
 				value:
-					"None of them is offering the whole bandwidth of possible options. E.g. I wanted to switch between a flex, inline-block or float based grid as well as I wanted to be able to overwrite certain parameters like gutter or column-count breakpoint wise. That is how I came up with the idea to create my very own grid compiler and Mesh wa.",
+					"<a href=''>autoStart</a> · <a href=''>damping</a> · <a href=''>stiffness</a>",
 			},
 			{
-				component: "headline",
-				value: "target",
-				type: "h4",
-			},
-			{
-				component: "copy",
-				value: `Lorem <a href='#${
-					keys.section
-				}'>ipsum</a> dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.`,
-			},
-			{
-				component: "headline",
-				value: "options",
-				type: "h4",
-			},
-			{
-				component: "copy",
-				value:
-					"Lorem <a href='#Test'>ipsum</a> dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.",
+				component: "attentionBox",
+				value: "<b>Notice:</b> Lorem ipsum.",
 			},
 		],
 		[

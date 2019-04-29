@@ -37,9 +37,6 @@ propertyNames.forEach(key => {
 		case "autoStart":
 			item.copy = "If set to <b>true</b> the tween starts immediately after construction.";
 			break;
-		case "current":
-			item.copy = "The currently interpolated values.";
-			break;
 		case "currentTime":
 			item.copy = "Past time since tween start.";
 			break;
@@ -61,14 +58,20 @@ propertyNames.forEach(key => {
 		case "options":
 			item.copy = "Object handed over to constructor.";
 			break;
-		case "origin":
-			item.copy = "Starting values handed over to constructor.";
+		case "onProgress":
+			item.copy = "Callback function – gets called while Tween is playing.";
+			break;
+		case "onComplete":
+			item.copy = "Callback function – gets called when Tween is finished.";
 			break;
 		case "parent":
 			item.copy = "Returns the parent Track. Default: <b>null</b>.";
 			break;
+		case "properties":
+			item.copy = "Object containing relevant properties and desired target values.";
+			break;
 		case "target":
-			item.copy = "Target values handed over to constructor.";
+			item.copy = "Object whose properties will be modified.";
 			break;
 		case "timeScale":
 			item.copy = "A floating number scaling the progress of the tween. Default: <b>1.0</b>.";
@@ -146,7 +149,8 @@ const tween = {
 		[
 			{
 				component: "copy",
-				value: "A Tween interpolates numeric values of an Object over time.",
+				value:
+					"A Tween interpolates numeric values of an Object over time. Multiple Tweens can be grouped on <a href='#'>Tracks</a> and controlled by <a href='#'>Timelines</a>.",
 			},
 			{
 				component: "canvas",
@@ -156,7 +160,7 @@ const tween = {
 		[
 			{
 				component: "copy",
-				value: "The example above could be achieved using the following Code.",
+				value: "The example above could be achieved using the Code below.",
 			},
 			{
 				component: "code",
@@ -179,34 +183,24 @@ const tween = {
 			},
 			{
 				component: "headline",
-				value: "Origin",
-				type: "h4",
-			},
-			{
-				component: "copy",
-				value:
-					'An object containing the starting values of a Tween. E.g. <code class="language-markup">{ x : 0 }</code>.',
-			},
-			{
-				component: "headline",
-				value: "Target",
-				type: "h4",
-			},
-			{
-				component: "copy",
-				value:
-					'An object containing the target values of a Tween. E.g. <code class="language-markup">{ x : 1 }</code>.',
-			},
-			{
-				component: "headline",
 				value: "Options",
 				type: "h4",
 			},
 			{
 				component: "copy",
 				value:
-					"An optional object to configure the settings of a Tween.<br/><a href=''>autoStart</a> · <a href=''>duration</a> · <a href=''>easing</a> · <a href=''>loop</a> · <a href=''>onProgress</a> · <a href=''>onComplete</a>",
+					"When creating a new Tween there are several options that can be handed over to the constructor.<br/><a href=''>autoStart</a> · <a href=''>duration</a> · <a href=''>easing</a> · <a href=''>loop</a> · <a href=''>onProgress</a> · <a href=''>onComplete</a>",
 			},
+			{
+				component: "attentionBox",
+				value:
+					'<b>Notice:</b> For the easing option you can either pass a function or a valid <a href="https://www.npmjs.com/package/eases" target="_blank">eases</a> string. E.g. "sineOut".',
+			},
+			// {
+			// 	component: "copy",
+			// 	value:
+			// 		"<a href=''>autoStart</a> · <a href=''>duration</a> · <a href=''>easing</a> · <a href=''>loop</a> · <a href=''>onProgress</a> · <a href=''>onComplete</a>",
+			// },
 		],
 		[
 			{

@@ -1,5 +1,12 @@
 import * as Nervo from "../../../src/js/index";
 import Canvas from "./Core/Canvas";
+import eases from "eases";
+
+const easeNames = [];
+
+for (const key in eases) {
+	easeNames.push(key);
+}
 
 class Timeline extends Canvas {
 	constructor(canvas) {
@@ -19,19 +26,20 @@ class Timeline extends Canvas {
 					// timeScale: timeScale,
 					easing: "cubicInOut",
 					duration: 3,
+					onProgress: e => {
+						// console.log(e.target);
+					},
 				}
 			);
 
 			this.tweens.push(tween);
 		}
 
+		console.log(this.tweens[0]);
+
 		this.timeline = new Nervo.Timeline([this.tweens[0], this.tweens[1]], {
 			loop: true,
-			// timeScale: 1,
-			// easing: "circInOut",
-			onComplete: e => {
-				console.log("onComplete");
-			},
+			onComplete: e => {},
 			onProgress: e => {
 				this.draw();
 			},
@@ -50,6 +58,9 @@ class Timeline extends Canvas {
 		const options = this.gui.addFolder("options");
 		options.add(this.timeline, "loop");
 		options.add(this.timeline, "timeScale");
+		options.add(this.timeline, "easing", easeNames).onChange(e => {
+			this.timeline.easing = eases[e];
+		});
 	}
 
 	draw = e => {
@@ -58,7 +69,7 @@ class Timeline extends Canvas {
 			this.context.beginPath();
 			this.context.arc(
 				this.padding +
-					(this.canvas.width - 2 * this.padding) * this.tweens[i].current.progress,
+					(this.canvas.width - 2 * this.padding) * this.tweens[i].target.progress,
 				this.padding + this.radius * 2.75 * i,
 				this.radius,
 				0,
@@ -70,7 +81,7 @@ class Timeline extends Canvas {
 			} else if (i <= 3) {
 				this.context.fillStyle = "#DD436B";
 			} else {
-				this.context.fillStyle = "#196A99";
+				this.context.fillStyle = "#202449";
 			}
 			this.context.fill();
 		}

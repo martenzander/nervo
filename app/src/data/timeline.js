@@ -35,42 +35,48 @@ propertyNames.forEach(key => {
 
 	switch (key) {
 		case "autoStart":
-			item.copy = "If set to <b>true</b> the timeline starts immediately after construction.";
+			item.copy = "If set to <b>true</b> the Timeline starts immediately after construction.";
 			break;
 		case "children":
 			item.copy = "Contains a list of Tracks. Default: <b>null</b>";
 			break;
 		case "currentTime":
-			item.copy = "Past time since timeline start.";
+			item.copy = "Past time since Timeline start.";
 			break;
 		case "duration":
-			item.copy = "A floating point number defining the length of the timeline.";
+			item.copy = "A floating point number defining the length of the Timeline.";
 			break;
 		case "easing":
 			item.copy = "Callback function that interpolates the progress.";
 			break;
 		case "isActive":
-			item.copy = "Returns <b>true</b> when the timeline is playing.";
+			item.copy = "Returns <b>true</b> when the Timeline is playing.";
 			break;
 		case "isTimeline":
 			item.copy = "Returns <b>true</b>.";
 			break;
 		case "loop":
-			item.copy = "Whether the timeline will loop when finished.";
+			item.copy = "Whether the Timeline will loop when finished.";
+			break;
+		case "onComplete":
+			item.copy = "Callback function – gets called when Timeline is finished.";
+			break;
+		case "onProgress":
+			item.copy = "Callback function – gets called while Timeline is playing.";
 			break;
 		case "options":
 			item.copy = "Object handed over to constructor.";
 			break;
 		case "timeScale":
 			item.copy =
-				"A floating number scaling the progress of the timeline. Default: <b>1.0</b>.";
+				"A floating number scaling the progress of the Timeline. Default: <b>1.0</b>.";
 			break;
 		case "type":
 			item.copy =
 				"A string with the purpose to identify the object. Default: <b>Timeline</b>.";
 			break;
 		case "uuid":
-			item.copy = "<a href=''>UUID</a> of the timeline.";
+			item.copy = "<a href=''>UUID</a> of the Timeline.";
 			break;
 		default:
 			item.copy = "";
@@ -106,25 +112,25 @@ methodNames.forEach(key => {
 
 	switch (key) {
 		case "add":
-			item.copy = "Adds Tweens or Tracks to the timeline.";
+			item.copy = "Adds Tweens or Tracks to the Timeline.";
 			break;
 		case "clone":
-			item.copy = "Returns a clone of the timeline.";
+			item.copy = "Returns a clone of the Timeline.";
 			break;
 		case "pause":
-			item.copy = "Pauses the timeline.";
+			item.copy = "Pauses the Timeline.";
 			break;
 		case "play":
-			item.copy = "Continues playing the timeline at .<a href=''>currentTime</a>.";
+			item.copy = "Continues playing the Timeline at .<a href=''>currentTime</a>.";
 			break;
 		case "remove":
-			item.copy = "Removes Tweens or Tracks from the timeline.";
+			item.copy = "Removes Tweens or Tracks from the Timeline.";
 			break;
 		case "start":
-			item.copy = "Starts playing the timeline from the start.";
+			item.copy = "Starts playing the Timeline from the start.";
 			break;
 		case "stop":
-			item.copy = "Resets the timeline to the start and pauses.";
+			item.copy = "Resets the Timeline to the start and pauses.";
 			break;
 		default:
 			item.copy = "";
@@ -156,12 +162,12 @@ const timeline = {
 		[
 			{
 				component: "copy",
-				value: "The example above could be achieved using the following Code.",
+				value: "The example above could be achieved using the Code below.",
 			},
 			{
 				component: "code",
 				value: {
-					source: "tweenExample.js",
+					source: "timelineExample.js",
 				},
 			},
 		],
@@ -174,29 +180,18 @@ const timeline = {
 			{
 				component: "code",
 				value: {
-					source: "tweenConstructor.js",
+					source: "timelineConstructor.js",
 				},
 			},
 			{
 				component: "headline",
-				value: "Origin",
+				value: "Tweens",
 				type: "h4",
 			},
 			{
 				component: "copy",
 				value:
-					"None of them is offering the whole bandwidth of possible options. E.g. I wanted to switch between a flex, inline-block or float based grid as well as I wanted to be able to overwrite certain parameters like gutter or column-count breakpoint wise. That is how I came up with the idea to create my very own grid compiler and Mesh wa.",
-			},
-			{
-				component: "headline",
-				value: "Target",
-				type: "h4",
-			},
-			{
-				component: "copy",
-				value: `Lorem <a href='#${
-					keys.section
-				}'>ipsum</a> dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.`,
+					"An array of Tweens that will be added to the Timeline. The constructor automatically groups given Tweens on a Track with a <a href='#'>.start</a> value of <b>0</b>.",
 			},
 			{
 				component: "headline",
@@ -206,7 +201,7 @@ const timeline = {
 			{
 				component: "copy",
 				value:
-					"Lorem <a href='#Test'>ipsum</a> dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.",
+					"<a href=''>autoStart</a> · <a href=''>easing</a> · <a href=''>loop</a> · <a href=''>onProgress</a> · <a href=''>onComplete</a>",
 			},
 		],
 		[
