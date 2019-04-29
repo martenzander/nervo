@@ -6,7 +6,7 @@ export default class Spring extends Base {
 	static Stiffness = 0.2;
 	static Damping = 0.5;
 
-	constructor(current, target, options = {}) {
+	constructor(target, properties, options = {}) {
 		super(options);
 		delete this.parent;
 		delete this.children;
@@ -14,13 +14,13 @@ export default class Spring extends Base {
 		delete this.remove;
 
 		this.autoStart = options.autoStart !== undefined ? options.autoStart : true;
+		this.properties = properties;
 		this.target = target;
-		this.current = current;
 		this.stiffness = options.stiffness !== undefined ? options.stiffness : Spring.Stiffness;
 		this.damping = options.damping !== undefined ? options.damping : Spring.Damping;
 		this._velocities = {};
 
-		for (const key in this.current) {
+		for (const key in this.target) {
 			this._velocities[key] = 0.0;
 		}
 
@@ -34,14 +34,14 @@ export default class Spring extends Base {
 	type = "Spring";
 
 	@readonly
-	setTarget = target => {
-		this.target = target;
+	setTarget = properties => {
+		this.properties = properties;
 		if (this.isActive) return;
 		this.enable();
 	};
 
 	/*
-		.pause(): Sets this.isActive to false and interrupts the tick loop.
+		.disable(): Sets this.isActive to false and interrupts the tick loop.
 	*/
 	@readonly
 	disable = e => {
@@ -49,7 +49,7 @@ export default class Spring extends Base {
 	};
 
 	/*
-		.play(): Sets this.isActive to true and triggers the tick loop.
+		.enable(): Sets this.isActive to true and triggers the tick loop.
 	*/
 	@readonly
 	enable = e => {
@@ -61,24 +61,24 @@ export default class Spring extends Base {
 	_update = e => {
 		let isComplete = false;
 
-		for (const key in this.current) {
-			if (this.current[key] !== this.target[key]) {
-				const valueDelta = this.current[key] - this.target[key];
+		for (const key in this.properties) {
+			if (this.target[key] !== this.properties[key]) {
+				const valueDelta = this.target[key] - this.properties[key];
 				const force = -this.stiffness * valueDelta;
 				const damping = -this.damping * this._velocities[key];
 				const acceleration = force + damping;
 				this._velocities[key] = this._velocities[key] + acceleration;
-				this.current[key] += this._velocities[key];
+				this.target[key] += this._velocities[key];
 			} else {
 				isComplete = true;
 			}
 		}
 
-		this._onProgress();
+		this.dispatchEvent({ type: "onProgress" });
 
 		if (isComplete) {
 			this.disable();
-			this._onComplete();
+			this.dispatchEvent({ type: "onComplete" });
 		}
 	};
 

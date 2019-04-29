@@ -19,27 +19,31 @@ export default class Base extends EventDispatcher {
 		this.options = options;
 		this.parent = null;
 
-		Base.Instances.push(this);
-
 		if ("onComplete" in this.options) {
 			this.onComplete = this.options.onComplete;
-			this.addEventListener("onComplete", this.onComplete);
+			this.addEventListener("onComplete", e => {
+				this.onComplete(e);
+			});
 		}
 		if ("onProgress" in this.options) {
 			this.onProgress = this.options.onProgress;
-			this.addEventListener("onProgress", this.onProgress);
+			this.addEventListener("onProgress", e => {
+				this.onProgress(e);
+			});
 		}
+
+		Base.Instances.push(this);
 	}
 
-	@readonly
-	_onComplete = e => {
-		this.dispatchEvent({ type: "onComplete" });
-	};
+	/*
+		.onProgress():
+	*/
+	onProgress = e => {};
 
-	@readonly
-	_onProgress = e => {
-		this.dispatchEvent({ type: "onProgress" });
-	};
+	/*
+		.onComplete():
+	*/
+	onComplete = e => {};
 
 	@readonly
 	clone = e => {
@@ -150,19 +154,15 @@ export default class Base extends EventDispatcher {
 
 	@readonly
 	_onChildChange = e => {
-		if (this.isTimeline) {
+		if (this.isTimeline || this.isTrack) {
 			this._updateDuration();
-		}
-
-		if (this.isTrack) {
-			this._updateTimeRange();
 		}
 	};
 
 	@readonly
-	_updateChildren = time => {
+	_updateChildrenByTime = t => {
 		this.children.forEach(child => {
-			child._update(time);
+			child._update(t);
 		});
 	};
 }

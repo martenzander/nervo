@@ -2,26 +2,27 @@ import { readonly } from "./../Core/Decorators";
 import Ticker from "./../Core/Ticker";
 
 export default class Tween extends Ticker {
-	constructor(origin, target, options = {}) {
-		super(options);
-		this.target = target;
-		this.origin = origin;
-		this.current = { ...{}, ...this.origin };
-		if (this.autoStart) this.start();
-	}
-
 	@readonly
 	isTween = true;
 
 	@readonly
 	type = "Tween";
 
+	constructor(target, properties, options = {}) {
+		super(options);
+
+		this.properties = properties;
+		this.target = target;
+		this._reference = { ...{}, ...this.target };
+		if (this.autoStart) this.start();
+	}
+
 	@readonly
 	_execute = e => {
-		// update values
-		for (const key in this.origin) {
-			this.current[key] =
-				this.origin[key] + (this.target[key] - this.origin[key]) * this.easedProgress;
+		for (const key in this.properties) {
+			this.target[key] =
+				this._reference[key] +
+				(this.properties[key] - this._reference[key]) * this.easedProgress;
 		}
 	};
 }

@@ -20,8 +20,8 @@ export default class Timeline extends Ticker {
 	type = "Timeline";
 
 	@readonly
-	_execute = time => {
-		this._updateChildren(time);
+	_execute = t => {
+		this._updateChildrenByTime(t);
 	};
 
 	@readonly

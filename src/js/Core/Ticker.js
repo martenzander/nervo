@@ -119,13 +119,13 @@ export default class Ticker extends Base {
 		this._execute(updateTime);
 
 		/* Trigger events based on progress and loop options. */
-		this._onProgress();
+		this.dispatchEvent({ type: "onProgress" });
 
 		if (this.progress >= 1.0) {
 			if (this.loop) {
 				this.start();
 			} else {
-				this._onComplete();
+				this.dispatchEvent({ type: "onComplete" });
 				this.pause();
 			}
 		}
