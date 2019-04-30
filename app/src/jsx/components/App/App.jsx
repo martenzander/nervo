@@ -42,66 +42,36 @@ class App extends Component {
 	};
 
 	render() {
-		if (this.state.renderHeader) {
-			return (
-				<div className={`${styles.app} app`}>
-					<InpageAnchors>
-						{/* <GithubRibbon /> */}
-						<Header value={this} />
-						<Hero>
-							<div className={"nervo-container"}>
-								<Logo big />
-								<p className={`${styles.color}`}>{`v${this.data.version}`}</p>
-								<br />
-								<p className={`${styles.description}`}>{this.data.description}</p>
-								<div>
-									<Button primary href={`#${data.sections[0].key}`}>
-										Documentation
-									</Button>
-									<Button href={this.data.repository.url.replace("git+", "")}>
-										Github
-									</Button>
-								</div>
-							</div>
-						</Hero>
-						<div className={`${styles.margin}`}>
-							<Layout
-								ref={this.layoutCallback}
-								className={`js-main-content ${styles.padding}`}
-								content={this.sections}
-							/>
-							<Footer />
-						</div>
-					</InpageAnchors>
-				</div>
-			);
-		}
+		const renderHeader = this.state.renderHeader;
 		return (
 			<div className={`${styles.app} app`}>
-				<Hero>
-					<div className={"nervo-container"}>
-						<Logo big />
-						<p className={`${styles.color}`}>{`v${this.data.version}`}</p>
-						<br />
-						<p className={`${styles.description}`}>{this.data.description}</p>
-						<div>
-							<Button primary href={`#${data.sections[0].key}`}>
-								Documentation
-							</Button>
-							<Button href={this.data.repository.url.replace("git+", "")}>
-								Github
-							</Button>
+				<InpageAnchors>
+					{renderHeader && <Header value={this} />}
+					<Hero>
+						<div className={"nervo-container"}>
+							<Logo big />
+							<p className={`${styles.color}`}>{`v${this.data.version}`}</p>
+							<br />
+							<p className={`${styles.description}`}>{this.data.description}</p>
+							<div>
+								<Button primary href={`#${data.sections[0].key}`}>
+									Documentation
+								</Button>
+								<Button href={this.data.repository.url.replace("git+", "")}>
+									Github
+								</Button>
+							</div>
 						</div>
+					</Hero>
+					<div className={`${styles.margin}`}>
+						<Layout
+							ref={this.layoutCallback}
+							className={`js-main-content ${styles.padding}`}
+							content={this.sections}
+						/>
+						<Footer />
 					</div>
-				</Hero>
-				<div className={`${styles.margin}`}>
-					<Layout
-						ref={this.layoutCallback}
-						className={`js-main-content ${styles.padding}`}
-						content={this.sections}
-					/>
-					<Footer />
-				</div>
+				</InpageAnchors>
 			</div>
 		);
 	}
