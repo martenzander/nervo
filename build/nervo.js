@@ -73,7 +73,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "06c8f043903b39bb6a3a";
+/******/ 	var hotCurrentHash = "ab89bef8c2db2b2f42ef";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -4819,9 +4819,9 @@ function (_Root) {
 
     _initializerDefineProperty(_this, "remove", _descriptor3, _assertThisInitialized(_this));
 
-    _initializerDefineProperty(_this, "_onChildChange", _descriptor4, _assertThisInitialized(_this));
+    _initializerDefineProperty(_this, "_updateChildrenByTime", _descriptor4, _assertThisInitialized(_this));
 
-    _initializerDefineProperty(_this, "_updateChildrenByTime", _descriptor5, _assertThisInitialized(_this));
+    _initializerDefineProperty(_this, "_onChildChange", _descriptor5, _assertThisInitialized(_this));
 
     _this.children = [];
     _this.parent = null;
@@ -4865,9 +4865,11 @@ function (_Root) {
             if (object[i].isTrack) _this3.add(object[i], {});
           }
 
-          var track = _this3._getTrackFromTweens(tweens, options);
+          if (tweens.length >= 1) {
+            var track = _this3._getTrackFromTweens(tweens, options);
 
-          _this3.add(track, options);
+            _this3.add(track, options);
+          }
 
           return _this3;
         }
@@ -4916,7 +4918,9 @@ function (_Root) {
           type: "added"
         });
 
-        _this3._onChildChange();
+        if (_this3.isTimeline || _this3.isTrack) {
+          _this3._onChildChange(_this3);
+        }
       } else {
         console.error("".concat(libName, ".Base.add: Object is not an instance of ").concat(libName, ".Base."), object);
       }
@@ -4950,36 +4954,54 @@ function (_Root) {
 
         _this4.children.splice(index, 1);
 
-        _this4._onChildChange();
+        if (_this4.isTimeline || _this4.isTrack) {
+          _this4._onChildChange(_this4);
+        }
       }
 
       return _this4;
     };
   }
-}), _descriptor4 = _applyDecoratedDescriptor(_class.prototype, "_onChildChange", [_Decorators__WEBPACK_IMPORTED_MODULE_20__["readonly"]], {
+}), _descriptor4 = _applyDecoratedDescriptor(_class.prototype, "_updateChildrenByTime", [_Decorators__WEBPACK_IMPORTED_MODULE_20__["readonly"]], {
   configurable: true,
   enumerable: true,
   writable: true,
   initializer: function initializer() {
     var _this5 = this;
 
-    return function (e) {
-      if (_this5.isTimeline || _this5.isTrack) {
-        _this5._updateDuration();
-      }
+    return function (t) {
+      _this5.children.forEach(function (child) {
+        child._update(t);
+      });
     };
   }
-}), _descriptor5 = _applyDecoratedDescriptor(_class.prototype, "_updateChildrenByTime", [_Decorators__WEBPACK_IMPORTED_MODULE_20__["readonly"]], {
+}), _descriptor5 = _applyDecoratedDescriptor(_class.prototype, "_onChildChange", [_Decorators__WEBPACK_IMPORTED_MODULE_20__["readonly"]], {
   configurable: true,
   enumerable: true,
   writable: true,
   initializer: function initializer() {
     var _this6 = this;
 
-    return function (t) {
-      _this6.children.forEach(function (child) {
-        child._update(t);
+    return function (object) {
+      var duration = 0;
+
+      if (object.children.length <= 0) {
+        console.warn("".concat(libName, ".Track._onChildChange: This object has no children."), object);
+        return _this6;
+      }
+
+      object.children.forEach(function (child) {
+        var timeScale = child.timeScale !== undefined ? child.timeScale : 1.0;
+        var childStart = typeof child.start === "number" ? child.start : 0.0;
+        if (child.duration * timeScale + childStart > duration) duration = child.duration * timeScale + childStart;
       });
+      object.duration = duration;
+
+      if (object.parent) {
+        _this6._onChildChange(object.parent);
+      }
+
+      return _this6;
     };
   }
 })), _class);
@@ -5725,7 +5747,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var _class, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _temp;
+var _class, _descriptor, _descriptor2, _descriptor3, _descriptor4, _temp;
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
@@ -5773,10 +5795,6 @@ function (_Ticker) {
 
     _initializerDefineProperty(_this, "_getTrackFromTweens", _descriptor4, _assertThisInitialized(_this));
 
-    _initializerDefineProperty(_this, "_updateDuration", _descriptor5, _assertThisInitialized(_this));
-
-    _this._updateDuration();
-
     if (objects.length !== 0) _this.add(objects, options);
     if (_this.autoStart) _this.start();
     return _this;
@@ -5820,23 +5838,6 @@ function (_Ticker) {
         start: options.start !== undefined ? options.start : _this3.duration
       });
       return track;
-    };
-  }
-}), _descriptor5 = _applyDecoratedDescriptor(_class.prototype, "_updateDuration", [_Core_Decorators__WEBPACK_IMPORTED_MODULE_15__["readonly"]], {
-  configurable: true,
-  enumerable: true,
-  writable: true,
-  initializer: function initializer() {
-    var _this4 = this;
-
-    return function (e) {
-      var duration = 0;
-
-      _this4.children.forEach(function (child) {
-        if (child.start + child.duration > duration) duration = child.start + child.duration;
-      });
-
-      _this4.duration = duration;
     };
   }
 })), _class);
@@ -5905,7 +5906,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var _class, _descriptor, _descriptor2, _temp;
+var _class, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _temp;
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
@@ -5951,66 +5952,11 @@ function (_Family) {
 
     _initializerDefineProperty(_this, "type", _descriptor2, _assertThisInitialized(_this));
 
-    _this._updateDuration = function (start) {
-      var duration = 0;
-      _this.start = start !== undefined ? start : _this.start;
+    _initializerDefineProperty(_this, "setStartTime", _descriptor3, _assertThisInitialized(_this));
 
-      if (_this.children.length <= 0) {
-        console.warn("".concat(libName, ".Track._updateDuration: No children on this Track."));
-        return _assertThisInitialized(_this);
-      }
+    _initializerDefineProperty(_this, "_reset", _descriptor4, _assertThisInitialized(_this));
 
-      _this.children.forEach(function (child) {
-        var timeScale = child.timeScale !== undefined ? child.timeScale : 1.0;
-        var childStart = typeof child.start === "number" ? child.start : 0.0;
-        if (child.duration * timeScale + childStart > duration) duration = child.duration * timeScale + childStart;
-      });
-
-      _this.duration = duration;
-      return _assertThisInitialized(_this);
-    };
-
-    _this._reset = function (e) {
-      _this.isFinished = false;
-      _this.hasStarted = false;
-
-      _this.children.forEach(function (child) {
-        child._reset();
-      });
-    };
-
-    _this._update = function (t) {
-      var timeScale = _this.parent.timeScale !== undefined ? _this.parent.timeScale : 1.0;
-      t /= timeScale;
-
-      if (t >= _this.duration + _this.start) {
-        if (_this.isFinished) return;
-
-        _this._updateChildrenByTime(_this.duration);
-
-        _this.dispatchEvent({
-          type: "onComplete"
-        });
-
-        _this.isFinished = true;
-      } else if (t >= _this.start) {
-        if (!_this.hasStarted) {
-          _this.children.forEach(function (child) {
-            child.isActive = true;
-          });
-
-          _this._updateChildrenByTime(0);
-
-          _this.hasStarted = true;
-        } else {
-          _this._updateChildrenByTime(t - _this.start);
-
-          _this.dispatchEvent({
-            type: "onProgress"
-          });
-        }
-      }
-    };
+    _initializerDefineProperty(_this, "_update", _descriptor5, _assertThisInitialized(_this));
 
     _this.isFinished = false;
     _this.hasStarted = false;
@@ -6034,6 +5980,98 @@ function (_Family) {
   writable: true,
   initializer: function initializer() {
     return "Track";
+  }
+}), _descriptor3 = _applyDecoratedDescriptor(_class.prototype, "setStartTime", [_Core_Decorators__WEBPACK_IMPORTED_MODULE_16__["readonly"]], {
+  configurable: true,
+  enumerable: true,
+  writable: true,
+  initializer: function initializer() {
+    var _this2 = this;
+
+    return function (startTime) {
+      if (typeof startTime !== "number") {
+        console.error("".concat(libName, ".Track.setStartTime: Provided startTime is not typeof 'number'."));
+        return _this2;
+      }
+
+      _this2.start = startTime;
+
+      if (_this2.parent !== null) {
+        _this2._onChildChange(_this2);
+      }
+
+      return _this2;
+    };
+  }
+}), _descriptor4 = _applyDecoratedDescriptor(_class.prototype, "_reset", [_Core_Decorators__WEBPACK_IMPORTED_MODULE_16__["readonly"]], {
+  configurable: true,
+  enumerable: true,
+  writable: true,
+  initializer: function initializer() {
+    var _this3 = this;
+
+    return function (e) {
+      _this3.isFinished = false;
+      _this3.hasStarted = false;
+
+      _this3.children.forEach(function (child) {
+        child.stop();
+      });
+    };
+  }
+}), _descriptor5 = _applyDecoratedDescriptor(_class.prototype, "_update", [_Core_Decorators__WEBPACK_IMPORTED_MODULE_16__["readonly"]], {
+  configurable: true,
+  enumerable: true,
+  writable: true,
+  initializer: function initializer() {
+    var _this4 = this;
+
+    return function (t) {
+      /*
+      	modify t by timeScale
+      */
+      var timeScale = _this4.parent.timeScale !== undefined ? _this4.parent.timeScale : 1.0;
+
+      if (timeScale === Infinity) {
+        timeScale = 1.0;
+      }
+
+      t /= timeScale;
+
+      if (t >= _this4.duration + _this4.start) {
+        if (_this4.isFinished) return;
+
+        _this4._updateChildrenByTime(_this4.duration);
+
+        _this4.dispatchEvent({
+          type: "onComplete"
+        });
+
+        _this4.isFinished = true;
+        _this4.hasStarted = false;
+      } else if (t >= _this4.start) {
+        if (!_this4.hasStarted) {
+          _this4.children.forEach(function (child) {
+            if (child.isTween) child.isActive = true;
+          });
+
+          _this4._updateChildrenByTime(0);
+
+          _this4.hasStarted = true;
+          _this4.isFinished = false;
+        } else {
+          _this4._updateChildrenByTime(t - _this4.start);
+
+          _this4.dispatchEvent({
+            type: "onProgress"
+          });
+        }
+      } else {
+        if (!_this4.hasStarted) return;
+
+        _this4._reset();
+      }
+    };
   }
 })), _class);
 
