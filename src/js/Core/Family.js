@@ -31,8 +31,10 @@ export default class Family extends Root {
 					if (object[i].isTween) tweens.push(object[i]);
 					if (object[i].isTrack) this.add(object[i], {});
 				}
-				const track = this._getTrackFromTweens(tweens, options);
-				this.add(track, options);
+				if (tweens.length >= 1) {
+					const track = this._getTrackFromTweens(tweens, options);
+					this.add(track, options);
+				}
 				return this;
 			}
 
