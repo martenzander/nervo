@@ -50,6 +50,9 @@ propertyNames.forEach(key => {
 		case "isSpring":
 			item.copy = "Returns <b>true</b>.";
 			break;
+		case "object":
+			item.copy = "Configuring object handed over to constructor.";
+			break;
 		case "onComplete":
 			item.copy = "Callback function – gets called when Spring is finished.";
 			break;
@@ -63,10 +66,10 @@ propertyNames.forEach(key => {
 			item.copy = "Stiffness of the Spring. Default <b>0.2</b>";
 			break;
 		case "target":
-			item.copy = "Target of the Spring.";
+			item.copy = "Object containing relevant properties and desired target values.";
 			break;
 		case "type":
-			item.copy = "A string with the purpose to identify the object. Default: <b>Spring</b>.";
+			item.copy = "String with the purpose to identify the object. Default: <b>Spring</b>.";
 			break;
 		case "uuid":
 			item.copy = "<a href=''>UUID</a> of the Spring.";
@@ -89,19 +92,36 @@ const methodsList = [];
 const methodNames = [];
 
 for (const key in reference) {
-	methodNames.push(key);
+	if (typeof reference[key] === "function") methodNames.push(key);
 }
 methodNames.sort();
 
 methodNames.forEach(key => {
-	methodNames.push(key);
+	const argumentNames = reference[key]
+		.toString()
+		.replace(/((\/\/.*$)|(\/\*[\s\S]*?\*\/)|(\s))/gm, "")
+		.match(/^function\s*[^\(]*\(\s*([^\)]*)\)/m)[1]
+		.split(/,/);
 
 	const item = {
 		name: `${key}`,
-		value: `( )`,
+		value: "( ",
 		readonly: !Object.getOwnPropertyDescriptor(reference, key).writable,
 		key: keys[key],
 	};
+
+	argumentNames.forEach((name, i) => {
+		const type = typeof reference[name];
+		const valueType = type !== "undefined" ? type : "any";
+		if (name === "") return;
+		if (i === argumentNames.length - 1) {
+			item.value += ` <b>${name}</b> : ${valueType}`;
+		} else {
+			item.value += ` <b>${name}</b> : ${valueType},`;
+		}
+	});
+
+	item.value += " )";
 
 	switch (key) {
 		case "clone":
@@ -135,11 +155,19 @@ const spring = {
 		[
 			{
 				component: "copy",
-				value: `<code class="language-markup">alert("hi")</code> Lorem ipsum <code class='language-markup'>dolor</code> sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. <code class="language-markup">alert("hi")</code> Lorem ipsum <code class='language-markup'>dolor</code> sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.`,
+				value:
+					"Springs animate in a more physically correct and natural way. They are durationless and accumulative calculated. As soon as a Spring has completed it will become inactive. To trigger a Spring update use .<a href=''>setTarget()</a>. Click and drag somewhere on the canvas below and play with properties like .<a href=''>stiffness</a> or .<a href=''>damping</a>",
 			},
+		],
+		[
 			{
 				component: "canvas",
 				value: SpringExample,
+			},
+			{
+				component: "attentionBox",
+				value:
+					"<b>Notice:</b> Negative and too high values can lead to undesired results. Undamped or overdamped Springs won't complete or complete after a long time.",
 			},
 		],
 		[
@@ -163,10 +191,6 @@ const spring = {
 				component: "copy",
 				value:
 					"<a href=''>autoStart</a> · <a href=''>damping</a> · <a href=''>stiffness</a>",
-			},
-			{
-				component: "attentionBox",
-				value: "<b>Notice:</b> Lorem ipsum.",
 			},
 		],
 		[

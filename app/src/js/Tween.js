@@ -27,7 +27,7 @@ class Tween extends Canvas {
 				onProgress: e => {
 					this.pos.x =
 						this.padding +
-						(this.canvas.width - 2 * this.padding) * e.target.target.progress;
+						(this.canvas.width - 2 * this.padding) * e.target.object.progress;
 					this.pos.y = this.canvas.height / 2;
 					this.draw();
 				},

@@ -1,1 +1,1 @@
-new Nervo.Tween(target : {} , properties : {}, options : {});
+new Nervo.Tween(object : {} , target : {}, options : {});

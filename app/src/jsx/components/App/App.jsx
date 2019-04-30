@@ -15,7 +15,7 @@ const data = require("./../../../data/index.js").default;
 
 class App extends Component {
 	state = {
-		value: 0,
+		renderHeader: false,
 	};
 
 	constructor(props) {
@@ -35,36 +35,73 @@ class App extends Component {
 		});
 	}
 
+	layoutCallback = e => {
+		this.setState({
+			renderHeader: true,
+		});
+	};
+
 	render() {
+		if (this.state.renderHeader) {
+			return (
+				<div className={`${styles.app} app`}>
+					<InpageAnchors>
+						{/* <GithubRibbon /> */}
+						<Header value={this} />
+						<Hero>
+							<div className={"nervo-container"}>
+								<Logo big />
+								<p className={`${styles.color}`}>{`v${this.data.version}`}</p>
+								<br />
+								<p className={`${styles.description}`}>{this.data.description}</p>
+								<div>
+									<Button primary href={`#${data.sections[0].key}`}>
+										Documentation
+									</Button>
+									<Button href={this.data.repository.url.replace("git+", "")}>
+										Github
+									</Button>
+								</div>
+							</div>
+						</Hero>
+						<div className={`${styles.margin}`}>
+							<Layout
+								ref={this.layoutCallback}
+								className={`js-main-content ${styles.padding}`}
+								content={this.sections}
+							/>
+							<Footer />
+						</div>
+					</InpageAnchors>
+				</div>
+			);
+		}
 		return (
 			<div className={`${styles.app} app`}>
-				<InpageAnchors>
-					{/* <GithubRibbon /> */}
-					<Header value={this} />
-					<Hero>
-						<div className={"nervo-container"}>
-							<Logo big />
-							<p className={`${styles.color}`}>{`v${this.data.version}`}</p>
-							<br />
-							<p className={`${styles.description}`}>{this.data.description}</p>
-							<div>
-								<Button primary href={`#${data.sections[0].key}`}>
-									Documentation
-								</Button>
-								<Button href={this.data.repository.url.replace("git+", "")}>
-									Github
-								</Button>
-							</div>
+				<Hero>
+					<div className={"nervo-container"}>
+						<Logo big />
+						<p className={`${styles.color}`}>{`v${this.data.version}`}</p>
+						<br />
+						<p className={`${styles.description}`}>{this.data.description}</p>
+						<div>
+							<Button primary href={`#${data.sections[0].key}`}>
+								Documentation
+							</Button>
+							<Button href={this.data.repository.url.replace("git+", "")}>
+								Github
+							</Button>
 						</div>
-					</Hero>
-					<div className={`${styles.margin}`}>
-						<Layout
-							className={`js-main-content ${styles.padding}`}
-							content={this.sections}
-						/>
-						<Footer />
 					</div>
-				</InpageAnchors>
+				</Hero>
+				<div className={`${styles.margin}`}>
+					<Layout
+						ref={this.layoutCallback}
+						className={`js-main-content ${styles.padding}`}
+						content={this.sections}
+					/>
+					<Footer />
+				</div>
 			</div>
 		);
 	}

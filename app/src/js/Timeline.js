@@ -17,7 +17,7 @@ class Timeline extends Canvas {
 		this.tweens = [];
 
 		for (let i = 0; i < 6; i++) {
-			let timeScale = i === 1 ? 4 : 1;
+			const timeScale = i === 0 ? 1.5 : 1;
 
 			const tween = new Nervo.Tween(
 				{ progress: 0 },
@@ -35,16 +35,33 @@ class Timeline extends Canvas {
 			this.tweens.push(tween);
 		}
 
-		console.log(this.tweens[0]);
+		// const trackNested = new Nervo.Track([this.tweens[0], this.tweens[1], this.tweens[2]], {
+		// 	start: 2,
+		// 	onProgress: e => {
+		// 		// console.log(e);
+		// 	},
+		// });
 
-		this.timeline = new Nervo.Timeline([this.tweens[0], this.tweens[1]], {
+		// const parentTrack = new Nervo.Track(
+		// 	[trackNested, this.tweens[3], this.tweens[4], this.tweens[5]],
+		// 	{
+		// 		start: 0,
+		// 		onProgress: e => {
+		// 			// console.log(e);
+		// 		},
+		// 	}
+		// );
+
+		this.timeline = new Nervo.Timeline([], {
 			loop: true,
+			timeScale: 2,
 			onComplete: e => {},
 			onProgress: e => {
 				this.draw();
 			},
 		});
 
+		this.timeline.add([this.tweens[0], this.tweens[1]], { start: 0 });
 		this.timeline.add([this.tweens[2], this.tweens[3]], { start: 1 });
 		this.timeline.add([this.tweens[4], this.tweens[5]], { start: 2 });
 		this.timeline.start();
@@ -69,7 +86,7 @@ class Timeline extends Canvas {
 			this.context.beginPath();
 			this.context.arc(
 				this.padding +
-					(this.canvas.width - 2 * this.padding) * this.tweens[i].target.progress,
+					(this.canvas.width - 2 * this.padding) * this.tweens[i].object.progress,
 				this.padding + this.radius * 2.75 * i,
 				this.radius,
 				0,

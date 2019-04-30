@@ -12,13 +12,11 @@ class Spring extends Canvas {
 			{},
 			{
 				autoStart: false,
-				stiffness: 0.1,
-				damping: 0.2,
 				onProgress: e => {
 					this.draw();
 				},
 				onComplete: e => {
-					// console.log("onComplete");
+					console.log(e, "onComplete");
 				},
 			}
 		);
@@ -72,8 +70,8 @@ class Spring extends Canvas {
 		this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
 		this.context.beginPath();
 		this.context.arc(
-			this.spring.target.x,
-			this.spring.target.y,
+			this.spring.object.x,
+			this.spring.object.y,
 			this.radius,
 			0,
 			2 * Math.PI,

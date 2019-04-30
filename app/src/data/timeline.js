@@ -65,15 +65,14 @@ propertyNames.forEach(key => {
 			item.copy = "Callback function – gets called while Timeline is playing.";
 			break;
 		case "options":
-			item.copy = "Object handed over to constructor.";
+			item.copy = "Configuring object handed over to constructor.";
 			break;
 		case "timeScale":
 			item.copy =
-				"A floating number scaling the progress of the Timeline. Default: <b>1.0</b>.";
+				"Floating number scaling the duration of the Timeline. Default: <b>1.0</b>.";
 			break;
 		case "type":
-			item.copy =
-				"A string with the purpose to identify the object. Default: <b>Timeline</b>.";
+			item.copy = "String with the purpose to identify the object. Default: <b>Timeline</b>.";
 			break;
 		case "uuid":
 			item.copy = "<a href=''>UUID</a> of the Timeline.";
@@ -96,23 +95,41 @@ const methodsList = [];
 const methodNames = [];
 
 for (const key in reference) {
-	methodNames.push(key);
+	if (typeof reference[key] === "function") methodNames.push(key);
 }
 methodNames.sort();
 
 methodNames.forEach(key => {
-	methodNames.push(key);
+	const argumentNames = reference[key]
+		.toString()
+		.replace(/((\/\/.*$)|(\/\*[\s\S]*?\*\/)|(\s))/gm, "")
+		.match(/^function\s*[^\(]*\(\s*([^\)]*)\)/m)[1]
+		.split(/,/);
 
 	const item = {
 		name: `${key}`,
-		value: `( )`,
+		value: "( ",
 		readonly: !Object.getOwnPropertyDescriptor(reference, key).writable,
 		key: keys[key],
 	};
 
+	argumentNames.forEach((name, i) => {
+		const type = typeof reference[name];
+		const valueType = type !== "undefined" ? type : "any";
+		if (name === "") return;
+		if (i === argumentNames.length - 1) {
+			item.value += ` <b>${name}</b> : ${valueType}`;
+		} else {
+			item.value += ` <b>${name}</b> : ${valueType},`;
+		}
+	});
+
+	item.value += " )";
+
 	switch (key) {
 		case "add":
-			item.copy = "Adds Tweens or Tracks to the Timeline.";
+			console.log();
+			item.copy = "Adds Tweens or Tracks to the Timeline. Arrays are allowed.";
 			break;
 		case "clone":
 			item.copy = "Returns a clone of the Timeline.";
@@ -124,7 +141,7 @@ methodNames.forEach(key => {
 			item.copy = "Continues playing the Timeline at .<a href=''>currentTime</a>.";
 			break;
 		case "remove":
-			item.copy = "Removes Tweens or Tracks from the Timeline.";
+			item.copy = "Removes Tweens or Tracks from the Timeline. Arrays are allowed.";
 			break;
 		case "start":
 			item.copy = "Starts playing the Timeline from the start.";
@@ -152,23 +169,13 @@ const timeline = {
 			{
 				component: "copy",
 				value:
-					"Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.",
-			},
-			{
-				component: "canvas",
-				value: TimelineExample,
+					"Timelines control multiple Tracks and their contained Tweens. If you want to add a Tween to a Timeline you can either add the Tween to an already existing Track or directly add the Tween to the Timeline using .<a href=''>add()</a>.",
 			},
 		],
 		[
 			{
-				component: "copy",
-				value: "The example above could be achieved using the Code below.",
-			},
-			{
-				component: "code",
-				value: {
-					source: "timelineExample.js",
-				},
+				component: "canvas",
+				value: TimelineExample,
 			},
 		],
 		[
@@ -180,7 +187,7 @@ const timeline = {
 			{
 				component: "code",
 				value: {
-					source: "timelineConstructor.js",
+					source: "timelineExample.js",
 				},
 			},
 			{
@@ -202,6 +209,11 @@ const timeline = {
 				component: "copy",
 				value:
 					"<a href=''>autoStart</a> · <a href=''>easing</a> · <a href=''>loop</a> · <a href=''>onProgress</a> · <a href=''>onComplete</a>",
+			},
+			{
+				component: "attentionBox",
+				value:
+					'<b>Notice:</b> For the easing option you can either pass a function or a valid <a href="https://www.npmjs.com/package/eases" target="_blank">eases</a> string. E.g. "sineOut".',
 			},
 		],
 		[

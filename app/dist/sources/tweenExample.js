@@ -3,7 +3,7 @@ const tween = new Nervo.Tween(
 	{ progress: 1 },
 	{
 		autoStart: true,
-		duration: 2,
+		duration: 3,
 		easing: "quadInOut",
 		loop: true,
 		onProgress: e => {

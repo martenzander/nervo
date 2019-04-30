@@ -55,8 +55,11 @@ propertyNames.forEach(key => {
 		case "loop":
 			item.copy = "Whether the tween will loop when finished.";
 			break;
+		case "object":
+			item.copy = "Object whose properties will be modified.";
+			break;
 		case "options":
-			item.copy = "Object handed over to constructor.";
+			item.copy = "Configuring object handed over to constructor.";
 			break;
 		case "onProgress":
 			item.copy = "Callback function – gets called while Tween is playing.";
@@ -67,17 +70,14 @@ propertyNames.forEach(key => {
 		case "parent":
 			item.copy = "Returns the parent Track. Default: <b>null</b>.";
 			break;
-		case "properties":
+		case "target":
 			item.copy = "Object containing relevant properties and desired target values.";
 			break;
-		case "target":
-			item.copy = "Object whose properties will be modified.";
-			break;
 		case "timeScale":
-			item.copy = "A floating number scaling the progress of the tween. Default: <b>1.0</b>.";
+			item.copy = "Foating number scaling the duration of the tween. Default: <b>1.0</b>.";
 			break;
 		case "type":
-			item.copy = "A string with the purpose to identify the object. Default: <b>Tween</b>.";
+			item.copy = "String with the purpose to identify the object. Default: <b>Tween</b>.";
 			break;
 		case "uuid":
 			item.copy = "<a href=''>UUID</a> of the Tween.";
@@ -100,19 +100,36 @@ const methodsList = [];
 const methodNames = [];
 
 for (const key in reference) {
-	methodNames.push(key);
+	if (typeof reference[key] === "function") methodNames.push(key);
 }
 methodNames.sort();
 
 methodNames.forEach(key => {
-	methodNames.push(key);
+	const argumentNames = reference[key]
+		.toString()
+		.replace(/((\/\/.*$)|(\/\*[\s\S]*?\*\/)|(\s))/gm, "")
+		.match(/^function\s*[^\(]*\(\s*([^\)]*)\)/m)[1]
+		.split(/,/);
 
 	const item = {
 		name: `${key}`,
-		value: "( )",
+		value: "( ",
 		readonly: !Object.getOwnPropertyDescriptor(reference, key).writable,
 		key: keys[key],
 	};
+
+	argumentNames.forEach((name, i) => {
+		const type = typeof reference[name];
+		const valueType = type !== "undefined" ? type : "any";
+		if (name === "") return;
+		if (i === argumentNames.length - 1) {
+			item.value += ` <b>${name}</b> : ${valueType}`;
+		} else {
+			item.value += ` <b>${name}</b> : ${valueType},`;
+		}
+	});
+
+	item.value += " )";
 
 	switch (key) {
 		case "clone":
@@ -150,23 +167,13 @@ const tween = {
 			{
 				component: "copy",
 				value:
-					"A Tween interpolates numeric values of an Object over time. Multiple Tweens can be grouped on <a href='#'>Tracks</a> and controlled by <a href='#'>Timelines</a>.",
-			},
-			{
-				component: "canvas",
-				value: TweenExample,
+					"A Tween interpolates any numeric value of an object over time. Multiple Tweens can be grouped on <a href='#'>Tracks</a> and controlled by <a href='#'>Timelines</a>.",
 			},
 		],
 		[
 			{
-				component: "copy",
-				value: "The example above could be achieved using the Code below.",
-			},
-			{
-				component: "code",
-				value: {
-					source: "tweenExample.js",
-				},
+				component: "canvas",
+				value: TweenExample,
 			},
 		],
 		[
@@ -178,7 +185,7 @@ const tween = {
 			{
 				component: "code",
 				value: {
-					source: "tweenConstructor.js",
+					source: "tweenExample.js",
 				},
 			},
 			{
@@ -189,18 +196,13 @@ const tween = {
 			{
 				component: "copy",
 				value:
-					"When creating a new Tween there are several options that can be handed over to the constructor.<br/><a href=''>autoStart</a> · <a href=''>duration</a> · <a href=''>easing</a> · <a href=''>loop</a> · <a href=''>onProgress</a> · <a href=''>onComplete</a>",
+					"<a href=''>autoStart</a> · <a href=''>duration</a> · <a href=''>easing</a> · <a href=''>loop</a> · <a href=''>onProgress</a> · <a href=''>onComplete</a>",
 			},
 			{
 				component: "attentionBox",
 				value:
 					'<b>Notice:</b> For the easing option you can either pass a function or a valid <a href="https://www.npmjs.com/package/eases" target="_blank">eases</a> string. E.g. "sineOut".',
 			},
-			// {
-			// 	component: "copy",
-			// 	value:
-			// 		"<a href=''>autoStart</a> · <a href=''>duration</a> · <a href=''>easing</a> · <a href=''>loop</a> · <a href=''>onProgress</a> · <a href=''>onComplete</a>",
-			// },
 		],
 		[
 			{

@@ -40,7 +40,7 @@ class Layout extends Component {
 								"nervo-col-12 nervo-col-sm-12 nervo-col-md-12 nervo-col-lg-9"
 							}
 						>
-							<main ref={this.refCallback}>{this.props.content}</main>
+							<main>{this.props.content}</main>
 						</div>
 
 						<div
@@ -49,7 +49,10 @@ class Layout extends Component {
 							}
 						>
 							<Sidebar>
-								<SidebarNavigation sections={this.props.content} />
+								<SidebarNavigation
+									renderSidebarNavigation={this.state.renderSidebarNavigation}
+									sections={this.props.content}
+								/>
 							</Sidebar>
 						</div>
 					</div>

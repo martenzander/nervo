@@ -55,7 +55,7 @@ propertyNames.forEach(key => {
 			item.copy = "Callback function – gets called while Track is playing.";
 			break;
 		case "options":
-			item.copy = "Object handed over to constructor.";
+			item.copy = "Configuring object handed over to constructor.";
 			break;
 		case "parent":
 			item.copy = "Parent Timeline. Default: <b>null</b>.";
@@ -64,7 +64,7 @@ propertyNames.forEach(key => {
 			item.copy = "Start of the Track in seconds.";
 			break;
 		case "type":
-			item.copy = "A string with the purpose to identify the object. Default: <b>Track</b>.";
+			item.copy = "String with the purpose to identify the object. Default: <b>Track</b>.";
 			break;
 		case "uuid":
 			item.copy = "<a href=''>UUID</a> of the Track.";
@@ -87,29 +87,46 @@ const methodsList = [];
 const methodNames = [];
 
 for (const key in reference) {
-	methodNames.push(key);
+	if (typeof reference[key] === "function") methodNames.push(key);
 }
 methodNames.sort();
 
 methodNames.forEach(key => {
-	methodNames.push(key);
+	const argumentNames = reference[key]
+		.toString()
+		.replace(/((\/\/.*$)|(\/\*[\s\S]*?\*\/)|(\s))/gm, "")
+		.match(/^function\s*[^\(]*\(\s*([^\)]*)\)/m)[1]
+		.split(/,/);
 
 	const item = {
 		name: `${key}`,
-		value: `( )`,
+		value: "( ",
 		readonly: !Object.getOwnPropertyDescriptor(reference, key).writable,
 		key: keys[key],
 	};
 
+	argumentNames.forEach((name, i) => {
+		const type = typeof reference[name];
+		const valueType = type !== "undefined" ? type : "any";
+		if (name === "") return;
+		if (i === argumentNames.length - 1) {
+			item.value += ` <b>${name}</b> : ${valueType}`;
+		} else {
+			item.value += ` <b>${name}</b> : ${valueType},`;
+		}
+	});
+
+	item.value += " )";
+
 	switch (key) {
 		case "add":
-			item.copy = "Adds Tweens to the Track.";
+			item.copy = "Adds Tweens to the Track. Arrays are allowed.";
 			break;
 		case "clone":
 			item.copy = "Returns a clone of the Track.";
 			break;
 		case "remove":
-			item.copy = "Removes Tweens from the Track.";
+			item.copy = "Removes Tweens from the Track. Arrays are allowed.";
 			break;
 		default:
 			item.copy = "";
@@ -131,18 +148,12 @@ const track = {
 			{
 				component: "copy",
 				value:
-					"<b>Notice:</b> Tracks don't modify objects directly. They update their child Tweens based on given time provided by their parent timeline. Tracks without a parent Timeline have no effect on their Tweens.",
+					"Tracks group multiple <a href=''>Tweens</a> and define a collective .<a href=''>start</a> for all .<a href=''>children</a>.",
 			},
 			{
 				component: "attentionBox",
 				value:
-					"<b>Notice:</b> Tracks update their childs based on a given time provided by their parent Timeline. Tracks without a parent Timeline have no effect on their Tweens.",
-			},
-			{
-				component: "code",
-				value: {
-					source: "trackExample.js",
-				},
+					"<b>Notice:</b> Tracks update their children based on a given time provided by a Timeline. Tracks without a parent Timeline have no effect on their Tweens.",
 			},
 		],
 		[
@@ -154,7 +165,7 @@ const track = {
 			{
 				component: "code",
 				value: {
-					source: "trackConstructor.js",
+					source: "trackExample.js",
 				},
 			},
 			{
