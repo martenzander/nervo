@@ -87,7 +87,9 @@ export default class Family extends Root {
 
 			object.dispatchEvent({ type: "added" });
 
-			this._onChildChange();
+			if (this.isTimeline || this.isTrack) {
+				this._onChildChange(this);
+			}
 		} else {
 			console.error(
 				`${libName}.Base.add: Object is not an instance of ${libName}.Base.`,
@@ -114,17 +116,12 @@ export default class Family extends Root {
 			object.dispatchEvent({ type: "removed" });
 
 			this.children.splice(index, 1);
-			this._onChildChange();
+			if (this.isTimeline || this.isTrack) {
+				this._onChildChange(this);
+			}
 		}
 
 		return this;
-	};
-
-	@readonly
-	_onChildChange = e => {
-		if (this.isTimeline || this.isTrack) {
-			this._updateDuration();
-		}
 	};
 
 	@readonly
@@ -132,5 +129,31 @@ export default class Family extends Root {
 		this.children.forEach(child => {
 			child._update(t);
 		});
+	};
+
+	@readonly
+	_onChildChange = object => {
+		let duration = 0;
+
+		if (object.children.length <= 0) {
+			console.warn(`${libName}.Track._onChildChange: This object has no children.`, object);
+			return this;
+		}
+
+		object.children.forEach(child => {
+			const timeScale = child.timeScale !== undefined ? child.timeScale : 1.0;
+			const childStart = typeof child.start === "number" ? child.start : 0.0;
+
+			if (child.duration * timeScale + childStart > duration)
+				duration = child.duration * timeScale + childStart;
+		});
+
+		object.duration = duration;
+
+		if (object.parent) {
+			this._onChildChange(object.parent);
+		}
+
+		return this;
 	};
 }

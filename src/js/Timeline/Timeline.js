@@ -6,7 +6,6 @@ export default class Timeline extends Ticker {
 	constructor(objects = [], options = {}) {
 		super(options);
 
-		this._updateDuration();
 		if (objects.length !== 0) this.add(objects, options);
 		if (this.autoStart) this.start();
 	}
@@ -28,16 +27,5 @@ export default class Timeline extends Ticker {
 			start: options.start !== undefined ? options.start : this.duration,
 		});
 		return track;
-	};
-
-	@readonly
-	_updateDuration = e => {
-		let duration = 0;
-
-		this.children.forEach(child => {
-			if (child.start + child.duration > duration) duration = child.start + child.duration;
-		});
-
-		this.duration = duration;
 	};
 }

@@ -19,24 +19,20 @@ export default class Track extends Family {
 		if (objects.length >= 1) this.add(objects, options);
 	}
 
-	_updateDuration = start => {
-		let duration = 0;
-		this.start = start !== undefined ? start : this.start;
-
-		if (this.children.length <= 0) {
-			console.warn(`${libName}.Track._updateDuration: No children on this Track.`);
+	@readonly
+	setStartTime = startTime => {
+		if (typeof startTime !== "number") {
+			console.error(
+				`${libName}.Track.setStartTime: Provided startTime is not typeof 'number'.`
+			);
 			return this;
 		}
 
-		this.children.forEach(child => {
-			const timeScale = child.timeScale !== undefined ? child.timeScale : 1.0;
-			const childStart = typeof child.start === "number" ? child.start : 0.0;
+		this.start = startTime;
 
-			if (child.duration * timeScale + childStart > duration)
-				duration = child.duration * timeScale + childStart;
-		});
-
-		this.duration = duration;
+		if (this.parent !== null) {
+			this._onChildChange(this);
+		}
 
 		return this;
 	};
