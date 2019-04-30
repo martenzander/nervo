@@ -1,5 +1,6 @@
 import * as Nervo from "./../../../src/js/index";
 const reference = new Nervo.Track([new Nervo.Tween({}, {}, { duration: 2 })], {});
+const TrackExample = require("./../js/Track");
 import uuid from "uuid/v4";
 
 // keys
@@ -149,6 +150,12 @@ const track = {
 				component: "copy",
 				value:
 					"Tracks group multiple <a href=''>Tweens</a> and define a collective .<a href=''>start</a> for all its direct .<a href=''>children</a>. The most outer parent of a Track must be a Timeline in order to work.",
+			},
+		],
+		[
+			{
+				component: "canvas",
+				value: TrackExample,
 			},
 			{
 				component: "attentionBox",

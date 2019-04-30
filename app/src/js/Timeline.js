@@ -14,58 +14,41 @@ class Timeline extends Canvas {
 		this.radiusFactor = 0.0625 / 2;
 		this.setSizes();
 
-		// const test = new Nervo.Test();
-
 		this.tweens = [];
 
-		for (let i = 0; i < 6; i++) {
-			const timeScale = i === 0 ? 1.5 : 1;
-
+		for (let i = 0; i < 3; i++) {
 			const tween = new Nervo.Tween(
 				{ progress: 0 },
 				{ progress: 1 },
 				{
-					// timeScale: timeScale,
+					id: i,
 					easing: "cubicInOut",
 					duration: 3,
-					onProgress: e => {
-						// console.log(e.target);
-					},
+					onProgress: e => {},
 				}
 			);
 
 			this.tweens.push(tween);
 		}
 
-		// const trackNested = new Nervo.Track([this.tweens[0], this.tweens[1], this.tweens[2]], {
-		// 	start: 2,
-		// 	onProgress: e => {
-		// 		// console.log(e);
-		// 	},
-		// });
-
-		// const parentTrack = new Nervo.Track(
-		// 	[trackNested, this.tweens[3], this.tweens[4], this.tweens[5]],
-		// 	{
-		// 		start: 0,
-		// 		onProgress: e => {
-		// 			// console.log(e);
-		// 		},
-		// 	}
-		// );
-
 		this.timeline = new Nervo.Timeline([], {
+			name: "test",
 			loop: true,
-			timeScale: 2,
+			timeScale: 1,
 			onComplete: e => {},
 			onProgress: e => {
 				this.draw();
 			},
 		});
 
-		this.timeline.add([this.tweens[0], this.tweens[1]], { start: 0 });
-		this.timeline.add([this.tweens[2], this.tweens[3]], { start: 1 });
-		this.timeline.add([this.tweens[4], this.tweens[5]], { start: 2 });
+		this.timeline.add([this.tweens[0]], { start: 0 });
+		this.timeline.add([this.tweens[1]], { start: 1 });
+		this.timeline.add([this.tweens[2]], { start: 2 });
+
+		this.timeline.children.forEach(child => {
+			child.name = "test";
+			child.id = child.children[0].id;
+		});
 		this.timeline.start();
 
 		// GUI Properties
@@ -84,7 +67,9 @@ class Timeline extends Canvas {
 
 	draw = e => {
 		this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+		let isActive = "";
 		for (let i = 0; i < this.tweens.length; i++) {
+			isActive += ` ${this.tweens[i].isActive}`;
 			this.context.beginPath();
 			this.context.arc(
 				this.padding +
@@ -95,12 +80,12 @@ class Timeline extends Canvas {
 				2 * Math.PI,
 				false
 			);
-			if (i <= 1) {
+			if (i === 0) {
 				this.context.fillStyle = "#FFEB4F";
-			} else if (i <= 3) {
+			} else if (i === 1) {
 				this.context.fillStyle = "#DD436B";
 			} else {
-				this.context.fillStyle = "#202449";
+				this.context.fillStyle = "#196A99";
 			}
 			this.context.fill();
 		}
