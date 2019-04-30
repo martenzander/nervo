@@ -13,7 +13,7 @@ class Track extends Canvas {
 		super(canvas);
 		this.radiusFactor = 0.0625 / 2;
 		this.setSizes();
-		this.trackHeight = 32 / this.canvas.height;
+		this.trackHeight = 80 / this.canvas.height;
 		this.trackBgColor = "#141730";
 		this.trackColors = ["#FFEB4F", "#DD436B", "#196A99"];
 
@@ -53,16 +53,20 @@ class Track extends Canvas {
 		});
 
 		// GUI Properties
-		const tracksFolder = this.gui.addFolder("tracks");
 		for (let i = 0; i < this.tracks.length; i++) {
-			const folder = tracksFolder.addFolder(`Track ${i}`);
+			const folder = this.gui.addFolder(`Track ${i + 1}`);
 			folder
 				.add(this.tracks[i], "start")
 				.min(0)
 				.onChange(e => {
-					this.tracks[i].setStart(e);
+					this.tracks[i].setStartTime(e);
 				});
 		}
+		const timelineFolder = this.gui.addFolder("Timeline");
+		timelineFolder.add(this.timeline, "timeScale");
+		timelineFolder.add(this.timeline, "easing", easeNames).onChange(e => {
+			this.timeline.easing = eases[e];
+		});
 
 		this.timeline.start();
 	}
@@ -88,7 +92,7 @@ class Track extends Canvas {
 
 		// Progress
 		this.context.fillStyle = "rgba( 32, 36, 73 , 0.5)";
-		const width = this.timeline.progress * this.canvas.width;
+		const width = this.timeline.easedProgress * this.canvas.width;
 		this.context.fillRect(0, 0, width, this.canvas.height);
 
 		for (let i = 0; i < this.tracks.length; i++) {
