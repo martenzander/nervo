@@ -156,7 +156,7 @@ const spring = {
 			{
 				component: "copy",
 				value:
-					"Springs animate in a more physically correct and natural way. They are durationless and accumulative calculated. As soon as a Spring has completed it will become inactive. To trigger a Spring update use .<a href=''>setTarget()</a>. Click and drag somewhere on the canvas below and play with properties like .<a href=''>stiffness</a> or .<a href=''>damping</a>",
+					"Springs animate in a more physically and natural way. They are durationless and accumulative calculated. As soon as a Spring has completed it will become inactive. To trigger a Spring update use .<a href=''>setTarget()</a>. Click and drag somewhere on the canvas below and play with properties like .<a href=''>stiffness</a> or .<a href=''>damping</a>",
 			},
 		],
 		[

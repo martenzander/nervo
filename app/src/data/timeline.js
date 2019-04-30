@@ -169,7 +169,7 @@ const timeline = {
 			{
 				component: "copy",
 				value:
-					"Timelines control multiple Tracks and their contained Tweens. If you want to add a Tween to a Timeline you can either add the Tween to an already existing Track or directly add the Tween to the Timeline using .<a href=''>add()</a>.",
+					"Timelines control multiple Tracks and their contained children. If you want to add a Tween to a Timeline you can either add the Tween to an already existing Track or directly add the Tween to the Timeline using .<a href=''>add()</a>. As long as no options provided, this will add the Tween at the end of the Timeline nested in its own Track.",
 			},
 		],
 		[
@@ -207,8 +207,11 @@ const timeline = {
 			},
 			{
 				component: "copy",
-				value:
-					"<a href=''>autoStart</a> · <a href=''>easing</a> · <a href=''>loop</a> · <a href=''>onProgress</a> · <a href=''>onComplete</a>",
+				value: `<a href='#${keys.autoStart}'>autoStart</a> · <a href='#${
+					keys.easing
+				}'>easing</a> · <a href='#${keys.loop}'>loop</a> · <a href='#${
+					keys.onComplete
+				}'>onComplete</a> · <a href='#${keys.onProgress}'>onProgress</a>`,
 			},
 			{
 				component: "attentionBox",

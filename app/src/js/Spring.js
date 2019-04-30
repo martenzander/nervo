@@ -15,9 +15,7 @@ class Spring extends Canvas {
 				onProgress: e => {
 					this.draw();
 				},
-				onComplete: e => {
-					console.log(e, "onComplete");
-				},
+				onComplete: e => {},
 			}
 		);
 

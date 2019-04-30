@@ -14,6 +14,8 @@ class Timeline extends Canvas {
 		this.radiusFactor = 0.0625 / 2;
 		this.setSizes();
 
+		// const test = new Nervo.Test();
+
 		this.tweens = [];
 
 		for (let i = 0; i < 6; i++) {

@@ -148,12 +148,12 @@ const track = {
 			{
 				component: "copy",
 				value:
-					"Tracks group multiple <a href=''>Tweens</a> and define a collective .<a href=''>start</a> for all .<a href=''>children</a>.",
+					"Tracks group multiple <a href=''>Tweens</a> and define a collective .<a href=''>start</a> for all its direct .<a href=''>children</a>. The most outer parent of a Track must be a Timeline in order to work.",
 			},
 			{
 				component: "attentionBox",
 				value:
-					"<b>Notice:</b> Tracks update their children based on a given time provided by a Timeline. Tracks without a parent Timeline have no effect on their Tweens.",
+					"<b>Pro Tip:</b> It is allowed to nest Tracks for even more flexibility in time and space.",
 			},
 		],
 		[
@@ -170,12 +170,12 @@ const track = {
 			},
 			{
 				component: "headline",
-				value: "Tweens",
+				value: "Children",
 				type: "h4",
 			},
 			{
 				component: "copy",
-				value: "An array of Tweens that will be added to the Track.",
+				value: "Array containing Tweens and Tracks that will be added to the Track.",
 			},
 			{
 				component: "headline",
@@ -184,7 +184,9 @@ const track = {
 			},
 			{
 				component: "copy",
-				value: "<a href=''>start</a>",
+				value: `<a href='#${keys.start}'>start</a> · <a href='#${
+					keys.onComplete
+				}'>onComplete</a> · <a href='#${keys.onProgress}'>onProgress</a>`,
 			},
 		],
 		[

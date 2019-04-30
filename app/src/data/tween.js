@@ -195,8 +195,13 @@ const tween = {
 			},
 			{
 				component: "copy",
-				value:
-					"<a href=''>autoStart</a> · <a href=''>duration</a> · <a href=''>easing</a> · <a href=''>loop</a> · <a href=''>onProgress</a> · <a href=''>onComplete</a>",
+				value: `<a href='#${keys.autoStart}'>autoStart</a> · <a href='#${
+					keys.duration
+				}'>duration</a> · <a href='#${keys.easing}'>easing</a> · <a href='#${
+					keys.loop
+				}'>loop</a> · <a href='#${keys.onComplete}'>onComplete</a> · <a href='#${
+					keys.onProgress
+				}'>onProgress</a>`,
 			},
 			{
 				component: "attentionBox",
