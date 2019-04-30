@@ -1,10 +1,10 @@
 import * as Nervo from "./../index";
 import Clock from "./Clock";
-import Base from "./Base";
+import Family from "./Family";
 import * as Eases from "eases";
 import { readonly } from "./Decorators";
 
-export default class Ticker extends Base {
+export default class Ticker extends Family {
 	/*
 		Nervo.Ticker: This is not intended to be called directly.
 		It is called internally as a base class to manage timing and easing by other Nervo classes.
@@ -51,7 +51,7 @@ export default class Ticker extends Base {
 		.start(): Resets this instance, all of its children and than starts ticking.
 	*/
 	@readonly
-	start = e => {
+	start = () => {
 		this._reset();
 		this.play();
 	};
@@ -60,7 +60,7 @@ export default class Ticker extends Base {
 		.stop(): Resets this instance, all of its children and than stops at t = 0.
 	*/
 	@readonly
-	stop = e => {
+	stop = () => {
 		this._reset();
 		this.pause();
 	};
@@ -70,7 +70,7 @@ export default class Ticker extends Base {
 		Also stops the clock at this.currentTime.
 	*/
 	@readonly
-	pause = e => {
+	pause = () => {
 		this.isActive = false;
 		this._clock.stop();
 	};
@@ -80,7 +80,7 @@ export default class Ticker extends Base {
 		restarting the clock.
 	*/
 	@readonly
-	play = e => {
+	play = () => {
 		this.isActive = true;
 		this._clock.start();
 		this._tick();

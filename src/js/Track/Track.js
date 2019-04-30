@@ -1,9 +1,9 @@
 const packageConfig = require("./../../../package.json");
 const libName = packageConfig.name.charAt(0).toUpperCase() + packageConfig.name.slice(1);
 import { readonly } from "./../Core/Decorators";
-import Base from "./../Core/Base";
+import Family from "../Core/Family";
 
-export default class Track extends Base {
+export default class Track extends Family {
 	@readonly
 	isTrack = true;
 
@@ -24,15 +24,16 @@ export default class Track extends Base {
 		this.start = start !== undefined ? start : this.start;
 
 		if (this.children.length <= 0) {
-			console.warn(
-				`${libName}.Track._updateDuration: No instances of ${libName}.Tween in this Track.`
-			);
+			console.warn(`${libName}.Track._updateDuration: No children on this Track.`);
 			return this;
 		}
 
 		this.children.forEach(child => {
-			if (child.duration * child.timeScale > duration)
-				duration = child.duration * child.timeScale;
+			const timeScale = child.timeScale !== undefined ? child.timeScale : 1.0;
+			const childStart = typeof child.start === "number" ? child.start : 0.0;
+
+			if (child.duration * timeScale + childStart > duration)
+				duration = child.duration * timeScale + childStart;
 		});
 
 		this.duration = duration;
@@ -49,7 +50,8 @@ export default class Track extends Base {
 	};
 
 	_update = t => {
-		t /= this.parent.timeScale;
+		const timeScale = this.parent.timeScale !== undefined ? this.parent.timeScale : 1.0;
+		t /= timeScale;
 
 		if (t >= this.duration + this.start) {
 			if (this.isFinished) return;
@@ -65,7 +67,7 @@ export default class Track extends Base {
 				this.hasStarted = true;
 			} else {
 				this._updateChildrenByTime(t - this.start);
-				this.dispatchEvent({ type: "onprogress" });
+				this.dispatchEvent({ type: "onProgress" });
 			}
 		}
 	};

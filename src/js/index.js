@@ -1,4 +1,3 @@
-import * as Utils from "./Core/Utils";
 import Spring from "./Spring/Spring";
 import Timeline from "./Timeline/Timeline";
 import Track from "./Track/Track";
@@ -16,9 +15,6 @@ export { Duration };
 export { Easing };
 export { Loop };
 export { TimeScale };
-
-// Utils
-export { Utils };
 
 // Classes
 export { Spring };

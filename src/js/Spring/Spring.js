@@ -1,26 +1,22 @@
 import { readonly } from "./../Core/Decorators";
 import * as Nervo from "./../index";
-import Base from "../Core/Base";
+import Root from "../Core/Root";
 
-export default class Spring extends Base {
+export default class Spring extends Root {
 	static Stiffness = 0.2;
 	static Damping = 0.5;
 
-	constructor(target, properties, options = {}) {
+	constructor(object, target, options = {}) {
 		super(options);
-		delete this.parent;
-		delete this.children;
-		delete this.add;
-		delete this.remove;
 
 		this.autoStart = options.autoStart !== undefined ? options.autoStart : true;
-		this.properties = properties;
 		this.target = target;
+		this.object = object;
 		this.stiffness = options.stiffness !== undefined ? options.stiffness : Spring.Stiffness;
 		this.damping = options.damping !== undefined ? options.damping : Spring.Damping;
 		this._velocities = {};
 
-		for (const key in this.target) {
+		for (const key in this.object) {
 			this._velocities[key] = 0.0;
 		}
 
@@ -34,8 +30,8 @@ export default class Spring extends Base {
 	type = "Spring";
 
 	@readonly
-	setTarget = properties => {
-		this.properties = properties;
+	setTarget = target => {
+		this.target = target;
 		if (this.isActive) return;
 		this.enable();
 	};
@@ -44,7 +40,7 @@ export default class Spring extends Base {
 		.disable(): Sets this.isActive to false and interrupts the tick loop.
 	*/
 	@readonly
-	disable = e => {
+	disable = () => {
 		this.isActive = false;
 	};
 
@@ -52,7 +48,7 @@ export default class Spring extends Base {
 		.enable(): Sets this.isActive to true and triggers the tick loop.
 	*/
 	@readonly
-	enable = e => {
+	enable = () => {
 		this.isActive = true;
 		this._tick();
 	};
@@ -61,14 +57,14 @@ export default class Spring extends Base {
 	_update = e => {
 		let isComplete = false;
 
-		for (const key in this.properties) {
-			if (this.target[key] !== this.properties[key]) {
-				const valueDelta = this.target[key] - this.properties[key];
+		for (const key in this.target) {
+			if (this.object[key] !== this.target[key]) {
+				const valueDelta = this.object[key] - this.target[key];
 				const force = -this.stiffness * valueDelta;
 				const damping = -this.damping * this._velocities[key];
 				const acceleration = force + damping;
 				this._velocities[key] = this._velocities[key] + acceleration;
-				this.target[key] += this._velocities[key];
+				this.object[key] += this._velocities[key];
 			} else {
 				isComplete = true;
 			}

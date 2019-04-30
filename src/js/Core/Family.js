@@ -1,58 +1,24 @@
 const packageConfig = require("./../../../package.json");
 const libName = packageConfig.name.charAt(0).toUpperCase() + packageConfig.name.slice(1);
-import EventDispatcher from "./EventDispatcher";
 import { readonly } from "./Decorators";
 const uuid = require("uuid/v4");
+import Root from "./Root";
 
-export default class Base extends EventDispatcher {
-	static Instances = [];
-
-	@readonly
-	isNervo = true;
-
-	@readonly
-	uuid = uuid();
-
+export default class Family extends Root {
 	constructor(options) {
-		super();
+		super(options);
 		this.children = [];
-		this.options = options;
 		this.parent = null;
-
-		if ("onComplete" in this.options) {
-			this.onComplete = this.options.onComplete;
-			this.addEventListener("onComplete", e => {
-				this.onComplete(e);
-			});
-		}
-		if ("onProgress" in this.options) {
-			this.onProgress = this.options.onProgress;
-			this.addEventListener("onProgress", e => {
-				this.onProgress(e);
-			});
-		}
-
-		Base.Instances.push(this);
 	}
 
-	/*
-		.onProgress():
-	*/
-	onProgress = e => {};
-
-	/*
-		.onComplete():
-	*/
-	onComplete = e => {};
-
 	@readonly
-	clone = e => {
+	clone = () => {
 		const clone = Object.assign(Object.create(Object.getPrototypeOf(this)), this);
 		Object.defineProperty(clone, "uuid", {
 			value: uuid(),
 			writable: false,
 		});
-		Base.Instances.push(clone);
+		Root.Instances.push(clone);
 		return clone;
 	};
 
@@ -105,9 +71,9 @@ export default class Base extends EventDispatcher {
 			}
 
 			if (this.isTrack) {
-				if (!object.isTween) {
+				if (object.isTimeline || object.isSpring) {
 					console.error(
-						`${libName}.Base.add: Object is not an instance of ${libName}.Tween.`,
+						`${libName}.Base.add: Can't add object of type ${object.type} to a Track.`,
 						object
 					);
 					return this;

@@ -8,21 +8,21 @@ export default class Tween extends Ticker {
 	@readonly
 	type = "Tween";
 
-	constructor(target, properties, options = {}) {
+	constructor(object, target, options = {}) {
 		super(options);
 
-		this.properties = properties;
 		this.target = target;
-		this._reference = { ...{}, ...this.target };
+		this.object = object;
+		this._reference = { ...{}, ...this.object };
 		if (this.autoStart) this.start();
 	}
 
 	@readonly
 	_execute = e => {
-		for (const key in this.properties) {
-			this.target[key] =
+		for (const key in this.target) {
+			this.object[key] =
 				this._reference[key] +
-				(this.properties[key] - this._reference[key]) * this.easedProgress;
+				(this.target[key] - this._reference[key]) * this.easedProgress;
 		}
 	};
 }

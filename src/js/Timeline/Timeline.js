@@ -5,11 +5,9 @@ import Ticker from "./../Core/Ticker";
 export default class Timeline extends Ticker {
 	constructor(objects = [], options = {}) {
 		super(options);
-		delete this.parent;
 
 		this._updateDuration();
-
-		this.add(this._getTrackFromTweens(objects, options), options);
+		if (objects.length !== 0) this.add(objects, options);
 		if (this.autoStart) this.start();
 	}
 
