@@ -41,16 +41,26 @@ export default class Track extends Family {
 		return this;
 	};
 
+	@readonly
 	_reset = e => {
 		this.isFinished = false;
 		this.hasStarted = false;
 		this.children.forEach(child => {
-			child._reset();
+			child.stop();
 		});
 	};
 
+	@readonly
 	_update = t => {
-		const timeScale = this.parent.timeScale !== undefined ? this.parent.timeScale : 1.0;
+		/*
+			modify t by timeScale
+		*/
+		let timeScale = this.parent.timeScale !== undefined ? this.parent.timeScale : 1.0;
+
+		if (timeScale === Infinity) {
+			timeScale = 1.0;
+		}
+
 		t /= timeScale;
 
 		if (t >= this.duration + this.start) {
@@ -58,17 +68,22 @@ export default class Track extends Family {
 			this._updateChildrenByTime(this.duration);
 			this.dispatchEvent({ type: "onComplete" });
 			this.isFinished = true;
+			this.hasStarted = false;
 		} else if (t >= this.start) {
 			if (!this.hasStarted) {
 				this.children.forEach(child => {
-					child.isActive = true;
+					if (child.isTween) child.isActive = true;
 				});
 				this._updateChildrenByTime(0);
 				this.hasStarted = true;
+				this.isFinished = false;
 			} else {
 				this._updateChildrenByTime(t - this.start);
 				this.dispatchEvent({ type: "onProgress" });
 			}
+		} else {
+			if (!this.hasStarted) return;
+			this._reset();
 		}
 	};
 }
