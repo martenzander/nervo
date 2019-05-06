@@ -18,6 +18,15 @@ export default class Tween extends Ticker {
 	}
 
 	@readonly
+	setDuration = duration => {
+		this.duration = duration;
+
+		if (this.parent) {
+			this._onChildChange(this.parent);
+		}
+	};
+
+	@readonly
 	_execute = e => {
 		for (const key in this.target) {
 			this.object[key] =
