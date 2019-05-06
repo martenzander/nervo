@@ -73,7 +73,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "ab89bef8c2db2b2f42ef";
+/******/ 	var hotCurrentHash = "1b51d8023cca0e88462d";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -6145,7 +6145,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var _class, _descriptor, _descriptor2, _descriptor3, _temp;
+var _class, _descriptor, _descriptor2, _descriptor3, _descriptor4, _temp;
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
@@ -6191,7 +6191,9 @@ function (_Ticker) {
 
     _initializerDefineProperty(_this, "type", _descriptor2, _assertThisInitialized(_this));
 
-    _initializerDefineProperty(_this, "_execute", _descriptor3, _assertThisInitialized(_this));
+    _initializerDefineProperty(_this, "setDuration", _descriptor3, _assertThisInitialized(_this));
+
+    _initializerDefineProperty(_this, "_execute", _descriptor4, _assertThisInitialized(_this));
 
     _this.target = target;
     _this.object = object;
@@ -6215,16 +6217,31 @@ function (_Ticker) {
   initializer: function initializer() {
     return "Tween";
   }
-}), _descriptor3 = _applyDecoratedDescriptor(_class.prototype, "_execute", [_Core_Decorators__WEBPACK_IMPORTED_MODULE_18__["readonly"]], {
+}), _descriptor3 = _applyDecoratedDescriptor(_class.prototype, "setDuration", [_Core_Decorators__WEBPACK_IMPORTED_MODULE_18__["readonly"]], {
   configurable: true,
   enumerable: true,
   writable: true,
   initializer: function initializer() {
     var _this2 = this;
 
+    return function (duration) {
+      _this2.duration = duration;
+
+      if (_this2.parent) {
+        _this2._onChildChange(_this2.parent);
+      }
+    };
+  }
+}), _descriptor4 = _applyDecoratedDescriptor(_class.prototype, "_execute", [_Core_Decorators__WEBPACK_IMPORTED_MODULE_18__["readonly"]], {
+  configurable: true,
+  enumerable: true,
+  writable: true,
+  initializer: function initializer() {
+    var _this3 = this;
+
     return function (e) {
-      for (var key in _this2.target) {
-        _this2.object[key] = _this2._reference[key] + (_this2.target[key] - _this2._reference[key]) * _this2.easedProgress;
+      for (var key in _this3.target) {
+        _this3.object[key] = _this3._reference[key] + (_this3.target[key] - _this3._reference[key]) * _this3.easedProgress;
       }
     };
   }
