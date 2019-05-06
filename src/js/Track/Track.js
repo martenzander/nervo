@@ -1,9 +1,9 @@
 const packageConfig = require("./../../../package.json");
 const libName = packageConfig.name.charAt(0).toUpperCase() + packageConfig.name.slice(1);
 import { readonly } from "./../Core/Decorators";
-import Family from "../Core/Family";
+import Ticker from "../Core/Ticker";
 
-export default class Track extends Family {
+export default class Track extends Ticker {
 	@readonly
 	isTrack = true;
 
@@ -14,30 +14,19 @@ export default class Track extends Family {
 		super(options);
 		this.isFinished = false;
 		this.hasStarted = false;
-		this.duration = 0;
-		this.start = options.start !== undefined ? options.start : 0;
+		this.startTime = options.startTime !== undefined ? options.startTime : 0;
 		if (objects.length >= 1) this.add(objects, options);
 	}
 
 	@readonly
 	setStartTime = startTime => {
-		if (typeof startTime !== "number") {
-			console.error(
-				`${libName}.Track.setStartTime: Provided startTime is not typeof 'number'.`
-			);
-			return this;
-		}
-
-		this.start = startTime;
-
-		if (this.parent !== null) {
-			this._onChildChange(this);
-		}
+		this.startTime = startTime;
+		this._onChange(this);
 
 		return this;
 	};
 
-	@readonly
+	// @readonly
 	_reset = e => {
 		this.isFinished = false;
 		this.hasStarted = false;
@@ -48,24 +37,15 @@ export default class Track extends Family {
 
 	@readonly
 	_update = t => {
-		/*
-			modify t by timeScale
-		*/
-		let timeScale = this.parent.timeScale !== undefined ? this.parent.timeScale : 1.0;
+		this.currentTime = t / this.timeScale;
 
-		if (timeScale === Infinity) {
-			timeScale = 1.0;
-		}
-
-		t /= timeScale;
-
-		if (t >= this.duration + this.start) {
+		if (t >= this.duration * this.timeScale + this.startTime) {
 			if (this.isFinished) return;
 			this._updateChildrenByTime(this.duration);
 			this.dispatchEvent({ type: "onComplete" });
 			this.isFinished = true;
 			this.hasStarted = false;
-		} else if (t >= this.start) {
+		} else if (t >= this.startTime) {
 			if (!this.hasStarted) {
 				this.children.forEach(child => {
 					if (child.isTween) child.isActive = true;
@@ -74,7 +54,7 @@ export default class Track extends Family {
 				this.hasStarted = true;
 				this.isFinished = false;
 			} else {
-				this._updateChildrenByTime(t - this.start);
+				this._updateChildrenByTime(this.currentTime - this.startTime / this.timeScale);
 				this.dispatchEvent({ type: "onProgress" });
 			}
 		} else {

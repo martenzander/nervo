@@ -5,13 +5,11 @@ import Tween from "./Tween/Tween";
 
 // Defaults
 const AutoStart = false;
-const Duration = 1.0;
 const Easing = "linear";
 const Loop = false;
 const TimeScale = 1;
 
 export { AutoStart };
-export { Duration };
 export { Easing };
 export { Loop };
 export { TimeScale };

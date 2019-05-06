@@ -13,7 +13,7 @@ export default class Ticker extends Family {
 		super(options);
 		this.autoStart = options.autoStart !== undefined ? options.autoStart : Nervo.AutoStart;
 		this.currentTime = 0;
-		this.duration = options.duration !== undefined ? options.duration : Nervo.Duration;
+		this.duration = options.duration !== undefined ? options.duration : 0;
 		this.easing = options.easing !== undefined ? options.easing : Eases[Nervo.Easing];
 		if (typeof this.easing === "string") this.easing = Eases[this.easing];
 		this.isActive = false;
@@ -32,7 +32,6 @@ export default class Ticker extends Family {
 		It's best practice to not call this method directly.
 		Use .start() or .stop() instead.
 	*/
-	@readonly
 	_reset = e => {
 		this.currentTime = 0;
 
@@ -45,6 +44,14 @@ export default class Ticker extends Family {
 		this.isActive = true;
 
 		this._update(this.currentTime);
+	};
+
+	@readonly
+	setTimeScale = timeScale => {
+		this.timeScale = timeScale;
+		this._onChange(this);
+
+		return this;
 	};
 
 	/*
@@ -136,13 +143,11 @@ export default class Ticker extends Family {
 		Only gets triggered by .play() and should not be called directly.
 	*/
 	@readonly
-	_tick = e => {
+	_tick = () => {
 		if (!this.isActive) return;
 
 		/* Update time. */
-		this.deltaTime = this._clock.getDelta();
-		this.lastTime = this.currentTime;
-		this.currentTime += this.deltaTime;
+		this.currentTime += this._clock.getDelta();
 
 		/* Trigger update to calculate actual progress. */
 		this._update(this.currentTime);

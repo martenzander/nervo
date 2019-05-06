@@ -20,10 +20,7 @@ export default class Tween extends Ticker {
 	@readonly
 	setDuration = duration => {
 		this.duration = duration;
-
-		if (this.parent) {
-			this._onChildChange(this.parent);
-		}
+		this._onChange(this);
 	};
 
 	@readonly

@@ -12,19 +12,19 @@ export default class Timeline extends Ticker {
 	constructor(objects = [], options = {}) {
 		super(options);
 
-		if (objects.length !== 0) this.add(objects, options);
+		if (objects.length !== 0) this.add(objects, {});
 		if (this.autoStart) this.start();
 	}
 
 	@readonly
 	_execute = t => {
-		this._updateChildrenByTime(t);
+		this._updateChildrenByTime(t / this.timeScale);
 	};
 
 	@readonly
 	_getTrackFromTweens = (tweens, options) => {
 		const track = new Track(tweens, {
-			start: options.start !== undefined ? options.start : this.duration,
+			startTime: options.startTime !== undefined ? options.startTime : this.duration,
 		});
 		return track;
 	};

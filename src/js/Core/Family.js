@@ -88,7 +88,7 @@ export default class Family extends Root {
 			object.dispatchEvent({ type: "added" });
 
 			if (this.isTimeline || this.isTrack) {
-				this._onChildChange(this);
+				this._onChange(this);
 			}
 		} else {
 			console.error(
@@ -117,7 +117,7 @@ export default class Family extends Root {
 
 			this.children.splice(index, 1);
 			if (this.isTimeline || this.isTrack) {
-				this._onChildChange(this);
+				this._onChange(this);
 			}
 		}
 
@@ -127,31 +127,29 @@ export default class Family extends Root {
 	@readonly
 	_updateChildrenByTime = t => {
 		this.children.forEach(child => {
+			child.isActive = true;
 			child._update(t);
 		});
 	};
 
 	@readonly
-	_onChildChange = object => {
-		let duration = 0;
+	_onChange = object => {
+		if (!object.isTween) {
+			let duration = 0;
 
-		if (object.children.length <= 0) {
-			console.warn(`${libName}.Track._onChildChange: This object has no children.`, object);
-			return this;
+			object.children.forEach(child => {
+				const childTimeScale = child.timeScale !== undefined ? child.timeScale : 1.0;
+				const childStart = typeof child.startTime === "number" ? child.startTime : 0.0;
+
+				if (child.duration * childTimeScale + childStart > duration)
+					duration = child.duration * childTimeScale + childStart;
+			});
+
+			object.duration = duration;
 		}
 
-		object.children.forEach(child => {
-			const timeScale = child.timeScale !== undefined ? child.timeScale : 1.0;
-			const childStart = typeof child.start === "number" ? child.start : 0.0;
-
-			if (child.duration * timeScale + childStart > duration)
-				duration = child.duration * timeScale + childStart;
-		});
-
-		object.duration = duration;
-
 		if (object.parent) {
-			this._onChildChange(object.parent);
+			this._onChange(object.parent);
 		}
 
 		return this;
