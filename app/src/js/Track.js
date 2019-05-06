@@ -13,113 +13,173 @@ class Track extends Canvas {
 		super(canvas);
 		this.radiusFactor = 0.0625 / 2;
 		this.setSizes();
-		this.trackHeight = 80 / this.canvas.height;
+		this.trackHeight = 0.1724137931;
 		this.trackBgColor = "#141730";
-		this.trackColors = ["#FFEB4F", "#DD436B", "#196A99"];
+		this.trackLabelFontSize = 0.02181818182;
 
 		// tweens
 		this.tweens = [];
-		for (let i = 0; i < 3; i++) {
+		for (let i = 0; i < 8; i++) {
 			const tween = new Nervo.Tween(
 				{ progress: 0 },
 				{ progress: 1 },
 				{
 					easing: "cubicInOut",
-					duration: 3,
+					duration: 1 + (i % 2),
 					onProgress: e => {},
 				}
 			);
+
+			if (i === 0) {
+				tween.onProgress = e => {
+					// console.log(e.target.progress);
+				};
+			}
+
 			this.tweens.push(tween);
 		}
 
-		// tracks
-		this.tracks = [];
-		for (let i = 0; i < 3; i++) {
-			const track = new Nervo.Track([this.tweens[i]], {
-				start: 1 + i,
-				onProgress: e => {},
-			});
-
-			this.tracks.push(track);
-		}
-
-		this.timeline = new Nervo.Timeline(this.tracks, {
+		this.timeline = new Nervo.Timeline([], {
 			loop: true,
-			timeScale: 2,
+			timeScale: 1,
 			onComplete: e => {},
 			onProgress: e => {
 				this.draw();
 			},
 		});
 
-		// GUI Properties
-		const tracksFolder = this.gui.addFolder("Tracks");
-		for (let i = 0; i < this.tracks.length; i++) {
-			const folder = tracksFolder.addFolder(`Track ${i + 1}`);
-			folder
-				.add(this.tracks[i], "start")
-				.min(0)
-				.onChange(e => {
-					this.tracks[i].setStartTime(e);
-				});
+		for (let i = 0; i < this.tweens.length; i += 2) {
+			this.timeline.add([this.tweens[i], this.tweens[i + 1]], {
+				startTime: i,
+			});
 		}
+
+		// Tweens
+
 		const tweensFolder = this.gui.addFolder("Tweens");
 		for (let i = 0; i < this.tweens.length; i++) {
-			const folder = tweensFolder.addFolder(`Tween ${i + 1}`);
-			folder
-				.add(this.tweens[i], "duration")
+			const tween = this.tweens[i];
+			const tweenFolder = tweensFolder.addFolder(`Tween ${i + 1}`);
+			tweenFolder
+				.add(tween, "duration")
 				.min(0)
 				.onChange(e => {
-					this.tweens[i].setDuration(e);
+					tween.setDuration(e);
 				});
+			tweenFolder.add(tween, "timeScale").onChange(e => {
+				tween.setTimeScale(e);
+			});
 		}
+
+		// Tracks
+		const tracksFolder = this.gui.addFolder("Tracks");
+		for (let i = 0; i < this.timeline.children.length; i++) {
+			const folder = tracksFolder.addFolder(`Track ${i + 1}`);
+			const track = this.timeline.children[i];
+			folder
+				.add(track, "startTime")
+				.min(0)
+				.onChange(e => {
+					track.setStartTime(e);
+				});
+			folder.add(track, "timeScale").onChange(e => {
+				track.setTimeScale(e);
+			});
+		}
+
+		// Timeline
 		const timelineFolder = this.gui.addFolder("Timeline");
 		timelineFolder.add(this.timeline, "timeScale");
 		timelineFolder.add(this.timeline, "easing", easeNames).onChange(e => {
 			this.timeline.easing = eases[e];
 		});
 
+		this.timeline.children[0].id = "test";
+
 		this.timeline.start();
 	}
 
 	draw = e => {
 		this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
-		this.context.font = "18px Roboto Black Italic";
 
-		for (let i = 0; i < this.tracks.length; i++) {
+		const trackHeight = (this.canvas.height - this.padding) / this.timeline.children.length;
+		const leftSpace = this.padding * 1.75;
+
+		this.context.font = `${this.trackLabelFontSize * this.canvas.width}px Roboto Black Italic`;
+		this.context.textBaseline = "middle";
+		this.context.textAlign = "left";
+		for (let i = 0; i < this.timeline.children.length; i++) {
+			const track = this.timeline.children[i];
 			// Backgrounds
-			let y = this.canvas.height / 2 + (this.trackHeight * this.canvas.height + 1) * i;
-			y -= (this.tracks.length / 2) * (this.trackHeight * this.canvas.height);
+			let y = this.padding + (trackHeight + 1) * i;
+			// this.context.fillStyle = track.hasStarted ? "rgba(78,81,111,0)" : this.trackBgColor;
 			this.context.fillStyle = this.trackBgColor;
-			this.context.fillRect(0, y, this.canvas.width, this.trackHeight * this.canvas.height);
+			this.context.fillRect(0, y, this.canvas.width, trackHeight);
 
 			// Tracks
-			this.context.fillStyle = this.tweens[i].isActive
-				? this.trackColors[i]
-				: "rgba(78,81,111,1)";
-			const x = (this.tracks[i].start / this.timeline.duration) * this.canvas.width;
-			const width = (this.tracks[i].duration / this.timeline.duration) * this.canvas.width;
-			this.context.fillRect(x, y, width, this.trackHeight * this.canvas.height);
-			this.context.fillStyle = "#141730";
-			this.context.fillText(
-				`Track ${i + 1}`,
-				x + 5,
-				y + this.trackHeight * this.canvas.height - 5
-			);
+			this.context.fillStyle = track.isActive ? "#196A99" : "rgba(78,81,111,0)";
+			const x =
+				(track.startTime / this.timeline.duration) * (this.canvas.width - leftSpace) +
+				leftSpace;
+			const width =
+				((track.duration * track.timeScale) / this.timeline.duration) *
+				(this.canvas.width - leftSpace);
+
+			// Tweens
+			const tweenPadding = 0.15 * trackHeight;
+			for (let n = 0; n < track.children.length; n++) {
+				const tween = track.children[n];
+				// this.context.fillStyle = tween.isActive ? "#DD436B" : "rgba(78,81,111,1)";
+				this.context.fillStyle = tween.isActive ? "#DD436B" : "rgba( 32, 36, 73 , 1)";
+				const tweenHeight = (trackHeight - 3 * tweenPadding) / track.children.length;
+				const tweenY = y + tweenPadding + (tweenHeight + tweenPadding) * n;
+				const totalTweenDuration = tween.duration * tween.timeScale;
+				const tweenWidth = (totalTweenDuration / track.duration) * width;
+				this.context.fillRect(x, tweenY, tweenWidth, tweenHeight);
+			}
 		}
 
 		// Progress
 		this.context.fillStyle = "rgba( 32, 36, 73 , 0.5)";
-		const width = this.timeline.easedProgress * this.canvas.width;
-		this.context.fillRect(0, 0, width, this.canvas.height);
+		const width = this.timeline.easedProgress * (this.canvas.width - leftSpace);
+		this.context.fillRect(0, 0, width + leftSpace, this.canvas.height);
+		this.context.moveTo(width + leftSpace, 0);
+		this.context.lineTo(width + leftSpace, this.canvas.height);
+		this.context.stroke();
 
-		for (let i = 0; i < this.tracks.length; i++) {
-			// Backgrounds
-			let y = this.canvas.height / 2 + (this.trackHeight * this.canvas.height + 1) * i;
-			y -= (this.tracks.length / 2) * (this.trackHeight * this.canvas.height);
-			// Track Markers
-			this.context.fillStyle = this.trackColors[i];
-			this.context.fillRect(0, y, 5, this.trackHeight * this.canvas.height);
+		// time indicator
+		this.context.font = `${(this.trackLabelFontSize / 1.5) *
+			this.canvas.width}px Roboto Black Italic`;
+		this.context.strokeStyle = "rgba(255,255,255,0.25)";
+		this.context.textBaseline = "top";
+		this.context.textAlign = "center";
+		this.context.fillStyle = "rgba(255,255,255,0.25)";
+		this.context.lineWidth = 1;
+
+		for (let i = 0; i < this.timeline.duration * 10; i++) {
+			const x =
+				(i / (this.timeline.duration * 10)) * (this.canvas.width - leftSpace) + leftSpace;
+			this.context.beginPath();
+			this.context.moveTo(x, 0);
+			if (i % 10 === 0) {
+				this.context.lineTo(x, this.padding / 3);
+				this.context.stroke();
+				this.context.fillText(`${i / 10}`, x, this.padding / 2);
+			} else {
+				this.context.lineTo(x, 10);
+				this.context.stroke();
+			}
+		}
+
+		// TrackLabel
+		this.context.textAlign = "left";
+		this.context.textBaseline = "middle";
+
+		for (let i = 0; i < this.timeline.children.length; i++) {
+			const track = this.timeline.children[i];
+			this.context.fillStyle = track.isActive ? "#DD436B" : "rgba(255,255,255,0.25)";
+			let y = this.padding + (trackHeight + 1) * i;
+			this.context.fillText(`Track ${i + 1}`, 15, y + trackHeight / 2 + 2);
 		}
 	};
 }

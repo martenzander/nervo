@@ -66,7 +66,10 @@ class Spring extends Canvas {
 
 	draw = e => {
 		this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+
+		// ellipse
 		this.context.beginPath();
+		this.context.fillStyle = "#DD436B";
 		this.context.arc(
 			this.spring.object.x,
 			this.spring.object.y,
@@ -75,8 +78,15 @@ class Spring extends Canvas {
 			2 * Math.PI,
 			false
 		);
-		this.context.fillStyle = "#FFEB4F";
 		this.context.fill();
+
+		// text
+		this.context.font = "24px Roboto Black Italic";
+		this.context.textAlign = "center";
+		this.context.textBaseline = "middle";
+		this.context.fillStyle = "#141730";
+		// this.context.textAlign = "center";
+		this.context.fillText("DRAG ME!", this.spring.object.x, this.spring.object.y);
 	};
 }
 

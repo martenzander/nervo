@@ -43,7 +43,9 @@ class Tween extends Canvas {
 		const options = this.gui.addFolder("options");
 		options.add(this.tween, "duration");
 		options.add(this.tween, "loop");
-		options.add(this.tween, "timeScale");
+		options.add(this.tween, "timeScale").onChange(e => {
+			this.tween.setTimeScale(e);
+		});
 		options.add(this.tween, "easing", easeNames).onChange(e => {
 			this.tween.easing = eases[e];
 		});

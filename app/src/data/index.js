@@ -11,8 +11,8 @@ const data = {
 		{ ...about },
 		// { ...gettingStarted },
 		{ ...tween },
-		{ ...track },
 		{ ...timeline },
+		{ ...track },
 		{ ...spring },
 	],
 };

@@ -191,9 +191,11 @@ const track = {
 			},
 			{
 				component: "copy",
-				value: `<a href='#${keys.start}'>start</a> · <a href='#${
+				value: `<a href='#${keys.startTime}'>startTime</a> · <a href='#${
 					keys.onComplete
-				}'>onComplete</a> · <a href='#${keys.onProgress}'>onProgress</a>`,
+				}'>onComplete</a> · <a href='#${keys.onProgress}'>onProgress</a> · <a href='#${
+					keys.timeScale
+				}'>timeScale</a>`,
 			},
 		],
 		[

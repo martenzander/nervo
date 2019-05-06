@@ -120,7 +120,6 @@ methodNames.forEach(key => {
 
 	argumentNames.forEach((name, i) => {
 		const type = typeof reference[name];
-		console.log(name);
 		const valueType = type !== "undefined" ? type : "any";
 		if (name === "") return;
 		if (i === argumentNames.length - 1) {
