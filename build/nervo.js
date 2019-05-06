@@ -73,7 +73,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "1b51d8023cca0e88462d";
+/******/ 	var hotCurrentHash = "d0d9042499926bc3dec9";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -4821,7 +4821,7 @@ function (_Root) {
 
     _initializerDefineProperty(_this, "_updateChildrenByTime", _descriptor4, _assertThisInitialized(_this));
 
-    _initializerDefineProperty(_this, "_onChildChange", _descriptor5, _assertThisInitialized(_this));
+    _initializerDefineProperty(_this, "_onChange", _descriptor5, _assertThisInitialized(_this));
 
     _this.children = [];
     _this.parent = null;
@@ -4919,7 +4919,7 @@ function (_Root) {
         });
 
         if (_this3.isTimeline || _this3.isTrack) {
-          _this3._onChildChange(_this3);
+          _this3._onChange(_this3);
         }
       } else {
         console.error("".concat(libName, ".Base.add: Object is not an instance of ").concat(libName, ".Base."), object);
@@ -4955,7 +4955,7 @@ function (_Root) {
         _this4.children.splice(index, 1);
 
         if (_this4.isTimeline || _this4.isTrack) {
-          _this4._onChildChange(_this4);
+          _this4._onChange(_this4);
         }
       }
 
@@ -4971,11 +4971,13 @@ function (_Root) {
 
     return function (t) {
       _this5.children.forEach(function (child) {
+        child.isActive = true;
+
         child._update(t);
       });
     };
   }
-}), _descriptor5 = _applyDecoratedDescriptor(_class.prototype, "_onChildChange", [_Decorators__WEBPACK_IMPORTED_MODULE_20__["readonly"]], {
+}), _descriptor5 = _applyDecoratedDescriptor(_class.prototype, "_onChange", [_Decorators__WEBPACK_IMPORTED_MODULE_20__["readonly"]], {
   configurable: true,
   enumerable: true,
   writable: true,
@@ -4983,22 +4985,18 @@ function (_Root) {
     var _this6 = this;
 
     return function (object) {
-      var duration = 0;
-
-      if (object.children.length <= 0) {
-        console.warn("".concat(libName, ".Track._onChildChange: This object has no children."), object);
-        return _this6;
+      if (!object.isTween) {
+        var duration = 0;
+        object.children.forEach(function (child) {
+          var childTimeScale = child.timeScale !== undefined ? child.timeScale : 1.0;
+          var childStart = typeof child.startTime === "number" ? child.startTime : 0.0;
+          if (child.duration * childTimeScale + childStart > duration) duration = child.duration * childTimeScale + childStart;
+        });
+        object.duration = duration;
       }
 
-      object.children.forEach(function (child) {
-        var timeScale = child.timeScale !== undefined ? child.timeScale : 1.0;
-        var childStart = typeof child.start === "number" ? child.start : 0.0;
-        if (child.duration * timeScale + childStart > duration) duration = child.duration * timeScale + childStart;
-      });
-      object.duration = duration;
-
       if (object.parent) {
-        _this6._onChildChange(object.parent);
+        _this6._onChange(object.parent);
       }
 
       return _this6;
@@ -5184,28 +5182,31 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_es_array_reduce__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_reduce__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var core_js_modules_es_array_slice__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! core-js/modules/es.array.slice */ "./node_modules/core-js/modules/es.array.slice.js");
 /* harmony import */ var core_js_modules_es_array_slice__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_slice__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var core_js_modules_es_object_define_property__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! core-js/modules/es.object.define-property */ "./node_modules/core-js/modules/es.object.define-property.js");
-/* harmony import */ var core_js_modules_es_object_define_property__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_define_property__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var core_js_modules_es_object_get_prototype_of__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! core-js/modules/es.object.get-prototype-of */ "./node_modules/core-js/modules/es.object.get-prototype-of.js");
-/* harmony import */ var core_js_modules_es_object_get_prototype_of__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_get_prototype_of__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var core_js_modules_es_object_keys__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! core-js/modules/es.object.keys */ "./node_modules/core-js/modules/es.object.keys.js");
-/* harmony import */ var core_js_modules_es_object_keys__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_keys__WEBPACK_IMPORTED_MODULE_9__);
-/* harmony import */ var core_js_modules_es_object_set_prototype_of__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! core-js/modules/es.object.set-prototype-of */ "./node_modules/core-js/modules/es.object.set-prototype-of.js");
-/* harmony import */ var core_js_modules_es_object_set_prototype_of__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_set_prototype_of__WEBPACK_IMPORTED_MODULE_10__);
-/* harmony import */ var core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! core-js/modules/es.object.to-string */ "./node_modules/core-js/modules/es.object.to-string.js");
-/* harmony import */ var core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_11__);
-/* harmony import */ var core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! core-js/modules/es.string.iterator */ "./node_modules/core-js/modules/es.string.iterator.js");
-/* harmony import */ var core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_12__);
-/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
-/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_13__);
-/* harmony import */ var core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! core-js/modules/web.dom-collections.iterator */ "./node_modules/core-js/modules/web.dom-collections.iterator.js");
-/* harmony import */ var core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_14__);
-/* harmony import */ var _index__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./../index */ "./src/js/index.js");
-/* harmony import */ var _Clock__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./Clock */ "./src/js/Core/Clock.js");
-/* harmony import */ var _Family__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./Family */ "./src/js/Core/Family.js");
-/* harmony import */ var eases__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! eases */ "./node_modules/eases/index.js");
-/* harmony import */ var eases__WEBPACK_IMPORTED_MODULE_18___default = /*#__PURE__*/__webpack_require__.n(eases__WEBPACK_IMPORTED_MODULE_18__);
-/* harmony import */ var _Decorators__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./Decorators */ "./src/js/Core/Decorators.js");
+/* harmony import */ var core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! core-js/modules/es.function.name */ "./node_modules/core-js/modules/es.function.name.js");
+/* harmony import */ var core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var core_js_modules_es_object_define_property__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! core-js/modules/es.object.define-property */ "./node_modules/core-js/modules/es.object.define-property.js");
+/* harmony import */ var core_js_modules_es_object_define_property__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_define_property__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var core_js_modules_es_object_get_prototype_of__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! core-js/modules/es.object.get-prototype-of */ "./node_modules/core-js/modules/es.object.get-prototype-of.js");
+/* harmony import */ var core_js_modules_es_object_get_prototype_of__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_get_prototype_of__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var core_js_modules_es_object_keys__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! core-js/modules/es.object.keys */ "./node_modules/core-js/modules/es.object.keys.js");
+/* harmony import */ var core_js_modules_es_object_keys__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_keys__WEBPACK_IMPORTED_MODULE_10__);
+/* harmony import */ var core_js_modules_es_object_set_prototype_of__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! core-js/modules/es.object.set-prototype-of */ "./node_modules/core-js/modules/es.object.set-prototype-of.js");
+/* harmony import */ var core_js_modules_es_object_set_prototype_of__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_set_prototype_of__WEBPACK_IMPORTED_MODULE_11__);
+/* harmony import */ var core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! core-js/modules/es.object.to-string */ "./node_modules/core-js/modules/es.object.to-string.js");
+/* harmony import */ var core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_12__);
+/* harmony import */ var core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! core-js/modules/es.string.iterator */ "./node_modules/core-js/modules/es.string.iterator.js");
+/* harmony import */ var core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_13__);
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_14__);
+/* harmony import */ var core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! core-js/modules/web.dom-collections.iterator */ "./node_modules/core-js/modules/web.dom-collections.iterator.js");
+/* harmony import */ var core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_15___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_15__);
+/* harmony import */ var _index__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./../index */ "./src/js/index.js");
+/* harmony import */ var _Clock__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./Clock */ "./src/js/Core/Clock.js");
+/* harmony import */ var _Family__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./Family */ "./src/js/Core/Family.js");
+/* harmony import */ var eases__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! eases */ "./node_modules/eases/index.js");
+/* harmony import */ var eases__WEBPACK_IMPORTED_MODULE_19___default = /*#__PURE__*/__webpack_require__.n(eases__WEBPACK_IMPORTED_MODULE_19__);
+/* harmony import */ var _Decorators__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./Decorators */ "./src/js/Core/Decorators.js");
+
 
 
 
@@ -5244,6 +5245,9 @@ function _applyDecoratedDescriptor(target, property, decorators, descriptor, con
 
 function _initializerWarningHelper(descriptor, context) { throw new Error('Decorating class property failed. Please ensure that ' + 'proposal-class-properties is enabled and set to use loose mode. ' + 'To use proposal-class-properties in spec mode with decorators, wait for ' + 'the next major version of decorators in stage 2.'); }
 
+var packageConfig = __webpack_require__(/*! ./../../../package.json */ "./package.json");
+
+var libName = packageConfig.name.charAt(0).toUpperCase() + packageConfig.name.slice(1);
 
 
 
@@ -5267,7 +5271,22 @@ function (_Family) {
 
     _initializerDefineProperty(_this, "_clock", _descriptor, _assertThisInitialized(_this));
 
-    _initializerDefineProperty(_this, "_reset", _descriptor2, _assertThisInitialized(_this));
+    _this._reset = function (e) {
+      _this.currentTime = 0;
+      /* Reset all children. */
+
+      _this.children.forEach(function (child) {
+        child._reset();
+      });
+      /* Set this.isActive so ._update(t) will have effect. */
+
+
+      _this.isActive = true;
+
+      _this._update(_this.currentTime);
+    };
+
+    _initializerDefineProperty(_this, "setTimeScale", _descriptor2, _assertThisInitialized(_this));
 
     _initializerDefineProperty(_this, "start", _descriptor3, _assertThisInitialized(_this));
 
@@ -5277,56 +5296,50 @@ function (_Family) {
 
     _initializerDefineProperty(_this, "play", _descriptor6, _assertThisInitialized(_this));
 
-    _initializerDefineProperty(_this, "_execute", _descriptor7, _assertThisInitialized(_this));
+    _this._execute = function (e) {};
+
+    _initializerDefineProperty(_this, "_updateProgress", _descriptor7, _assertThisInitialized(_this));
 
     _this._update = function (t) {
       if (!_this.isActive) return;
-      var updateTime = 0;
-      /* Update progress. */
 
-      _this.progress = t / (_this.duration * _this.timeScale);
-      _this.easedProgress = _this.easing(_this.progress);
-      /* Set actual updateTime. */
+      _this._updateProgress(t);
 
-      if (_this.progress >= 1.0) {
-        _this.progress = 1.0;
-        _this.easedProgress = 1.0;
-        updateTime = _this.duration * _this.timeScale;
-      } else {
-        updateTime = _this.duration * _this.timeScale * _this.easedProgress;
-      }
+      var updateTime = _this.duration * _this.easedProgress;
 
       _this._execute(updateTime);
-      /* Trigger events based on progress and loop options. */
-
-
-      _this.dispatchEvent({
-        type: "onProgress"
-      });
 
       if (_this.progress >= 1.0) {
         if (_this.loop) {
           _this.start();
         } else {
           _this.dispatchEvent({
+            type: "onProgress"
+          });
+
+          _this.dispatchEvent({
             type: "onComplete"
           });
 
           _this.pause();
         }
+      } else if (_this.progress > 0) {
+        _this.dispatchEvent({
+          type: "onProgress"
+        });
       }
     };
 
     _initializerDefineProperty(_this, "_tick", _descriptor8, _assertThisInitialized(_this));
 
-    _this.autoStart = options.autoStart !== undefined ? options.autoStart : _index__WEBPACK_IMPORTED_MODULE_15__["AutoStart"];
+    _this.autoStart = options.autoStart !== undefined ? options.autoStart : _index__WEBPACK_IMPORTED_MODULE_16__["AutoStart"];
     _this.currentTime = 0;
-    _this.duration = options.duration !== undefined ? options.duration : _index__WEBPACK_IMPORTED_MODULE_15__["Duration"];
-    _this.easing = options.easing !== undefined ? options.easing : eases__WEBPACK_IMPORTED_MODULE_18__[_index__WEBPACK_IMPORTED_MODULE_15__["Easing"]];
-    if (typeof _this.easing === "string") _this.easing = eases__WEBPACK_IMPORTED_MODULE_18__[_this.easing];
+    _this.duration = options.duration !== undefined ? options.duration : 0;
+    _this.easing = options.easing !== undefined ? options.easing : eases__WEBPACK_IMPORTED_MODULE_19__[_index__WEBPACK_IMPORTED_MODULE_16__["Easing"]];
+    if (typeof _this.easing === "string") _this.easing = eases__WEBPACK_IMPORTED_MODULE_19__[_this.easing];
     _this.isActive = false;
-    _this.loop = options.loop !== undefined ? options.loop : _index__WEBPACK_IMPORTED_MODULE_15__["Loop"];
-    _this.timeScale = options.timeScale !== undefined ? options.timeScale : _index__WEBPACK_IMPORTED_MODULE_15__["TimeScale"];
+    _this.loop = options.loop !== undefined ? options.loop : _index__WEBPACK_IMPORTED_MODULE_16__["Loop"];
+    _this.timeScale = options.timeScale !== undefined || 0 ? options.timeScale : _index__WEBPACK_IMPORTED_MODULE_16__["TimeScale"];
     return _this;
   }
   /*
@@ -5335,36 +5348,35 @@ function (_Family) {
 
 
   return Ticker;
-}(_Family__WEBPACK_IMPORTED_MODULE_17__["default"]), _temp), (_descriptor = _applyDecoratedDescriptor(_class.prototype, "_clock", [_Decorators__WEBPACK_IMPORTED_MODULE_19__["readonly"]], {
+}(_Family__WEBPACK_IMPORTED_MODULE_18__["default"]), _temp), (_descriptor = _applyDecoratedDescriptor(_class.prototype, "_clock", [_Decorators__WEBPACK_IMPORTED_MODULE_20__["readonly"]], {
   configurable: true,
   enumerable: true,
   writable: true,
   initializer: function initializer() {
-    return new _Clock__WEBPACK_IMPORTED_MODULE_16__["default"]();
+    return new _Clock__WEBPACK_IMPORTED_MODULE_17__["default"]();
   }
-}), _descriptor2 = _applyDecoratedDescriptor(_class.prototype, "_reset", [_Decorators__WEBPACK_IMPORTED_MODULE_19__["readonly"]], {
+}), _descriptor2 = _applyDecoratedDescriptor(_class.prototype, "setTimeScale", [_Decorators__WEBPACK_IMPORTED_MODULE_20__["readonly"]], {
   configurable: true,
   enumerable: true,
   writable: true,
   initializer: function initializer() {
     var _this2 = this;
 
-    return function (e) {
-      _this2.currentTime = 0;
-      /* Reset all children. */
+    return function (timeScale) {
+      if (timeScale <= 0) {
+        console.warn("".concat(libName, ".Ticker.setTimeScale: timeScale <= 0 is not allowed."), _this2);
+        _this2.timeScale = 1.0;
+        return _this2;
+      }
 
-      _this2.children.forEach(function (child) {
-        child._reset();
-      });
-      /* Set this.isActive so ._update(t) will have effect. */
+      _this2.timeScale = timeScale;
 
+      _this2._onChange(_this2);
 
-      _this2.isActive = true;
-
-      _this2._update(_this2.currentTime);
+      return _this2;
     };
   }
-}), _descriptor3 = _applyDecoratedDescriptor(_class.prototype, "start", [_Decorators__WEBPACK_IMPORTED_MODULE_19__["readonly"]], {
+}), _descriptor3 = _applyDecoratedDescriptor(_class.prototype, "start", [_Decorators__WEBPACK_IMPORTED_MODULE_20__["readonly"]], {
   configurable: true,
   enumerable: true,
   writable: true,
@@ -5377,7 +5389,7 @@ function (_Family) {
       _this3.play();
     };
   }
-}), _descriptor4 = _applyDecoratedDescriptor(_class.prototype, "stop", [_Decorators__WEBPACK_IMPORTED_MODULE_19__["readonly"]], {
+}), _descriptor4 = _applyDecoratedDescriptor(_class.prototype, "stop", [_Decorators__WEBPACK_IMPORTED_MODULE_20__["readonly"]], {
   configurable: true,
   enumerable: true,
   writable: true,
@@ -5390,7 +5402,7 @@ function (_Family) {
       _this4.pause();
     };
   }
-}), _descriptor5 = _applyDecoratedDescriptor(_class.prototype, "pause", [_Decorators__WEBPACK_IMPORTED_MODULE_19__["readonly"]], {
+}), _descriptor5 = _applyDecoratedDescriptor(_class.prototype, "pause", [_Decorators__WEBPACK_IMPORTED_MODULE_20__["readonly"]], {
   configurable: true,
   enumerable: true,
   writable: true,
@@ -5403,7 +5415,7 @@ function (_Family) {
       _this5._clock.stop();
     };
   }
-}), _descriptor6 = _applyDecoratedDescriptor(_class.prototype, "play", [_Decorators__WEBPACK_IMPORTED_MODULE_19__["readonly"]], {
+}), _descriptor6 = _applyDecoratedDescriptor(_class.prototype, "play", [_Decorators__WEBPACK_IMPORTED_MODULE_20__["readonly"]], {
   configurable: true,
   enumerable: true,
   writable: true,
@@ -5418,32 +5430,44 @@ function (_Family) {
       _this6._tick();
     };
   }
-}), _descriptor7 = _applyDecoratedDescriptor(_class.prototype, "_execute", [_Decorators__WEBPACK_IMPORTED_MODULE_19__["readonly"]], {
-  configurable: true,
-  enumerable: true,
-  writable: true,
-  initializer: function initializer() {
-    return function (e) {};
-  }
-}), _descriptor8 = _applyDecoratedDescriptor(_class.prototype, "_tick", [_Decorators__WEBPACK_IMPORTED_MODULE_19__["readonly"]], {
+}), _descriptor7 = _applyDecoratedDescriptor(_class.prototype, "_updateProgress", [_Decorators__WEBPACK_IMPORTED_MODULE_20__["readonly"]], {
   configurable: true,
   enumerable: true,
   writable: true,
   initializer: function initializer() {
     var _this7 = this;
 
-    return function (e) {
-      if (!_this7.isActive) return;
+    return function (t) {
+      _this7.progress = t / (_this7.duration * _this7.timeScale);
+      _this7.easedProgress = _this7.easing(_this7.progress);
+      /* Set actual updateTime. */
+
+      if (_this7.progress >= 1.0) {
+        _this7.progress = 1.0;
+        _this7.easedProgress = 1.0;
+      } else if (_this7.progress <= 0) {
+        _this7.progress = 0.0;
+        _this7.easedProgress = 0.0;
+      }
+    };
+  }
+}), _descriptor8 = _applyDecoratedDescriptor(_class.prototype, "_tick", [_Decorators__WEBPACK_IMPORTED_MODULE_20__["readonly"]], {
+  configurable: true,
+  enumerable: true,
+  writable: true,
+  initializer: function initializer() {
+    var _this8 = this;
+
+    return function () {
+      if (!_this8.isActive) return;
       /* Update time. */
 
-      _this7.deltaTime = _this7._clock.getDelta();
-      _this7.lastTime = _this7.currentTime;
-      _this7.currentTime += _this7.deltaTime;
+      _this8.currentTime += _this8._clock.getDelta();
       /* Trigger update to calculate actual progress. */
 
-      _this7._update(_this7.currentTime);
+      _this8._update(_this8.currentTime);
 
-      requestAnimationFrame(_this7._tick);
+      requestAnimationFrame(_this8._tick);
     };
   }
 })), _class);
@@ -5795,7 +5819,7 @@ function (_Ticker) {
 
     _initializerDefineProperty(_this, "_getTrackFromTweens", _descriptor4, _assertThisInitialized(_this));
 
-    if (objects.length !== 0) _this.add(objects, options);
+    if (objects.length !== 0) _this.add(objects, {});
     if (_this.autoStart) _this.start();
     return _this;
   }
@@ -5835,7 +5859,7 @@ function (_Ticker) {
 
     return function (tweens, options) {
       var track = new _Track_Track__WEBPACK_IMPORTED_MODULE_16__["default"](tweens, {
-        start: options.start !== undefined ? options.start : _this3.duration
+        startTime: options.startTime !== undefined ? options.startTime : _this3.duration
       });
       return track;
     };
@@ -5888,7 +5912,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! core-js/modules/web.dom-collections.iterator */ "./node_modules/core-js/modules/web.dom-collections.iterator.js");
 /* harmony import */ var core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_15___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_15__);
 /* harmony import */ var _Core_Decorators__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./../Core/Decorators */ "./src/js/Core/Decorators.js");
-/* harmony import */ var _Core_Family__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../Core/Family */ "./src/js/Core/Family.js");
+/* harmony import */ var _Core_Ticker__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../Core/Ticker */ "./src/js/Core/Ticker.js");
 
 
 
@@ -5935,8 +5959,8 @@ var libName = packageConfig.name.charAt(0).toUpperCase() + packageConfig.name.sl
 
 var Track = (_class = (_temp =
 /*#__PURE__*/
-function (_Family) {
-  _inherits(Track, _Family);
+function (_Ticker) {
+  _inherits(Track, _Ticker);
 
   function Track() {
     var _this;
@@ -5958,16 +5982,21 @@ function (_Family) {
 
     _initializerDefineProperty(_this, "_update", _descriptor5, _assertThisInitialized(_this));
 
-    _this.isFinished = false;
-    _this.hasStarted = false;
-    _this.duration = 0;
-    _this.start = options.start !== undefined ? options.start : 0;
+    delete _this.start;
+    delete _this.stop;
+    delete _this.pause;
+    delete _this.play;
+    delete _this.autoPlay;
+    delete _this.loop;
+    delete _this._tick;
+    _this._isFinished = false;
+    _this.startTime = options.startTime !== undefined ? options.startTime : 0;
     if (objects.length >= 1) _this.add(objects, options);
     return _this;
   }
 
   return Track;
-}(_Core_Family__WEBPACK_IMPORTED_MODULE_17__["default"]), _temp), (_descriptor = _applyDecoratedDescriptor(_class.prototype, "isTrack", [_Core_Decorators__WEBPACK_IMPORTED_MODULE_16__["readonly"]], {
+}(_Core_Ticker__WEBPACK_IMPORTED_MODULE_17__["default"]), _temp), (_descriptor = _applyDecoratedDescriptor(_class.prototype, "isTrack", [_Core_Decorators__WEBPACK_IMPORTED_MODULE_16__["readonly"]], {
   configurable: true,
   enumerable: true,
   writable: true,
@@ -5989,16 +6018,9 @@ function (_Family) {
     var _this2 = this;
 
     return function (startTime) {
-      if (typeof startTime !== "number") {
-        console.error("".concat(libName, ".Track.setStartTime: Provided startTime is not typeof 'number'."));
-        return _this2;
-      }
+      _this2.startTime = startTime;
 
-      _this2.start = startTime;
-
-      if (_this2.parent !== null) {
-        _this2._onChildChange(_this2);
-      }
+      _this2._onChange(_this2);
 
       return _this2;
     };
@@ -6011,8 +6033,8 @@ function (_Family) {
     var _this3 = this;
 
     return function (e) {
-      _this3.isFinished = false;
-      _this3.hasStarted = false;
+      _this3._isFinished = false;
+      _this3.isActive = false;
 
       _this3.children.forEach(function (child) {
         child.stop();
@@ -6027,49 +6049,46 @@ function (_Family) {
     var _this4 = this;
 
     return function (t) {
-      /*
-      	modify t by timeScale
-      */
-      var timeScale = _this4.parent.timeScale !== undefined ? _this4.parent.timeScale : 1.0;
+      _this4.currentTime = t;
+      if (!_this4.isActive) return;
 
-      if (timeScale === Infinity) {
-        timeScale = 1.0;
-      }
+      _this4._updateProgress(_this4.currentTime - _this4.startTime);
 
-      t /= timeScale;
+      var updateTime = _this4.duration * _this4.easedProgress;
 
-      if (t >= _this4.duration + _this4.start) {
-        if (_this4.isFinished) return;
+      _this4._updateChildrenByTime(updateTime);
 
-        _this4._updateChildrenByTime(_this4.duration);
+      if (_this4.progress >= 1.0) {
+        if (!_this4._isFinished) {
+          _this4._isFinished = true;
+          _this4.isActive = false;
 
-        _this4.dispatchEvent({
-          type: "onComplete"
-        });
-
-        _this4.isFinished = true;
-        _this4.hasStarted = false;
-      } else if (t >= _this4.start) {
-        if (!_this4.hasStarted) {
-          _this4.children.forEach(function (child) {
-            if (child.isTween) child.isActive = true;
+          _this4.dispatchEvent({
+            type: "onProgress"
           });
 
-          _this4._updateChildrenByTime(0);
-
-          _this4.hasStarted = true;
-          _this4.isFinished = false;
+          _this4.dispatchEvent({
+            type: "onComplete"
+          });
         } else {
-          _this4._updateChildrenByTime(t - _this4.start);
-
+          _this4.isActive = false;
+        }
+      } else if (_this4.progress > 0) {
+        if (!_this4.isActive) {
+          _this4.isActive = true;
+          _this4._isFinished = false;
+        } else {
           _this4.dispatchEvent({
             type: "onProgress"
           });
         }
       } else {
-        if (!_this4.hasStarted) return;
+        if (!_this4.isActive) return;
+        _this4._isFinished = false;
 
         _this4._reset();
+
+        _this4.isActive = false;
       }
     };
   }
@@ -6227,9 +6246,7 @@ function (_Ticker) {
     return function (duration) {
       _this2.duration = duration;
 
-      if (_this2.parent) {
-        _this2._onChildChange(_this2.parent);
-      }
+      _this2._onChange(_this2);
     };
   }
 }), _descriptor4 = _applyDecoratedDescriptor(_class.prototype, "_execute", [_Core_Decorators__WEBPACK_IMPORTED_MODULE_18__["readonly"]], {
@@ -6254,13 +6271,12 @@ function (_Ticker) {
 /*!*************************!*\
   !*** ./src/js/index.js ***!
   \*************************/
-/*! exports provided: AutoStart, Duration, Easing, Loop, TimeScale, Spring, Timeline, Track, Tween */
+/*! exports provided: AutoStart, Easing, Loop, TimeScale, Spring, Timeline, Track, Tween */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AutoStart", function() { return AutoStart; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Duration", function() { return Duration; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Easing", function() { return Easing; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Loop", function() { return Loop; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TimeScale", function() { return TimeScale; });
@@ -6282,11 +6298,9 @@ __webpack_require__.r(__webpack_exports__);
  // Defaults
 
 var AutoStart = false;
-var Duration = 1.0;
 var Easing = "linear";
 var Loop = false;
 var TimeScale = 1;
-
 
 
 
