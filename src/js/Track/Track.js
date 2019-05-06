@@ -24,18 +24,26 @@ export default class Track extends Ticker {
 		if (objects.length >= 1) this.add(objects, options);
 	}
 
-	/*
-		._update(): Updates the progress based on given time (t).
-		Triggers this.execute() with final updateTime.
-		Lastly trigger events based on progress and loop options.
-	*/
-
 	@readonly
 	setStartTime = startTime => {
 		this.startTime = startTime;
 		this._onChange(this);
 
 		return this;
+	};
+
+	/*
+		._reset(): Deactivates this and resets all of its children to t = 0.
+		It's best practice to not call this method directly.
+	*/
+
+	@readonly
+	_reset = e => {
+		this._isFinished = false;
+		this.isActive = false;
+		this.children.forEach(child => {
+			child.stop();
+		});
 	};
 
 	/*

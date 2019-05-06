@@ -43,7 +43,7 @@ export default class Ticker extends Family {
 		/* Set this.isActive so ._update(t) will have effect. */
 		this.isActive = true;
 
-		if (!this.isTrack) this._update(this.currentTime);
+		this._update(this.currentTime);
 	};
 
 	@readonly
