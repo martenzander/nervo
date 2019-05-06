@@ -12,11 +12,23 @@ export default class Track extends Ticker {
 
 	constructor(objects = [], options = {}) {
 		super(options);
-		this.isFinished = false;
-		this.hasStarted = false;
+		delete this.start;
+		delete this.stop;
+		delete this.pause;
+		delete this.play;
+		delete this.autoPlay;
+		delete this._tick;
+
+		this._isFinished = false;
 		this.startTime = options.startTime !== undefined ? options.startTime : 0;
 		if (objects.length >= 1) this.add(objects, options);
 	}
+
+	/*
+		._update(): Updates the progress based on given time (t).
+		Triggers this.execute() with final updateTime.
+		Lastly trigger events based on progress and loop options.
+	*/
 
 	@readonly
 	setStartTime = startTime => {
@@ -26,40 +38,44 @@ export default class Track extends Ticker {
 		return this;
 	};
 
-	// @readonly
-	_reset = e => {
-		this.isFinished = false;
-		this.hasStarted = false;
-		this.children.forEach(child => {
-			child.stop();
-		});
-	};
+	/*
+		._update(): Updates the progress based on given time (t).
+		Updates children based on updateTime. Lastly trigger events
+		based on progress and loop options.
+	*/
 
 	@readonly
 	_update = t => {
-		this.currentTime = t / this.timeScale;
+		this.currentTime = t;
+		if (!this.isActive) return;
 
-		if (t >= this.duration * this.timeScale + this.startTime) {
-			if (this.isFinished) return;
-			this._updateChildrenByTime(this.duration);
-			this.dispatchEvent({ type: "onComplete" });
-			this.isFinished = true;
-			this.hasStarted = false;
-		} else if (t >= this.startTime) {
-			if (!this.hasStarted) {
-				this.children.forEach(child => {
-					if (child.isTween) child.isActive = true;
-				});
-				this._updateChildrenByTime(0);
-				this.hasStarted = true;
-				this.isFinished = false;
+		this._updateProgress(this.currentTime - this.startTime);
+
+		const updateTime = this.duration * this.easedProgress;
+
+		this._updateChildrenByTime(updateTime);
+
+		if (this.progress >= 1.0) {
+			if (!this._isFinished) {
+				this._isFinished = true;
+				this.isActive = false;
+				this.dispatchEvent({ type: "onProgress" });
+				this.dispatchEvent({ type: "onComplete" });
 			} else {
-				this._updateChildrenByTime(this.currentTime - this.startTime / this.timeScale);
+				this.isActive = false;
+			}
+		} else if (this.progress > 0) {
+			if (!this.isActive) {
+				this.isActive = true;
+				this._isFinished = false;
+			} else {
 				this.dispatchEvent({ type: "onProgress" });
 			}
 		} else {
-			if (!this.hasStarted) return;
+			if (!this.isActive) return;
+			this._isFinished = false;
 			this._reset();
+			this.isActive = false;
 		}
 	};
 }

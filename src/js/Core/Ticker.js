@@ -43,7 +43,7 @@ export default class Ticker extends Family {
 		/* Set this.isActive so ._update(t) will have effect. */
 		this.isActive = true;
 
-		this._update(this.currentTime);
+		if (!this.isTrack) this._update(this.currentTime);
 	};
 
 	@readonly
@@ -94,23 +94,17 @@ export default class Ticker extends Family {
 	};
 
 	/*
-		this.execute(): Actual performance code of extending classes belongs here.
+		._execute(): Actual performance code of extending classes belongs here.
 	*/
-	@readonly
+
 	_execute = e => {};
 
 	/*
-		._update(): Updates the progress based on the currentTime.
-		Than applies timeScale and triggers this.execute() with final updateTime.
-		Lastly trigger events based on progress and loop options.
+		_updateProgress(): Updates .progress and .easedProgress.
 	*/
 
-	_update = t => {
-		if (!this.isActive) return;
-
-		let updateTime = 0;
-
-		/* Update progress. */
+	@readonly
+	_updateProgress = t => {
 		this.progress = t / (this.duration * this.timeScale);
 		this.easedProgress = this.easing(this.progress);
 
@@ -118,23 +112,37 @@ export default class Ticker extends Family {
 		if (this.progress >= 1.0) {
 			this.progress = 1.0;
 			this.easedProgress = 1.0;
-			updateTime = this.duration * this.timeScale;
-		} else {
-			updateTime = this.duration * this.timeScale * this.easedProgress;
+		} else if (this.progress <= 0) {
+			this.progress = 0.0;
+			this.easedProgress = 0.0;
 		}
+	};
+
+	/*
+		._update(): Updates the progress based on given time (t).
+		Triggers this.execute() with final updateTime.
+		Lastly trigger events based on progress and loop options.
+	*/
+
+	_update = t => {
+		if (!this.isActive) return;
+
+		this._updateProgress(t);
+
+		const updateTime = this.duration * this.easedProgress;
 
 		this._execute(updateTime);
-
-		/* Trigger events based on progress and loop options. */
-		this.dispatchEvent({ type: "onProgress" });
 
 		if (this.progress >= 1.0) {
 			if (this.loop) {
 				this.start();
 			} else {
+				this.dispatchEvent({ type: "onProgress" });
 				this.dispatchEvent({ type: "onComplete" });
 				this.pause();
 			}
+		} else if (this.progress > 0) {
+			this.dispatchEvent({ type: "onProgress" });
 		}
 	};
 
@@ -142,6 +150,7 @@ export default class Ticker extends Family {
 		._tick(): The requestAnimationFrame loop to trigger ._update() with currentTime.
 		Only gets triggered by .play() and should not be called directly.
 	*/
+
 	@readonly
 	_tick = () => {
 		if (!this.isActive) return;

@@ -18,7 +18,7 @@ export default class Timeline extends Ticker {
 
 	@readonly
 	_execute = t => {
-		this._updateChildrenByTime(t / this.timeScale);
+		this._updateChildrenByTime(t);
 	};
 
 	@readonly
