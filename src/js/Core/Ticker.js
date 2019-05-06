@@ -1,3 +1,5 @@
+const packageConfig = require("./../../../package.json");
+const libName = packageConfig.name.charAt(0).toUpperCase() + packageConfig.name.slice(1);
 import * as Nervo from "./../index";
 import Clock from "./Clock";
 import Family from "./Family";
@@ -18,7 +20,7 @@ export default class Ticker extends Family {
 		if (typeof this.easing === "string") this.easing = Eases[this.easing];
 		this.isActive = false;
 		this.loop = options.loop !== undefined ? options.loop : Nervo.Loop;
-		this.timeScale = options.timeScale !== undefined ? options.timeScale : Nervo.TimeScale;
+		this.timeScale = options.timeScale !== undefined || 0 ? options.timeScale : Nervo.TimeScale;
 	}
 
 	/*
@@ -48,6 +50,12 @@ export default class Ticker extends Family {
 
 	@readonly
 	setTimeScale = timeScale => {
+		if (timeScale <= 0) {
+			console.warn(`${libName}.Ticker.setTimeScale: timeScale <= 0 is not allowed.`, this);
+			this.timeScale = 1.0;
+			return this;
+		}
+
 		this.timeScale = timeScale;
 		this._onChange(this);
 
