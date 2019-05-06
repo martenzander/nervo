@@ -11,7 +11,7 @@ const { resolve } = require("./webpack.settings");
 module.exports = {
 	entry: ["./app/src/jsx/Index.jsx"],
 	output: {
-		path: path.resolve(__dirname, "../", "app", "dist"),
+		path: path.resolve(__dirname, "../", "app", "public"),
 		filename: "js/[name].bundle.js",
 	},
 	devtool: devMode ? "inline-source-map" : false,
@@ -112,7 +112,7 @@ module.exports = {
 		host: "localhost",
 		historyApiFallback: true,
 		open: true,
-		contentBase: [path.join(__dirname, "..", "app", "dist")],
+		contentBase: [path.join(__dirname, "..", "app", "public")],
 		watchContentBase: true,
 		publicPath: "http://localhost:8080/",
 	},

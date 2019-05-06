@@ -53,13 +53,24 @@ class Track extends Canvas {
 		});
 
 		// GUI Properties
+		const tracksFolder = this.gui.addFolder("Tracks");
 		for (let i = 0; i < this.tracks.length; i++) {
-			const folder = this.gui.addFolder(`Track ${i + 1}`);
+			const folder = tracksFolder.addFolder(`Track ${i + 1}`);
 			folder
 				.add(this.tracks[i], "start")
 				.min(0)
 				.onChange(e => {
 					this.tracks[i].setStartTime(e);
+				});
+		}
+		const tweensFolder = this.gui.addFolder("Tweens");
+		for (let i = 0; i < this.tweens.length; i++) {
+			const folder = tweensFolder.addFolder(`Tween ${i + 1}`);
+			folder
+				.add(this.tweens[i], "duration")
+				.min(0)
+				.onChange(e => {
+					this.tweens[i].setDuration(e);
 				});
 		}
 		const timelineFolder = this.gui.addFolder("Timeline");
@@ -73,6 +84,7 @@ class Track extends Canvas {
 
 	draw = e => {
 		this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+		this.context.font = "18px Roboto Black Italic";
 
 		for (let i = 0; i < this.tracks.length; i++) {
 			// Backgrounds
@@ -88,6 +100,12 @@ class Track extends Canvas {
 			const x = (this.tracks[i].start / this.timeline.duration) * this.canvas.width;
 			const width = (this.tracks[i].duration / this.timeline.duration) * this.canvas.width;
 			this.context.fillRect(x, y, width, this.trackHeight * this.canvas.height);
+			this.context.fillStyle = "#141730";
+			this.context.fillText(
+				`Track ${i + 1}`,
+				x + 5,
+				y + this.trackHeight * this.canvas.height - 5
+			);
 		}
 
 		// Progress

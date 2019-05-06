@@ -8,7 +8,8 @@ class Canvas {
 		this.gui.domElement.classList.add("gui");
 		this.canvas.parentElement.parentElement.appendChild(this.gui.domElement);
 		this.context = canvas.getContext("2d");
-		this.radiusFactor = 0.0625;
+		// this.radiusFactor = 0.0625;
+		this.radiusFactor = 0.1;
 		this.setSizes();
 		window.addEventListener("resize", this.onResize);
 	}

@@ -15,12 +15,12 @@ class Tween extends Canvas {
 			x: this.padding,
 			y: this.canvas.height / 2,
 		};
+		this.progress = 0;
 
 		this.tween = new Nervo.Tween(
 			{ progress: 0 },
 			{ progress: 1 },
 			{
-				autoStart: true,
 				duration: 3,
 				loop: true,
 				easing: "quintInOut",
@@ -48,15 +48,26 @@ class Tween extends Canvas {
 			this.tween.easing = eases[e];
 		});
 
-		this.draw();
+		this.tween.start();
 	}
 
 	draw = e => {
 		this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
 		this.context.beginPath();
-		this.context.arc(this.pos.x, this.pos.y, this.radius, 0, 2 * Math.PI, false);
+
+		this.context.translate(this.pos.x, this.pos.y);
+		this.context.rotate((360 * this.tween.easedProgress * Math.PI) / 180);
+		this.context.translate(-this.pos.x, -this.pos.y);
+		this.context.fillRect(
+			this.pos.x - this.radius / 2,
+			this.pos.y - this.radius / 2,
+			this.radius,
+			this.radius
+		);
 		this.context.fillStyle = "#FFEB4F";
 		this.context.fill();
+
+		this.context.setTransform(1, 0, 0, 1, 0, 0);
 	};
 }
 

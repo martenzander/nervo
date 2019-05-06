@@ -15,7 +15,7 @@ const callback = function(error, response) {
 	response.files.forEach(file => {
 		const name = file.name;
 		const data = file.contents;
-		fs.writeFile(`./app/dist/favicons/${name}`, data, err => {
+		fs.writeFile(`./app/public/favicons/${name}`, data, err => {
 			if (err) {
 				return console.log(err);
 			}
@@ -49,7 +49,7 @@ const callback = function(error, response) {
 		const name = image.name;
 		const data = image.contents;
 
-		fs.writeFile(`./app/dist/favicons/${name}`, data, err => {
+		fs.writeFile(`./app/public/favicons/${name}`, data, err => {
 			if (err) {
 				return console.log(err);
 			}

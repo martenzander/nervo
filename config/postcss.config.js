@@ -76,7 +76,7 @@ module.exports = ctx => ({
 		"postcss-assets": {
 			// relative: 'css/',
 			loadPaths: ["img/", "img/**/*", "fonts/", "fonts/**/*"],
-			basePath: "app/dist/",
+			basePath: "app/public/",
 			cachebuster: false,
 		},
 		"postcss-flexbugs-fixes": {},
