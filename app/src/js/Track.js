@@ -16,6 +16,7 @@ class Track extends Canvas {
 		this.trackHeight = 0.1724137931;
 		this.trackBgColor = "#141730";
 		this.trackLabelFontSize = 0.02181818182;
+		this.fixedPadding = 50;
 
 		// tweens
 		this.tweens = [];
@@ -102,16 +103,18 @@ class Track extends Canvas {
 	draw = e => {
 		this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
-		const trackHeight = (this.canvas.height - this.padding) / this.timeline.children.length;
-		const leftSpace = this.padding * 1.75;
+		const trackHeight =
+			(this.canvas.height - this.fixedPadding) / this.timeline.children.length;
+		const leftSpace = this.fixedPadding * 1.75;
 
-		this.context.font = `${this.trackLabelFontSize * this.canvas.width}px Roboto Black Italic`;
+		// this.context.font = `${this.trackLabelFontSize * this.canvas.width}px Roboto Black Italic`;
+		this.context.font = `12px Roboto Black Italic`;
 		this.context.textBaseline = "middle";
 		this.context.textAlign = "left";
 		for (let i = 0; i < this.timeline.children.length; i++) {
 			const track = this.timeline.children[i];
 			// Backgrounds
-			let y = this.padding + (trackHeight + 1) * i;
+			let y = this.fixedPadding + (trackHeight + 1) * i;
 			// this.context.fillStyle = track.hasStarted ? "rgba(78,81,111,0)" : this.trackBgColor;
 			this.context.fillStyle = this.trackBgColor;
 			this.context.fillRect(0, y, this.canvas.width, trackHeight);
@@ -142,14 +145,15 @@ class Track extends Canvas {
 		// Progress
 		this.context.fillStyle = "rgba( 32, 36, 73 , 0.5)";
 		const width = this.timeline.easedProgress * (this.canvas.width - leftSpace);
-		this.context.fillRect(0, 0, width + leftSpace, this.canvas.height);
+		// this.context.fillRect(0, 0, width + leftSpace, this.canvas.height);
 		this.context.moveTo(width + leftSpace, 0);
 		this.context.lineTo(width + leftSpace, this.canvas.height);
 		this.context.stroke();
 
 		// time indicator
-		this.context.font = `${(this.trackLabelFontSize / 1.5) *
-			this.canvas.width}px Roboto Black Italic`;
+		// this.context.font = `${(this.trackLabelFontSize / 1.5) *
+		// 	this.canvas.width}px Roboto Black Italic`;
+		this.context.font = `12px Roboto Black Italic`;
 		this.context.strokeStyle = "rgba(255,255,255,0.25)";
 		this.context.textBaseline = "top";
 		this.context.textAlign = "center";
@@ -162,9 +166,9 @@ class Track extends Canvas {
 			this.context.beginPath();
 			this.context.moveTo(x, 0);
 			if (i % 10 === 0) {
-				this.context.lineTo(x, this.padding / 3);
+				this.context.lineTo(x, this.fixedPadding / 3);
 				this.context.stroke();
-				this.context.fillText(`${i / 10}`, x, this.padding / 2);
+				this.context.fillText(`${i / 10}`, x, this.fixedPadding / 2);
 			} else {
 				this.context.lineTo(x, 10);
 				this.context.stroke();
@@ -178,7 +182,7 @@ class Track extends Canvas {
 		for (let i = 0; i < this.timeline.children.length; i++) {
 			const track = this.timeline.children[i];
 			this.context.fillStyle = track.isActive ? "#DD436B" : "rgba(255,255,255,0.25)";
-			let y = this.padding + (trackHeight + 1) * i;
+			let y = this.fixedPadding + (trackHeight + 1) * i;
 			this.context.fillText(`Track ${i + 1}`, 15, y + trackHeight / 2 + 2);
 		}
 	};
