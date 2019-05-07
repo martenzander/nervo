@@ -16,7 +16,7 @@ export default class Track extends Ticker {
 		delete this.stop;
 		delete this.pause;
 		delete this.play;
-		delete this.autoPlay;
+		delete this.autoStart;
 		delete this.loop;
 		delete this._tick;
 
