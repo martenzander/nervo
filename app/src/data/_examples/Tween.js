@@ -1,4 +1,4 @@
-import * as Nervo from "../../../src/js/index";
+import * as Nervo from "./../../../../src/js/index";
 import Canvas from "./Core/Canvas";
 import eases from "eases";
 
@@ -8,7 +8,7 @@ for (const key in eases) {
 	easeNames.push(key);
 }
 
-class Tween extends Canvas {
+class TweenExample extends Canvas {
 	constructor(canvas) {
 		super(canvas);
 		this.pos = {
@@ -73,4 +73,4 @@ class Tween extends Canvas {
 	};
 }
 
-export default Tween;
+export default TweenExample;

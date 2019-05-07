@@ -78,7 +78,11 @@ class Header extends Component {
 					<div className={"nervo-container"}>
 						<div className={styles.contentHolder}>
 							<div className={`${styles.content} ${styles.highZIndex}`}>
-								<h1 className={`${styles.content} ${styles.marginRight}`}>
+								<h1
+									className={`${styles.content} ${styles.marginRight} ${
+										styles.headline
+									}`}
+								>
 									<a>
 										<Logo />
 									</a>

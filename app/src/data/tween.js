@@ -1,6 +1,6 @@
 import * as Nervo from "./../../../src/js/index";
 const reference = new Nervo.Tween({}, {}, {});
-const TweenExample = require("./../js/Tween");
+const TweenExample = require("./_examples/Tween");
 import uuid from "uuid/v4";
 
 // keys
@@ -38,7 +38,7 @@ propertyNames.forEach(key => {
 			item.copy = "If set to <b>true</b> the tween starts immediately after construction.";
 			break;
 		case "currentTime":
-			item.copy = "Past time since tween start.";
+			item.copy = "Past time since Tween start.";
 			break;
 		case "duration":
 			item.copy = "A floating point number defining the length of the tween.";
@@ -47,13 +47,13 @@ propertyNames.forEach(key => {
 			item.copy = "Callback function that interpolates the progress.";
 			break;
 		case "isActive":
-			item.copy = "Returns <b>true</b> when the tween is playing.";
+			item.copy = "Returns <b>true</b> when the Tween is playing.";
 			break;
 		case "isTween":
 			item.copy = "Returns <b>true</b>.";
 			break;
 		case "loop":
-			item.copy = "Whether the tween will loop when finished.";
+			item.copy = "Whether the Tween will loop when finished.";
 			break;
 		case "object":
 			item.copy = "Object whose properties will be modified.";
@@ -74,7 +74,7 @@ propertyNames.forEach(key => {
 			item.copy = "Object containing relevant properties and desired target values.";
 			break;
 		case "timeScale":
-			item.copy = "Foating number scaling the duration of the tween. Default: <b>1.0</b>.";
+			item.copy = "Foating number scaling the duration of the Tween. Default: <b>1.0</b>.";
 			break;
 		case "type":
 			item.copy = "String with the purpose to identify the object. Default: <b>Tween</b>.";
@@ -133,19 +133,25 @@ methodNames.forEach(key => {
 
 	switch (key) {
 		case "clone":
-			item.copy = "Returns a clone of the tween.";
+			item.copy = "Returns a clone of the Tween.";
 			break;
 		case "pause":
-			item.copy = "Pauses the tween.";
+			item.copy = "Pauses the Tween.";
 			break;
 		case "play":
-			item.copy = "Continues playing the tween at .<a href=''>currentTime</a>.";
+			item.copy = "Continues playing the Tween at .<a href=''>currentTime</a>.";
+			break;
+		case "setDuration":
+			item.copy = `Sets a new .<a href='#${keys.duration}'>duration</a> value.`;
+			break;
+		case "setTimeScale":
+			item.copy = `Sets a new .<a href='#${keys.timeScale}'>timeScale</a> value.`;
 			break;
 		case "start":
-			item.copy = "Starts playing the tween from the start.";
+			item.copy = "Starts playing the Tween from the start.";
 			break;
 		case "stop":
-			item.copy = "Resets the tween to the start and pauses.";
+			item.copy = "Resets the Tween to the start and pauses.";
 			break;
 		default:
 			item.copy = "";
@@ -185,7 +191,7 @@ const tween = {
 			{
 				component: "code",
 				value: {
-					source: "tweenExample.js",
+					source: "tweenConstructor.js",
 				},
 			},
 			{
@@ -201,7 +207,7 @@ const tween = {
 					keys.loop
 				}'>loop</a> · <a href='#${keys.onComplete}'>onComplete</a> · <a href='#${
 					keys.onProgress
-				}'>onProgress</a>`,
+				}'>onProgress</a> · <a href='#${keys.timeScale}'>timeScale</a>`,
 			},
 			{
 				component: "attentionBox",

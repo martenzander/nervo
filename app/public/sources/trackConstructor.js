@@ -1,1 +1,1 @@
-new Nervo.Track(Tweens : [] , options : {});
+new Nervo.Track(children : [] , options : {});

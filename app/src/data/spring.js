@@ -1,6 +1,6 @@
 import * as Nervo from "./../../../src/js/index";
 const reference = new Nervo.Spring({}, {}, {});
-const SpringExample = require("./../js/Spring");
+const SpringExample = require("./_examples/Spring");
 import uuid from "uuid/v4";
 
 // keys
@@ -50,7 +50,7 @@ propertyNames.forEach(key => {
 		case "isSpring":
 			item.copy = "Returns <b>true</b>.";
 			break;
-		case "object":
+		case "options":
 			item.copy = "Configuring object handed over to constructor.";
 			break;
 		case "onComplete":
@@ -59,7 +59,7 @@ propertyNames.forEach(key => {
 		case "onProgress":
 			item.copy = "Callback function – gets called while Spring is playing.";
 			break;
-		case "options":
+		case "object":
 			item.copy = "Object handed over to constructor.";
 			break;
 		case "stiffness":
@@ -155,8 +155,11 @@ const spring = {
 		[
 			{
 				component: "copy",
-				value:
-					"Springs animate in a more physically and natural way. They are durationless and accumulative calculated. As soon as a Spring has completed it will become inactive. To trigger a Spring update use .<a href=''>setTarget()</a>. Click and drag somewhere on the canvas below and play with properties like .<a href=''>stiffness</a> or .<a href=''>damping</a>",
+				value: `Springs animate in a more physical and natural way. They are durationless and accumulative calculated. As soon as a Spring has completed it will become inactive. To update a Spring use .<a href='#${
+					keys.setTarget
+				}'>setTarget()</a>. Click and drag somewhere on the canvas below and play with properties like .<a href='#${
+					keys.stiffness
+				}'>stiffness</a> or .<a href='#${keys.damping}'>damping</a>`,
 			},
 		],
 		[

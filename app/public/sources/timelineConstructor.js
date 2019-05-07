@@ -1,1 +1,1 @@
-new Nervo.Timeline(Tweens : [] , options : {});
+new Nervo.Timeline(children : [] , options : {});

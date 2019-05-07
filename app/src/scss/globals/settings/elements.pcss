@@ -21,12 +21,14 @@ html {
   margin: 0;
   padding: 0;
   cursor: default;
-  // background: $primary-dark;
-  font-size: 16px;
-  // @include font("regular", 16px, none, 0);
+  font-size: 15px;
   color: $corporate-color-3;
   width: 100%;
   min-height: 100vh;
+
+  @include md{
+    font-size: 16px;
+  }
 }
 
 body {

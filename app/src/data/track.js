@@ -1,6 +1,7 @@
 import * as Nervo from "./../../../src/js/index";
 const reference = new Nervo.Track([new Nervo.Tween({}, {}, { duration: 2 })], {});
-const TrackExample = require("./../js/Track");
+const tweenContent = require("./tween");
+const trackContent = require("./track");
 import uuid from "uuid/v4";
 
 // keys
@@ -35,16 +36,19 @@ propertyNames.forEach(key => {
 
 	switch (key) {
 		case "children":
-			item.copy = "Contains a list of Tweens. Default <b>null</b>";
+			item.copy = "Contains a list of Tweens or Tracks. Default <b>null</b>";
+			break;
+		case "currentTime":
+			item.copy = "Past time since the parent started.";
 			break;
 		case "duration":
 			item.copy = "Total duration of the Track.";
 			break;
-		case "hasStarted":
-			item.copy = "Returns <b>true</b> when Track started updating. Default: <b>false</b>.";
+		case "easing":
+			item.copy = "Callback function that interpolates the progress.";
 			break;
-		case "isFinished":
-			item.copy = "Returns <b>true</b> when Track is finished. Default: <b>false</b>.";
+		case "isActive":
+			item.copy = "Returns <b>true</b> when the Track is playing.";
 			break;
 		case "isTrack":
 			item.copy = "Returns <b>true</b>.";
@@ -61,8 +65,11 @@ propertyNames.forEach(key => {
 		case "parent":
 			item.copy = "Parent Timeline. Default: <b>null</b>.";
 			break;
-		case "start":
-			item.copy = "Start of the Track in seconds.";
+		case "startTime":
+			item.copy = "Starting time of the Track in relation to its parent.";
+			break;
+		case "timeScale":
+			item.copy = "Foating number scaling the duration of the Track. Default: <b>1.0</b>.";
 			break;
 		case "type":
 			item.copy = "String with the purpose to identify the object. Default: <b>Track</b>.";
@@ -127,7 +134,15 @@ methodNames.forEach(key => {
 			item.copy = "Returns a clone of the Track.";
 			break;
 		case "remove":
-			item.copy = "Removes Tweens from the Track. Arrays are allowed.";
+			item.copy = `Removes <a href='#${tweenContent.keys.section}'>Tweens</a> or <a href='#${
+				trackContent.keys.section
+			}'>Tracks</a> from the Track. Arrays are allowed.`;
+			break;
+		case "setStartTime":
+			item.copy = `Sets a new .<a href='#${keys.startTime}'>startTime</a> value.`;
+			break;
+		case "setTimeScale":
+			item.copy = `Sets a new .<a href='#${keys.timeScale}'>timeScale</a> value.`;
 			break;
 		default:
 			item.copy = "";
@@ -148,19 +163,11 @@ const track = {
 		[
 			{
 				component: "copy",
-				value:
-					"Tracks group multiple <a href=''>Tweens</a> and define a collective .<a href=''>start</a> for all its direct .<a href=''>children</a>. The most outer parent of a Track must be a Timeline in order to work.",
-			},
-		],
-		[
-			{
-				component: "canvas",
-				value: TrackExample,
-			},
-			{
-				component: "attentionBox",
-				value:
-					"<b>Pro Tip:</b> It is allowed to nest Tracks for even more flexibility in time and space.",
+				value: `Tracks group multiple <a href='#${
+					tweenContent.keys.section
+				}'>Tweens</a> and define a collective .<a href='#${
+					keys.startTime
+				}'>startTime</a> for all its direct .<a href='#${keys.children}'>children</a>.`,
 			},
 		],
 		[
@@ -172,7 +179,7 @@ const track = {
 			{
 				component: "code",
 				value: {
-					source: "trackExample.js",
+					source: "trackConstructor.js",
 				},
 			},
 			{
@@ -192,10 +199,15 @@ const track = {
 			{
 				component: "copy",
 				value: `<a href='#${keys.startTime}'>startTime</a> · <a href='#${
-					keys.onComplete
-				}'>onComplete</a> · <a href='#${keys.onProgress}'>onProgress</a> · <a href='#${
-					keys.timeScale
-				}'>timeScale</a>`,
+					keys.easing
+				}'>easing</a> · <a href='#${keys.onComplete}'>onComplete</a> · <a href='#${
+					keys.onProgress
+				}'>onProgress</a> · <a href='#${keys.timeScale}'>timeScale</a>`,
+			},
+			{
+				component: "attentionBox",
+				value:
+					'<b>Notice:</b> For the easing option you can either pass a function or a valid <a href="https://www.npmjs.com/package/eases" target="_blank">eases</a> string. E.g. "sineOut".',
 			},
 		],
 		[
