@@ -20,12 +20,12 @@ class Track extends Canvas {
 
 		// tweens
 		this.tweens = [];
-		for (let i = 0; i < 8; i++) {
+		for (let i = 0; i < 4; i++) {
 			const tween = new Nervo.Tween(
 				{ progress: 0 },
 				{ progress: 1 },
 				{
-					easing: "cubicInOut",
+					easing: "sineOut",
 					duration: 1 + (i % 2),
 					onProgress: e => {},
 				}
@@ -51,7 +51,7 @@ class Track extends Canvas {
 
 		for (let i = 0; i < this.tweens.length; i += 2) {
 			this.timeline.add([this.tweens[i], this.tweens[i + 1]], {
-				startTime: i,
+				startTime: i * 1.0,
 			});
 		}
 
@@ -79,7 +79,7 @@ class Track extends Canvas {
 			const track = this.timeline.children[i];
 			folder
 				.add(track, "startTime")
-				.min(0)
+				.min(0.0)
 				.onChange(e => {
 					track.setStartTime(e);
 				});
@@ -105,19 +105,19 @@ class Track extends Canvas {
 
 		const trackHeight =
 			(this.canvas.height - this.fixedPadding) / this.timeline.children.length;
-		const leftSpace = this.fixedPadding * 1.75;
+		const leftSpace = this.fixedPadding * 1.5;
 
-		// this.context.font = `${this.trackLabelFontSize * this.canvas.width}px Roboto Black Italic`;
-		this.context.font = `12px Roboto Black Italic`;
+		this.context.font = "12px Roboto Black Italic";
 		this.context.textBaseline = "middle";
 		this.context.textAlign = "left";
 		for (let i = 0; i < this.timeline.children.length; i++) {
 			const track = this.timeline.children[i];
 			// Backgrounds
-			let y = this.fixedPadding + (trackHeight + 1) * i;
-			// this.context.fillStyle = track.hasStarted ? "rgba(78,81,111,0)" : this.trackBgColor;
+			const y = this.fixedPadding + (trackHeight + 1) * i;
 			this.context.fillStyle = this.trackBgColor;
 			this.context.fillRect(0, y, this.canvas.width, trackHeight);
+			this.context.fillStyle = "#202449";
+			this.context.fillRect(leftSpace - 1, y, 1, trackHeight);
 
 			// Tracks
 			this.context.fillStyle = track.isActive ? "#196A99" : "rgba(78,81,111,0)";
@@ -129,15 +129,16 @@ class Track extends Canvas {
 				(this.canvas.width - leftSpace);
 
 			// Tweens
-			const tweenPadding = 0.15 * trackHeight;
+			const tweenPadding = 1;
 			for (let n = 0; n < track.children.length; n++) {
 				const tween = track.children[n];
-				// this.context.fillStyle = tween.isActive ? "#DD436B" : "rgba(78,81,111,1)";
-				this.context.fillStyle = tween.isActive ? "#DD436B" : "rgba( 32, 36, 73 , 1)";
-				const tweenHeight = (trackHeight - 3 * tweenPadding) / track.children.length;
-				const tweenY = y + tweenPadding + (tweenHeight + tweenPadding) * n;
+				const tweenHeight =
+					(trackHeight - (tweenPadding * track.children.length - 1)) /
+					track.children.length;
+				const tweenY = y + (tweenHeight + tweenPadding) * n;
 				const totalTweenDuration = tween.duration * tween.timeScale;
 				const tweenWidth = (totalTweenDuration / track.duration) * width;
+				this.context.fillStyle = tween.isActive ? "#DD436B" : "rgba( 221, 67, 107 , 0.35)";
 				this.context.fillRect(x, tweenY, tweenWidth, tweenHeight);
 			}
 		}
@@ -145,15 +146,12 @@ class Track extends Canvas {
 		// Progress
 		this.context.fillStyle = "rgba( 32, 36, 73 , 0.5)";
 		const width = this.timeline.easedProgress * (this.canvas.width - leftSpace);
-		// this.context.fillRect(0, 0, width + leftSpace, this.canvas.height);
 		this.context.moveTo(width + leftSpace, 0);
 		this.context.lineTo(width + leftSpace, this.canvas.height);
 		this.context.stroke();
 
 		// time indicator
-		// this.context.font = `${(this.trackLabelFontSize / 1.5) *
-		// 	this.canvas.width}px Roboto Black Italic`;
-		this.context.font = `12px Roboto Black Italic`;
+		this.context.font = "12px Roboto Slab Bold";
 		this.context.strokeStyle = "rgba(255,255,255,0.25)";
 		this.context.textBaseline = "top";
 		this.context.textAlign = "center";
@@ -169,9 +167,6 @@ class Track extends Canvas {
 				this.context.lineTo(x, this.fixedPadding / 3);
 				this.context.stroke();
 				this.context.fillText(`${i / 10}`, x, this.fixedPadding / 2);
-			} else {
-				this.context.lineTo(x, 10);
-				this.context.stroke();
 			}
 		}
 
@@ -182,7 +177,7 @@ class Track extends Canvas {
 		for (let i = 0; i < this.timeline.children.length; i++) {
 			const track = this.timeline.children[i];
 			this.context.fillStyle = track.isActive ? "#DD436B" : "rgba(255,255,255,0.25)";
-			let y = this.fixedPadding + (trackHeight + 1) * i;
+			const y = this.fixedPadding + (trackHeight + 1) * i;
 			this.context.fillText(`Track ${i + 1}`, 15, y + trackHeight / 2 + 2);
 		}
 	};
