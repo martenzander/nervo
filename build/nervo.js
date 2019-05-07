@@ -73,7 +73,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "d0d9042499926bc3dec9";
+/******/ 	var hotCurrentHash = "6b85779c06f3d06cfbe7";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -5986,7 +5986,7 @@ function (_Ticker) {
     delete _this.stop;
     delete _this.pause;
     delete _this.play;
-    delete _this.autoPlay;
+    delete _this.autoStart;
     delete _this.loop;
     delete _this._tick;
     _this._isFinished = false;
