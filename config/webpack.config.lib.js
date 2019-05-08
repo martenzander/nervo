@@ -2,12 +2,11 @@ const path = require("path");
 const packageConfig = require("./../package.json");
 const webpack = require("webpack");
 
+const devMode = process.env.NODE_ENV !== "production";
 const { resolve } = require("./webpack.settings");
 
-const fileName =
-	process.env.NODE_ENV === "development"
-		? `${packageConfig.name}.js`
-		: `${packageConfig.name}.min.js`;
+const fileName = devMode ? `${packageConfig.name}.js` : `${packageConfig.name}.min.js`;
+const plugins = devMode ? [new webpack.HotModuleReplacementPlugin()] : [];
 
 module.exports = {
 	entry: ["./src/js/index.js"],
@@ -44,5 +43,5 @@ module.exports = {
 			},
 		],
 	},
-	plugins: [new webpack.HotModuleReplacementPlugin()],
+	plugins,
 };
