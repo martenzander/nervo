@@ -11,8 +11,8 @@ export default class Tween extends Ticker {
 	constructor(object, target, options = {}) {
 		super(options);
 
-		this.target = target;
 		this.object = object;
+		this.target = target;
 		this._reference = { ...{}, ...this.object };
 		if (this.autoStart) this.start();
 	}

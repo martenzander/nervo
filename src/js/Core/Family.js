@@ -1,5 +1,3 @@
-const packageConfig = require("./../../../package.json");
-const libName = packageConfig.name.charAt(0).toUpperCase() + packageConfig.name.slice(1);
 import { readonly } from "./Decorators";
 const uuid = require("uuid/v4");
 import Root from "./Root";
@@ -25,34 +23,29 @@ export default class Family extends Root {
 	@readonly
 	add = (object, options = {}) => {
 		if (object.length >= 1) {
-			if (this.isTimeline) {
-				const tweens = [];
-				for (let i = 0; i < object.length; i++) {
-					if (object[i].isTween) tweens.push(object[i]);
-					if (object[i].isTrack) this.add(object[i], {});
-				}
-				if (tweens.length >= 1) {
-					const track = this._getTrackFromTweens(tweens, options);
-					this.add(track, options);
-				}
-				return this;
-			}
-
 			for (let i = 0; i < object.length; i++) {
-				this.add(object[i]);
+				this.add(object[i], options);
 			}
 			return this;
 		}
 
 		if (object === this) {
-			console.error(`${libName}.Base.add: Object can't be a child of itself.`, object);
+			console.error("Nervo.Family.add: Object can't be a child of itself.", object);
 			return this;
 		}
 
 		if (object && object.isNervo) {
 			if (this.isTween || this.isSpring) {
 				console.warn(
-					`${libName}.Base.add: Object is an instance of ${libName}.Tween or ${libName}.Spring and can't have children.`,
+					"Nervo.Family.add: Object is an instance of Nervo.Tween or Nervo.Spring and can't have children.",
+					object
+				);
+				return this;
+			}
+
+			if (object.isSpring) {
+				console.error(
+					`Nervo.Family.add: Can't add object of type ${object.type} to a Track.`,
 					object
 				);
 				return this;
@@ -62,39 +55,15 @@ export default class Family extends Root {
 				object.parent.remove(object);
 			}
 
-			if (this.isTimeline) {
-				if (!object.isTween && !object.isTrack) {
-					console.error(
-						`${libName}.Base.add: Object is not an instance of ${libName}.Tween or ${libName}.Track.`,
-						object
-					);
-					return this;
-				}
-			}
-
-			if (this.isTrack) {
-				if (object.isTimeline || object.isSpring) {
-					console.error(
-						`${libName}.Base.add: Can't add object of type ${object.type} to a Track.`,
-						object
-					);
-					return this;
-				}
-			}
-
 			object.parent = this;
 			this.children.push(object);
 
 			object.dispatchEvent({ type: "added" });
 
-			if (this.isTimeline || this.isTrack) {
-				this._onChange(this);
-			}
+			this._onChange(this);
 		} else {
-			console.error(
-				`${libName}.Base.add: Object is not an instance of ${libName}.Base.`,
-				object
-			);
+			console.error("Nervo.Family.add: Object is not an instance of Nervo.Family.", object);
+			return this;
 		}
 		return this;
 	};
@@ -139,10 +108,10 @@ export default class Family extends Root {
 
 			object.children.forEach(child => {
 				const childTimeScale = child.timeScale !== undefined ? child.timeScale : 1.0;
-				const childStart = typeof child.startTime === "number" ? child.startTime : 0.0;
+				const childDelay = typeof child.delay === "number" ? child.delay : 0.0;
 
-				if (child.duration * childTimeScale + childStart > duration)
-					duration = child.duration * childTimeScale + childStart;
+				if (child.duration * childTimeScale + childDelay > duration)
+					duration = child.duration * childTimeScale + childDelay;
 			});
 
 			object.duration = duration;

@@ -1,6 +1,5 @@
 import Spring from "./Spring/Spring";
 import Timeline from "./Timeline/Timeline";
-import Track from "./Track/Track";
 import Tween from "./Tween/Tween";
 
 // Defaults
@@ -17,5 +16,4 @@ export { TimeScale };
 // Classes
 export { Spring };
 export { Timeline };
-export { Track };
 export { Tween };

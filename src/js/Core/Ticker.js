@@ -1,5 +1,3 @@
-const packageConfig = require("./../../../package.json");
-const libName = packageConfig.name.charAt(0).toUpperCase() + packageConfig.name.slice(1);
 import * as Nervo from "./../index";
 import Clock from "./Clock";
 import Family from "./Family";
@@ -13,6 +11,7 @@ export default class Ticker extends Family {
 	*/
 	constructor(options) {
 		super(options);
+		this._isFinished = false;
 		this.autoStart = options.autoStart !== undefined ? options.autoStart : Nervo.AutoStart;
 		this.currentTime = 0;
 		this.duration = options.duration !== undefined ? options.duration : 0;
@@ -20,6 +19,7 @@ export default class Ticker extends Family {
 		if (typeof this.easing === "string") this.easing = Eases[this.easing];
 		this.isActive = false;
 		this.loop = options.loop !== undefined ? options.loop : Nervo.Loop;
+		this.delay = options.delay !== undefined ? options.delay : 0;
 		this.timeScale = options.timeScale !== undefined || 0 ? options.timeScale : Nervo.TimeScale;
 	}
 
@@ -30,28 +30,30 @@ export default class Ticker extends Family {
 	_clock = new Clock();
 
 	/*
+		.setDelay:
+	*/
+	@readonly
+	setDelay = delay => {
+		this.delay = delay;
+		this._onChange(this);
+
+		return this;
+	};
+
+	/*
 		._reset(): Resets this instance and all of its children to t = 0.
 		It's best practice to not call this method directly.
 		Use .start() or .stop() instead.
 	*/
 	_reset = e => {
 		this.currentTime = 0;
-
-		/* Reset all children. */
-		this.children.forEach(child => {
-			child._reset();
-		});
-
-		/* Set this.isActive so ._update(t) will have effect. */
-		this.isActive = true;
-
 		this._update(this.currentTime);
 	};
 
 	@readonly
 	setTimeScale = timeScale => {
 		if (timeScale <= 0) {
-			console.warn(`${libName}.Ticker.setTimeScale: timeScale <= 0 is not allowed.`, this);
+			console.warn("Nervo.Ticker.setTimeScale: timeScale <= 0 is not allowed.", this);
 			this.timeScale = 1.0;
 			return this;
 		}
@@ -86,7 +88,7 @@ export default class Ticker extends Family {
 	*/
 	@readonly
 	pause = () => {
-		this.isActive = false;
+		this.paused = true;
 		this._clock.stop();
 	};
 
@@ -96,7 +98,7 @@ export default class Ticker extends Family {
 	*/
 	@readonly
 	play = () => {
-		this.isActive = true;
+		this.paused = false;
 		this._clock.start();
 		this._tick();
 	};
@@ -133,25 +135,35 @@ export default class Ticker extends Family {
 	*/
 
 	_update = t => {
-		if (!this.isActive) return;
-
-		this._updateProgress(t);
+		this._updateProgress(t - this.delay);
 
 		const updateTime = this.duration * this.easedProgress;
 
-		this._execute(updateTime);
+		if (this.isTween) {
+			this._execute(updateTime);
+		} else {
+			this._updateChildrenByTime(updateTime);
+		}
 
 		if (this.progress >= 1.0) {
 			if (this.loop) {
 				this.dispatchEvent({ type: "onProgress" });
 				this.start();
-			} else {
+			} else if (!this._isFinished) {
+				this._isFinished = true;
 				this.dispatchEvent({ type: "onProgress" });
 				this.dispatchEvent({ type: "onComplete" });
 				this.pause();
+			} else {
+				this.isActive = false;
 			}
-		} else if (this.progress > 0) {
+		} else if (this.progress >= 0) {
+			this.isActive = true;
+			this._isFinished = false;
 			this.dispatchEvent({ type: "onProgress" });
+		} else {
+			this._isFinished = false;
+			this.isActive = false;
 		}
 	};
 
@@ -162,7 +174,7 @@ export default class Ticker extends Family {
 
 	@readonly
 	_tick = () => {
-		if (!this.isActive) return;
+		if (this.paused) return;
 
 		/* Update time. */
 		this.currentTime += this._clock.getDelta();
