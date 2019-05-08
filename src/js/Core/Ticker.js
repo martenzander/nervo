@@ -120,9 +120,9 @@ export default class Ticker extends Family {
 		if (this.progress >= 1.0) {
 			this.progress = 1.0;
 			this.easedProgress = 1.0;
-		} else if (this.progress <= 0) {
-			this.progress = 0.0;
-			this.easedProgress = 0.0;
+		} else if (this.progress < 0) {
+			this.progress = -1.0;
+			this.easedProgress = -1.0;
 		}
 	};
 
@@ -143,6 +143,7 @@ export default class Ticker extends Family {
 
 		if (this.progress >= 1.0) {
 			if (this.loop) {
+				this.dispatchEvent({ type: "onProgress" });
 				this.start();
 			} else {
 				this.dispatchEvent({ type: "onProgress" });
