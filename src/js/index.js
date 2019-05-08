@@ -6,12 +6,10 @@ import Tween from "./Tween/Tween";
 const AutoStart = false;
 const Easing = "linear";
 const Loop = false;
-const TimeScale = 1;
 
 export { AutoStart };
 export { Easing };
 export { Loop };
-export { TimeScale };
 
 // Classes
 export { Spring };

@@ -45,7 +45,7 @@ export default class Family extends Root {
 
 			if (object.isSpring) {
 				console.error(
-					`Nervo.Family.add: Can't add object of type ${object.type} to a Track.`,
+					`Nervo.Family.add: Can't add object of type ${object.type} to a Timeline.`,
 					object
 				);
 				return this;
@@ -54,6 +54,8 @@ export default class Family extends Root {
 			if (object.parent !== null) {
 				object.parent.remove(object);
 			}
+
+			object.setDelay(options.delay !== undefined ? options.delay : this.duration);
 
 			object.parent = this;
 			this.children.push(object);
@@ -85,9 +87,7 @@ export default class Family extends Root {
 			object.dispatchEvent({ type: "removed" });
 
 			this.children.splice(index, 1);
-			if (this.isTimeline || this.isTrack) {
-				this._onChange(this);
-			}
+			this._onChange(this);
 		}
 
 		return this;
@@ -96,7 +96,6 @@ export default class Family extends Root {
 	@readonly
 	_updateChildrenByTime = t => {
 		this.children.forEach(child => {
-			child.isActive = true;
 			child._update(t);
 		});
 	};
@@ -107,11 +106,11 @@ export default class Family extends Root {
 			let duration = 0;
 
 			object.children.forEach(child => {
-				const childTimeScale = child.timeScale !== undefined ? child.timeScale : 1.0;
+				const childScale = child.scale !== undefined ? child.scale : 1.0;
 				const childDelay = typeof child.delay === "number" ? child.delay : 0.0;
 
-				if (child.duration * childTimeScale + childDelay > duration)
-					duration = child.duration * childTimeScale + childDelay;
+				if (child.duration * childScale + childDelay > duration)
+					duration = child.duration * childScale + childDelay;
 			});
 
 			object.duration = duration;

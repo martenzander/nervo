@@ -20,7 +20,7 @@ export default class Ticker extends Family {
 		this.isActive = false;
 		this.loop = options.loop !== undefined ? options.loop : Nervo.Loop;
 		this.delay = options.delay !== undefined ? options.delay : 0;
-		this.timeScale = options.timeScale !== undefined || 0 ? options.timeScale : Nervo.TimeScale;
+		this.scale = options.scale !== undefined || 0 ? options.scale : 1.0;
 	}
 
 	/*
@@ -51,14 +51,14 @@ export default class Ticker extends Family {
 	};
 
 	@readonly
-	setTimeScale = timeScale => {
-		if (timeScale <= 0) {
-			console.warn("Nervo.Ticker.setTimeScale: timeScale <= 0 is not allowed.", this);
-			this.timeScale = 1.0;
+	setScale = scale => {
+		if (scale <= 0) {
+			console.warn("Nervo.Ticker.setScale: scale <= 0 is not allowed.", this);
+			this.scale = 1.0;
 			return this;
 		}
 
-		this.timeScale = timeScale;
+		this.scale = scale;
 		this._onChange(this);
 
 		return this;
@@ -115,7 +115,7 @@ export default class Ticker extends Family {
 
 	@readonly
 	_updateProgress = t => {
-		this.progress = t / (this.duration * this.timeScale);
+		this.progress = t / (this.duration * this.scale);
 		this.easedProgress = this.easing(this.progress);
 
 		/* Set actual updateTime. */
