@@ -55,10 +55,9 @@ export default class Track extends Ticker {
 
 	@readonly
 	_update = t => {
-		this.currentTime = t;
 		if (!this.isActive) return;
 
-		this._updateProgress(this.currentTime - this.startTime);
+		this._updateProgress(t - this.startTime);
 
 		const updateTime = this.duration * this.easedProgress;
 
