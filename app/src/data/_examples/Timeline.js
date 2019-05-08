@@ -19,7 +19,7 @@ class TimelineExample extends Canvas {
 			Create a bunch of Tweens.
 		*/
 
-		for (let i = 0; i < 10; i++) {
+		for (let i = 0; i < 8; i++) {
 			const tween = new Nervo.Tween(
 				{ progress: 0 },
 				{ progress: 1 },
@@ -29,6 +29,9 @@ class TimelineExample extends Canvas {
 					onProgress: e => {},
 				}
 			);
+			if (i === 1) {
+				// tween.setDelay(2);
+			}
 			this.tweens.push(tween);
 		}
 
@@ -49,8 +52,19 @@ class TimelineExample extends Canvas {
 			Add .tweens to .timeline.
 		*/
 		for (let i = 0; i < this.tweens.length; i += 2) {
-			this.timeline.add([this.tweens[i], this.tweens[i + 1]], {
-				startTime: i * 1.0,
+			const sequence = new Nervo.Timeline(
+				[
+					new Nervo.Timeline(this.tweens[i], {
+						delay: 1,
+					}),
+					this.tweens[i + 1],
+				],
+				{
+					delay: i * 1.0,
+				}
+			);
+			this.timeline.add(sequence, {
+				delay: i * 1.0,
 			});
 		}
 
@@ -64,10 +78,10 @@ class TimelineExample extends Canvas {
 			const folder = tracksFolder.addFolder(`${i + 1}`);
 			const track = this.timeline.children[i];
 			folder
-				.add(track, "startTime")
+				.add(track, "delay")
 				.min(0.0)
 				.onChange(e => {
-					track.setStartTime(e);
+					track.setDelay(e);
 				});
 			folder.add(track, "timeScale").onChange(e => {
 				track.setTimeScale(e);
@@ -108,13 +122,13 @@ class TimelineExample extends Canvas {
 
 		/*
 			Calculate trackHeight, leftMargin.
-			Set fontStyle and tweenPadding.
+			Set fontStyle and childPadding.
 		*/
 		const trackHeight =
 			(this.canvas.height - this.fixedPadding) / this.timeline.children.length;
 		// const leftMargin = this.fixedPadding * 0.25;
 		const leftMargin = 5;
-		const tweenPadding = 1;
+		const childPadding = 1;
 		this.context.font = "12px Roboto Slab Bold";
 		this.context.textBaseline = "top";
 		this.context.textAlign = "center";
@@ -122,7 +136,7 @@ class TimelineExample extends Canvas {
 		for (let i = 0; i < this.timeline.children.length; i++) {
 			const track = this.timeline.children[i];
 			const x =
-				(track.startTime / this.timeline.duration) * (this.canvas.width - leftMargin) +
+				(track.delay / this.timeline.duration) * (this.canvas.width - leftMargin) +
 				leftMargin;
 			const width =
 				((track.duration * track.timeScale) / this.timeline.duration) *
@@ -137,17 +151,19 @@ class TimelineExample extends Canvas {
 			this.context.fillStyle = "#DD436B";
 			if (track.isActive) this.context.fillRect(0, y, leftMargin, trackHeight);
 
-			// Tweens
+			// Children
 			for (let n = 0; n < track.children.length; n++) {
-				const tween = track.children[n];
-				const tweenHeight =
-					(trackHeight - (tweenPadding * track.children.length - 1)) /
+				const child = track.children[n];
+				const delayWidth =
+					(child.delay / this.timeline.duration) * (this.canvas.width - leftMargin);
+				const childHeight =
+					(trackHeight - (childPadding * track.children.length - 1)) /
 					track.children.length;
-				const tweenY = y + (tweenHeight + tweenPadding) * n;
-				const totalTweenDuration = tween.duration * tween.timeScale;
-				const tweenWidth = (totalTweenDuration / track.duration) * width;
-				this.context.fillStyle = tween.isActive ? "#FFEB4F" : "rgba( 255, 235, 79 , 0.35)";
-				this.context.fillRect(x, tweenY, tweenWidth, tweenHeight);
+				const childY = y + (childHeight + childPadding) * n;
+				const totalChildDuration = child.duration * child.timeScale;
+				const childWidth = (totalChildDuration / track.duration) * width;
+				this.context.fillStyle = child.isActive ? "#FFEB4F" : "rgba( 255, 235, 79 , 0.35)";
+				this.context.fillRect(x + delayWidth, childY, childWidth, childHeight);
 			}
 		}
 

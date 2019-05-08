@@ -1,7 +1,6 @@
 import * as Nervo from "./../../../src/js/index";
 const reference = new Nervo.Timeline([], {});
 const TimelineExample = require("./_examples/Timeline");
-const trackContent = require("./track");
 const tweenContent = require("./tween");
 import uuid from "uuid/v4";
 
@@ -40,7 +39,7 @@ propertyNames.forEach(key => {
 			item.copy = "If set to <b>true</b> the Timeline starts immediately after construction.";
 			break;
 		case "children":
-			item.copy = "Contains a list of Tracks. Default: <b>null</b>";
+			item.copy = "Contains a list of Timelines and Tweens. Default: <b>null</b>";
 			break;
 		case "currentTime":
 			item.copy = "Past time since Timeline start.";
@@ -130,8 +129,7 @@ methodNames.forEach(key => {
 
 	switch (key) {
 		case "add":
-			console.log();
-			item.copy = "Adds Tweens or Tracks to the Timeline. Arrays are allowed.";
+			item.copy = "Adds Tweens or Timelines to the Timeline. Arrays are allowed.";
 			break;
 		case "clone":
 			item.copy = "Returns a clone of the Timeline.";
@@ -144,8 +142,8 @@ methodNames.forEach(key => {
 			break;
 		case "remove":
 			item.copy = `Removes <a href'#${
-				trackContent.keys.section
-			}'>Tracks</a> from the Timeline. Arrays are allowed.`;
+				tweenContent.keys.section
+			}'>Tweens</a> or Timelines from the Timeline. Arrays are allowed.`;
 			break;
 		case "start":
 			item.copy = "Starts playing the Timeline from the start.";
@@ -176,12 +174,10 @@ const timeline = {
 			{
 				component: "copy",
 				value: `Timelines control multiple <a href='#${
-					trackContent.keys.section
-				}'>Tracks</a> and their contained children. If you want to add a <a href='#${
 					tweenContent.keys.section
-				}'>Tween</a> to a Timeline you can either add the Tween to an already existing Track or directly add the Tween to the Timeline using .<a href='#${
+				}'>Tweens</a> or Timelines. If you want to add a Tween to a Timeline use the .<a href='#${
 					keys.add
-				}'>add</a>(). As long as there are no options provided, this will add the Tween at the end of the Timeline nested in a new Track. See the example below and play with some properties to better understand how Timelines, Tracks and Tweens work together.`,
+				}'>add</a>() method. As long as there are no options provided, this will add the Tween at the end of the Timeline nested in a new Track. See the example below and play with some properties to better understand how Timelines, Tracks and Tweens work together.`,
 			},
 		],
 		[
@@ -210,7 +206,7 @@ const timeline = {
 			{
 				component: "copy",
 				value: `An array of Tweens and Tracks that will be added to the Timeline. The constructor automatically groups given Tweens on a Track with a .<a href='#${
-					trackContent.keys.startTime
+					tweenContent.keys.delay
 				}'>startTime</a> value of <b>0</b>.`,
 			},
 			{

@@ -1,6 +1,7 @@
 import * as Nervo from "./../../../src/js/index";
 const reference = new Nervo.Tween({}, {}, {});
 const TweenExample = require("./_examples/Tween");
+// const timelineContent = require("./timeline");
 import uuid from "uuid/v4";
 
 // keys

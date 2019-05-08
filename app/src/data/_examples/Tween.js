@@ -21,6 +21,7 @@ class TweenExample extends Canvas {
 			{ progress: 0 },
 			{ progress: 1 },
 			{
+				delay: 2,
 				duration: 3,
 				loop: true,
 				easing: "quintInOut",
@@ -41,7 +42,12 @@ class TweenExample extends Canvas {
 		controls.add(this.tween, "play");
 		controls.add(this.tween, "pause");
 		const options = this.gui.addFolder("options");
-		options.add(this.tween, "duration");
+		options.add(this.tween, "duration").onChange(e => {
+			this.tween.setDuration(e);
+		});
+		options.add(this.tween, "delay").onChange(e => {
+			this.tween.setDelay(e);
+		});
 		options.add(this.tween, "loop");
 		options.add(this.tween, "timeScale").onChange(e => {
 			this.tween.setTimeScale(e);
@@ -51,6 +57,7 @@ class TweenExample extends Canvas {
 		});
 
 		this.tween.start();
+		this.draw();
 	}
 
 	draw = e => {
@@ -60,14 +67,13 @@ class TweenExample extends Canvas {
 		this.context.translate(this.pos.x, this.pos.y);
 		this.context.rotate((360 * this.tween.easedProgress * Math.PI) / 180);
 		this.context.translate(-this.pos.x, -this.pos.y);
+		this.context.fillStyle = "#FFEB4F";
 		this.context.fillRect(
 			this.pos.x - this.radius / 2,
 			this.pos.y - this.radius / 2,
 			this.radius,
 			this.radius
 		);
-		this.context.fillStyle = "#FFEB4F";
-		this.context.fill();
 
 		this.context.setTransform(1, 0, 0, 1, 0, 0);
 	};
