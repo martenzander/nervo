@@ -177,13 +177,18 @@ const timeline = {
 					tweenContent.keys.section
 				}'>Tweens</a> or Timelines. If you want to add a Tween to a Timeline use the .<a href='#${
 					keys.add
-				}'>add</a>() method. As long as there are no options provided, this will add the Tween at the end of the Timeline nested in a new Track. See the example below and play with some properties to better understand how Timelines, Tracks and Tweens work together.`,
+				}'>add</a>() method. As long as there are no options provided, this will add the Tween at the end of the Timeline. See the example below and play with some properties to better understand how Timelines and Tweens work together.`,
 			},
 		],
 		[
 			{
 				component: "canvas",
 				value: TimelineExample,
+			},
+			{
+				component: "attentionBox",
+				value:
+					"<b>Pro Tip:</b> For even more flexibility in space and time start nesting Timelines!",
 			},
 		],
 		[
@@ -223,11 +228,6 @@ const timeline = {
 				}'>onComplete</a> · <a href='#${keys.onProgress}'>onProgress</a> · <a href='#${
 					keys.timeScale
 				}'>timeScale</a>`,
-			},
-			{
-				component: "attentionBox",
-				value:
-					'<b>Notice:</b> For the easing option you can either pass a function or a valid <a href="https://www.npmjs.com/package/eases" target="_blank">eases</a> string. E.g. "sineOut".',
 			},
 		],
 		[

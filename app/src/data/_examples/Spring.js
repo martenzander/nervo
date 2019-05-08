@@ -1,10 +1,10 @@
 import * as Nervo from "./../../../../src/js/index";
 import Canvas from "./Core/Canvas";
+import detectIt from "detect-it";
 
 class Spring extends Canvas {
 	constructor(canvas) {
 		super(canvas);
-
 		this.isDragging = false;
 		this.springCount = 10;
 		this.springs = [];
@@ -40,15 +40,24 @@ class Spring extends Canvas {
 		});
 
 		this.initEvents();
-		this.draw();
+		setTimeout(e => {
+			this.draw();
+		}, 500);
 	}
 
 	initEvents = e => {
 		window.addEventListener("resize", this.setSpringTargetToCenter);
-		this.canvas.addEventListener("mouseleave", this.onMouseLeaveOrUp);
-		this.canvas.addEventListener("mouseup", this.onMouseLeaveOrUp);
-		this.canvas.addEventListener("mousedown", this.onMouseDown);
-		this.canvas.addEventListener("mousemove", this.onMouseMove);
+		if (detectIt.deviceType === "mouseOnly") {
+			this.canvas.addEventListener("mouseleave", this.onMouseLeaveOrUp);
+			this.canvas.addEventListener("mouseup", this.onMouseLeaveOrUp);
+			this.canvas.addEventListener("mousedown", this.onMouseDown);
+			this.canvas.addEventListener("mousemove", this.onMouseMove);
+		} else {
+			this.canvas.addEventListener("touchcancel", this.onMouseLeaveOrUp);
+			this.canvas.addEventListener("touchend", this.onMouseLeaveOrUp);
+			this.canvas.addEventListener("touchstart", this.onMouseDown);
+			this.canvas.addEventListener("touchmove", this.onMouseMove);
+		}
 	};
 
 	onMouseDown = e => {
@@ -58,6 +67,7 @@ class Spring extends Canvas {
 
 	onMouseMove = e => {
 		if (!this.isDragging) return;
+		if (e.touches !== undefined) e.preventDefault();
 		this.updateMousePosition(e);
 	};
 
@@ -75,12 +85,14 @@ class Spring extends Canvas {
 
 	updateMousePosition = e => {
 		const canvasBoundingBox = e.target.getBoundingClientRect();
+		const clientX = detectIt.deviceType === "mouseOnly" ? e.clientX : e.touches[0].clientX;
+		const clientY = detectIt.deviceType === "mouseOnly" ? e.clientY : e.touches[0].clientY;
 
 		for (let i = 0; i < this.springs.length; i++) {
 			if (i === 0) {
 				this.springs[i].setTarget({
-					x: e.clientX - canvasBoundingBox.left,
-					y: e.clientY - canvasBoundingBox.top,
+					x: clientX - canvasBoundingBox.left,
+					y: clientY - canvasBoundingBox.top,
 				});
 			} else {
 				this.springs[i].setTarget(this.springs[i - 1].object);
@@ -93,14 +105,12 @@ class Spring extends Canvas {
 
 		// ellipse
 		for (let i = 0; i < this.springs.length; i++) {
-			// this.context.fillStyle =
-			// 	this.springs.length - i - 1 === 0 ? "rgba(221,67,107,1)" : "rgba(20,23,48,0.75)";
 			this.context.fillStyle = this.colors[i % 3];
 			this.context.beginPath();
 			this.context.arc(
 				this.springs[this.springs.length - i - 1].object.x,
 				this.springs[this.springs.length - i - 1].object.y,
-				this.radius,
+				i === this.springs.length - 1 ? this.radius : this.radius - 1,
 				0,
 				2 * Math.PI,
 				false
