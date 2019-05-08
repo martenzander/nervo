@@ -2,7 +2,7 @@
 	"name": "nervo",
 	"version": "0.0.7",
 	"description": "Solid JavaScript Animation Library",
-	"main": "build/nervo.min.js",
+	"main": "src/index.js",
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/SlimMarten/nervo.git"
@@ -99,7 +99,6 @@
 		"webpack-dev-server": "^3.2.1"
 	},
 	"dependencies": {
-		"@babel/polyfill": "^7.2.5",
 		"uuid": "^3.3.2",
 		"eases": "^1.0.8"
 	}
