@@ -73,7 +73,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "96205d27724ca83b6389";
+/******/ 	var hotCurrentHash = "a66ef4fd122cfda8cfcc";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -4806,7 +4806,7 @@ function (_Root) {
 
       if (object.length >= 1) {
         for (var i = 0; i < object.length; i++) {
-          _this3.add(object[i]);
+          _this3.add(object[i], options);
         }
 
         return _this3;
@@ -4824,7 +4824,7 @@ function (_Root) {
         }
 
         if (object.isSpring) {
-          console.error("Nervo.Family.add: Can't add object of type ".concat(object.type, " to a Track."), object);
+          console.error("Nervo.Family.add: Can't add object of type ".concat(object.type, " to a Timeline."), object);
           return _this3;
         }
 
@@ -4832,6 +4832,7 @@ function (_Root) {
           object.parent.remove(object);
         }
 
+        object.setDelay(options.delay !== undefined ? options.delay : _this3.duration);
         object.parent = _this3;
 
         _this3.children.push(object);
@@ -4843,6 +4844,7 @@ function (_Root) {
         _this3._onChange(_this3);
       } else {
         console.error("Nervo.Family.add: Object is not an instance of Nervo.Family.", object);
+        return _this3;
       }
 
       return _this3;
@@ -4874,9 +4876,7 @@ function (_Root) {
 
         _this4.children.splice(index, 1);
 
-        if (_this4.isTimeline || _this4.isTrack) {
-          _this4._onChange(_this4);
-        }
+        _this4._onChange(_this4);
       }
 
       return _this4;
@@ -4891,8 +4891,6 @@ function (_Root) {
 
     return function (t) {
       _this5.children.forEach(function (child) {
-        child.isActive = true;
-
         child._update(t);
       });
     };
@@ -4908,9 +4906,9 @@ function (_Root) {
       if (!object.isTween) {
         var duration = 0;
         object.children.forEach(function (child) {
-          var childTimeScale = child.timeScale !== undefined ? child.timeScale : 1.0;
+          var childScale = child.scale !== undefined ? child.scale : 1.0;
           var childDelay = typeof child.delay === "number" ? child.delay : 0.0;
-          if (child.duration * childTimeScale + childDelay > duration) duration = child.duration * childTimeScale + childDelay;
+          if (child.duration * childScale + childDelay > duration) duration = child.duration * childScale + childDelay;
         });
         object.duration = duration;
       }
@@ -5193,7 +5191,7 @@ function (_Family) {
       _this._update(_this.currentTime);
     };
 
-    _initializerDefineProperty(_this, "setTimeScale", _descriptor3, _assertThisInitialized(_this));
+    _initializerDefineProperty(_this, "setScale", _descriptor3, _assertThisInitialized(_this));
 
     _initializerDefineProperty(_this, "start", _descriptor4, _assertThisInitialized(_this));
 
@@ -5264,7 +5262,7 @@ function (_Family) {
     _this.isActive = false;
     _this.loop = options.loop !== undefined ? options.loop : _index__WEBPACK_IMPORTED_MODULE_15__["Loop"];
     _this.delay = options.delay !== undefined ? options.delay : 0;
-    _this.timeScale = options.timeScale !== undefined || 0 ? options.timeScale : _index__WEBPACK_IMPORTED_MODULE_15__["TimeScale"];
+    _this.scale = options.scale !== undefined || 0 ? options.scale : 1.0;
     return _this;
   }
   /*
@@ -5295,21 +5293,21 @@ function (_Family) {
       return _this2;
     };
   }
-}), _descriptor3 = _applyDecoratedDescriptor(_class.prototype, "setTimeScale", [_Decorators__WEBPACK_IMPORTED_MODULE_19__["readonly"]], {
+}), _descriptor3 = _applyDecoratedDescriptor(_class.prototype, "setScale", [_Decorators__WEBPACK_IMPORTED_MODULE_19__["readonly"]], {
   configurable: true,
   enumerable: true,
   writable: true,
   initializer: function initializer() {
     var _this3 = this;
 
-    return function (timeScale) {
-      if (timeScale <= 0) {
-        console.warn("Nervo.Ticker.setTimeScale: timeScale <= 0 is not allowed.", _this3);
-        _this3.timeScale = 1.0;
+    return function (scale) {
+      if (scale <= 0) {
+        console.warn("Nervo.Ticker.setScale: scale <= 0 is not allowed.", _this3);
+        _this3.scale = 1.0;
         return _this3;
       }
 
-      _this3.timeScale = timeScale;
+      _this3.scale = scale;
 
       _this3._onChange(_this3);
 
@@ -5378,7 +5376,7 @@ function (_Family) {
     var _this8 = this;
 
     return function (t) {
-      _this8.progress = t / (_this8.duration * _this8.timeScale);
+      _this8.progress = t / (_this8.duration * _this8.scale);
       _this8.easedProgress = _this8.easing(_this8.progress);
       /* Set actual updateTime. */
 
@@ -5753,7 +5751,7 @@ function (_Ticker) {
 
     _initializerDefineProperty(_this, "type", _descriptor2, _assertThisInitialized(_this));
 
-    if (objects.length >= 1) _this.add(objects, {});
+    if (objects.length >= 1 || objects.isNervo) _this.add(objects, {});
     if (_this.autoStart) _this.start();
     return _this;
   }
@@ -5952,7 +5950,7 @@ function (_Ticker) {
 /*!*************************!*\
   !*** ./src/js/index.js ***!
   \*************************/
-/*! exports provided: AutoStart, Easing, Loop, TimeScale, Spring, Timeline, Tween */
+/*! exports provided: AutoStart, Easing, Loop, Spring, Timeline, Tween */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -5960,7 +5958,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AutoStart", function() { return AutoStart; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Easing", function() { return Easing; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Loop", function() { return Loop; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TimeScale", function() { return TimeScale; });
 /* harmony import */ var _Spring_Spring__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Spring/Spring */ "./src/js/Spring/Spring.js");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Spring", function() { return _Spring_Spring__WEBPACK_IMPORTED_MODULE_0__["default"]; });
 
@@ -5977,8 +5974,6 @@ __webpack_require__.r(__webpack_exports__);
 var AutoStart = false;
 var Easing = "linear";
 var Loop = false;
-var TimeScale = 1;
-
 
 
  // Classes
