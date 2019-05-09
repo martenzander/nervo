@@ -2,7 +2,7 @@
 	"name": "nervo",
 	"version": "0.0.7",
 	"description": "Solid JavaScript Animation Library",
-	"main": "src/index.js",
+	"main": "build/nervo.min.js",
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/SlimMarten/nervo.git"
