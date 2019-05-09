@@ -150,13 +150,21 @@ class TimelineExample extends Canvas {
 			Set fontStyle and childPadding.
 		*/
 		const height =
-			(this.canvas.height - this.fixedPadding) / 1 / this.rootTimeline.children.length;
+			(this.canvas.height - this.fixedPadding * 2) / 1 / this.rootTimeline.children.length;
 		this.leftMargin = 0;
 		this.timelineHeight = 3;
 		const childPadding = 1;
 		this.context.font = "12px Roboto Slab Bold";
 		this.context.textBaseline = "top";
 		this.context.textAlign = "center";
+		// timeline Backgrounds
+		this.context.fillStyle = "rgba(0,0,0,0.35)";
+		this.context.fillRect(
+			0,
+			this.fixedPadding,
+			this.canvas.width,
+			this.canvas.height - this.fixedPadding * 2
+		);
 
 		for (let i = 0; i < this.rootTimeline.children.length; i++) {
 			const timeline = this.rootTimeline.children[i];
@@ -168,11 +176,7 @@ class TimelineExample extends Canvas {
 			const width =
 				((timeline.duration * timeline.scale) / this.rootTimeline.duration) *
 				(this.canvas.width - this.leftMargin);
-			const y = this.fixedPadding + (height + 2) * i;
-
-			// timeline Backgrounds
-			this.context.fillStyle = "rgba(0,0,0,0.35)";
-			this.context.fillRect(0, y, this.canvas.width, height);
+			const y = this.fixedPadding + height * i;
 
 			this.fillTimeline(timeline, x, y, width, height);
 		}

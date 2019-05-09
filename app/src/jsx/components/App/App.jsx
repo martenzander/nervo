@@ -51,8 +51,8 @@ class App extends Component {
 						<div className={"nervo-container"}>
 							<Logo big />
 							<p className={`${styles.color}`}>{`v${this.data.version}`}</p>
-							<br />
-							<p className={`${styles.description}`}>{this.data.description}</p>
+							{/* <br /> */}
+							{/* <p className={`${styles.description}`}>{this.data.description}</p> */}
 							<div>
 								<Button primary href={`#${data.sections[0].key}`}>
 									Documentation
