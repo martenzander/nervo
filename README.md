@@ -81,7 +81,7 @@ new Nervo.Timeline(children : [], options : {});
 #### Children
 An array of Tweens and Timelines that will be added to the Timeline.
 
-####Options
+#### Options
 autoStart · easing · loop · onComplete · onProgress · scale
 
 ### Properties
