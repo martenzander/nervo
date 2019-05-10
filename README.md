@@ -10,6 +10,22 @@ Solid JavaScript Animation Library
 </p>
 </p>
 
+- [About Nervo](#about-nervo)
+  - [Installation](#installation)
+  - [Import](#import)
+- [Nervo.Tween()](#nervotween)
+  - [Constructor](#constructor)
+  - [Properties](#properties)
+  - [Methods](#methods)
+- [Nervo.Timeline()](#nervotimeline)
+  - [Constructor](#constructor-1)
+  - [Properties](#properties-1)
+  - [Methods](#methods-1)
+- [Nervo.Spring()](#nervospring)
+  - [Constructor](#constructor-2)
+  - [Properties](#properties-2)
+  - [Methods](#methods-2)
+
 ## About Nervo
 Nervo is a solid JavaScript animation library providing basic tweening functionality. It is designed to be flexible, intuitive and easy to learn. Nervo allows you to create single Tweens, makes controlling multiple Tweens within Timelines easy, and providess Springs
 
@@ -31,8 +47,7 @@ A Tween interpolates any numeric value of an object over time. Multiple Tweens c
 ```js
 new Nervo.Tween(from : {}, to : {}, options : {});
 ```
-
-#### Options
+<!-- omit in toc --> #### Options
 autoStart · duration · easing · loop · onComplete · onProgress · scale
 
 > **_Note:_**  For the easing option you can either pass a function or a valid [eases](https://www.npmjs.com/package/eases) string. E.g. »sineOut«.
@@ -78,10 +93,10 @@ Timelines control multiple Tweens or Timelines. If you want to add a Tween to a 
 new Nervo.Timeline(children : [], options : {});
 ```
 
-#### Children
+<!-- omit in toc --> #### Children
 An array of Tweens and Timelines that will be added to the Timeline.
 
-#### Options
+<!-- omit in toc -->  #### Options
 autoStart · easing · loop · onComplete · onProgress · scale
 
 ### Properties
@@ -124,7 +139,7 @@ Springs animate in a more physical and natural way. They are durationless and ac
 new Nervo.Spring(object : {}, target : {}, options : {});
 ```
 
-#### Options
+<!-- omit in toc -->  #### Options
 autoStart · damping · stiffness
 
 ### Properties
