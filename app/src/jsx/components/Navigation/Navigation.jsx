@@ -12,7 +12,6 @@ class Navigation extends Component {
 	constructor(props) {
 		super(props);
 		this.scrollReference = window.scrollY;
-		console.log(this.props.sections);
 	}
 
 	onScroll = e => {

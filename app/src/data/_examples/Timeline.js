@@ -128,6 +128,7 @@ class TimelineExample extends Canvas {
 		const childHeight =
 			(height - (this.timelineHeight + 2) - (timeline.children.length - 1) * 2) /
 			timeline.children.length;
+		const scale = timeline === this.rootTimeline ? 1.0 : timeline.scale;
 
 		let delayWidth = 0;
 
@@ -137,19 +138,16 @@ class TimelineExample extends Canvas {
 				(child.delay / this.rootTimeline.duration) * (this.canvas.width - this.leftMargin);
 
 			function scaleDelayWidth(object) {
-				delayWidth *= object.scale;
-
 				if (object.parent !== null) {
+					delayWidth *= object.scale;
 					scaleDelayWidth(object.parent);
 				}
 			}
 
-			scaleDelayWidth(timeline);
+			if (timeline !== this.rootTimeline) scaleDelayWidth(timeline);
 
 			const childWidth =
-				((child.duration * child.scale) / (timeline.duration * timeline.scale)) *
-				width *
-				timeline.scale;
+				((child.duration * child.scale) / (timeline.duration * scale)) * width * scale;
 			const childY = y + (this.timelineHeight + 2) + i * (childHeight + 2);
 			const childX = x + delayWidth;
 			this.context.fillStyle = "rgba(0,0,0,0.15)";

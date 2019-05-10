@@ -100,7 +100,7 @@ class Header extends Component {
 											styles.font
 										}`}
 									>
-										{this.state.downloads}
+										{this.state.downloads} Downloads
 										{/* {this.props.value.data.version} */}
 									</span>
 								</p>
