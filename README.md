@@ -10,24 +10,16 @@ Solid JavaScript Animation Library
 </p>
 </p>
 
+<!-- omit in toc --> ## Table of Contents
 - [About Nervo](#about-nervo)
   - [Installation](#installation)
   - [Import](#import)
-- [Nervo.Tween()](#nervotween)
-  - [Constructor](#constructor)
-  - [Properties](#properties)
-  - [Methods](#methods)
-- [Nervo.Timeline()](#nervotimeline)
-  - [Constructor](#constructor-1)
-  - [Properties](#properties-1)
-  - [Methods](#methods-1)
-- [Nervo.Spring()](#nervospring)
-  - [Constructor](#constructor-2)
-  - [Properties](#properties-2)
-  - [Methods](#methods-2)
+- [Tween](#tween)
+- [Timeline](#timeline)
+- [Spring](#spring)
 
 ## About Nervo
-Nervo is a solid JavaScript animation library providing basic tweening functionality. It is designed to be flexible, intuitive and easy to learn. Nervo allows you to create single [Tweens](#nervotween), makes controlling multiple Tweens within [Timelines](#nervotimeline) easy, and providess Springs
+Nervo is a solid JavaScript animation library providing basic tweening functionality. It is designed to be flexible, intuitive and easy to learn. Nervo allows you to create single [Tweens](#tween), makes controlling multiple Tweens within [Timelines](#timeline) easy, and providess Springs
 
 ### Installation
 ```
@@ -40,10 +32,10 @@ import * as Nervo from 'nervo';
 ```
 ___
 
-## Nervo.Tween()
-A Tween interpolates any numeric value of an object over time. Multiple Tweens can be controlled by Timelines.
+## Tween
+A Tween interpolates any numeric value of an object over time. Multiple Tweens can be controlled by [Timelines](#timeline).
 
-### Constructor
+<!-- omit in toc -->  ### Constructor
 ```js
 new Nervo.Tween(from : {}, to : {}, options : {});
 ```
@@ -52,7 +44,7 @@ autoStart · duration · easing · loop · onComplete · onProgress · scale
 
 > **_Note:_**  For the easing option you can either pass a function or a valid [eases](https://www.npmjs.com/package/eases) string. E.g. »sineOut«.
 
-### Properties
+<!-- omit in toc -->  ### Properties
 - .autoStart
 - .currentTime
 - .delay
@@ -71,7 +63,7 @@ autoStart · duration · easing · loop · onComplete · onProgress · scale
 - .type
 - .uuid
 
-### Methods
+<!-- omit in toc -->  ### Methods
 - .clone()
 - .pause()
 - .play()
@@ -83,12 +75,12 @@ autoStart · duration · easing · loop · onComplete · onProgress · scale
 
 ___
 
-## Nervo.Timeline()
-Timelines control multiple Tweens or Timelines. If you want to add a Tween to a Timeline use the .add() method. As long as there are no options provided, this will add the Tween at the end of the Timeline. See the example below and play with some properties to better understand how Timelines and Tweens work together.
+## Timeline
+Timelines control multiple [Tweens](#tween) or Timelines. If you want to add a Tween to a Timeline use the .add() method. As long as there are no options provided, this will add the Tween at the end of the Timeline. See the example below and play with some properties to better understand how Timelines and Tweens work together.
 
 > **_Pro Tip:_**  For even more flexibility in space and time start nesting Timelines!
 
-### Constructor
+<!-- omit in toc -->  ### Constructor
 ```js
 new Nervo.Timeline(children : [], options : {});
 ```
@@ -99,7 +91,7 @@ An array of Tweens and Timelines that will be added to the Timeline.
 <!-- omit in toc -->  #### Options
 autoStart · easing · loop · onComplete · onProgress · scale
 
-### Properties
+<!-- omit in toc --> ### Properties
 - .autoStart
 - .children
 - .currentTime
@@ -117,7 +109,7 @@ autoStart · easing · loop · onComplete · onProgress · scale
 - .type
 - .uuid
 
-### Methods
+<!-- omit in toc -->  ### Methods
 - .add()
 - .clone()
 - .pause()
@@ -129,12 +121,12 @@ autoStart · easing · loop · onComplete · onProgress · scale
 - .stop()
 ___
 
-## Nervo.Spring()
+## Spring
 Springs animate in a more physical and natural way. They are durationless and accumulative calculated. As soon as a Spring has completed it will become inactive. To update a Spring use .setTarget(). Click and drag somewhere on the canvas below and play with properties like .stiffness or .damping.
 
 > **_Note:_**  Negative and too high values can lead to undesired results. Undamped or overdamped Springs won't complete or complete after a long time.
 
-### Constructor
+<!-- omit in toc -->  ### Constructor
 ```js
 new Nervo.Spring(object : {}, target : {}, options : {});
 ```
@@ -142,7 +134,7 @@ new Nervo.Spring(object : {}, target : {}, options : {});
 <!-- omit in toc -->  #### Options
 autoStart · damping · stiffness
 
-### Properties
+<!-- omit in toc -->  ### Properties
 - .autoStart
 - .damping
 - .isActive
@@ -156,7 +148,7 @@ autoStart · damping · stiffness
 - .type
 - .uuid
 
-### Methods
+<!-- omit in toc -->  ### Methods
 - .disable()
 - .enable()
 - .setTarget(target : any)
