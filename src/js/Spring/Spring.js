@@ -6,17 +6,18 @@ export default class Spring extends Root {
 	static Stiffness = 0.2;
 	static Damping = 0.5;
 
-	constructor(object, target, options = {}) {
+	constructor(from, to, options = {}) {
 		super(options);
 
-		this.autoStart = options.autoStart !== undefined ? options.autoStart : true;
-		this.target = target;
-		this.object = object;
+		this.autoStart = options.autoStart !== undefined ? options.autoStart : false;
+		this.from = from;
+		this.to = to;
+		this.target = options.target !== undefined ? options.target : { ...this.from };
 		this.stiffness = options.stiffness !== undefined ? options.stiffness : Spring.Stiffness;
 		this.damping = options.damping !== undefined ? options.damping : Spring.Damping;
 		this._velocities = {};
 
-		for (const key in this.object) {
+		for (const key in this.from) {
 			this._velocities[key] = 0.0;
 		}
 
@@ -30,8 +31,8 @@ export default class Spring extends Root {
 	type = "Spring";
 
 	@readonly
-	setTarget = target => {
-		this.target = target;
+	springTo = to => {
+		this.to = to;
 		if (this.isActive) return;
 		this.enable();
 	};
@@ -57,14 +58,14 @@ export default class Spring extends Root {
 	_update = e => {
 		let isComplete = false;
 
-		for (const key in this.target) {
-			if (this.object[key] !== this.target[key]) {
-				const valueDelta = this.object[key] - this.target[key];
+		for (const key in this.to) {
+			if (this.target[key] !== this.to[key]) {
+				const valueDelta = this.target[key] - this.to[key];
 				const force = -this.stiffness * valueDelta;
 				const damping = -this.damping * this._velocities[key];
 				const acceleration = force + damping;
 				this._velocities[key] = this._velocities[key] + acceleration;
-				this.object[key] += this._velocities[key];
+				this.target[key] += this._velocities[key];
 			} else {
 				isComplete = true;
 			}
