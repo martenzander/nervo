@@ -29,8 +29,8 @@ class TimelineExample extends Canvas {
 					onProgress: e => {},
 				}
 			);
-			if (i === 1) {
-				// tween.setDelay(2);
+			if (i === 0) {
+				tween.id = "test";
 			}
 			this.tweens.push(tween);
 		}
@@ -51,14 +51,11 @@ class TimelineExample extends Canvas {
 		/*
 			Add .tweens to .timeline.
 		*/
+
 		for (let i = 0; i < this.tweens.length; i += 2) {
-			const timeline = new Nervo.Timeline([], {});
-			timeline.add([new Nervo.Timeline(this.tweens[i], {}), this.tweens[i + 1]], {
-				delay: 0,
-			});
-			this.rootTimeline.add(timeline, {
-				delay: i * 1.0,
-			});
+			const timeline = new Nervo.Timeline([this.tweens[i], this.tweens[i + 1]], {});
+			this.rootTimeline.add(timeline, {});
+			// this.rootTimeline.add(this.tweens[i], {});
 		}
 
 		/*
@@ -110,31 +107,61 @@ class TimelineExample extends Canvas {
 		}
 	}
 
+	getScaleFactor = object => {
+		let scale = object.scale;
+
+		function addScale(object) {
+			scale += object.scale;
+
+			if (object.parent !== null) {
+				addScale(object.parent);
+			}
+		}
+
+		addScale(object);
+		return scale;
+	};
+
 	fillTimeline = (timeline, x, y, width, height) => {
-		this.context.fillStyle = timeline.isActive ? "#DD436B" : "rgba(221,67,107,0.35)";
+		this.context.fillStyle = timeline.isActive ? "#DD436B" : "rgba(221,67,107,0.55)";
 		this.context.fillRect(x, y, width, this.timelineHeight);
 		const childHeight =
 			(height - (this.timelineHeight + 2) - (timeline.children.length - 1) * 2) /
 			timeline.children.length;
 
+		let delayWidth = 0;
+
 		for (let i = 0; i < timeline.children.length; i++) {
 			const child = timeline.children[i];
-			const delayWidth =
+			let delayWidth =
 				(child.delay / this.rootTimeline.duration) * (this.canvas.width - this.leftMargin);
-			const childWidth = ((child.duration * child.scale) / timeline.duration) * width;
+
+			function scaleDelayWidth(object) {
+				delayWidth *= object.scale;
+
+				if (object.parent !== null) {
+					scaleDelayWidth(object.parent);
+				}
+			}
+
+			scaleDelayWidth(timeline);
+
+			const childWidth =
+				((child.duration * child.scale) / (timeline.duration * timeline.scale)) *
+				width *
+				timeline.scale;
 			const childY = y + (this.timelineHeight + 2) + i * (childHeight + 2);
-			const childX = (x + delayWidth) * timeline.scale;
+			const childX = x + delayWidth;
+			this.context.fillStyle = "rgba(0,0,0,0.15)";
+			this.context.fillRect(0, childY, this.canvas.width, childHeight);
+			this.context.fillStyle = "rgba(0,0,0,0.35)";
+			this.context.fillRect(childX, childY, childWidth, childHeight);
 
 			if (child.isTimeline) {
 				this.fillTimeline(child, childX, childY, childWidth, childHeight);
 			} else {
-				this.context.fillStyle = child.isActive ? "#FFEB4F" : "rgba( 255, 235, 79 , 0.35)";
-				this.context.fillRect(
-					x + delayWidth * timeline.scale,
-					childY,
-					childWidth,
-					childHeight
-				);
+				this.context.fillStyle = child.isActive ? "#FFEB4F" : "rgba( 255, 235, 79 , 0.55)";
+				this.context.fillRect(childX, childY, childWidth, childHeight);
 			}
 		}
 	};
@@ -157,29 +184,14 @@ class TimelineExample extends Canvas {
 		this.context.font = "12px Roboto Slab Bold";
 		this.context.textBaseline = "top";
 		this.context.textAlign = "center";
-		// timeline Backgrounds
-		this.context.fillStyle = "rgba(0,0,0,0.35)";
-		this.context.fillRect(
+
+		this.fillTimeline(
+			this.rootTimeline,
 			0,
 			this.fixedPadding,
 			this.canvas.width,
 			this.canvas.height - this.fixedPadding * 2
 		);
-
-		for (let i = 0; i < this.rootTimeline.children.length; i++) {
-			const timeline = this.rootTimeline.children[i];
-			const x =
-				((timeline.delay / this.rootTimeline.duration) *
-					(this.canvas.width - this.leftMargin) +
-					this.leftMargin) *
-				timeline.scale;
-			const width =
-				((timeline.duration * timeline.scale) / this.rootTimeline.duration) *
-				(this.canvas.width - this.leftMargin);
-			const y = this.fixedPadding + height * i;
-
-			this.fillTimeline(timeline, x, y, width, height);
-		}
 
 		/*
 			Draw time slider.

@@ -12,6 +12,7 @@ class Navigation extends Component {
 	constructor(props) {
 		super(props);
 		this.scrollReference = window.scrollY;
+		console.log(this.props.sections);
 	}
 
 	onScroll = e => {
@@ -93,6 +94,8 @@ class Navigation extends Component {
 							li={styles.li}
 							a={styles.a}
 							active={styles.aActive}
+							data={this.props.data}
+							github
 						/>
 					</nav>
 				) : (

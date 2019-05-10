@@ -34,6 +34,9 @@ class TimelineContent {
 				case "currentTime":
 					item.copy = "Past time since Timeline start.";
 					break;
+				case "delay":
+					item.copy = "A floating point number defining a delay relative to the parent.";
+					break;
 				case "duration":
 					item.copy = "A floating point number defining the length of the Timeline.";
 					break;
@@ -57,6 +60,9 @@ class TimelineContent {
 					break;
 				case "options":
 					item.copy = "Configuring object handed over to constructor.";
+					break;
+				case "parent":
+					item.copy = "Returns the parent Timeline. Default: <b>null</b>.";
 					break;
 				case "scale":
 					item.copy =
@@ -142,6 +148,9 @@ class TimelineContent {
 				case "stop":
 					item.copy = "Resets the Timeline to the start and pauses.";
 					break;
+				case "setDelay":
+					item.copy = `Sets a new .<a href='#${keys.timeline.delay}'>delay</a> value.`;
+					break;
 				case "setScale":
 					item.copy = `Sets a new .<a href='#${keys.timeline.scale}'>scale</a> value.`;
 					break;
@@ -168,7 +177,7 @@ class TimelineContent {
 							keys.tween.section
 						}'>Tweens</a> or Timelines. If you want to add a Tween to a Timeline use the .<a href='#${
 							keys.timeline.add
-						}'>add</a>() method. As long as there are no options provided, this will add the Tween at the end of the Timeline. See the example below and play with some properties to better understand how Timelines and Tweens work together.`,
+						}'>add</a>() method. By default all children will be added at the end of a Timeline. Experiment with the example below to get familiar with Timelines, Tweens and how they interact.`,
 					},
 				],
 				[

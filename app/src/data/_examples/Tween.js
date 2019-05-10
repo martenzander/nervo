@@ -28,7 +28,7 @@ class TweenExample extends Canvas {
 				onProgress: e => {
 					this.pos.x =
 						this.padding +
-						(this.canvas.width - 2 * this.padding) * e.target.object.progress;
+						(this.canvas.width - 2 * this.padding) * e.target.target.progress;
 					this.pos.y = this.canvas.height / 2;
 					this.draw();
 				},
@@ -42,18 +42,18 @@ class TweenExample extends Canvas {
 		controls.add(this.tween, "play");
 		controls.add(this.tween, "pause");
 		const options = this.gui.addFolder("options");
+		options.add(this.tween, "delay").onChange(e => {
+			this.tween.setDelay(e);
+		});
 		options.add(this.tween, "duration").onChange(e => {
 			this.tween.setDuration(e);
 		});
-		options.add(this.tween, "delay").onChange(e => {
-			this.tween.setDelay(e);
+		options.add(this.tween, "easing", easeNames).onChange(e => {
+			this.tween.easing = eases[e];
 		});
 		options.add(this.tween, "loop");
 		options.add(this.tween, "scale").onChange(e => {
 			this.tween.setScale(e);
-		});
-		options.add(this.tween, "easing", easeNames).onChange(e => {
-			this.tween.easing = eases[e];
 		});
 
 		this.tween.start();

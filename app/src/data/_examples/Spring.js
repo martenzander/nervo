@@ -15,8 +15,8 @@ class Spring extends Canvas {
 				{ x: this.canvas.width / 2, y: this.canvas.height / 2 },
 				{},
 				{
-					stiffness: 0.2,
-					damping: 0.8,
+					stiffness: 0.45,
+					damping: 0.9,
 					autoStart: false,
 					onProgress: e => {
 						this.draw();
@@ -77,10 +77,16 @@ class Spring extends Canvas {
 	};
 
 	setSpringTargetToCenter = e => {
-		this.springs[0].setTarget({
-			x: this.canvas.width / 2,
-			y: this.canvas.height / 2,
-		});
+		for (let i = 0; i < this.springs.length; i++) {
+			if (i === 0) {
+				this.springs[i].springTo({
+					x: this.canvas.width / 2,
+					y: this.canvas.height / 2,
+				});
+			} else {
+				this.springs[i].springTo(this.springs[i - 1].target);
+			}
+		}
 	};
 
 	updateMousePosition = e => {
@@ -90,12 +96,12 @@ class Spring extends Canvas {
 
 		for (let i = 0; i < this.springs.length; i++) {
 			if (i === 0) {
-				this.springs[i].setTarget({
+				this.springs[i].springTo({
 					x: clientX - canvasBoundingBox.left,
 					y: clientY - canvasBoundingBox.top,
 				});
 			} else {
-				this.springs[i].setTarget(this.springs[i - 1].object);
+				this.springs[i].springTo(this.springs[i - 1].target);
 			}
 		}
 	};
@@ -108,8 +114,8 @@ class Spring extends Canvas {
 			this.context.fillStyle = this.colors[i % 3];
 			this.context.beginPath();
 			this.context.arc(
-				this.springs[this.springs.length - i - 1].object.x,
-				this.springs[this.springs.length - i - 1].object.y,
+				this.springs[this.springs.length - i - 1].target.x,
+				this.springs[this.springs.length - i - 1].target.y,
 				i === this.springs.length - 1 ? this.radius : this.radius - 1,
 				0,
 				2 * Math.PI,
@@ -124,7 +130,7 @@ class Spring extends Canvas {
 		this.context.textBaseline = "middle";
 		this.context.fillStyle = "#FFEB4F";
 		this.context.textAlign = "center";
-		this.context.fillText("DRAG ME!", this.springs[0].object.x, this.springs[0].object.y);
+		this.context.fillText("DRAG ME!", this.springs[0].target.x, this.springs[0].target.y);
 	};
 }
 

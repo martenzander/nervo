@@ -106,7 +106,10 @@ class Header extends Component {
 								</p>
 							</div>
 							<div className={styles.content}>
-								<Navigation sections={this.props.value.sections} />
+								<Navigation
+									data={this.props.value.data}
+									sections={this.props.value.sections}
+								/>
 							</div>
 						</div>
 					</div>

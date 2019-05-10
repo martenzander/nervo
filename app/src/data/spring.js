@@ -51,14 +51,17 @@ class SpringContent {
 				case "onProgress":
 					item.copy = "Callback function – gets called while Spring is playing.";
 					break;
-				case "object":
-					item.copy = "Object handed over to constructor.";
+				case "from":
+					item.copy = "Object containing starting values of the Spring.";
 					break;
 				case "stiffness":
 					item.copy = "Stiffness of the Spring. Default <b>0.2</b>";
 					break;
+				case "to":
+					item.copy = "Object containing desired target values.";
+					break;
 				case "target":
-					item.copy = "Object containing relevant properties and desired target values.";
+					item.copy = "Object containing the current state values of the Spring.";
 					break;
 				case "type":
 					item.copy =
@@ -126,7 +129,7 @@ class SpringContent {
 				case "enable":
 					item.copy = "Enables the Spring.";
 					break;
-				case "setTarget":
+				case "springTo":
 					item.copy = "Sets a new target and enables the Spring.";
 					break;
 				default:
@@ -148,11 +151,11 @@ class SpringContent {
 				[
 					{
 						component: "copy",
-						value: `Springs animate in a more physical and natural way. They are durationless and accumulative calculated. As soon as a Spring has completed it will become inactive. To update a Spring use .<a href='#${
-							keys.spring.setTarget
-						}'>setTarget()</a>. Click and drag somewhere on the canvas below and play with properties like .<a href='#${
+						value: `Springs animate in a more physical and natural way. They are durationless and accumulative calculated. To update a Spring use .<a href='#${
+							keys.spring.springTo
+						}'>springTo()</a>. Click and drag somewhere on the canvas below and play with properties like .<a href='#${
 							keys.spring.stiffness
-						}'>stiffness</a> or .<a href='#${keys.spring.damping}'>damping</a>`,
+						}'>stiffness</a> or .<a href='#${keys.spring.damping}'>damping</a>.`,
 					},
 				],
 				[

@@ -46,20 +46,17 @@ class App extends Component {
 		return (
 			<div className={`${styles.app} app`}>
 				<InpageAnchors>
+					<GithubRibbon />
 					{renderHeader && <Header value={this} />}
 					<Hero>
 						<div className={"nervo-container"}>
 							<Logo big />
-							<p className={`${styles.color}`}>{`v${this.data.version}`}</p>
-							{/* <br /> */}
-							{/* <p className={`${styles.description}`}>{this.data.description}</p> */}
+							<p className={`${styles.description}`}>{`v${this.data.version}`}</p>
 							<div>
-								<Button primary href={`#${data.sections[0].key}`}>
-									Documentation
+								<Button primary href={`./downloads/nervo_v${data.version}.zip`}>
+									Download
 								</Button>
-								<Button href={this.data.repository.url.replace("git+", "")}>
-									Github
-								</Button>
+								<Button href={`#${data.sections[0].key}`}>Documentation</Button>
 							</div>
 						</div>
 					</Hero>

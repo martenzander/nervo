@@ -2,9 +2,9 @@ import * as Nervo from "./../../../src/js/index";
 const packageConfig = require("./../../../package.json");
 import uuid from "uuid/v4";
 const references = {
-	tween: new Nervo.Tween(),
-	timeline: new Nervo.Timeline(),
-	spring: new Nervo.Spring(),
+	tween: new Nervo.Tween({}, {}, {}),
+	timeline: new Nervo.Timeline([], {}),
+	spring: new Nervo.Spring({}, {}, {}),
 };
 
 const keys = {};

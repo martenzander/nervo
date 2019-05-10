@@ -31,11 +31,17 @@ class TweenContent {
 				case "currentTime":
 					item.copy = "Past time since Tween start.";
 					break;
+				case "delay":
+					item.copy = "A floating point number defining a delay relative to the parent.";
+					break;
 				case "duration":
 					item.copy = "A floating point number defining the length of the tween.";
 					break;
 				case "easing":
 					item.copy = "Callback function that interpolates the progress.";
+					break;
+				case "from":
+					item.copy = "Object containing starting values of the Tween.";
 					break;
 				case "isActive":
 					item.copy = "Returns <b>true</b> when the Tween is playing.";
@@ -46,8 +52,8 @@ class TweenContent {
 				case "loop":
 					item.copy = "Whether the Tween will loop when finished.";
 					break;
-				case "object":
-					item.copy = "Object whose properties will be modified.";
+				case "target":
+					item.copy = "Object containing the current state values of the Tween.";
 					break;
 				case "options":
 					item.copy = "Configuring object handed over to constructor.";
@@ -59,10 +65,10 @@ class TweenContent {
 					item.copy = "Callback function – gets called when Tween is finished.";
 					break;
 				case "parent":
-					item.copy = "Returns the parent Track. Default: <b>null</b>.";
+					item.copy = "Returns the parent Timeline. Default: <b>null</b>.";
 					break;
-				case "target":
-					item.copy = "Object containing relevant properties and desired target values.";
+				case "to":
+					item.copy = "Object containing desired target values.";
 					break;
 				case "scale":
 					item.copy =
@@ -134,6 +140,9 @@ class TweenContent {
 				case "play":
 					item.copy = "Continues playing the Tween at .<a href=''>currentTime</a>.";
 					break;
+				case "setDelay":
+					item.copy = `Sets a new .<a href='#${keys.tween.delay}'>delay</a> value.`;
+					break;
 				case "setDuration":
 					item.copy = `Sets a new .<a href='#${keys.tween.duration}'>duration</a> value.`;
 					break;
@@ -167,7 +176,7 @@ class TweenContent {
 						component: "copy",
 						value: `A Tween interpolates any numeric value of an object over time. Multiple Tweens can be controlled by <a href='#${
 							keys.timeline.section
-						}'>Timelines</a>.`,
+						}'>Timelines</a>. Experiment with the example below to become familiar with Nervo Tweens.`,
 					},
 				],
 				[
@@ -196,10 +205,10 @@ class TweenContent {
 					{
 						component: "copy",
 						value: `<a href='#${keys.tween.autoStart}'>autoStart</a> · <a href='#${
-							keys.tween.duration
-						}'>duration</a> · <a href='#${keys.tween.easing}'>easing</a> · <a href='#${
-							keys.tween.loop
-						}'>loop</a> · <a href='#${
+							keys.tween.delay
+						}'>delay</a> · <a href='#${keys.tween.duration}'>duration</a> · <a href='#${
+							keys.tween.easing
+						}'>easing</a> · <a href='#${keys.tween.loop}'>loop</a> · <a href='#${
 							keys.tween.onComplete
 						}'>onComplete</a> · <a href='#${
 							keys.tween.onProgress

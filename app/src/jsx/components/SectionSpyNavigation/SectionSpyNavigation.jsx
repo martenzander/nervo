@@ -52,6 +52,7 @@ class SectionSpyNavigation extends Component {
 			} else {
 				linkClass = `${this.props.a}`;
 			}
+
 			return (
 				<li key={s.props.uuid.replace(/\s/g, "")} className={this.props.li}>
 					<a
@@ -64,7 +65,25 @@ class SectionSpyNavigation extends Component {
 				</li>
 			);
 		});
-		return <ul className={this.props.ul}>{items}</ul>;
+
+		if (this.props.github) {
+			return (
+				<ul className={this.props.ul}>
+					{items}
+					<li className={this.props.li}>
+						<a
+							onClick={this.props.onItemClick ? this.props.onItemClick : null}
+							href={this.props.data.repository.url.replace("git+", "")}
+							className={this.props.a}
+						>
+							Github
+						</a>
+					</li>
+				</ul>
+			);
+		} else {
+			return <ul className={this.props.ul}>{items}</ul>;
+		}
 	}
 }
 
