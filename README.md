@@ -44,33 +44,33 @@ autoStart · duration · easing · loop · onComplete · onProgress · scale
 > **_Note:_**  For the easing option you can either pass a function or a valid [eases](https://www.npmjs.com/package/eases) string. E.g. »sineOut«.
 
 ### Properties <!-- omit in toc -->
-#####.autoStart
-#####.currentTime
-#####.delay
-#####.duration
-#####.easing
-#####.isActive
-#####.isTween
-#####.loop
-#####.object
-#####.onComplete
-#####.onProgress
-#####.options
-#####.parent
-#####.scale
-#####.target
-#####.type
-#####.uuid
+##### .autoStart <!-- omit in toc -->
+##### .currentTime <!-- omit in toc -->
+##### .delay <!-- omit in toc -->
+##### .duration <!-- omit in toc -->
+##### .easing <!-- omit in toc -->
+##### .isActive <!-- omit in toc -->
+##### .isTween <!-- omit in toc -->
+##### .loop <!-- omit in toc -->
+##### .object <!-- omit in toc -->
+##### .onComplete <!-- omit in toc -->
+##### .onProgress <!-- omit in toc -->
+##### .options <!-- omit in toc -->
+##### .parent <!-- omit in toc -->
+##### .scale <!-- omit in toc -->
+##### .target <!-- omit in toc -->
+##### .type <!-- omit in toc -->
+##### .uuid <!-- omit in toc -->
 
 ### Methods <!-- omit in toc -->
-#####.clone()
-#####.pause()
-#####.play()
-#####.setDelay(delay : number)
-#####.setDuration(duration : number)
-#####.setScale(scale : number)
-#####.start()
-#####.stop()
+##### .clone() <!-- omit in toc -->
+##### .pause() <!-- omit in toc -->
+##### .play() <!-- omit in toc -->
+##### .setDelay(delay : number) <!-- omit in toc -->
+##### .setDuration(duration : number) <!-- omit in toc -->
+##### .setScale(scale : number) <!-- omit in toc -->
+##### .start() <!-- omit in toc -->
+##### .stop() <!-- omit in toc -->
 
 ___
 
@@ -91,37 +91,37 @@ An array of Tweens and Timelines that will be added to the Timeline.
 autoStart · easing · loop · onComplete · onProgress · scale
 
 ### Properties <!-- omit in toc -->
-#####.autoStart
-#####.children
-#####.currentTime
-#####.delay
-#####.duration
-#####.easing
-#####.isActive
-#####.isTimeline
-#####.loop
-#####.onComplete
-#####.onProgress
-#####.options
-#####.parent
-#####.scale
-#####.type
-#####.uuid
+##### .autoStart <!-- omit in toc -->
+##### .children <!-- omit in toc -->
+##### .currentTime <!-- omit in toc -->
+##### .delay <!-- omit in toc -->
+##### .duration <!-- omit in toc -->
+##### .easing <!-- omit in toc -->
+##### .isActive <!-- omit in toc -->
+##### .isTimeline <!-- omit in toc -->
+##### .loop <!-- omit in toc -->
+##### .onComplete <!-- omit in toc -->
+##### .onProgress <!-- omit in toc -->
+##### .options <!-- omit in toc -->
+##### .parent <!-- omit in toc -->
+##### .scale <!-- omit in toc -->
+##### .type <!-- omit in toc -->
+##### .uuid <!-- omit in toc -->
 
 ### Methods <!-- omit in toc -->
-#####.add()
-#####.clone()
-#####.pause()
-#####.play()
-#####.remove(object : any)
-#####.setDelay(delay : number)
-#####.setScale(scale : number)
-#####.start()
-#####.stop()
+##### .add() <!-- omit in toc -->
+##### .clone() <!-- omit in toc -->
+##### .pause() <!-- omit in toc -->
+##### .play() <!-- omit in toc -->
+##### .remove(object : any) <!-- omit in toc -->
+##### .setDelay(delay : number) <!-- omit in toc -->
+##### .setScale(scale : number) <!-- omit in toc -->
+##### .start() <!-- omit in toc -->
+##### .stop() <!-- omit in toc -->
 ___
 
 ## Spring
-Springs animate in a more physical and natural way. They are durationless and accumulative calculated. As soon as a Spring has completed it will become inactive. To update a Spring use .setTarget(). Click and drag somewhere on the canvas below and play with properties like .stiffness or .damping.
+Springs animate in a more physical and natural way. They are durationless and accumulative calculated. As soon as a Spring has completed it will become inactive. To update a Spring use .[setTarget](#settarget)(). Click and drag somewhere on the canvas below and play with properties like .[stiffness](#stiffness) or .damping.
 
 > **_Note:_**  Negative and too high values can lead to undesired results. Undamped or overdamped Springs won't complete or complete after a long time.
 
@@ -131,23 +131,23 @@ new Nervo.Spring(object : {}, target : {}, options : {});
 ```
 
 #### Options <!-- omit in toc -->
-autoStart · damping · stiffness
+[autoStart](#autostart) · damping · stiffness
 
 ### Properties <!-- omit in toc -->
-#####.autoStart
-#####.damping
-#####.isActive
-#####.isSpring
-#####.object
-#####.onComplete
-#####.onProgress
-#####.options
-#####.stiffness
-#####.target
-#####.type
-#####.uuid
+##### .autoStart <!-- omit in toc -->
+##### .damping <!-- omit in toc -->
+##### .isActive <!-- omit in toc -->
+##### .isSpring <!-- omit in toc -->
+##### .object <!-- omit in toc -->
+##### .onComplete <!-- omit in toc -->
+##### .onProgress <!-- omit in toc -->
+##### .options <!-- omit in toc -->
+##### .stiffness <!-- omit in toc -->
+##### .target <!-- omit in toc -->
+##### .type <!-- omit in toc -->
+##### .uuid <!-- omit in toc -->
 
 ### Methods <!-- omit in toc -->
-#####.disable()
-#####.enable()
-#####.setTarget(target : any)
+##### .disable() <!-- omit in toc -->
+##### .enable() <!-- omit in toc -->
+##### .setTarget() <!-- omit in toc -->
