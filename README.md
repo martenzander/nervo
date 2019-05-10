@@ -44,33 +44,33 @@ autoStart · duration · easing · loop · onComplete · onProgress · scale
 > **_Note:_**  For the easing option you can either pass a function or a valid [eases](https://www.npmjs.com/package/eases) string. E.g. »sineOut«.
 
 ### Properties <!-- omit in toc -->
-- .autoStart
-- .currentTime
-- .delay
-- .duration
-- .easing
-- .isActive
-- .isTween
-- .loop
-- .object
-- .onComplete
-- .onProgress
-- .options
-- .parent
-- .scale
-- .target
-- .type
-- .uuid
+#####.autoStart
+#####.currentTime
+#####.delay
+#####.duration
+#####.easing
+#####.isActive
+#####.isTween
+#####.loop
+#####.object
+#####.onComplete
+#####.onProgress
+#####.options
+#####.parent
+#####.scale
+#####.target
+#####.type
+#####.uuid
 
 ### Methods <!-- omit in toc -->
-- .clone()
-- .pause()
-- .play()
-- .setDelay(delay : number)
-- .setDuration(duration : number)
-- .setScale(scale : number)
-- .start()
-- .stop()
+#####.clone()
+#####.pause()
+#####.play()
+#####.setDelay(delay : number)
+#####.setDuration(duration : number)
+#####.setScale(scale : number)
+#####.start()
+#####.stop()
 
 ___
 
@@ -91,33 +91,33 @@ An array of Tweens and Timelines that will be added to the Timeline.
 autoStart · easing · loop · onComplete · onProgress · scale
 
 ### Properties <!-- omit in toc -->
-- .autoStart
-- .children
-- .currentTime
-- .delay
-- .duration
-- .easing
-- .isActive
-- .isTimeline
-- .loop
-- .onComplete
-- .onProgress
-- .options
-- .parent
-- .scale
-- .type
-- .uuid
+#####.autoStart
+#####.children
+#####.currentTime
+#####.delay
+#####.duration
+#####.easing
+#####.isActive
+#####.isTimeline
+#####.loop
+#####.onComplete
+#####.onProgress
+#####.options
+#####.parent
+#####.scale
+#####.type
+#####.uuid
 
 ### Methods <!-- omit in toc -->
-- .add()
-- .clone()
-- .pause()
-- .play()
-- .remove(object : any)
-- .setDelay(delay : number)
-- .setScale(scale : number)
-- .start()
-- .stop()
+#####.add()
+#####.clone()
+#####.pause()
+#####.play()
+#####.remove(object : any)
+#####.setDelay(delay : number)
+#####.setScale(scale : number)
+#####.start()
+#####.stop()
 ___
 
 ## Spring
@@ -134,20 +134,20 @@ new Nervo.Spring(object : {}, target : {}, options : {});
 autoStart · damping · stiffness
 
 ### Properties <!-- omit in toc -->
-- .autoStart
-- .damping
-- .isActive
-- .isSpring
-- .object
-- .onComplete
-- .onProgress
-- .options
-- .stiffness
-- .target
-- .type
-- .uuid
+#####.autoStart
+#####.damping
+#####.isActive
+#####.isSpring
+#####.object
+#####.onComplete
+#####.onProgress
+#####.options
+#####.stiffness
+#####.target
+#####.type
+#####.uuid
 
 ### Methods <!-- omit in toc -->
-- .disable()
-- .enable()
-- .setTarget(target : any)
+#####.disable()
+#####.enable()
+#####.setTarget(target : any)
