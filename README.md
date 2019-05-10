@@ -27,17 +27,17 @@ ___
 ## Nervo.Tween()
 A Tween interpolates any numeric value of an object over time. Multiple Tweens can be controlled by Timelines.
 
-###Constructor
+### Constructor
 ```js
 new Nervo.Tween(from : {}, to : {}, options : {});
 ```
 
-####Options
+#### Options
 autoStart · duration · easing · loop · onComplete · onProgress · scale
 
 > **_Note:_**  For the easing option you can either pass a function or a valid [eases](https://www.npmjs.com/package/eases) string. E.g. »sineOut«.
 
-###Properties
+### Properties
 - .autoStart
 - .currentTime
 - .delay
@@ -56,7 +56,7 @@ autoStart · duration · easing · loop · onComplete · onProgress · scale
 - .type
 - .uuid
 
-###Methods
+### Methods
 - .clone()
 - .pause()
 - .play()
@@ -73,18 +73,18 @@ Timelines control multiple Tweens or Timelines. If you want to add a Tween to a 
 
 > **_Pro Tip:_**  For even more flexibility in space and time start nesting Timelines!
 
-###Constructor
+### Constructor
 ```js
 new Nervo.Timeline(children : [], options : {});
 ```
 
-####Children
+#### Children
 An array of Tweens and Timelines that will be added to the Timeline.
 
 ####Options
 autoStart · easing · loop · onComplete · onProgress · scale
 
-###Properties
+### Properties
 - .autoStart
 - .children
 - .currentTime
@@ -102,7 +102,7 @@ autoStart · easing · loop · onComplete · onProgress · scale
 - .type
 - .uuid
 
-###Methods
+### Methods
 - .add()
 - .clone()
 - .pause()
@@ -119,15 +119,15 @@ Springs animate in a more physical and natural way. They are durationless and ac
 
 > **_Note:_**  Negative and too high values can lead to undesired results. Undamped or overdamped Springs won't complete or complete after a long time.
 
-###Constructor
+### Constructor
 ```js
 new Nervo.Spring(object : {}, target : {}, options : {});
 ```
 
-####Options
+#### Options
 autoStart · damping · stiffness
 
-###Properties
+### Properties
 - .autoStart
 - .damping
 - .isActive
@@ -141,7 +141,7 @@ autoStart · damping · stiffness
 - .type
 - .uuid
 
-###Methods
+### Methods
 - .disable()
 - .enable()
 - .setTarget(target : any)
