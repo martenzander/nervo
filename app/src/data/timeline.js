@@ -196,13 +196,13 @@ class TimelineContent {
 					},
 					{
 						component: "headline",
-						value: "Tweens",
+						value: "Children",
 						type: "h4",
 					},
 					{
 						component: "copy",
 						value:
-							"An array of Tweens or Timelines that will be added to the Timeline.",
+							"An array of Tweens and Timelines that will be added to the Timeline.",
 					},
 					{
 						component: "headline",

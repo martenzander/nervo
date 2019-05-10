@@ -1,5 +1,11 @@
+@import './../../../scss/mixins/media-queries.pcss';
+
 .section{
-  padding-bottom: 7.5rem;
+  padding-bottom: 5rem;
+
+  @include md{
+    padding-bottom: 7.5rem;
+  }
 
   &:nth-last-child(1){
     padding-bottom: 0;

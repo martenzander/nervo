@@ -53,7 +53,7 @@ class Spring extends Canvas {
 			this.canvas.addEventListener("mousedown", this.onMouseDown);
 			this.canvas.addEventListener("mousemove", this.onMouseMove);
 		} else {
-			this.canvas.addEventListener("touchcancel", this.onMouseLeaveOrUp);
+			// this.canvas.addEventListener("touchcancel", this.onMouseLeaveOrUp);
 			this.canvas.addEventListener("touchend", this.onMouseLeaveOrUp);
 			this.canvas.addEventListener("touchstart", this.onMouseDown);
 			this.canvas.addEventListener("touchmove", this.onMouseMove);

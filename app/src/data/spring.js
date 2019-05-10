@@ -185,8 +185,9 @@ class SpringContent {
 					},
 					{
 						component: "copy",
-						value:
-							"<a href=''>autoStart</a> · <a href=''>damping</a> · <a href=''>stiffness</a>",
+						value: `<a href='#${keys.spring.autoStart}'>autoStart</a> · <a href='#${
+							keys.spring.damping
+						}'>damping</a> · <a href='#${keys.spring.stiffness}'>stiffness</a>`,
 					},
 				],
 				[

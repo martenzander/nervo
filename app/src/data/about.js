@@ -9,9 +9,9 @@ class AboutContent {
 						component: "copy",
 						value: `Nervo is a solid JavaScript animation library providing basic tweening functionality. It is designed to be flexible, intuitive and easy to learn. Nervo allows you to create single <a href='#${
 							keys.tween.section
-						}'>Tweens</a> or control more complex arrangements within <a href='#${
+						}'>Tweens</a>, makes controlling multiple Tweens within <a href='#${
 							keys.timeline.section
-						}'>Timelines</a>.`,
+						}'>Timelines</a> easy, and providess Springs`,
 					},
 				],
 				[

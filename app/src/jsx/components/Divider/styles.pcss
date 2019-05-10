@@ -1,3 +1,5 @@
+@import './../../../scss/mixins/media-queries.pcss';
+
 .base{
   margin: 0;
   border: none;
@@ -6,6 +8,9 @@
   background-position: top;
   background-size: 5px 1px;
   background-repeat: repeat-x;
+  margin-top: 5rem;
 
-  margin-top: 7.5rem;
+  @include md{
+    margin-top: 7.5rem;
+  }
 }
