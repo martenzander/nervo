@@ -1,5 +1,5 @@
 <p align="center">
-    <a href="https://www.nervo-js.org" rel="nofollow"><img src="https://raw.githubusercontent.com/SlimMarten/nervo/development/logo.svg?sanitize=true" align="center" width="300"></a>
+    <a href="http://www.nervo-js.org" rel="nofollow"><img src="https://raw.githubusercontent.com/SlimMarten/nervo/development/logo.svg?sanitize=true" align="center" width="300"></a>
 </p>
 <p align="center">
 Solid JavaScript Animation Library
@@ -12,7 +12,7 @@ Solid JavaScript Animation Library
 
 <h3 align="center">
   <a href="http://nervo-js.org">Docs</a> •
-  <a href="http://nervo-js.org">Download</a>
+  <a href="http://nervo-js.org/downloads/nervo_v1.0.0.zip">Download</a>
 </h3>
 
-Nervo is a solid JavaScript animation library providing basic tweening functionality. It is designed to be flexible, intuitive and easy to learn. Nervo allows you to create Tweens, Timelines and Springs.
+Nervo is a solid JavaScript animation library providing basic tweening functionality. It is designed to be flexible, intuitive and easy to learn. Nervo allows you to create single Tweens or control them using Timelines. Add a natural feel to your project using Nervo's Spring class.
