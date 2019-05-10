@@ -15,4 +15,4 @@ Solid JavaScript Animation Library
   <a href="https://twitter.com/directus">Download</a>
 </h3>
 
-Nervo is a solid JavaScript animation library providing basic tweening functionality. It is designed to be flexible, intuitive and easy to learn. Nervo allows you to create single [Tweens](#tween), makes controlling multiple Tweens within [Timelines](#timeline) easy, and provides Springs.
+Nervo is a solid JavaScript animation library providing basic tweening functionality. It is designed to be flexible, intuitive and easy to learn. Nervo allows you to create Tweens, Timelines and Springs.
