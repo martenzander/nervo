@@ -10,7 +10,6 @@ Solid JavaScript Animation Library
 </p>
 </p>
 
-<!-- omit in toc --> ## Table of Contents
 - [About Nervo](#about-nervo)
   - [Installation](#installation)
   - [Import](#import)
