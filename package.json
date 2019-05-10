@@ -1,6 +1,6 @@
 {
 	"name": "nervo",
-	"version": "0.0.7",
+	"version": "1.0.0",
 	"description": "Solid JavaScript Animation Library",
 	"main": "build/nervo.min.js",
 	"repository": {
@@ -12,7 +12,8 @@
 		"build:prod": "NODE_ENV=production webpack --config config/webpack.config.lib.js --mode production",
 		"build:dev": "NODE_ENV=development webpack --config config/webpack.config.lib.js --mode development",
 		"build:app": "NODE_ENV=production webpack --config config/webpack.config.app.js --mode production",
-		"build:lib": "npm-run-all build:prod build:dev",
+		"zip": "node config/zip.js",
+		"build:lib": "npm-run-all build:prod build:dev zip",
 		"build": "npm-run-all build:lib favicon build:app",
 		"app": "NODE_ENV=development webpack-dev-server --config config/webpack.config.app.js --mode development --open",
 		"start": "npm-run-all app"
@@ -38,6 +39,7 @@
 		"@babel/plugin-proposal-decorators": "^7.4.4",
 		"@babel/preset-env": "^7.3.4",
 		"@babel/preset-react": "^7.0.0",
+		"adm-zip": "^0.4.13",
 		"autoprefixer": "^9.5.0",
 		"babel-eslint": "^10.0.1",
 		"babel-loader": "^8.0.5",
@@ -57,6 +59,7 @@
 		"handlebars-loader": "^1.7.1",
 		"html-webpack-plugin": "^3.2.0",
 		"jsdom": "^15.0.0",
+		"jszip": "^3.2.1",
 		"mini-css-extract-plugin": "^0.5.0",
 		"moveto": "^1.8.0",
 		"npm-download-counts": "^0.1.2",
