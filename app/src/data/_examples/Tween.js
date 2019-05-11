@@ -21,7 +21,6 @@ class TweenExample extends Canvas {
 			{ progress: 0 },
 			{ progress: 1 },
 			{
-				delay: 2,
 				duration: 3,
 				loop: true,
 				easing: "quintInOut",
