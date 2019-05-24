@@ -1,11 +1,11 @@
 {
 	"name": "nervo",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"description": "Solid JavaScript Animation Library",
 	"main": "build/nervo.min.js",
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/SlimMarten/nervo.git"
+		"url": "git+https://github.com/martenzander/nervo.git"
 	},
 	"scripts": {
 		"favicon": "node config/favicon/favicon.js",
