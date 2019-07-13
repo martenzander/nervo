@@ -1,6 +1,6 @@
 {
 	"name": "nervo",
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"description": "Solid JavaScript Animation Library",
 	"main": "build/nervo.min.js",
 	"repository": {
@@ -18,19 +18,7 @@
 		"app": "NODE_ENV=development webpack-dev-server --config config/webpack.config.app.js --mode development --open",
 		"start": "npm-run-all app"
 	},
-	"keywords": [
-		"javascript",
-		"animation",
-		"framework",
-		"tween",
-		"timeline",
-		"svg",
-		"css",
-		"motion",
-		"js",
-		"library",
-		"toolkit"
-	],
+	"keywords": ["javascript", "animation", "framework", "tween", "timeline", "svg", "css", "motion", "js", "library", "toolkit"],
 	"author": "Marten Zander",
 	"license": "MIT",
 	"devDependencies": {
