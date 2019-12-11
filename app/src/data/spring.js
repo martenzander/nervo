@@ -26,15 +26,13 @@ class SpringContent {
 
 			switch (key) {
 				case "autoStart":
-					item.copy =
-						"If set to <b>true</b> the Spring starts immediately after construction.";
+					item.copy = "If set to <b>true</b> the Spring starts immediately after construction.";
 					break;
 				case "current":
 					item.copy = "The currently interpolated values.";
 					break;
 				case "damping":
-					item.copy =
-						"A floating number responsible for the damping of the Spring. Default: <b>0.5</b>";
+					item.copy = "A floating number responsible for the damping of the Spring. Default: <b>0.5</b>";
 					break;
 				case "isActive":
 					item.copy = "Returns <b>true</b> when the Spring is playing.";
@@ -56,6 +54,8 @@ class SpringContent {
 					break;
 				case "stiffness":
 					item.copy = "Stiffness of the Spring. Default <b>0.2</b>";
+				case "threshold":
+					item.copy = "Threshold of the Spring. Default <b>0</b>";
 					break;
 				case "to":
 					item.copy = "Object containing desired target values.";
@@ -64,8 +64,7 @@ class SpringContent {
 					item.copy = "Object containing the current state values of the Spring.";
 					break;
 				case "type":
-					item.copy =
-						"String with the purpose to identify the object. Default: <b>Spring</b>.";
+					item.copy = "String with the purpose to identify the object. Default: <b>Spring</b>.";
 					break;
 				case "uuid":
 					item.copy = "<a href=''>UUID</a> of the Spring.";
@@ -188,9 +187,9 @@ class SpringContent {
 					},
 					{
 						component: "copy",
-						value: `<a href='#${keys.spring.autoStart}'>autoStart</a> · <a href='#${
-							keys.spring.damping
-						}'>damping</a> · <a href='#${keys.spring.stiffness}'>stiffness</a>`,
+						value: `<a href='#${keys.spring.autoStart}'>autoStart</a> · <a href='#${keys.spring.damping}'>damping</a> · <a href='#${
+							keys.spring.stiffness
+						}'>stiffness</a> · <a href='#${keys.spring.threshold}'>threshold</a>`,
 					},
 				],
 				[
