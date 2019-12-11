@@ -19,7 +19,7 @@ export default class Spring extends Root {
 		this._controlObj = {};
 		this._velocities = {};
 
-		for (const key in this.target) {
+		for (const key in this.to) {
 			this._velocities[key] = 0.0;
 			this._controlObj[key] = false;
 		}
