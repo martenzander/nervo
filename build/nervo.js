@@ -73,7 +73,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "dae750b3bdfcb445edd6";
+/******/ 	var hotCurrentHash = "8db58ff3d6ccf62f202d";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -5422,7 +5422,7 @@ function (_Root) {
     _this._controlObj = {};
     _this._velocities = {};
 
-    for (var key in _this.target) {
+    for (var key in _this.to) {
       _this._velocities[key] = 0.0;
       _this._controlObj[key] = false;
     }
