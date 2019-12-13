@@ -13,7 +13,7 @@ class Spring extends Canvas {
 		for (let i = 0; i < this.springCount; i++) {
 			const spring = new Nervo.Spring(
 				{ x: this.canvas.width / 2, y: this.canvas.height / 2 },
-				{},
+				{ x: this.canvas.width / 2, y: this.canvas.height / 2 },
 				{
 					stiffness: 0.45,
 					damping: 0.9,

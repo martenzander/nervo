@@ -1,1 +1,1 @@
-new Nervo.Spring(from : {} , to : {}, options : {});
+new Nervo.Spring(target : {} , to : {}, options : {});
